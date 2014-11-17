@@ -187,4 +187,4 @@ Notificatore.idp
 Notificatore.idp.good
 NotificatoreDB.ddl
 Notificatore*.zip
-output/
+output/*.*
