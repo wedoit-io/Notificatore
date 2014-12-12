@@ -796,7 +796,7 @@ public partial class DeviceIDWinStore : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.TYPE_OS = '5') ");
     PAN_DEVICETOKEN.SetQuery(PPQRY_APPLICAZIONI, 1, SQL, PFL_DEVICETOKEN_APPLICAZIONE, "");
-    PAN_DEVICETOKEN.SetQueryDB(PPQRY_APPLICAZIONI, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_DEVICETOKEN.SetQueryDB(PPQRY_APPLICAZIONI, MainFrm.NotificatoreDBObject.DB, 2048);
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.PRG_LINGUA as IDLINGUA, ");
@@ -812,7 +812,7 @@ public partial class DeviceIDWinStore : MyWebForm
     SQL.Append("from ");
     SQL.Append("  LINGUE A ");
     PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 1, SQL, PFL_DEVICETOKEN_IDLINGUA, "");
-    PAN_DEVICETOKEN.SetQueryDB(PPQRY_LINGUE, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_DEVICETOKEN.SetQueryDB(PPQRY_LINGUE, MainFrm.NotificatoreDBObject.DB, 2048);
     PAN_DEVICETOKEN.SetIMDB(IMDB, "PQRY_DEVICETOKEN4", true);
     PAN_DEVICETOKEN.set_SetString(MyGlb.MASTER_ROWNAME, "Device Token");
     SQL = new StringBuilder();
@@ -853,10 +853,10 @@ public partial class DeviceIDWinStore : MyWebForm
     SQL.Append("order by ");
     SQL.Append("  A.DATA_ULT_ACCESSO desc ");
     PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN4, 5, SQL, -1, "");
-    PAN_DEVICETOKEN.SetQueryDB(PPQRY_DEVICETOKEN4, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_DEVICETOKEN.SetQueryDB(PPQRY_DEVICETOKEN4, MainFrm.NotificatoreDBObject.DB, 2048);
     PAN_DEVICETOKEN.SetMasterTable(0, "DEV_TOKENS");
     PAN_DEVICETOKEN.AddToSortList(PFL_DEVICETOKEN_DATAULTIACCE, false);
-    SQL = new StringBuilder("");
+    SQL = new StringBuilder("select DEV_TOKENS_ID.NextVal from dual");
     PAN_DEVICETOKEN.SetQuery(0, -1, SQL, PFL_DEVICETOKEN_ID, "");
   }
 

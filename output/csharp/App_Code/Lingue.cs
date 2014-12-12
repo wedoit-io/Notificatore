@@ -471,9 +471,9 @@ public partial class Lingue : MyWebForm
     PAN_LINGUE.SetQuery(PPQRY_LINGUE, 4, SQL, -1, "");
     SQL = new StringBuilder();
     PAN_LINGUE.SetQuery(PPQRY_LINGUE, 5, SQL, -1, "");
-    PAN_LINGUE.SetQueryDB(PPQRY_LINGUE, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_LINGUE.SetQueryDB(PPQRY_LINGUE, MainFrm.NotificatoreDBObject.DB, 2048);
     PAN_LINGUE.SetMasterTable(0, "LINGUE");
-    SQL = new StringBuilder("");
+    SQL = new StringBuilder("select LINGUE_PRG_LINGUA.NextVal from dual");
     PAN_LINGUE.SetQuery(0, -1, SQL, PFL_LINGUE_ID, "");
   }
 

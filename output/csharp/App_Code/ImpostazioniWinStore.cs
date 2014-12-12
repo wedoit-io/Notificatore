@@ -635,7 +635,7 @@ public partial class ImpostazioniWinStore : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPS A ");
     PAN_APPSPUSHSETT.SetQuery(PPQRY_APPS, 1, SQL, PFL_APPSPUSHSETT_APPLICAZIONE, "");
-    PAN_APPSPUSHSETT.SetQueryDB(PPQRY_APPS, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_APPSPUSHSETT.SetQueryDB(PPQRY_APPS, MainFrm.NotificatoreDBObject.DB, 2048);
     PAN_APPSPUSHSETT.SetIMDB(IMDB, "PQRY_APPLICAZION4", true);
     PAN_APPSPUSHSETT.set_SetString(MyGlb.MASTER_ROWNAME, "Applicazione");
     SQL = new StringBuilder();
@@ -663,9 +663,9 @@ public partial class ImpostazioniWinStore : MyWebForm
     PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZION4, 4, SQL, -1, "");
     SQL = new StringBuilder();
     PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZION4, 5, SQL, -1, "");
-    PAN_APPSPUSHSETT.SetQueryDB(PPQRY_APPLICAZION4, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_APPSPUSHSETT.SetQueryDB(PPQRY_APPLICAZION4, MainFrm.NotificatoreDBObject.DB, 2048);
     PAN_APPSPUSHSETT.SetMasterTable(0, "APPS_PUSH_SETTING");
-    SQL = new StringBuilder("");
+    SQL = new StringBuilder("select APPS_PUSH_SETTING_ID.NextVal from dual");
     PAN_APPSPUSHSETT.SetQuery(0, -1, SQL, PFL_APPSPUSHSETT_ID, "");
   }
 

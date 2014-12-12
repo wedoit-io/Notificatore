@@ -780,7 +780,7 @@ public partial class SpedizioniWinStore : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.TYPE_OS = '5') ");
     PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 1, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "");
-    PAN_SPEDIZIONI.SetQueryDB(PPQRY_APPLICAZIONI, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_SPEDIZIONI.SetQueryDB(PPQRY_APPLICAZIONI, MainFrm.NotificatoreDBObject.DB, 2048);
     PAN_SPEDIZIONI.SetIMDB(IMDB, "PQRY_SPEDIZIONI4", true);
     PAN_SPEDIZIONI.set_SetString(MyGlb.MASTER_ROWNAME, "Spedizione");
     SQL = new StringBuilder();
@@ -820,9 +820,9 @@ public partial class SpedizioniWinStore : MyWebForm
     PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI4, 4, SQL, -1, "");
     SQL = new StringBuilder();
     PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI4, 5, SQL, -1, "");
-    PAN_SPEDIZIONI.SetQueryDB(PPQRY_SPEDIZIONI4, MainFrm.NotificatoreDBObject.DB, 256);
+    PAN_SPEDIZIONI.SetQueryDB(PPQRY_SPEDIZIONI4, MainFrm.NotificatoreDBObject.DB, 2048);
     PAN_SPEDIZIONI.SetMasterTable(0, "SPEDIZIONI");
-    SQL = new StringBuilder("");
+    SQL = new StringBuilder("select SPEDIZIONI_ID.NextVal from dual");
     PAN_SPEDIZIONI.SetQuery(0, -1, SQL, PFL_SPEDIZIONI_ID, "");
   }
 

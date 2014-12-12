@@ -389,6 +389,7 @@ public partial class InvioWinphoneManuale : MyWebForm
         SQL = new StringBuilder();
         SQL.Append("insert into SPEDIZIONI ");
         SQL.Append("( ");
+        SQL.Append("  ID, ");
         SQL.Append("  ID_APPLICAZIONE, ");
         SQL.Append("  DEV_TOKEN, ");
         SQL.Append("  DES_MESSAGGIO, ");
@@ -399,11 +400,12 @@ public partial class InvioWinphoneManuale : MyWebForm
         SQL.Append(") ");
         SQL.Append("values ");
         SQL.Append("( ");
+        SQL.Append("  SPEDIZIONI_ID.NextVal, ");
         SQL.Append("  " + IDL.CSql(IMDB.Value(IMDBDef1.TBL_PARAMETRI2, IMDBDef1.FLD_PARAMETRI2_ID_APPLICAZIONE, 0), IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ", ");
         SQL.Append("  " + IDL.CSql(IMDB.Value(IMDBDef1.TBL_PARAMETRI2, IMDBDef1.FLD_PARAMETRI2_DEV_TOKEN, 0), IDL.FMT_CHAR, MainFrm.NotificatoreDBObject.DBO()) + ", ");
         SQL.Append("  " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_NUOVATABELL1, IMDBDef1.PQSL_NUOVATABELL1_DES_MESSAGGIO, 0), IDL.FMT_CHAR, MainFrm.NotificatoreDBObject.DBO()) + ", ");
         SQL.Append("  'W', ");
-        SQL.Append("  GETDATE(), ");
+        SQL.Append("  SYSDATE, ");
         SQL.Append("  " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_NUOVATABELL1, IMDBDef1.PQSL_NUOVATABELL1_REG_ID, 0), IDL.FMT_CHAR, MainFrm.NotificatoreDBObject.DBO()) + ", ");
         SQL.Append("  '3' ");
         SQL.Append(") ");
