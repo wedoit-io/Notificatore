@@ -1,0 +1,1176 @@
+Microsoft (R) ASP.NET Compilation Tool versione 4.6.1038.0
+Utilit… per la precompilazione di un'applicazione ASP.NET
+Copyright (C) Microsoft Corporation. Tutti i diritti sono riservati.
+
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(16): warning CS0108: 'Prodotti.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(275): warning CS0108: 'Prodotti.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(283): warning CS0108: 'Prodotti.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(16): warning CS0108: 'Applicazioni.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(294): warning CS0108: 'Applicazioni.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(302): warning CS0108: 'Applicazioni.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(16): warning CS0108: 'InvioNotificheADispoitiviNotiIOS.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(351): warning CS0108: 'InvioNotificheADispoitiviNotiIOS.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(359): warning CS0108: 'InvioNotificheADispoitiviNotiIOS.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(16): warning CS0108: 'DeviceIDWinStore.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(319): warning CS0108: 'DeviceIDWinStore.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(327): warning CS0108: 'DeviceIDWinStore.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(16): warning CS0108: 'SalesData.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(338): warning CS0108: 'SalesData.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(346): warning CS0108: 'SalesData.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(16): warning CS0108: 'DeviceTokenIOS.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(328): warning CS0108: 'DeviceTokenIOS.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(336): warning CS0108: 'DeviceTokenIOS.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(16): warning CS0108: 'Configurazione.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(320): warning CS0108: 'Configurazione.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(328): warning CS0108: 'Configurazione.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(16): warning CS0108: 'ProductTypeIdentifiers.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(287): warning CS0108: 'ProductTypeIdentifiers.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(295): warning CS0108: 'ProductTypeIdentifiers.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(28): warning CS0108: 'MyWebEntryPoint.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebEntryPoint.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(56): warning CS0114: 'MyWebEntryPoint.InitPanelGlbFlags()' nasconde il membro ereditato 'com.progamma.ids.WebEntryPoint.InitPanelGlbFlags()'. Per consentire al membro corrente di eseguire l'override di tale implementazione, aggiungere la parola chiave override, altrimenti aggiungere la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6713): warning CS0114: 'MyWebEntryPoint.OnResize()' nasconde il membro ereditato 'com.progamma.ids.WebEntryPoint.OnResize()'. Per consentire al membro corrente di eseguire l'override di tale implementazione, aggiungere la parola chiave override, altrimenti aggiungere la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6727): warning CS0114: 'MyWebEntryPoint.OnTableSubstitution(com.progamma.IDVariant, com.progamma.IDVariant, com.progamma.IDVariant, com.progamma.IDVariant)' nasconde il membro ereditato 'com.progamma.ids.WebEntryPoint.OnTableSubstitution(com.progamma.IDVariant, com.progamma.IDVariant, com.progamma.IDVariant, com.progamma.IDVariant)'. Per consentire al membro corrente di eseguire l'override di tale implementazione, aggiungere la parola chiave override, altrimenti aggiungere la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(16): warning CS0108: 'InvioWNSManuale.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(347): warning CS0108: 'InvioWNSManuale.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(355): warning CS0108: 'InvioWNSManuale.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(16): warning CS0108: 'FiscalCalendar.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(287): warning CS0108: 'FiscalCalendar.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(295): warning CS0108: 'FiscalCalendar.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(16): warning CS0108: 'DispositiviNoti.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(281): warning CS0108: 'DispositiviNoti.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(289): warning CS0108: 'DispositiviNoti.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(17): warning CS0108: 'MyParams.Theme' nasconde il membro ereditato 'com.progamma.ids.Params.Theme'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(18): warning CS0108: 'MyParams.UseIDTag' nasconde il membro ereditato 'com.progamma.ids.Params.UseIDTag'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(19): warning CS0108: 'MyParams.UseRD' nasconde il membro ereditato 'com.progamma.ids.Params.UseRD'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(21): warning CS0108: 'MyParams.UseDoubleClick' nasconde il membro ereditato 'com.progamma.ids.Params.UseDoubleClick'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(22): warning CS0108: 'MyParams.UseFK' nasconde il membro ereditato 'com.progamma.ids.Params.UseFK'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(24): warning CS0108: 'MyParams.PanelsSortAlways' nasconde il membro ereditato 'com.progamma.ids.Params.PanelsSortAlways'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(25): warning CS0108: 'MyParams.PanelsLikeSearch' nasconde il membro ereditato 'com.progamma.ids.Params.PanelsLikeSearch'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(26): warning CS0108: 'MyParams.EnablePanelMultiSelection' nasconde il membro ereditato 'com.progamma.ids.Params.EnablePanelMultiSelection'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(27): warning CS0108: 'MyParams.ActivePanelMultiSelection' nasconde il membro ereditato 'com.progamma.ids.Params.ActivePanelMultiSelection'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(28): warning CS0108: 'MyParams.ShowPanelMultiSelection' nasconde il membro ereditato 'com.progamma.ids.Params.ShowPanelMultiSelection'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(29): warning CS0108: 'MyParams.ShowDisabledFieldActivator' nasconde il membro ereditato 'com.progamma.ids.Params.ShowDisabledFieldActivator'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(31): warning CS0108: 'MyParams.HtmlConstraints' nasconde il membro ereditato 'com.progamma.ids.Params.HtmlConstraints'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(32): warning CS0108: 'MyParams.UseCollapsableFrames' nasconde il membro ereditato 'com.progamma.ids.Params.UseCollapsableFrames'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(34): warning CS0108: 'MyParams.ShowRD' nasconde il membro ereditato 'com.progamma.ids.Params.ShowRD'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(36): warning CS0108: 'MyParams.IWCacheControl' nasconde il membro ereditato 'com.progamma.ids.Params.IWCacheControl'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(38): warning CS0108: 'MyParams.AutoSaveType' nasconde il membro ereditato 'com.progamma.ids.Params.AutoSaveType'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(39): warning CS0108: 'MyParams.ShowFieldImageInValue' nasconde il membro ereditato 'com.progamma.ids.Params.ShowFieldImageInValue'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(40): warning CS0108: 'MyParams.UseDecimalDot' nasconde il membro ereditato 'com.progamma.ids.Params.UseDecimalDot'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(41): warning CS0108: 'MyParams.UseFastRowSelector' nasconde il membro ereditato 'com.progamma.ids.Params.UseFastRowSelector'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(42): warning CS0108: 'MyParams.TruePopup' nasconde il membro ereditato 'com.progamma.ids.Params.TruePopup'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(43): warning CS0108: 'MyParams.UseClientMask' nasconde il membro ereditato 'com.progamma.ids.Params.UseClientMask'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(44): warning CS0108: 'MyParams.NativeBlob' nasconde il membro ereditato 'com.progamma.ids.Params.NativeBlob'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(45): warning CS0108: 'MyParams.PanelQBEEmpty' nasconde il membro ereditato 'com.progamma.ids.Params.PanelQBEEmpty'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(46): warning CS0108: 'MyParams.InfoMessages' nasconde il membro ereditato 'com.progamma.ids.Params.InfoMessages'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(47): warning CS0108: 'MyParams.PanelConfirmDelete' nasconde il membro ereditato 'com.progamma.ids.Params.PanelConfirmDelete'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(49): warning CS0108: 'MyParams.PanelIsLockable' nasconde il membro ereditato 'com.progamma.ids.Params.PanelIsLockable'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(50): warning CS0108: 'MyParams.ChangeRowDelay' nasconde il membro ereditato 'com.progamma.ids.Params.ChangeRowDelay'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(51): warning CS0108: 'MyParams.SmartLookupIcon' nasconde il membro ereditato 'com.progamma.ids.Params.SmartLookupIcon'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(52): warning CS0108: 'MyParams.ShowDisabledIcons' nasconde il membro ereditato 'com.progamma.ids.Params.ShowDisabledIcons'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(53): warning CS0108: 'MyParams.RightAlignedIcons' nasconde il membro ereditato 'com.progamma.ids.Params.RightAlignedIcons'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(54): warning CS0108: 'MyParams.AllowMasterPanelNav' nasconde il membro ereditato 'com.progamma.ids.Params.AllowMasterPanelNav'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(55): warning CS0108: 'MyParams.ToolbarPosition' nasconde il membro ereditato 'com.progamma.ids.Params.ToolbarPosition'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(56): warning CS0108: 'MyParams.UseRD3' nasconde il membro ereditato 'com.progamma.ids.Params.UseRD3'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(57): warning CS0108: 'MyParams.BorderType' nasconde il membro ereditato 'com.progamma.ids.Params.BorderType'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(58): warning CS0108: 'MyParams.TooltipErrorMode' nasconde il membro ereditato 'com.progamma.ids.Params.TooltipErrorMode'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(59): warning CS0108: 'MyParams.EnableGFX' nasconde il membro ereditato 'com.progamma.ids.Params.EnableGFX'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(60): warning CS0108: 'MyParams.EnableSound' nasconde il membro ereditato 'com.progamma.ids.Params.EnableSound'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(61): warning CS0108: 'MyParams.EnableRichTooltip' nasconde il membro ereditato 'com.progamma.ids.Params.EnableRichTooltip'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(62): warning CS0108: 'MyParams.MultiSelectionComboBox' nasconde il membro ereditato 'com.progamma.ids.Params.MultiSelectionComboBox'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(63): warning CS0108: 'MyParams.UseCollapsableGroups' nasconde il membro ereditato 'com.progamma.ids.Params.UseCollapsableGroups'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(64): warning CS0108: 'MyParams.PanelHighlightDelete' nasconde il membro ereditato 'com.progamma.ids.Params.PanelHighlightDelete'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(65): warning CS0108: 'MyParams.SelectAllOnlyVisible' nasconde il membro ereditato 'com.progamma.ids.Params.SelectAllOnlyVisible'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(66): warning CS0108: 'MyParams.TooltipOnEachRow' nasconde il membro ereditato 'com.progamma.ids.Params.TooltipOnEachRow'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(67): warning CS0108: 'MyParams.EnableFrameResize' nasconde il membro ereditato 'com.progamma.ids.Params.EnableFrameResize'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(68): warning CS0108: 'MyParams.QBETrueLessThan' nasconde il membro ereditato 'com.progamma.ids.Params.QBETrueLessThan'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(69): warning CS0108: 'MyParams.PanelEnableInsertWhenLocked' nasconde il membro ereditato 'com.progamma.ids.Params.PanelEnableInsertWhenLocked'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(70): warning CS0108: 'MyParams.LKEDOAllProperties' nasconde il membro ereditato 'com.progamma.ids.Params.LKEDOAllProperties'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(71): warning CS0108: 'MyParams.LoadingPolicy' nasconde il membro ereditato 'com.progamma.ids.Params.LoadingPolicy'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(72): warning CS0108: 'MyParams.PullToRefresh' nasconde il membro ereditato 'com.progamma.ids.Params.PullToRefresh'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(73): warning CS0108: 'MyParams.UseHTML5Upload' nasconde il membro ereditato 'com.progamma.ids.Params.UseHTML5Upload'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(74): warning CS0108: 'MyParams.CompletePanelBorders' nasconde il membro ereditato 'com.progamma.ids.Params.CompletePanelBorders'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(75): warning CS0108: 'MyParams.UseZones' nasconde il membro ereditato 'com.progamma.ids.Params.UseZones'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(76): warning CS0108: 'MyParams.EnableVoice' nasconde il membro ereditato 'com.progamma.ids.Params.EnableVoice'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(77): warning CS0108: 'MyParams.UseIDEditor' nasconde il membro ereditato 'com.progamma.ids.Params.UseIDEditor'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(78): warning CS0108: 'MyParams.EnterChangeFocus' nasconde il membro ereditato 'com.progamma.ids.Params.EnterChangeFocus'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(79): warning CS0108: 'MyParams.PanelsLikeMode' nasconde il membro ereditato 'com.progamma.ids.Params.PanelsLikeMode'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(80): warning CS0108: 'MyParams.UseRD4' nasconde il membro ereditato 'com.progamma.ids.Params.UseRD4'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyParams.cs(81): warning CS0108: 'MyParams.UseDynVS' nasconde il membro ereditato 'com.progamma.ids.Params.UseDynVS'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(16): warning CS0108: 'PromoCodes.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(275): warning CS0108: 'PromoCodes.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(283): warning CS0108: 'PromoCodes.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(16): warning CS0108: 'TestSpedizione.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(465): warning CS0108: 'TestSpedizione.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(473): warning CS0108: 'TestSpedizione.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(16): warning CS0108: 'DeviceIDWinPhone.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(319): warning CS0108: 'DeviceIDWinPhone.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(327): warning CS0108: 'DeviceIDWinPhone.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(16): warning CS0108: 'SpedizioniIOS.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(320): warning CS0108: 'SpedizioniIOS.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(328): warning CS0108: 'SpedizioniIOS.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(16): warning CS0108: 'LoginIphone.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(308): warning CS0108: 'LoginIphone.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(316): warning CS0108: 'LoginIphone.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(16): warning CS0108: 'ImpostazioniWinStore.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(300): warning CS0108: 'ImpostazioniWinStore.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(308): warning CS0108: 'ImpostazioniWinStore.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(16): warning CS0108: 'CountryCodes.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(275): warning CS0108: 'CountryCodes.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(283): warning CS0108: 'CountryCodes.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(16): warning CS0108: 'ImpostazioniAndroid.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(305): warning CS0108: 'ImpostazioniAndroid.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(313): warning CS0108: 'ImpostazioniAndroid.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(16): warning CS0108: 'SpedizioniWinStore.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(321): warning CS0108: 'SpedizioniWinStore.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(329): warning CS0108: 'SpedizioniWinStore.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(16): warning CS0108: 'SpedizioniAndroid.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(338): warning CS0108: 'SpedizioniAndroid.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(346): warning CS0108: 'SpedizioniAndroid.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(16): warning CS0108: 'Currencies.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(275): warning CS0108: 'Currencies.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(283): warning CS0108: 'Currencies.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(16): warning CS0108: 'InvioGMCManuale.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(339): warning CS0108: 'InvioGMCManuale.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(347): warning CS0108: 'InvioGMCManuale.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(16): warning CS0108: 'Logs.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(304): warning CS0108: 'Logs.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(312): warning CS0108: 'Logs.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(16): warning CS0108: 'InvioWinphoneManuale.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(318): warning CS0108: 'InvioWinphoneManuale.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(326): warning CS0108: 'InvioWinphoneManuale.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(16): warning CS0108: 'GraficoAndamento.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(467): warning CS0108: 'GraficoAndamento.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(475): warning CS0108: 'GraficoAndamento.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(16): warning CS0108: 'APILocator.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(434): warning CS0108: 'APILocator.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(442): warning CS0108: 'APILocator.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(16): warning CS0108: 'ImpostazioniWinPhone.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(292): warning CS0108: 'ImpostazioniWinPhone.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(300): warning CS0108: 'ImpostazioniWinPhone.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(16): warning CS0108: 'InvioNotificheAUtentiAndroid.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(351): warning CS0108: 'InvioNotificheAUtentiAndroid.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(359): warning CS0108: 'InvioNotificheAUtentiAndroid.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(16): warning CS0108: 'LoginIpad.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(332): warning CS0108: 'LoginIpad.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(340): warning CS0108: 'LoginIpad.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(16): warning CS0108: 'SpedizioniWinPhone.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(321): warning CS0108: 'SpedizioniWinPhone.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(329): warning CS0108: 'SpedizioniWinPhone.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(16): warning CS0108: 'DeviceIDAndroid.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(322): warning CS0108: 'DeviceIDAndroid.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(330): warning CS0108: 'DeviceIDAndroid.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(16): warning CS0108: 'Lingue.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(278): warning CS0108: 'Lingue.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(286): warning CS0108: 'Lingue.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(16): warning CS0108: 'InvioNotificheAUtentiIOS.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(351): warning CS0108: 'InvioNotificheAUtentiIOS.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(359): warning CS0108: 'InvioNotificheAUtentiIOS.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(16): warning CS0108: 'ImpostazioniIOS.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(318): warning CS0108: 'ImpostazioniIOS.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(326): warning CS0108: 'ImpostazioniIOS.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(16): warning CS0108: 'DeviceToken.MainFrm' nasconde il membro ereditato 'com.progamma.ids.WebForm.MainFrm'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(325): warning CS0108: 'DeviceToken.IsMyInstance(object)' nasconde il membro ereditato 'com.progamma.ids.WebForm.IsMyInstance(object)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(333): warning CS0108: 'DeviceToken.GetClassName(bool)' nasconde il membro ereditato 'com.progamma.ids.WebForm.GetClassName(bool)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebForm.cs(62): warning CS0162: Rilevato codice non eseguibile.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(100): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(102): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(213): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(222): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(364): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(372): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Prodotti.cs(379): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(118): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(120): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(232): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(241): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(321): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(322): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(323): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(351): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(352): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(353): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(438): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(446): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Applicazioni.cs(453): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(171): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(173): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(285): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(294): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(376): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(377): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(454): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(455): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(503): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(504): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(505): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(549): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(550): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(551): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(575): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(576): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(577): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(578): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(660): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(675): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheADispoitiviNotiIOS.cs(686): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(139): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(141): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(266): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(344): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(345): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(346): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(374): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(375): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(497): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(505): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinStore.cs(528): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(163): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(165): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(276): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(285): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(427): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(435): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SalesData.cs(442): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(148): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(150): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(275): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(353): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(354): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(355): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(387): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(388): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(389): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(487): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(495): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceTokenIOS.cs(526): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(143): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(145): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(258): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(267): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(351): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(352): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(353): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(387): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(388): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(389): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(423): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(424): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(425): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(453): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(454): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(455): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(481): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(482): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(483): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(513): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(514): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(515): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(545): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(546): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(547): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(576): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(577): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(578): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(680): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(731): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Configurazione.cs(770): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(112): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(114): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(225): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(234): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(376): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(384): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ProductTypeIdentifiers.cs(407): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(2658): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(2914): warning CS0168: La variabile 'FormIdx' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(3566): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4454): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4455): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4524): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4525): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4526): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4558): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4559): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4560): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4578): warning CS0168: La variabile 'e3' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4600): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4601): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4602): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4683): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4684): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4685): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4735): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4736): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4737): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4792): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4793): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4794): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4823): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4824): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4825): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4850): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4851): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4896): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(4897): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5025): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5026): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5088): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5089): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5344): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5591): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5592): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5593): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5640): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5641): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5764): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5811): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5812): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5860): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5861): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5862): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5891): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(5892): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6023): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6024): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6211): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6212): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6407): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6408): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6586): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6587): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6588): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6639): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\MyWebEntryPoint.cs(6640): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(165): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(167): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(281): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(290): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(372): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(373): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(374): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(405): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(406): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(407): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(458): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(459): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(460): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(486): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(487): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(488): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(489): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(590): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(619): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(626): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWNSManuale.cs(791): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(112): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(114): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(225): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(234): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(376): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(384): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\FiscalCalendar.cs(391): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(106): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(108): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(219): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(228): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(370): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(378): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DispositiviNoti.cs(389): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(100): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(102): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(213): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(222): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(364): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(372): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\PromoCodes.cs(379): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(223): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(225): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(397): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(406): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(490): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(491): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(492): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(521): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(522): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(523): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(550): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(551): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(552): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(553): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(648): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(663): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(682): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(687): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(702): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(709): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(714): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(722): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(737): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\TestSpedizione.cs(1135): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(139): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(141): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(266): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(344): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(345): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(346): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(374): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(375): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(486): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(494): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDWinPhone.cs(517): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(135): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(137): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(267): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(345): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(346): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(347): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(375): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(376): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(377): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(408): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(409): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(410): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(538): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(546): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniIOS.cs(561): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\NotificatoreDB.cs(288): warning CS0168: La variabile 's' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(126): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(128): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(242): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(251): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(332): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(333): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(334): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(366): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(367): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(368): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(369): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(465): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(480): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(487): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIphone.cs(580): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(125): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(127): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(238): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(247): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(327): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(328): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(329): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(418): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(426): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinStore.cs(441): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(100): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(102): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(213): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(222): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(364): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(372): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\CountryCodes.cs(379): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\PushAppEvents.cs(66): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\PushAppEvents.cs(67): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\PushAppEvents.cs(68): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\PushAppEvents.cs(96): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\PushAppEvents.cs(97): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\PushAppEvents.cs(98): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(125): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(127): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(252): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(332): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(333): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(334): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(359): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(360): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(361): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(452): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(460): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniAndroid.cs(475): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(141): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(143): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(268): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(346): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(347): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(348): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(466): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(474): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinStore.cs(493): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(153): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(155): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(285): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(363): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(364): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(365): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(419): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(420): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(421): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(512): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(520): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniAndroid.cs(539): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(100): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(102): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(213): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(222): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(364): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(372): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Currencies.cs(379): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\WNSHelper.cs(166): warning CS0618: 'System.Reflection.Assembly.LoadWithPartialName(string)' Š obsoleto: 'This method has been deprecated. Please use Assembly.Load() instead. http://go.microsoft.com/fwlink/?linkid=14202'
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(157): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(159): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(273): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(282): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(364): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(365): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(366): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(395): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(396): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(397): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(450): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(451): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(452): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(453): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(553): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(575): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(582): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioGMCManuale.cs(720): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(109): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(111): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(251): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(329): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(330): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(331): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(361): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(362): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(363): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(393): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(394): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(395): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(425): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(426): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(427): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(455): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(456): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(457): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(536): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(544): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Logs.cs(559): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(136): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(138): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(252): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(261): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(343): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(344): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(345): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(376): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(377): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(378): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(427): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(428): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(429): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(430): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(527): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(549): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(556): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioWinphoneManuale.cs(649): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(189): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(398): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(407): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(492): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(493): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(494): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(518): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(519): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(520): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(521): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(610): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(618): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(625): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(634): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(642): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(649): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(654): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(662): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GraficoAndamento.cs(669): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(186): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(188): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(370): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(379): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(461): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(462): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(463): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(493): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(494): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(495): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(522): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(523): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(524): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(549): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(550): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(551): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(636): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(644): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(651): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(660): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(668): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(687): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(692): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(700): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\APILocator.cs(711): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(117): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(119): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(230): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(239): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(319): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(320): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(321): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(410): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(418): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniWinPhone.cs(433): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(171): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(173): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(285): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(294): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(376): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(377): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(453): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(454): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(502): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(503): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(504): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(544): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(545): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(546): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(547): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(639): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(654): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiAndroid.cs(665): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(150): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(152): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(266): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(275): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(356): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(357): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(358): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(394): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(395): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(396): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(439): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(440): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(441): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(442): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(540): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(555): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(562): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\LoginIpad.cs(711): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(141): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(143): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(268): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(346): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(347): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(348): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(349): warning CS0219: La variabile 'CurPos' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(350): warning CS0168: La variabile 'C3' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(466): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(474): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\SpedizioniWinPhone.cs(493): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(142): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(144): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(269): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(347): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(348): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(349): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(377): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(378): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(491): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(499): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceIDAndroid.cs(522): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\GCMHelper.cs(117): warning CS0618: 'System.Reflection.Assembly.LoadWithPartialName(string)' Š obsoleto: 'This method has been deprecated. Please use Assembly.Load() instead. http://go.microsoft.com/fwlink/?linkid=14202'
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(103): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(105): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(216): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(225): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(367): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(375): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\Lingue.cs(382): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(171): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(173): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(285): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(294): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(376): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(377): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(450): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(451): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(503): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(504): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(505): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(549): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(550): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(551): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(575): warning CS0168: La variabile 'AggrBuff' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(576): warning CS0168: La variabile 'AggrRowCount' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(577): warning CS0219: La variabile 'AggrCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(578): warning CS0219: La variabile 'AggrNewGroup' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(660): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(675): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\InvioNotificheAUtentiIOS.cs(686): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(123): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(125): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(265): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(345): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(346): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(347): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(372): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(373): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(374): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(422): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(423): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(424): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(456): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(457): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(458): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(512): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(513): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(514): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(546): warning CS0219: La variabile 'TransCount' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(547): warning CS0219: La variabile 'ReturnStatus' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(548): warning CS0168: La variabile 'QV' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(673): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(681): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\ImpostazioniIOS.cs(696): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(150): warning CS0168: La variabile 'SQL' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(152): warning CS0168: La variabile 'Item' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(263): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(272): warning CS0164: Non Š stato fatto riferimento a questa etichetta.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(414): warning CS0219: La variabile 'i' Š assegnata ma il suo valore non Š mai usato.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(422): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\App_Code\DeviceToken.cs(453): warning CS0168: La variabile 'e' Š dichiarata ma non Š mai stata utilizzata.
+c:\Work2\Notificatore\output\csharp\Global.asax(5): warning CS0108: 'ASP.global_asax.Application_BeginRequest(object, System.EventArgs)' nasconde il membro ereditato 'Global.Application_BeginRequest(object, System.EventArgs)'. Se ci• Š intenzionale, utilizzare la parola chiave new.
+        1 file spostato/i.
+        1 file spostato/i.
+        1 file spostato/i.
+        1 file spostato/i.
+        1 file spostato/i.
+        1 file spostato/i.
+        1 file spostato/i.
+        1 file copiati.
+        1 file copiati.
+        1 file copiati.
+
+7-Zip [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+
+Scanning
+
+Updating archive deploy.zip
+
+Compressing  android.css
+Compressing  application.manifest
+Compressing  bin\App_Code.compiled
+Compressing  bin\App_Code.dll
+Compressing  bin\App_global.asax.compiled
+Compressing  bin\App_global.asax.dll
+Compressing  bin\IDWS.dll
+Compressing  bin\IJLib.dll
+Compressing  bin\Interop.InstDev.dll
+Compressing  bin\JCommon.dll
+Compressing  bin\JFreeChart.dll
+Compressing  bin\JSharpLib.dll
+Compressing  bin\Newtonsoft.Json.dll
+Compressing  bin\PushSharp.Amazon.dll
+Compressing  bin\PushSharp.Apple.dll
+Compressing  bin\PushSharp.Blackberry.dll
+Compressing  bin\PushSharp.Core.dll
+Compressing  bin\PushSharp.Firefox.dll
+Compressing  bin\PushSharp.Google.dll
+Compressing  bin\PushSharp.Windows.dll
+Compressing  calimages\seldt.gif
+Compressing  calpopup.htm
+Compressing  calpopup.js
+Compressing  chrome.css
+Compressing  ckeditor\ckeditor.js
+Compressing  ckeditor\config.js
+Compressing  ckeditor\contents.css
+Compressing  ckeditor\lang\en.js
+Compressing  ckeditor\lang\it.js
+Compressing  ckeditor\plugins\a11yhelp\dialogs\a11yhelp.js
+Compressing  ckeditor\plugins\a11yhelp\dialogs\lang\en.js
+Compressing  ckeditor\plugins\a11yhelp\dialogs\lang\it.js
+Compressing  ckeditor\plugins\clipboard\dialogs\paste.js
+Compressing  ckeditor\plugins\colordialog\dialogs\colordialog.js
+Compressing  ckeditor\plugins\dialog\dialogDefinition.js
+Compressing  ckeditor\plugins\icons.png
+Compressing  ckeditor\plugins\icons_hidpi.png
+Compressing  ckeditor\plugins\image\dialogs\image.js
+Compressing  ckeditor\plugins\image\images\noimage.png
+Compressing  ckeditor\plugins\link\dialogs\anchor.js
+Compressing  ckeditor\plugins\link\dialogs\link.js
+Compressing  ckeditor\plugins\link\images\anchor.gif
+Compressing  ckeditor\plugins\link\images\hidpi\anchor.png
+Compressing  ckeditor\plugins\magicline\images\hidpi\icon-rtl.png
+Compressing  ckeditor\plugins\magicline\images\hidpi\icon.png
+Compressing  ckeditor\plugins\magicline\images\icon-rtl.png
+Compressing  ckeditor\plugins\magicline\images\icon.png
+Compressing  ckeditor\plugins\pastefromword\filter\default.js
+Compressing  ckeditor\plugins\scayt\dialogs\options.js
+Compressing  ckeditor\plugins\scayt\dialogs\toolbar.css
+Compressing  ckeditor\plugins\scayt\LICENSE.md
+Compressing  ckeditor\plugins\scayt\README.md
+Compressing  ckeditor\plugins\specialchar\dialogs\lang\en.js
+Compressing  ckeditor\plugins\specialchar\dialogs\lang\it.js
+Compressing  ckeditor\plugins\specialchar\dialogs\specialchar.js
+Compressing  ckeditor\plugins\tabletools\dialogs\tableCell.js
+Compressing  ckeditor\plugins\table\dialogs\table.js
+Compressing  ckeditor\plugins\wsc\dialogs\ciframe.html
+Compressing  ckeditor\plugins\wsc\dialogs\tmpFrameset.html
+Compressing  ckeditor\plugins\wsc\dialogs\wsc.css
+Compressing  ckeditor\plugins\wsc\dialogs\wsc.js
+Compressing  ckeditor\plugins\wsc\dialogs\wsc_ie.js
+Compressing  ckeditor\plugins\wsc\LICENSE.md
+Compressing  ckeditor\skins\moono\dialog.css
+Compressing  ckeditor\skins\moono\dialog_ie.css
+Compressing  ckeditor\skins\moono\dialog_ie7.css
+Compressing  ckeditor\skins\moono\dialog_ie8.css
+Compressing  ckeditor\skins\moono\dialog_iequirks.css
+Compressing  ckeditor\skins\moono\editor.css
+Compressing  ckeditor\skins\moono\editor_gecko.css
+Compressing  ckeditor\skins\moono\editor_ie.css
+Compressing  ckeditor\skins\moono\editor_ie7.css
+Compressing  ckeditor\skins\moono\editor_ie8.css
+Compressing  ckeditor\skins\moono\editor_iequirks.css
+Compressing  ckeditor\skins\moono\icons.png
+Compressing  ckeditor\skins\moono\icons_hidpi.png
+Compressing  ckeditor\skins\moono\images\arrow.png
+Compressing  ckeditor\skins\moono\images\close.png
+Compressing  ckeditor\skins\moono\images\hidpi\close.png
+Compressing  ckeditor\skins\moono\images\hidpi\lock-open.png
+Compressing  ckeditor\skins\moono\images\hidpi\lock.png
+Compressing  ckeditor\skins\moono\images\hidpi\refresh.png
+Compressing  ckeditor\skins\moono\images\lock-open.png
+Compressing  ckeditor\skins\moono\images\lock.png
+Compressing  ckeditor\skins\moono\images\refresh.png
+Compressing  ckeditor\styles.js
+Compressing  custom.css
+Compressing  custom.js
+Compressing  custom3.js
+Compressing  DB\voice_eng.xml
+Compressing  DB\voice_ita.xml
+Compressing  DB\web.config
+Compressing  delaydlg.htm
+Compressing  Desktop.htm
+Compressing  Desktop_sm.htm
+Compressing  dragdrop.js
+Compressing  dtt.css
+Compressing  dtt.js
+Compressing  dttest.js
+Compressing  dtthelp.js
+Compressing  dttRD4.js
+Compressing  edge.css
+Compressing  firefox.css
+Compressing  Global.asax
+Compressing  help\help.css
+Compressing  help\help_html.css
+Compressing  help\help_pdf.css
+Compressing  help\htmlcss.bat
+Compressing  help\images\bar.gif
+Compressing  help\images\button1.gif
+Compressing  help\images\button2.gif
+Compressing  help\images\button3.gif
+Compressing  help\images\helpgen_r1_c1.gif
+Compressing  help\images\helpgen_r1_c3.gif
+Compressing  help\images\helpgen_r1_c4.gif
+Compressing  help\images\helpgen_r1_c5.gif
+Compressing  help\images\helpgen_r2_c1.gif
+Compressing  help\images\helpgen_r2_c2.gif
+Compressing  help\images\helpgen_r2_c3.gif
+Compressing  help\images\helpgen_r3_c1.gif
+Compressing  help\images\helpgen_r3_c2.gif
+Compressing  help\images\helpgen_r4_c1.gif
+Compressing  help\images\helpgen_r4_c3.gif
+Compressing  help\images\helpgen_r4_c4.gif
+Compressing  help\images\helpgen_r4_c5.gif
+Compressing  help\images\linked.gif
+Compressing  help\images\menu.gif
+Compressing  help\images\pandata.gif
+Compressing  help\images\panel.gif
+Compressing  help\images\panqbe.gif
+Compressing  help\images\panupd.gif
+Compressing  help\images\spacer.gif
+Compressing  help\images\summary.gif
+Compressing  help\images\vidcap.gif
+Compressing  help\images\vidlist.gif
+Compressing  help\pdfcss.bat
+Compressing  help\stdhelp.htm
+Compressing  help\stdhelp_eng.htm
+Compressing  ie10.css
+Compressing  ijlib.js
+Compressing  images\act.gif
+Compressing  images\adco.gif
+Compressing  images\adda.gif
+Compressing  images\adlo.gif
+Compressing  images\aeco.gif
+Compressing  images\aeda.gif
+Compressing  images\aelo.gif
+Compressing  images\ajload.gif
+Compressing  images\appicon.png
+Compressing  images\blob.gif
+Compressing  images\bottom.gif
+Compressing  images\bottom_sm.gif
+Compressing  images\btn.gif
+Compressing  images\btn_sm.gif
+Compressing  images\bug.gif
+Compressing  images\cancel.gif
+Compressing  images\cancel_sm.gif
+Compressing  images\captionbg.gif
+Compressing  images\clall.gif
+Compressing  images\clip.gif
+Compressing  images\clip_sm.gif
+Compressing  images\closed.gif
+Compressing  images\closedslev1.gif
+Compressing  images\closedslev2.gif
+Compressing  images\closedslev3.gif
+Compressing  images\closef.gif
+Compressing  images\closex.gif
+Compressing  images\cmdmlev2.gif
+Compressing  images\cmdmlev2end.gif
+Compressing  images\cmdmlev3.gif
+Compressing  images\cmdmlev3end.gif
+Compressing  images\cmdmlev4.gif
+Compressing  images\cmdmlev4end.gif
+Compressing  images\collapse.gif
+Compressing  images\collapse_sm.gif
+Compressing  images\csv.gif
+Compressing  images\csv_sm.gif
+Compressing  images\ddpl.gif
+Compressing  images\ddpr.gif
+Compressing  images\delbl.gif
+Compressing  images\delete.gif
+Compressing  images\delete_sm.gif
+Compressing  images\delip.gif
+Compressing  images\dlg_ask.gif
+Compressing  images\dlg_input.gif
+Compressing  images\dlg_warn.gif
+Compressing  images\dnpl.gif
+Compressing  images\dnpr.gif
+Compressing  images\dpl.gif
+Compressing  images\dppl.gif
+Compressing  images\dppr.gif
+Compressing  images\dpr.gif
+Compressing  images\dtthelp.gif
+Compressing  images\dupl.gif
+Compressing  images\dupl_sm.gif
+Compressing  images\empty.gif
+Compressing  images\error.gif
+Compressing  images\errpg.gif
+Compressing  images\expand.gif
+Compressing  images\expand_sm.gif
+Compressing  images\find.gif
+Compressing  images\find_sm.gif
+Compressing  images\find_sprite.gif
+Compressing  images\fmax.gif
+Compressing  images\fmin.gif
+Compressing  images\fnor.gif
+Compressing  images\grcl.gif
+Compressing  images\grpdis.gif
+Compressing  images\grpdis_sm.gif
+Compressing  images\grpen.gif
+Compressing  images\grpen_sm.gif
+Compressing  images\grxp.gif
+Compressing  images\help.gif
+Compressing  images\hidemenu.gif
+Compressing  images\IDEditorIcons.png
+Compressing  images\inde.gif
+Compressing  images\list.gif
+Compressing  images\listf.gif
+Compressing  images\listf_sm.gif
+Compressing  images\list_sm.gif
+Compressing  images\lock.gif
+Compressing  images\lock_sm.gif
+Compressing  images\logoipad.gif
+Compressing  images\logoiphone.gif
+Compressing  images\menusep.gif
+Compressing  images\micro.png
+Compressing  images\minfo.gif
+Compressing  images\minfo_sm.gif
+Compressing  images\mno.gif
+Compressing  images\mstop.gif
+Compressing  images\mstop_sm.gif
+Compressing  images\mwarn.gif
+Compressing  images\mwarn_sm.gif
+Compressing  images\myes.gif
+Compressing  images\myes_sm.gif
+Compressing  images\new.gif
+Compressing  images\new_sm.gif
+Compressing  images\next.gif
+Compressing  images\next_sm.gif
+Compressing  images\nn.gif
+Compressing  images\npl.gif
+Compressing  images\npr.gif
+Compressing  images\opened.gif
+Compressing  images\openedslev1.gif
+Compressing  images\openedslev2.gif
+Compressing  images\openedslev3.gif
+Compressing  images\pansel.gif
+Compressing  images\pansel0.gif
+Compressing  images\pansel1.gif
+Compressing  images\pgleft.gif
+Compressing  images\pgright.gif
+Compressing  images\pgsot.gif
+Compressing  images\pow2.gif
+Compressing  images\ppl.gif
+Compressing  images\ppr.gif
+Compressing  images\prev.gif
+Compressing  images\prev_sm.gif
+Compressing  images\print.gif
+Compressing  images\print_sm.gif
+Compressing  images\qbef.gif
+Compressing  images\refresh.gif
+Compressing  images\refresh_sm.gif
+Compressing  images\refx.gif
+Compressing  images\rs.gif
+Compressing  images\rse.gif
+Compressing  images\rsm.gif
+Compressing  images\scrdn.gif
+Compressing  images\scrdx.gif
+Compressing  images\scrsx.gif
+Compressing  images\scrup.gif
+Compressing  images\search.gif
+Compressing  images\search_sm.gif
+Compressing  images\select.gif
+Compressing  images\sep.gif
+Compressing  images\sfuma.gif
+Compressing  images\showmenu.gif
+Compressing  images\sortdn.gif
+Compressing  images\sortno.gif
+Compressing  images\sortup.gif
+Compressing  images\soter.gif
+Compressing  images\sotwa.gif
+Compressing  images\splash.jpg
+Compressing  images\start.gif
+Compressing  images\startup.png
+Compressing  images\t.gif
+Compressing  images\tm.gif
+Compressing  images\tmf.gif
+Compressing  images\tmfl.gif
+Compressing  images\tml.gif
+Compressing  images\tn.gif
+Compressing  images\tnf.gif
+Compressing  images\tnl.gif
+Compressing  images\tooltip_error.gif
+Compressing  images\tooltip_info.gif
+Compressing  images\tooltip_warning.gif
+Compressing  images\top.gif
+Compressing  images\top_sm.gif
+Compressing  images\tp.gif
+Compressing  images\tpf.gif
+Compressing  images\tpl.gif
+Compressing  images\trfl.gif
+Compressing  images\trnload.gif
+Compressing  images\unlk.gif
+Compressing  images\unlk_sm.gif
+Compressing  images\update.gif
+Compressing  images\update_sm.gif
+Compressing  images\upload.gif
+Compressing  images\upload_sprite.gif
+Compressing  images\warn2.gif
+Compressing  images\zoom.gif
+Compressing  InstComp.rsp
+Compressing  iphone.css
+Compressing  iw.css
+Compressing  jqplot\excanvas.js
+Compressing  jqplot\jqplot.css
+Compressing  jqplot\jqplot.js
+Compressing  kitkat.css
+Compressing  maskedinp.js
+Compressing  mmedia\close.mp3
+Compressing  mmedia\command.mp3
+Compressing  mmedia\delete.mp3
+Compressing  mmedia\error.mp3
+Compressing  mmedia\info.mp3
+Compressing  mmedia\login.mp3
+Compressing  mmedia\logoff.mp3
+Compressing  mmedia\open.mp3
+Compressing  mmedia\update.mp3
+Compressing  mmedia\warning.mp3
+Compressing  Notificatore.aspx
+Compressing  qhelp.htm
+Compressing  rd3.css
+Compressing  RD3\ClientMessages.js
+Compressing  RD3\ClientParams.js
+Compressing  RD3\DDManager.js
+Compressing  RD3\Debug\DebuggerItem.js
+Compressing  RD3\Debug\DebuggerManager.js
+Compressing  RD3\Desktop.js
+Compressing  RD3\Events\ClientEvents.js
+Compressing  RD3\Events\IDEvent.js
+Compressing  RD3\full.js
+Compressing  RD3\GFX\GFX.js
+Compressing  RD3\GFX\GFXManager.js
+Compressing  RD3\GFX\IDScroll.js
+Compressing  RD3\GlobalObject.js
+Compressing  RD3\HashTable.js
+Compressing  RD3\KBManager.js
+Compressing  RD3\MessagePump.js
+Compressing  RD3\MessagePumpRD4.js
+Compressing  RD3\Objects\ATimer.js
+Compressing  RD3\Objects\Book.js
+Compressing  RD3\Objects\BookBox.js
+Compressing  RD3\Objects\BookPage.js
+Compressing  RD3\Objects\BookSection.js
+Compressing  RD3\Objects\BookSpan.js
+Compressing  RD3\Objects\ButtonBar.js
+Compressing  RD3\Objects\CmdList.js
+Compressing  RD3\Objects\Command.js
+Compressing  RD3\Objects\Graph.js
+Compressing  RD3\Objects\IDCombo.js
+Compressing  RD3\Objects\IDEditor.js
+Compressing  RD3\Objects\IDPanel.js
+Compressing  RD3\Objects\IndHandler.js
+Compressing  RD3\Objects\Indicator.js
+Compressing  RD3\Objects\Message.js
+Compressing  RD3\Objects\MessageBox.js
+Compressing  RD3\Objects\MessageTooltip.js
+Compressing  RD3\Objects\PCell.js
+Compressing  RD3\Objects\PDFPrint.js
+Compressing  RD3\Objects\PField.js
+Compressing  RD3\Objects\PGroup.js
+Compressing  RD3\Objects\PListGroup.js
+Compressing  RD3\Objects\PopupControl.js
+Compressing  RD3\Objects\PopupDelay.js
+Compressing  RD3\Objects\PopupError.js
+Compressing  RD3\Objects\PopupFrame.js
+Compressing  RD3\Objects\PopupPreview.js
+Compressing  RD3\Objects\PPage.js
+Compressing  RD3\Objects\PValue.js
+Compressing  RD3\Objects\ScreenZone.js
+Compressing  RD3\Objects\SubForm.js
+Compressing  RD3\Objects\Tab.js
+Compressing  RD3\Objects\TabbedView.js
+Compressing  RD3\Objects\TimerHandler.js
+Compressing  RD3\Objects\Tree.js
+Compressing  RD3\Objects\TreeNode.js
+Compressing  RD3\Objects\ValueList.js
+Compressing  RD3\Objects\ValueListItem.js
+Compressing  RD3\Objects\VisAttrList.js
+Compressing  RD3\Objects\VisAttrObj.js
+Compressing  RD3\Objects\VoiceHandler.js
+Compressing  RD3\Objects\WebEntryPoint.js
+Compressing  RD3\Objects\WebForm.js
+Compressing  RD3\Objects\WebFrame.js
+Compressing  RD3\OWAMessagePump.js
+Compressing  RD3\ServerParams.js
+Compressing  RD3\Shell.js
+Compressing  RD3\TooltipManager.js
+Compressing  rd3_sm.css
+Compressing  RD4\full.js
+Compressing  rtcconst.ini
+Compressing  safari.css
+Compressing  soundman\license.txt
+Compressing  soundman\soundmanager2-nodebug-jsmin.js
+Compressing  soundman\soundmanager2.js
+Compressing  soundman\soundmanager2.swf
+Compressing  soundman\soundmanager2_flash9.swf
+Compressing  swfupload\license.txt
+Compressing  swfupload\swfupload.js
+Compressing  swfupload\swfupload.swf
+Compressing  web.config.standard
+
+Everything is Ok
+Premere un tasto per continuare . . . 

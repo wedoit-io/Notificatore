@@ -220,7 +220,7 @@ class GCMHelper
     /// <param name="deviceId"></param>
     /// <param name="message"></param>
     /// <returns></returns>
-    public static string SendNotificationPlain(string GoogleApiBrowserID, string deviceId, string message)
+    public static string SendNotificationPlain(string GoogleApiBrowserID, string deviceId, string message, string customField1, string customField2)
     {
         String sResponseFromServer = string.Empty;
         try
@@ -232,7 +232,10 @@ class GCMHelper
             tRequest.Headers.Add(string.Format("Authorization:key={0}", GoogleApiBrowserID));
 
             //string postData = "collapse_key=score_update&time_to_live=108&delay_while_idle=1&data.message=" + value + "&data.time=" + System.DateTime.Now.ToString() + "&registration_ids=" + deviceId + "";
-            string postData = "data.message=" + message + "&registration_id=" + deviceId + "";
+            //string postData = "data.message=" + message + "&registration_id=" + deviceId + "";
+            string postData = String.Format(@"data.message={0}&registration_id={1}&data.custom-field-1={2}&data.custom-field-2={3}", System.Web.HttpUtility.UrlEncode(message), deviceId, System.Web.HttpUtility.UrlEncode(customField1), System.Web.HttpUtility.UrlEncode(customField2));
+			
+
             //string postData = "{ 'registration_ids': [ '" + registrationId + "' ], 'data': {'message': '" + message + "'}}";
 
             Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
