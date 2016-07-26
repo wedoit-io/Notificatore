@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<script>
+function doLoad()
+{
+  setTimeout("refresh()", 60*1000);     // 60 secondi
+}
+function refresh()
+{
+  window.location.replace(window.location.href.replace(/unavailable.htm/i, 'Northwind.aspx'));
+}
+</script>
+<title>Application unavailable</title>
+<style type="text/css">
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  background-color: #F0F0F0;
+  margin: 0;
+}
+
+.loginbox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 340px;
+  margin-top: -200px;
+  margin-left: -170px;
+  background-color: #FFF;
+      border-radius: 3px;
+  -ms-border-radius: 3px;
+  -webkit-box-shadow: 0 2px 4px 0 #CCC;
+     -moz-box-shadow: 0 2px 4px 0 #CCC;
+          box-shadow: 0 2px 4px 0 #CCC;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+.bugBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px;
+  margin: 5px;
+}
+.bugBtn:hover {
+  opacity: 0.7;
+  filter: alpha( opacity = 70 );
+}
+
+form {
+  width: 300px;
+  margin: 10px 20px;
+}
+
+.button {
+  min-width: 80px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 5px;
+  vertical-align: middle;
+      border-radius: 3px;
+  -ms-border-radius: 3px;
+  font-size: 10pt;
+  font-weight: normal;
+  text-transform: uppercase;
+  border: none;
+  background-color: #8A9399;
+  color: #FFF;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 0 0 #666;
+     -moz-box-shadow: 0 1px 0 0 #666;
+          box-shadow: 0 1px 0 0 #666;
+}
+
+.button:hover {
+  background-color: #242D33;
+}
+
+form .button {
+  margin-top: 10px;
+}
+
+form input {
+  width: 100% !important;
+  height: 30px;
+  margin-bottom: 10px;
+  font-size: 10pt;
+}
+
+p {
+  font-size: 10pt;
+}
+
+p.largemessage {
+  padding: 10px 20px;
+  font-size: 12pt;
+  text-align: center;
+}
+
+label {
+  font-size: 10pt;
+  line-height: 24px;
+  display: block;
+}
+
+</style>
+</head>
+
+<body onload="doLoad()">
+
+  <div class="loginbox">
+
+    <p class="largemessage">L'applicazione &egrave; in fase di aggiornamento: ripartir&agrave; in automatico tra pochi minuti</p>
+    <p class="largemessage">The application is currently under maintenance: it will restart automatically in a few minutes</p>
+
+    <p align="center"><img border="0" src="images/pow2.gif" width="300" height="60"></p>
+
+    <div id="reqdiv" class="HelpReqDiv" style="display:none"></div>
+    <div id="reqVdiv" class="HelpReqDiv" style="display:none"></div>
+    <div id="itemdiv" class="HelpItemDiv" style="display:none"></div>
+
+  </div>
+
+</body>
+</html>
