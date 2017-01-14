@@ -53,4 +53,5 @@ begin
 ret :=  notificatore.SendNotification('Messaggio di test da DB Oracle', 'admin', 0, '3892DB2C-53A9-4B57-9638-08C1E91319C8' , 'IB');
 
 end;
-`
+
+```
