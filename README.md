@@ -11,7 +11,7 @@ La documentazione ' qua:
 
 ACL
 ===
-
+```plsql
 /* Eseguire come system */
 BEGIN
   DBMS_NETWORK_ACL_ADMIN.create_acl (
@@ -42,12 +42,9 @@ BEGIN
     host => 'notificatore.apexnet.it', 
     lower_port => 80,
     upper_port => NULL); 
-  COMMIT;
+  COMMIT;
 END;
 /
-
-
-
 
 declare
   ret varchar2(100);
@@ -56,3 +53,4 @@ begin
 ret :=  notificatore.SendNotification('Messaggio di test da DB Oracle', 'admin', 0, '3892DB2C-53A9-4B57-9638-08C1E91319C8' , 'IB');
 
 end;
+`
