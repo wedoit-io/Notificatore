@@ -7,6 +7,6 @@ Tale servizio si basa su una applicazione denominata **Notificatore**.
 Questo documento descrive il funzionamento generale del Notificatore e le specifiche tecniche per integrarsi ad esso.
 
 
-* [funzionamento.md]
-* [api]
-* [appendice]
+* ()[funzionamento.md]
+* ()[api.md]
+* ()[appendice.md]
