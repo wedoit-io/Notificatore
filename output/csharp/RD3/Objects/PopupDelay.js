@@ -87,7 +87,7 @@ PopupDelay.prototype.Realize = function()
   // Crea il pulsante di annullamento
   this.AbortButton = document.createElement("input");
   this.AbortButton.type = "button";
-  this.AbortButton.value = "Annulla";
+  this.AbortButton.value = ClientMessages.MSG_POPUP_CancelButton;
   this.AbortButton.className = "popup-progress-abortbutton";
   this.AbortButton.onclick = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+this.Identifier+"', 'Abort', ev)");;
   //

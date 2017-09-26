@@ -1,6 +1,6 @@
 // **********************************************
 // Promo Codes
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -439,7 +439,7 @@ public partial class PromoCodes : MyWebForm
     SQL.Append("select ");
     SQL.Append("  A.CODE as CODE, ");
     SQL.Append("  A.DESCRIPTION as DESCRIPTION ");
-    PAN_PROMOCODES.SetQuery(PPQRY_PROMOCODES, 0, SQL, -1, "");
+    PAN_PROMOCODES.SetQuery(PPQRY_PROMOCODES, 0, SQL, -1, "0FF50658-E37B-44E5-99C7-3301745E61A1");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPLE_PROMO_CODE A ");
@@ -677,6 +677,10 @@ public partial class PromoCodes : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

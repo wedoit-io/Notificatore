@@ -1,6 +1,6 @@
 // **********************************************
 // Impostazioni Win Phone
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -323,15 +323,24 @@ public partial class ImpostazioniWinPhone : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("33C933D7-48B9-43D9-A3A6-23365E66AFB3", "Apps Push Settings Before Insert", "", 0, "Impostazioni Win Phone")) return;
+      MainFrm.DTTObj.AddParameter ("33C933D7-48B9-43D9-A3A6-23365E66AFB3", "E3264FE0-85F2-4192-9D8F-1C019D3E9999", "Cancel", Cancel);
       // 
       // Apps Push Settings Before Insert Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddAssign ("CCAE696B-B889-4A4F-B7BC-199A33A5BFC9", "Type OS Applicazione [Impostazioni Win Phone - Apps Push Settings] := Windows Phone", "", IMDB.Value(IMDBDef1.PQRY_APPLICAZIONI, IMDBDef1.PQSL_APPLICAZIONI_TYPE_OS, 0));
+      MainFrm.DTTObj.AddToken ("CCAE696B-B889-4A4F-B7BC-199A33A5BFC9", "057F8A8B-F4F8-44F1-BC23-172B53A54683", 589824, "Windows Phone", (new IDVariant("3")));
       IMDB.set_Value(IMDBDef1.PQRY_APPLICAZIONI, IMDBDef1.PQSL_APPLICAZIONI_TYPE_OS, 0, (new IDVariant("3")));
+      MainFrm.DTTObj.AddAssignNewValue ("CCAE696B-B889-4A4F-B7BC-199A33A5BFC9", "7630299D-12B8-4238-A339-1A961AAC2557", IMDB.Value(IMDBDef1.PQRY_APPLICAZIONI, IMDBDef1.PQSL_APPLICAZIONI_TYPE_OS, 0));
+      MainFrm.DTTObj.ExitProc("33C933D7-48B9-43D9-A3A6-23365E66AFB3", "Apps Push Settings Before Insert", "", 0, "Impostazioni Win Phone");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("33C933D7-48B9-43D9-A3A6-23365E66AFB3", "Apps Push Settings Before Insert", "", _e);
       MainFrm.ErrObj.ProcError ("ImpostazioniWinPhone", "AppsPushSettingsBeforeInsert", _e);
+      MainFrm.DTTObj.ExitProc("33C933D7-48B9-43D9-A3A6-23365E66AFB3", "Apps Push Settings Before Insert", "", 0, "Impostazioni Win Phone");
     }
   }
 
@@ -578,7 +587,7 @@ public partial class ImpostazioniWinPhone : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPS A ");
     SQL.Append("where (A.ID = ~~ID_APP~~) ");
-    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPS, 0, SQL, PFL_APPSPUSHSETT_APPLICAZIONE, "");
+    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPS, 0, SQL, PFL_APPSPUSHSETT_APPLICAZIONE, "C6D2CDF3-69DE-4866-8E02-77B595D048B4");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as ID, ");
@@ -598,7 +607,7 @@ public partial class ImpostazioniWinPhone : MyWebForm
     SQL.Append("  A.ID_APP as ID_APP, ");
     SQL.Append("  A.FLG_AMBIENTE as FLG_AMBIENTE, ");
     SQL.Append("  A.WNS_XML as WNS_XML ");
-    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, -1, "");
+    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, -1, "1BE66AFE-2488-41E6-9E9E-F02991819CA3");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPS_PUSH_SETTING A ");
@@ -840,6 +849,10 @@ public partial class ImpostazioniWinPhone : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

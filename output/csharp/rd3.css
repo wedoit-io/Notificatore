@@ -1160,7 +1160,7 @@ IMG {
 
 .menu-command-image-level-3 {
   padding-right: 4px;
-  vertical-align: -3px;
+  vertical-align: 3px;
 }
 
 .menu-command-image-level-4 {
@@ -1368,6 +1368,23 @@ IMG {
   box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.6);
 }
 .toolbar-frame-command .toolbar-button:hover {
+  opacity: 0.7;
+  filter: alpha(opacity=70);
+  background-color: #FFFFFF;
+}
+
+.toolbar-frame-command-small .toolbar-button {
+    height: 20px;
+    line-height: 20px;
+    font-size: 8pt;
+    background-color: #FFFFFF;
+    color: #8A9399;
+    cursor: pointer;
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.6);
+}
+.toolbar-frame-command-small .toolbar-button:hover {
   opacity: 0.7;
   filter: alpha(opacity=70);
   background-color: #FFFFFF;
@@ -1730,9 +1747,9 @@ IMG {
 /* della form                                      */
 /* *************************************************/
 .form-caption-icon {
-  vertical-align: top;
+  vertical-align: middle;
   padding-left: 4px;
-  margin-top: 5px;
+  margin-top: 0px;
   cursor: pointer;
 }
 
@@ -2490,15 +2507,6 @@ IMG {
 }
 
 /* *************************************************/
-/* Classe applicata allo SPAN che contiene uno     */
-/* span di una box del book                        */
-/* *************************************************/
-.book-span {
-  font-family: Helvetica, Arial, sans-serif;
-  color: #242D33;
-}
-
-/* *************************************************/
 /* Classe applicata all'INPUT di tipo testo        */
 /* contenuto in  uno span attivo di una            */
 /* box del book                                    */
@@ -2508,6 +2516,8 @@ IMG {
   left: 0px;
   background-color: transparent;
   border: none;
+  font-size: inherit;
+  font-family: inherit;
 }
 
 .book-span-textarea {
@@ -2987,6 +2997,7 @@ IMG {
 .panel-field-caption-list SPAN {
   display: table-cell;
   vertical-align: middle;
+  cursor: inherit;
 }
 
 /* *************************************************/
@@ -2999,6 +3010,9 @@ IMG {
   overflow: hidden;
   padding: 2px;
   padding-top: 3px;
+}
+.panel-field-static SPAN {
+  cursor: inherit;
 }
 
 /* *************************************************/
@@ -3021,6 +3035,14 @@ IMG {
   position: absolute;
   overflow: visible;
   z-index: 1;
+}
+
+.panel-field-grouped-list-box .group-container {
+  text-align: left !important;
+}
+
+.panel-field-grouped-list-box .group-label {
+  width: auto !important;
 }
 
 /* *************************************************/
@@ -3977,8 +3999,8 @@ IMG {
   background-color: transparent;
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
-  -webkit-transform-origin: 0% 0%;
-  transform-origin: 0% 0%;
+  -webkit-transform-origin: left 0%;
+  transform-origin: left 0%;
   padding-top: 5px;
   padding-left: 4px;
 }
@@ -4751,6 +4773,15 @@ IMG {
   border-collapse: collapse;
 }
 
+.mup-table .panel-field-caption-list, .mup-table .panel-field-caption-form {
+  display: table-row;
+}
+
+.mup-header-filename span {
+  display: inline;
+}
+
+
 .mup-header-filename {
   width: 50%;
   text-align: left;
@@ -4801,7 +4832,7 @@ IMG {
 
 .mup-row-filestatus-js {
   width: 95%;
-  background-image: url(images/prgbarbg.gif);
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAAQCAYAAAA4eCmgAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAABaSURBVHic7dXBDYAwEMCwtpPf5nQG8kFI9gT5Zc/MswDgpfN1AAD/ZCAAJAYCQGIgACQGAkBiIAAkBgJAYiAAJAYCQGIgACQGAkBiIAAkBgJAYiAAJAYCQHIBcQQCn0OzmWcAAAAASUVORK5CYII=);
   background-size: 0%;
   background-repeat: no-repeat;
   border: 1px solid #E2E2E2;
@@ -4817,7 +4848,10 @@ IMG {
 .group-container {
   position: absolute;
   overflow: hidden;
-  text-align: left !important;
+  padding-right: 4px !important;
+  padding-left: 4px !important;
+  text-align: right !important;
+  line-height: 31px;
 }
 
 .group-collapse-img {
@@ -4832,6 +4866,11 @@ IMG {
   white-space: nowrap;
   overflow: hidden;
   text-align: left !important;
+}
+
+.group-container-list
+{
+  background: transparent !important;
 }
 
 .badge-red {
@@ -5047,4 +5086,25 @@ IMG {
   cursor: pointer;
   background: none;
   z-index: 1;
+}
+
+/* Elemento DIV mostrato durante la gestione delle richieste bloccanti */
+.blocking-box
+{
+  height : 100%;
+  width  : 100%;
+  border: none;
+  cursor: wait;
+  background-color: gray;
+  opacity: 0.00;
+  filter: alpha(opacity = 0);
+  display: none;
+  z-index: 9999;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+input[type=button]:focus, input[type=checkbox]:focus {
+	outline: gray dashed 1px;
 }

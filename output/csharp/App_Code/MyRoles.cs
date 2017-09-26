@@ -1,7 +1,7 @@
 // **********************************************
 // Roles Handler
 // Instant WEB Application: www.progamma.com
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using com.progamma.ids;

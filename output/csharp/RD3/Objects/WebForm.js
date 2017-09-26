@@ -36,6 +36,7 @@ function WebForm()
   this.HandledKeys = 0;                         // Tasti da intercettare a livello di form
   this.BackButtonTxt = null;                    // Testo da mostrare nel back-button (qualora presente)
   this.CloseOnSelection = false;                // Devo chiudere la form quando si esegue una selezione?
+  //this.ClassName = null;                      // Classe specifica da applicare alla Form
   //
   // Oggetti secondari gestiti da questo oggetto di modello
   this.Frames = new Array();                    // I frame che contengono gli oggetti visuali
@@ -226,11 +227,11 @@ WebForm.prototype.LoadFromXml = function(node)
     for (var i=0; i<n; i++) 
     {
       var fr = this.Frames[i];
-      if (fr.ChildFrame1)
+      if (fr.ChildFrame1 && (typeof fr.ChildFrame1 == "string"))
       {
         fr.ChildFrame1 = RD3_DesktopManager.ObjectMap[fr.ChildFrame1];
       }
-      if (fr.ChildFrame2)
+      if (fr.ChildFrame2 && (typeof fr.ChildFrame2 == "string"))
       {
         fr.ChildFrame2 = RD3_DesktopManager.ObjectMap[fr.ChildFrame2];
       }
@@ -293,6 +294,7 @@ WebForm.prototype.LoadProperties = function(node)
       case "pre": this.SetPreview(valore); break;
       case "hks": this.SetHandledKeys(parseInt(valore)); break;
       case "bbt": this.SetBackButtonText(valore); break;
+      case "cln": this.SetClassName(valore); break;
 
       case "clk": this.ClickEventDef = parseInt(valore); break;
       case "flc": this.ClickFLEventDef = parseInt(valore); break;
@@ -909,6 +911,7 @@ WebForm.prototype.SetBackButtonText = function(value)
   if (this.Realized && this.BackButtonCnt)
   {
     // Se deve esserci, lo mostro
+    var doUpdateToolbar = false;
     if (this.HasBackButton() && this.BackButtonTxt && this.BackButtonTxt.length > 0)
     {
       // Mostro il bottone
@@ -916,6 +919,9 @@ WebForm.prototype.SetBackButtonText = function(value)
       //
       // Ne aggiorno il testo
       this.BackButton.textContent = this.BackButtonTxt;
+      //
+      // Spingo un aggiornamento della toolbar. E' comparso il bottone BACK
+      doUpdateToolbar = true;
     }
     else // Non ci deve essere BackButton
     {
@@ -925,12 +931,35 @@ WebForm.prototype.SetBackButtonText = function(value)
         this.BackButtonCnt.parentNode.removeChild(this.BackButtonCnt);
         //
         // Spingo un aggiornamento della toolbar. E' sparito il bottone BACK
-        if (this.HasCaption())
-          this.AdaptToolbar = true;
-        else
-          this.GetFirstToolbar(true);
+        doUpdateToolbar = true;
       }
     }
+    //
+    if (doUpdateToolbar) 
+    {
+      if (this.HasCaption())
+        this.AdaptToolbar = true;
+      else
+        this.GetFirstToolbar(true);
+    }
+  }
+}
+
+
+WebForm.prototype.SetClassName = function(value) 
+{
+  var old = this.ClassName;
+  if (value!=undefined)
+    this.ClassName = value;
+  //
+  if (this.Realized)
+  {
+    // Se c'e' un vecchio valore lo rimuovo, poi se ce n'e' uno nuovo lo aggiungo.
+    // in questo modo posso gestire correttamente il cambio da classe "a" -> ""
+    if (old)
+      RD3_Glb.RemoveClass(this.FormBox, old);
+    if (this.ClassName)
+      RD3_Glb.AddClass(this.FormBox, this.ClassName);
   }
 }
 
@@ -1042,7 +1071,7 @@ WebForm.prototype.Realize = function()
   var parent;
   var mob = RD3_Glb.IsMobile();
   var mob7 = RD3_Glb.IsMobile7();
-	//
+  //
   if (this.SubFormObj)
   {
     if (this.SubFormObj instanceof SubForm)
@@ -1178,22 +1207,22 @@ WebForm.prototype.Realize = function()
   //
   var usemask = !(RD3_Glb.IsAndroid() || RD3_Glb.IsIE() || RD3_Glb.IsEdge()) || RD3_Glb.IsAndroid(4,4,0);
   if (!usemask && mob7)
-  	ext = "-i" + ext;
-	//
+    ext = "-i" + ext;
+  //
   if (this.HasCloseButton())
   {
     this.CloseBtn = document.createElement("img");
     this.CloseBtn.setAttribute("id", this.Identifier+":clo");
     if (mob)
     { 
-    	if (mob7 && usemask)
-    	{
-    		this.CloseBtn.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/mno" + ext)+"')";
-    		this.CloseBtn.style.webkitMaskRepeat = "no-repeat";
+      if (mob7 && usemask)
+      {
+        this.CloseBtn.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/mno" + ext)+"')";
+        this.CloseBtn.style.webkitMaskRepeat = "no-repeat";
         this.CloseBtn.style.webkitMaskSize = "25px 25px";
-    	}
-    	else
-      	this.CloseBtn.src = RD3_Glb.GetImgSrc("images/mno"+ext);
+      }
+      else
+        this.CloseBtn.src = RD3_Glb.GetImgSrc("images/mno"+ext);
     }
     else
       this.CloseBtn.src = RD3_Glb.GetImgSrc("images/closef"+ext);
@@ -1227,12 +1256,12 @@ WebForm.prototype.Realize = function()
     if (this.CloseBtn)
     {
       if (mob7 && usemask)
-    	{	
-    		this.CloseBtn.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/mno" + ext)+"')";
-    		this.CloseBtn.style.webkitMaskRepeat = "no-repeat";
+      { 
+        this.CloseBtn.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/mno" + ext)+"')";
+        this.CloseBtn.style.webkitMaskRepeat = "no-repeat";
         this.CloseBtn.style.webkitMaskSize = "25px 25px";
-    	}
-    	else
+      }
+      else
         this.CloseBtn.src = RD3_Glb.GetImgSrc("images/mno"+ext);
       RD3_TooltipManager.SetObjTitle(this.CloseBtn, RD3_ServerParams.ModalChiudiForm);
       this.CloseBtn.className = "form-caption-modal-image close-button";
@@ -1247,11 +1276,11 @@ WebForm.prototype.Realize = function()
       this.ConfirmBtn.className = "form-caption-modal-image accept-button";
       if (mob7 && usemask)
       {
-    		this.ConfirmBtn.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/myes" + ext)+"')";
-    		this.ConfirmBtn.style.webkitMaskRepeat = "no-repeat";
+        this.ConfirmBtn.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/myes" + ext)+"')";
+        this.ConfirmBtn.style.webkitMaskRepeat = "no-repeat";
         this.ConfirmBtn.style.webkitMaskSize = "25px 25px";
-    	}
-    	else
+      }
+      else
         this.ConfirmBtn.src = RD3_Glb.GetImgSrc("images/myes"+ext);
       this.ConfirmBtn.removeAttribute("width");
       this.ConfirmBtn.removeAttribute("height");
@@ -1413,6 +1442,7 @@ WebForm.prototype.Realize = function()
   this.SetFormWidth(null, true);
   this.SetFormHeight(null, true);
   this.SetBackButtonText();
+  this.SetClassName();
   //
   // SOLO alla fine attacco la form al DOM,
   // cosi' si fa prima
@@ -2714,11 +2744,12 @@ WebForm.prototype.Focus= function(startframe, gotop)
   //
   if (startframe && gotop != undefined)
   {
+    // In questo caso sto gestendo il tab o la navigazione con tastiera, non il fuoco generico della form
     if (gotop)
     {
       for (var i=idx; i<n; i++)
       {
-        if (this.Frames[i].Focus(gotop))
+        if (this.Frames[i].HandlesTabFocus() && this.Frames[i].Focus(gotop))
           return true;
       }
     }
@@ -2726,7 +2757,7 @@ WebForm.prototype.Focus= function(startframe, gotop)
     {
       for (var i=idx; i>=0; i--)
       {
-        if (this.Frames[i].Focus(gotop))
+        if (this.Frames[i].HandlesTabFocus() && this.Frames[i].Focus(gotop))
           return true;
       }
     }
@@ -3701,6 +3732,7 @@ WebForm.prototype.Host = function(content, header)
 
 // ********************************************************************************
 // Ritorna la prima toolbar di form o di frame per infilare dentro dei bottoni
+// flref - forza l'aggiornamento della toolbar
 // ********************************************************************************
 WebForm.prototype.GetFirstToolbar = function(flref)
 {
@@ -3714,7 +3746,14 @@ WebForm.prototype.GetFirstToolbar = function(flref)
     if (fr instanceof TabbedView)
     {
       if (fr.SelectedPage>=0 && !fr.Tabs[fr.SelectedPage].Content.OnlyContent)
-        return fr.Tabs[fr.SelectedPage].Content.ToolbarBox;
+      {
+        var frSel = fr.Tabs[fr.SelectedPage].Content;
+        //
+        // Se richiesto chiedo alla toolbar di aggiornarsi
+        if (flref && frSel instanceof IDPanel && frSel.Realized)
+          frSel.RefreshToolbar = true;
+        return frSel.ToolbarBox;
+      }
     }
     else if (!fr.ChildFrame1 && !fr.OnlyContent)
     {
@@ -3982,7 +4021,7 @@ WebForm.prototype.OnBackButton = function()
       if (fr instanceof IDPanel)
       {
         // Se il pannello ha il bottone "torna alla lista", torno alla lista
-        if (fr.FormListButtonCnt && fr.FormListButtonCnt.style.display=="")
+        if (fr.FormListButtonCnt && fr.FormListButtonCnt.style.display=="" && fr.HasList)
         {
           fr.OnToolbarClick({},'list');
           return true;
@@ -3990,26 +4029,6 @@ WebForm.prototype.OnBackButton = function()
         // Se il pannello e' in dettaglio sbloccato e bloccabile, non faccio nulla
         if (fr.PanelMode==RD3_Glb.PANEL_FORM && !fr.Locked && fr.Lockable)
           return true;
-        //
-        // Verifico se il backbutton della Form e' attaccato e mostrato nel pannello
-        if (this.HasBackButton() && firsttoolb==fr.ToolbarBox)
-        {
-          var m = RD3_DesktopManager.WebEntryPoint.CmdObj.MenuButton;
-          var bb = this.BackButtonCnt;
-          //
-          // In questo caso sono un BackButton
-          if (bb && bb.parentNode==fr.ToolbarBox && bb.style.display=="")
-          {
-            this.OnClose({});
-            return true;   
-          }
-          else if (RD3_Glb.IsSmartPhone() && m && m.parentNode==fr.ToolbarBox && m.style.display=="")
-          {
-            // Qui sono il menu-button
-            RD3_DesktopManager.WebEntryPoint.CmdObj.OnMenuButton();
-            return true;  
-          }
-        }
       }
       //
       // Albero che visualizza nodi innestati, si torna al nodo precedente.
@@ -4019,6 +4038,26 @@ WebForm.prototype.OnBackButton = function()
         {
           fr.ActiveNode.OnBack({});
           return true;
+        }
+      }
+      //
+      // Verifico se il backbutton della Form e' attaccato e mostrato nel pannello
+      if (this.HasBackButton() && firsttoolb==fr.ToolbarBox)
+      {
+        var m = RD3_DesktopManager.WebEntryPoint.CmdObj.MenuButton;
+        var bb = this.BackButtonCnt;
+        //
+        // In questo caso sono un BackButton
+        if (bb && bb.parentNode==fr.ToolbarBox && bb.style.display=="")
+        {
+          this.OnClose({});
+          return true;   
+        }
+        else if (RD3_Glb.IsSmartPhone() && m && m.parentNode==fr.ToolbarBox && m.style.display=="")
+        {
+          // Qui sono il menu-button
+          RD3_DesktopManager.WebEntryPoint.CmdObj.OnMenuButton();
+          return true;  
         }
       }
     }

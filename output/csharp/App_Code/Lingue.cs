@@ -1,6 +1,6 @@
 // **********************************************
 // Lingue
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -114,28 +114,28 @@ public partial class Lingue : MyWebForm
     //
     //
     RTCGuid = "3BB74F0D-2F2F-4F9F-8CF0-92FF660DD23E";
-    ResModeW = 1;
-    ResModeH = 1;
+    ResModeW = 3;
+    ResModeH = 3;
     iVisualFlags = -2049;
-    DesignWidth = 744;
-    DesignHeight = 60;
+    DesignWidth = 652;
+    DesignHeight = 492;
     set_Caption(new IDVariant("Lingue"));
     //
     Frames = new AFrame[2];
     Frames[1] = new AFrame(1);
     Frames[1].Parent = this;
-    Frames[1].Width = 744;
-    Frames[1].Height = 380;
+    Frames[1].Width = 652;
+    Frames[1].Height = 432;
     Frames[1].Caption = "Lingue";
     Frames[1].Parent = this;
-    Frames[1].FixedHeight = 380;
+    Frames[1].FixedHeight = 432;
     PAN_LINGUE = new IDPanel(w, this, 1, "PAN_LINGUE");
     Frames[1].Content = PAN_LINGUE;
     PAN_LINGUE.set_VisualFlag(Glb.PANVISPROP_HILITEROW,true);
     PAN_LINGUE.VS = MainFrm.VisualStyleList;
-    PAN_LINGUE.SetRect(MyGlb.OBJ_RECT, 0, 0, 0, 0, 744-MyGlb.PAN_OFFS_X, 380-MyGlb.PAN_OFFS_Y, 0, 0);
+    PAN_LINGUE.SetRect(MyGlb.OBJ_RECT, 0, 0, 0, 0, 652-MyGlb.PAN_OFFS_X, 432-MyGlb.PAN_OFFS_Y, 0, 0);
     PAN_LINGUE.SetRTCGuid(MyGlb.OBJ_PANEL, 0, "1165F031-F89B-4710-BF0D-C2B1C44CB08E");
-    PAN_LINGUE.SetRect(MyGlb.OBJ_PANEL, 0, 0, 0, 0, 560, 324, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_STRETCH);
+    PAN_LINGUE.SetRect(MyGlb.OBJ_PANEL, 0, 0, 0, 0, 560, 352, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_STRETCH);
     PAN_LINGUE.set_VisualStyle(MyGlb.OBJ_PANEL, 0, MyGlb.VIS_DEFAPANESTYL);
     PAN_LINGUE.SetHeaderSize(MyGlb.OBJ_PANEL, 0, 0, 32);
     PAN_LINGUE.SetFlags(MyGlb.OBJ_PANEL, 0, MainFrm.GlbPanelFlags | MyGlb.PAN_SCROLLREC | MyGlb.PAN_HASFORM | MyGlb.PAN_HASLIST | MyGlb.PAN_CANDELETE | MyGlb.PAN_CANUPDATE | MyGlb.PAN_CANSELECT | MyGlb.PAN_CANINSERT | MyGlb.OBJ_VISIBLE | MyGlb.OBJ_ENABLED, -1);
@@ -414,7 +414,7 @@ public partial class Lingue : MyWebForm
   {
 
     StringBuilder SQL = new StringBuilder();
-    PAN_LINGUE.SetRect(MyGlb.OBJ_FIELD, PFL_LINGUE_ID, MyGlb.PANEL_LIST, 0, 32, 48, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_LINGUE.SetRect(MyGlb.OBJ_FIELD, PFL_LINGUE_ID, MyGlb.PANEL_LIST, 0, 32, 48, 32, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_LINGUE.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_LINGUE_ID, MyGlb.PANEL_LIST, 20);
     PAN_LINGUE.SetNumRow(MyGlb.OBJ_FIELD, PFL_LINGUE_ID, MyGlb.PANEL_LIST, 1);
     PAN_LINGUE.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_LINGUE_ID, MyGlb.PANEL_LIST, "Id");
@@ -424,7 +424,7 @@ public partial class Lingue : MyWebForm
     PAN_LINGUE.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_LINGUE_ID, MyGlb.PANEL_FORM, "Id");
     PAN_LINGUE.SetFieldPage(PFL_LINGUE_ID, -1, -1);
     PAN_LINGUE.SetFieldPanel(PFL_LINGUE_ID, PPQRY_LINGUE, "A.PRG_LINGUA", "PRG_LINGUA", 1, 9, 0, -1709);
-    PAN_LINGUE.SetRect(MyGlb.OBJ_FIELD, PFL_LINGUE_DESCRIZIONE, MyGlb.PANEL_LIST, 48, 32, 424, 20, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
+    PAN_LINGUE.SetRect(MyGlb.OBJ_FIELD, PFL_LINGUE_DESCRIZIONE, MyGlb.PANEL_LIST, 48, 32, 424, 32, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
     PAN_LINGUE.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_LINGUE_DESCRIZIONE, MyGlb.PANEL_LIST, 64);
     PAN_LINGUE.SetNumRow(MyGlb.OBJ_FIELD, PFL_LINGUE_DESCRIZIONE, MyGlb.PANEL_LIST, 1);
     PAN_LINGUE.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_LINGUE_DESCRIZIONE, MyGlb.PANEL_LIST, "Descrizione");
@@ -434,7 +434,7 @@ public partial class Lingue : MyWebForm
     PAN_LINGUE.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_LINGUE_DESCRIZIONE, MyGlb.PANEL_FORM, "Descrizione");
     PAN_LINGUE.SetFieldPage(PFL_LINGUE_DESCRIZIONE, -1, -1);
     PAN_LINGUE.SetFieldPanel(PFL_LINGUE_DESCRIZIONE, PPQRY_LINGUE, "A.DES_LINGUA", "DES_LINGUA", 5, 150, 0, -1709);
-    PAN_LINGUE.SetRect(MyGlb.OBJ_FIELD, PFL_LINGUE_CODICELINGUA, MyGlb.PANEL_LIST, 472, 32, 88, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_LINGUE.SetRect(MyGlb.OBJ_FIELD, PFL_LINGUE_CODICELINGUA, MyGlb.PANEL_LIST, 472, 32, 88, 32, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_LINGUE.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_LINGUE_CODICELINGUA, MyGlb.PANEL_LIST, 76);
     PAN_LINGUE.SetNumRow(MyGlb.OBJ_FIELD, PFL_LINGUE_CODICELINGUA, MyGlb.PANEL_LIST, 1);
     PAN_LINGUE.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_LINGUE_CODICELINGUA, MyGlb.PANEL_LIST, "Codice Lingua");
@@ -458,7 +458,7 @@ public partial class Lingue : MyWebForm
     SQL.Append("  A.PRG_LINGUA as PRG_LINGUA, ");
     SQL.Append("  A.DES_LINGUA as DES_LINGUA, ");
     SQL.Append("  A.CDA_LINGUA as CDA_LINGUA ");
-    PAN_LINGUE.SetQuery(PPQRY_LINGUE, 0, SQL, -1, "");
+    PAN_LINGUE.SetQuery(PPQRY_LINGUE, 0, SQL, -1, "54D3BAF5-DD59-4F5D-B282-1116FDFC30F4");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  LINGUE A ");
@@ -698,6 +698,10 @@ public partial class Lingue : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

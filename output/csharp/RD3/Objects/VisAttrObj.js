@@ -2406,10 +2406,18 @@ VisAttrObj.prototype.SetBoxProto= function(obj)
       this.iBoxProto.style.backgroundImage = "";
     //
     // La Box puo' avere a sua Volta una classe gia' impostata, la devo rimuovere perche' la nuova istanza non sa di averla
-    //  (sono obbligato a rimuovere anche la classe assegnata al VS)
     if (this.iBoxProto.className != "book-box") {
-      this.iBoxProto.className = "book-box";
-      this.iBoxProto.setAttribute("vsclass", "");
+      var vsCls = this.GetClassName();
+      if (vsCls) 
+      {
+        this.iBoxProto.className = "book-box " + vsCls;
+        this.iBoxProto.setAttribute("vsclass", vsCls);
+      }
+      else
+      {
+        this.iBoxProto.className = "book-box";
+        this.iBoxProto.setAttribute("vsclass", "");
+      }
     }
   }
 }

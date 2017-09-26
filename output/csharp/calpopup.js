@@ -4,6 +4,8 @@
 var glbDay = 0;   // Data selezionata nel popup
 var glbMonth = 0;
 var glbYear = 0;
+var glbHour = -1;
+var glbMinute = -1;
 
 var glbSourceField = null;    // Campo e valore iniziale
 var glbSourceFieldValue = "";
@@ -13,6 +15,14 @@ var glbStartDate; // Posizione iniziale della prima data
 
 var DayNames = new Array("lu","ma","me","gi","ve","sa","do");
 var MonthNames = new Array("gennaio","febbraio","marzo","aprile","maggio","giugno","luglio","agosto","settembre","ottobre","novembre","dicembre");
+
+var DATE = 0;
+var DATETIME = 1;
+var TIME = 2;
+var isDateTime = DATE;
+
+var OriginalWidth = -1;
+var OriginalHeight = -1;
 
 // ************************************
 // Estrae/imposta i token
@@ -40,8 +50,6 @@ function getToken(ris,mask,token)
 	else
 	{
 		s = ris.substr(i,token.length);
-		while (s.length > 0 && s.charAt(0)=="0")
-			s = s.substr(1);
 		return parseInt(s);
 	}
 }
@@ -92,7 +100,7 @@ function GetNameOfMonth(vMonth)
 // ************************************
 // Controlla se la data è valida
 // ************************************
-function IsDate(vDay, vMonth, vYear) 
+function IsDate(vDay, vMonth, vYear, vHour, vMinute) 
 {
 	if(vYear > 2100 || vYear < 1900)
 		return false;
@@ -106,6 +114,12 @@ function IsDate(vDay, vMonth, vYear)
 	if(vDay > DaysInMonth(vMonth, vYear))
 		return false;
 	//
+	if (vHour && (vHour < 0 || vHour > 23))
+	  return false;
+	//
+	if (vMinute && (vMinute < 0 || vMinute > 59))
+	  return false;
+	//
 	return true;
 }
 
@@ -118,6 +132,8 @@ function ParseInputValue(vValue)
 	var vDay = 0;
 	var vMonth = 0;
 	var vYear = 0;
+	var vHour = 0;
+	var vMinute = 0;
 	//
 	if (vValue.length<glbCalMask.length)
 		vValue += glbCalMask.substring(vValue.length,glbCalMask.length);
@@ -125,6 +141,9 @@ function ParseInputValue(vValue)
 	vDay=getToken(vValue,glbCalMask,"dd");
 	vMonth=getToken(vValue,glbCalMask,"mm");
 	vYear=getToken(vValue,glbCalMask,"yyyy");
+	vHour=getToken(vValue,glbCalMask,"hh");
+	vMinute=getToken(vValue,glbCalMask,"nn");
+	//
 	if (vYear==-1)
 		vYear=getToken(vValue,glbCalMask,"yy");
 	//
@@ -136,11 +155,24 @@ function ParseInputValue(vValue)
 			vYear+=2000;
 	}
 	//
-	if(IsDate(vDay, vMonth, vYear) && vYear>0 && vMonth>0 && vDay>0)
+	if(vHour>0 && vMinute>0) 
+	{
+	  if(IsDate(vDay, vMonth, vYear, vHour, vMinute) && vYear>0 && vMonth>0 && vDay>0)
+	  {
+  	  glbDay = vDay;
+  		glbMonth = vMonth;
+  		glbYear = vYear;
+  		glbHour = vHour;
+  		glbMinute = vMinute;
+	  }
+	}
+	else if(IsDate(vDay, vMonth, vYear) && vYear>0 && vMonth>0 && vDay>0)
 	{
 		glbDay = vDay;
 		glbMonth = vMonth;
 		glbYear = vYear;
+		glbHour = vHour;
+    glbMinute = vMinute;
 	} 
 	else 
 	{
@@ -148,6 +180,17 @@ function ParseInputValue(vValue)
 		glbDay = Oggi.getDate();
 		glbMonth = Oggi.getMonth() + 1;
 		glbYear = Oggi.getFullYear();
+		//
+		if (glbCalMask.indexOf("hh:nn") > -1)
+		{
+  		glbHour = Oggi.getHours();
+  		glbMinute = Oggi.getMinutes();
+	  }
+	  else
+	  {
+	    glbHour = -1;
+  		glbMinute = -1;
+	  }
 	}
 	return true;
 }
@@ -178,6 +221,8 @@ function GetCaretPosition(input)
 function ShowCalendar(InputField, mask)
 {
 	var CalObj=document.getElementById("calpopup");
+	OriginalWidth = OriginalWidth == -1 ? CalObj.style.width : OriginalWidth;
+	OriginalHeight = OriginalHeight == -1 ? CalObj.style.height : OriginalHeight;
 	var CalFrame = GetFrame(window.frames,"calpopup");
 	//
 	// Firefox non trova l'IFRAME con nome CALPOPUP tra i window.frames... 
@@ -250,9 +295,19 @@ function ShowCalendar(InputField, mask)
 		// Apro il calendario che era chiuso
 		if(ParseInputValue(FieldValueDate))
 		{
-			SetDate2(glbDay, glbMonth, glbYear, false);
-			CalFrame.SetInputDate(glbDay, glbMonth, glbYear);
-			CalFrame.SetDate(glbDay, glbMonth, glbYear);
+		  var idx = glbCalMask.indexOf("hh");
+		  if (idx > -1) {
+		    if (glbCalMask.length > 5)
+		      isDateTime = DATETIME;
+		    else
+		      isDateTime = TIME;
+		  }
+		  else
+		    isDateTime = DATE;
+		  //
+	    SetDate2(glbDay, glbMonth, glbYear, false, glbHour, glbMinute);
+	    CalFrame.SetInputDate(glbDay, glbMonth, glbYear, glbHour, glbMinute);
+			CalFrame.SetDate(glbDay, glbMonth, glbYear, glbHour, glbMinute);
 		}
 		//
 		// Calcolo posizione calendario
@@ -290,9 +345,45 @@ function ShowCalendar(InputField, mask)
 		CalObj.style.top = tt+"px";
 		//
 		// Mostro calendario
-		// 
-		if(CalObj.style.display == "none")
-			CalObj.style.display = "block";
+		CalObj.style.display = "block";
+		//
+		var innerDoc = CalObj.contentDocument || CalObj.contentWindow.document;
+		var calHeader = innerDoc.getElementsByClassName("CalHeader")[0];
+		var calArrowDx = innerDoc.getElementsByClassName("CalHeaderArrowDX")[0];
+		var tp = innerDoc.getElementById("timepicker");
+  	var dp = innerDoc.getElementById("datepicker");
+		if (isDateTime == DATE) 
+		{
+		  if (tp) 
+		  {
+		    tp.style.display = "none";
+		    tp.className = "timepicker";
+		  }
+  	  dp.style.display = "inline-block";
+		  CalObj.style.width = OriginalWidth;
+		  CalObj.style.height = OriginalHeight;
+		  calArrowDx.className = "CalHeaderArrowDX";
+		}
+		else if (isDateTime == DATETIME)
+		{
+		  if (tp)
+		  {
+		    tp.style.display = "inline-block";
+	      tp.className = "timepicker";
+	    }
+  	  dp.style.display = "inline-block";
+		  CalObj.style.width = OriginalWidth == "220px" ? "360px" : "270px";
+		  CalObj.style.height = OriginalHeight;
+	    calArrowDx.className = "CalHeaderArrowDX CalHeaderArrowDX-TimePicker";
+	  }
+	  else if (isDateTime == TIME)
+	  {
+  	  tp.style.display = "inline-block";
+  	  tp.className = "timepicker TimeOnly";
+  	  dp.style.display = "none";
+  	  CalObj.style.width = "114px";
+  	  CalObj.style.height = "162px";
+    }
 	}
 }
 
@@ -300,12 +391,12 @@ function ShowCalendar(InputField, mask)
 // ************************************
 // Imposta Data nel Campo
 // ************************************
-function SetDate(vDay, vMonth, vYear)
+function SetDate(vDay, vMonth, vYear, vHour, vMinute)
 {
-	SetDate2(vDay, vMonth, vYear,true);
+	SetDate2(vDay, vMonth, vYear, true, vHour, vMinute);
 }
 
-function SetDate2(vDay, vMonth, vYear, bSetFocus)
+function SetDate2(vDay, vMonth, vYear, bSetFocus, vHour, vMinute)
 {	
   // L'RD2 potrebbe aver distrutto e ricreato l'oggetto (se era attivo)... lo ricerco nel documento
   if (glbSourceField && glbSourceField.name!="")
@@ -328,9 +419,13 @@ function SetDate2(vDay, vMonth, vYear, bSetFocus)
 			FieldValueDate += glbCalMask.substring(FieldValueDate.length,glbCalMask.length);
 		FieldValueDate = setToken(FieldValueDate,glbCalMask,"dd",vDay);
 		FieldValueDate = setToken(FieldValueDate,glbCalMask,"mm",vMonth);
-		FieldValueDate = setToken(FieldValueDate,glbCalMask,"yyyy",vYear);	 
+		FieldValueDate = setToken(FieldValueDate,glbCalMask,"yyyy",vYear);
 		if (getToken(FieldValueDate,glbCalMask,"yyyy")==-1)
 	  	FieldValueDate = setToken(FieldValueDate,glbCalMask,"yy",vYear%100);	 
+	  if (vHour > -1)
+	    FieldValueDate = setToken(FieldValueDate,glbCalMask,"hh",vHour);
+	  if (vMinute > -1)
+	    FieldValueDate = setToken(FieldValueDate,glbCalMask,"nn",vMinute);
 		//
 		// Imposto il valore solo se è cambiato
 		if (glbSourceField.value != glbSourceFieldValue.substr(0,glbStartDate) + FieldValueDate + glbSourceFieldValue.substr(glbStartDate + FieldValueDate.length))

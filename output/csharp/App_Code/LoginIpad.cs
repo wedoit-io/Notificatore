@@ -1,6 +1,6 @@
 // **********************************************
 // Login Ipad
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -360,23 +360,37 @@ public partial class LoginIpad : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("83D98AD2-DE1D-4404-A9E8-11981FCA6F64", "Bottone Login", "Esegue il login", 3, "Login Ipad")) return 0;
       // 
       // Bottone Login Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("42427576-02F6-4747-9B78-D994CFB5BA4C", "IF Esegue Login (Email Nuovo Pannello, PIN Nuovo Pannello)", "");
+      MainFrm.DTTObj.AddToken ("42427576-02F6-4747-9B78-D994CFB5BA4C", "7C0AF190-7DF1-4BA6-9E31-FC10884CAF66", 327680, "Email", IMDB.Value(IMDBDef1.TBL_DATIDILOGIN, IMDBDef1.FLD_DATIDILOGIN_EMAINUOVPANN, 0));
+      MainFrm.DTTObj.AddToken ("42427576-02F6-4747-9B78-D994CFB5BA4C", "13D69145-F5BD-48DC-BA0D-F76ED3361B96", 327680, "PIN", IMDB.Value(IMDBDef1.TBL_DATIDILOGIN, IMDBDef1.FLD_DATIDILOGIN_PINNUOVOPANN, 0));
       if (MainFrm.EsegueLogin(IMDB.Value(IMDBDef1.TBL_DATIDILOGIN, IMDBDef1.FLD_DATIDILOGIN_EMAINUOVPANN, 0), IMDB.Value(IMDBDef1.TBL_DATIDILOGIN, IMDBDef1.FLD_DATIDILOGIN_PINNUOVOPANN, 0)))
       {
+        MainFrm.DTTObj.EnterIf ("42427576-02F6-4747-9B78-D994CFB5BA4C", "IF Esegue Login (Email Nuovo Pannello, PIN Nuovo Pannello)", "");
+        MainFrm.DTTObj.AddSubProc ("CF9AA53F-4566-4C0D-B2F3-4FD9C3A32121", "Login Ipad.Close", "");
         MainFrm.UnloadForm(FormIdx,(new IDVariant(0)).booleanValue()); 
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("B33EA854-E4FC-4C68-88D0-9A45BC093470", "ELSE", "", "42427576-02F6-4747-9B78-D994CFB5BA4C");
+        MainFrm.DTTObj.AddSubProc ("6E40872F-1B70-4A3F-85C3-24E49D526966", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("6E40872F-1B70-4A3F-85C3-24E49D526966", "B73ABA04-29D1-4CD5-A13C-9F222DBB3F1D", "Messaggio", (new IDVariant("I dati inseriti non sono stati riconosciuti. Correggili e riprova.")));
         MainFrm.set_AlertMessage((new IDVariant("I dati inseriti non sono stati riconosciuti. Correggili e riprova."))); 
       }
+      MainFrm.DTTObj.EndIfBlk ("42427576-02F6-4747-9B78-D994CFB5BA4C");
+      MainFrm.DTTObj.ExitProc("83D98AD2-DE1D-4404-A9E8-11981FCA6F64", "Bottone Login", "Esegue il login", 3, "Login Ipad");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("83D98AD2-DE1D-4404-A9E8-11981FCA6F64", "Bottone Login", "Esegue il login", _e);
       MainFrm.ErrObj.ProcError ("LoginIpad", "BottoneLogin", _e);
+      MainFrm.DTTObj.ExitProc("83D98AD2-DE1D-4404-A9E8-11981FCA6F64", "Bottone Login", "Esegue il login", 3, "Login Ipad");
       return -1;
     }
   }
@@ -398,6 +412,11 @@ public partial class LoginIpad : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("7BEBD39B-083B-4DEB-8487-52FB74E54FEF", "On Resize", "", 0, "Login Ipad")) return;
+      MainFrm.DTTObj.AddParameter ("7BEBD39B-083B-4DEB-8487-52FB74E54FEF", "32797CBC-4D4B-451E-A813-1E20EFC0477A", "NewWidth", NewWidth);
+      MainFrm.DTTObj.AddParameter ("7BEBD39B-083B-4DEB-8487-52FB74E54FEF", "D2231FC0-6738-4E5C-BF4C-057E56D2D6D5", "NewHeight", NewHeight);
+      MainFrm.DTTObj.AddParameter ("7BEBD39B-083B-4DEB-8487-52FB74E54FEF", "3A8DAD5B-3F89-4BE0-A1AF-92DE49799D3D", "Cancel", Cancel);
       // 
       // On Resize Body
       // Corpo Procedura
@@ -405,28 +424,61 @@ public partial class LoginIpad : MyWebForm
       // 
       // allineamento logo
       // 
+      MainFrm.DTTObj.AddAssign ("8B472819-37EE-44FB-949B-BE8160C44517", "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left := C(NewWidth - Benvenuti in iSpesa Login [Login Ipad - Login].Form Width) / 2", "allineamento logo", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("8B472819-37EE-44FB-949B-BE8160C44517", "32797CBC-4D4B-451E-A813-1E20EFC0477A", 1376256, "NewWidth", NewWidth);
+      MainFrm.DTTObj.AddToken ("8B472819-37EE-44FB-949B-BE8160C44517", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Width", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_WIDTH, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM, IDL.Div((IDL.Sub(NewWidth, (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_WIDTH, Glb.PANEL_FORM))))), (new IDVariant(2))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("8B472819-37EE-44FB-949B-BE8160C44517", "038D9BEC-6D40-4290-9888-789DB86A76B3", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM));
       // 
       // oggetti allineati alla sinistra del logo
       // 
+      MainFrm.DTTObj.AddAssign ("85280A8F-0EC7-4F4E-91BB-2FA57F56E064", "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left := C(NewWidth - Benvenuti in iSpesa Login [Login Ipad - Login].Form Width) / 2", "oggetti allineati alla sinistra del logo", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("85280A8F-0EC7-4F4E-91BB-2FA57F56E064", "32797CBC-4D4B-451E-A813-1E20EFC0477A", 1376256, "NewWidth", NewWidth);
+      MainFrm.DTTObj.AddToken ("85280A8F-0EC7-4F4E-91BB-2FA57F56E064", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Width", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_WIDTH, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM, IDL.Div((IDL.Sub(NewWidth, (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_WIDTH, Glb.PANEL_FORM))))), (new IDVariant(2))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("85280A8F-0EC7-4F4E-91BB-2FA57F56E064", "038D9BEC-6D40-4290-9888-789DB86A76B3", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddAssign ("4D9D0C78-4ED1-4B1D-8AA8-40B194030D87", "Etichetta Scrivi Login [Login Ipad - Login].Form Left := Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", "", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICHESCRIVI, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("4D9D0C78-4ED1-4B1D-8AA8-40B194030D87", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICHESCRIVI, IDPanel.RT_LEFT, Glb.PANEL_FORM, (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("4D9D0C78-4ED1-4B1D-8AA8-40B194030D87", "5257B874-1CE1-42B0-935C-A1E6B68A892B", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICHESCRIVI, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddAssign ("5867482C-BDA2-4702-A5A8-42DDADC21739", "Email Login [Login Ipad - Login].Form Left := Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", "", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_EMAIL, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("5867482C-BDA2-4702-A5A8-42DDADC21739", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_EMAIL, IDPanel.RT_LEFT, Glb.PANEL_FORM, (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("5867482C-BDA2-4702-A5A8-42DDADC21739", "E923C6E7-E1D4-4EDB-970D-79B2739B4C62", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_EMAIL, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddAssign ("5AA3F2EE-0354-4757-93ED-0582C7F142B8", "PIN Login [Login Ipad - Login].Form Left := Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", "", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_PIN, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("5AA3F2EE-0354-4757-93ED-0582C7F142B8", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_PIN, IDPanel.RT_LEFT, Glb.PANEL_FORM, (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("5AA3F2EE-0354-4757-93ED-0582C7F142B8", "B5E0A895-66EE-4486-A243-62B78EC7FB8C", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_PIN, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddAssign ("03C0FF2F-4218-4FC0-99BE-B66995292AF0", "Benvenuti in iSpesa 1 Login [Login Ipad - Login].Form Left := Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", "", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPE1, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("03C0FF2F-4218-4FC0-99BE-B66995292AF0", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPE1, IDPanel.RT_LEFT, Glb.PANEL_FORM, (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("03C0FF2F-4218-4FC0-99BE-B66995292AF0", "E6900092-BD12-4419-AF3A-B20CE118F0F3", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPE1, IDPanel.RT_LEFT, Glb.PANEL_FORM));
       // 
       // oggetti allineati alla destra interna della colonna
       // di sinistra
       // 
+      MainFrm.DTTObj.AddAssign ("B8CDA320-B5CD-44C9-9DA1-A4D03281BC5A", "Bottone Login [Login Ipad - Login].Form Left := Benvenuti in iSpesa Login [Login Ipad - Login].Form Left + Email Login [Login Ipad - Login].Form Width - Bottone Login [Login Ipad - Login].Form Width", "oggetti allineati alla destra interna della colonna di sinistra", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BOTTONELOGIN, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("B8CDA320-B5CD-44C9-9DA1-A4D03281BC5A", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))));
+      MainFrm.DTTObj.AddToken ("B8CDA320-B5CD-44C9-9DA1-A4D03281BC5A", "E923C6E7-E1D4-4EDB-970D-79B2739B4C62", 2686976, "Email Login [Login Ipad - Login].Form Width", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_EMAIL, IDPanel.RT_WIDTH, Glb.PANEL_FORM))));
+      MainFrm.DTTObj.AddToken ("B8CDA320-B5CD-44C9-9DA1-A4D03281BC5A", "098984F4-A573-42B9-A4A2-3F74A4B947A8", 2686976, "Bottone Login [Login Ipad - Login].Form Width", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BOTTONELOGIN, IDPanel.RT_WIDTH, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BOTTONELOGIN, IDPanel.RT_LEFT, Glb.PANEL_FORM, IDL.Sub(IDL.Add((new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))), (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_EMAIL, IDPanel.RT_WIDTH, Glb.PANEL_FORM)))), (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BOTTONELOGIN, IDPanel.RT_WIDTH, Glb.PANEL_FORM)))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("B8CDA320-B5CD-44C9-9DA1-A4D03281BC5A", "098984F4-A573-42B9-A4A2-3F74A4B947A8", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BOTTONELOGIN, IDPanel.RT_LEFT, Glb.PANEL_FORM));
       // 
       // oggetti allineati alla destra del logo
       // 
+      MainFrm.DTTObj.AddAssign ("FC1FFCC9-E2DA-42DD-8772-746E39A0B464", "Etichetta Il sistema più Login [Login Ipad - Login].Form Left := Benvenuti in iSpesa Login [Login Ipad - Login].Form Left + Benvenuti in iSpesa Login [Login Ipad - Login].Form Width - Etichetta Il sistema più Login [Login Ipad - Login].Form", "oggetti allineati alla destra del logo", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICILSISPIU, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.AddToken ("FC1FFCC9-E2DA-42DD-8772-746E39A0B464", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Left", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))));
+      MainFrm.DTTObj.AddToken ("FC1FFCC9-E2DA-42DD-8772-746E39A0B464", "038D9BEC-6D40-4290-9888-789DB86A76B3", 2686976, "Benvenuti in iSpesa Login [Login Ipad - Login].Form Width", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_WIDTH, Glb.PANEL_FORM))));
+      MainFrm.DTTObj.AddToken ("FC1FFCC9-E2DA-42DD-8772-746E39A0B464", "BE0AAA3B-743B-425A-A3EA-59A4B9FA4562", 2686976, "Etichetta Il sistema più Login [Login Ipad - Login].Form Width", (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICILSISPIU, IDPanel.RT_WIDTH, Glb.PANEL_FORM))));
       PAN_LOGIN.set_ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICILSISPIU, IDPanel.RT_LEFT, Glb.PANEL_FORM, IDL.Sub(IDL.Add((new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_LEFT, Glb.PANEL_FORM))), (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_BENVEINISPES, IDPanel.RT_WIDTH, Glb.PANEL_FORM)))), (new IDVariant(PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICILSISPIU, IDPanel.RT_WIDTH, Glb.PANEL_FORM)))).intValue());
+      MainFrm.DTTObj.AddAssignNewValue ("FC1FFCC9-E2DA-42DD-8772-746E39A0B464", "BE0AAA3B-743B-425A-A3EA-59A4B9FA4562", PAN_LOGIN.ObjRect(Glb.OBJ_FIELD, PFL_LOGIN_ETICILSISPIU, IDPanel.RT_LEFT, Glb.PANEL_FORM));
+      MainFrm.DTTObj.ExitProc("7BEBD39B-083B-4DEB-8487-52FB74E54FEF", "On Resize", "", 0, "Login Ipad");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("7BEBD39B-083B-4DEB-8487-52FB74E54FEF", "On Resize", "", _e);
       MainFrm.ErrObj.ProcError ("LoginIpad", "OnResize", _e);
+      MainFrm.DTTObj.ExitProc("7BEBD39B-083B-4DEB-8487-52FB74E54FEF", "On Resize", "", 0, "Login Ipad");
     }
   }
 
@@ -943,6 +995,10 @@ public partial class LoginIpad : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

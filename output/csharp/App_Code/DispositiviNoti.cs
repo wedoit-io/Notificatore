@@ -1,6 +1,6 @@
 // **********************************************
 // Dispositivi Noti
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -486,7 +486,7 @@ public partial class DispositiviNoti : MyWebForm
     SQL.Append("  A.DES_MESSAGGIO as DES_MESSAGGIO, ");
     SQL.Append("  A.DEV_TOKEN as DEV_TOKEN, ");
     SQL.Append("  A.TYPE_OS as TYPE_OS ");
-    PAN_DISPOSITNOTI.SetQuery(PPQRY_DISPONOTIIOS, 0, SQL, -1, "");
+    PAN_DISPOSITNOTI.SetQuery(PPQRY_DISPONOTIIOS, 0, SQL, -1, "4209F443-FBDA-46B8-B307-27C7E86954C2");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  DISPOSITIVI_NOTI A ");
@@ -726,6 +726,10 @@ public partial class DispositiviNoti : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

@@ -631,6 +631,10 @@ PListGroup.prototype.GetNumRows = function()
   }
   else
   {
+    // Gruppo vuoto, non ha record!
+    if (this.StartingRecord === 1 && this.EndingRecord === 0)
+      return 0;
+    //
     // Le righe mostrate dipendono dai miei valori + 1 (la mia intestazione)
     return (this.EndingRecord - this.StartingRecord +1) +1;
   }

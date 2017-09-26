@@ -1,6 +1,6 @@
 // **********************************************
 // API Locator
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -465,18 +465,30 @@ public partial class APILocator : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("AD7E2FF4-67A0-4CD3-9924-A286AF70FB7F", "API Locator Before Insert", "", 0, "API Locator")) return;
+      MainFrm.DTTObj.AddParameter ("AD7E2FF4-67A0-4CD3-9924-A286AF70FB7F", "5BA3D621-A024-45B5-BB40-D1A544C52054", "Cancel", Cancel);
       // 
       // API Locator Before Insert Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("C2DAB954-F69C-4189-A83A-072A6D240088", "IF Is Null (Chiave Apps API Locator [API Locator - API Locator])", "");
+      MainFrm.DTTObj.AddToken ("C2DAB954-F69C-4189-A83A-072A6D240088", "EECFE8A5-7E59-4523-A3A6-B23E83AF0CF7", 917504, "Chiave Apps", IMDB.Value(IMDBDef1.PQRY_APILOCATOR, IMDBDef1.PQSL_APILOCATOR_APP_KEY, 0));
       if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_APILOCATOR, IMDBDef1.PQSL_APILOCATOR_APP_KEY, 0)))
       {
+        MainFrm.DTTObj.EnterIf ("C2DAB954-F69C-4189-A83A-072A6D240088", "IF Is Null (Chiave Apps API Locator [API Locator - API Locator])", "");
+        MainFrm.DTTObj.AddAssign ("0DE1A995-3132-456C-8445-FF313C60905E", "Auth Key Apps API Locator [API Locator - API Locator] := Upper (Doc ID To Guid (New Doc ID ()))", "", IMDB.Value(IMDBDef1.PQRY_APILOCATOR, IMDBDef1.PQSL_APILOCATOR_AUTH_KEY, 0));
         IMDB.set_Value(IMDBDef1.PQRY_APILOCATOR, IMDBDef1.PQSL_APILOCATOR_AUTH_KEY, 0, IDL.Upper(new IDVariant(com.progamma.GUID.DocID2GUID (com.progamma.doc.MDOInit.GetNewDocID().stringValue()))));
+        MainFrm.DTTObj.AddAssignNewValue ("0DE1A995-3132-456C-8445-FF313C60905E", "3790AAC1-6E60-4810-8E35-9678702A6A06", IMDB.Value(IMDBDef1.PQRY_APILOCATOR, IMDBDef1.PQSL_APILOCATOR_AUTH_KEY, 0));
       }
+      MainFrm.DTTObj.EndIfBlk ("C2DAB954-F69C-4189-A83A-072A6D240088");
+      MainFrm.DTTObj.ExitProc("AD7E2FF4-67A0-4CD3-9924-A286AF70FB7F", "API Locator Before Insert", "", 0, "API Locator");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("AD7E2FF4-67A0-4CD3-9924-A286AF70FB7F", "API Locator Before Insert", "", _e);
       MainFrm.ErrObj.ProcError ("APILocator", "APILocatorBeforeInsert", _e);
+      MainFrm.DTTObj.ExitProc("AD7E2FF4-67A0-4CD3-9924-A286AF70FB7F", "API Locator Before Insert", "", 0, "API Locator");
     }
   }
 
@@ -497,15 +509,24 @@ public partial class APILocator : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("776E4437-F0B1-41A6-AE06-DCE83C482DE3", "Api Locator Before Insert", "", 0, "API Locator")) return;
+      MainFrm.DTTObj.AddParameter ("776E4437-F0B1-41A6-AE06-DCE83C482DE3", "75457361-E7E7-4B42-98F5-E5C4A1FDE237", "Cancel", Cancel);
       // 
       // Api Locator Before Insert Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddAssign ("09425D72-EE37-42AA-89D5-DA6DC10DF532", "ID App Dettagli App [API Locator - Api Locator] := ID Apps API Locator [API Locator - API Locator]", "", IMDB.Value(IMDBDef1.PQRY_DETTAGLIAPP, IMDBDef1.PQSL_DETTAGLIAPP_ID_APP, 0));
+      MainFrm.DTTObj.AddToken ("09425D72-EE37-42AA-89D5-DA6DC10DF532", "1BDD5D87-DBFF-42F9-A5F7-B855C6D1D1DB", 917504, "ID Apps", IMDB.Value(IMDBDef1.PQRY_APILOCATOR, IMDBDef1.PQSL_APILOCATOR_ID, 0));
       IMDB.set_Value(IMDBDef1.PQRY_DETTAGLIAPP, IMDBDef1.PQSL_DETTAGLIAPP_ID_APP, 0, IMDB.Value(IMDBDef1.PQRY_APILOCATOR, IMDBDef1.PQSL_APILOCATOR_ID, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("09425D72-EE37-42AA-89D5-DA6DC10DF532", "1B3A6C79-FC55-48AA-AF1C-7541F7FB1C94", IMDB.Value(IMDBDef1.PQRY_DETTAGLIAPP, IMDBDef1.PQSL_DETTAGLIAPP_ID_APP, 0));
+      MainFrm.DTTObj.ExitProc("776E4437-F0B1-41A6-AE06-DCE83C482DE3", "Api Locator Before Insert", "", 0, "API Locator");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("776E4437-F0B1-41A6-AE06-DCE83C482DE3", "Api Locator Before Insert", "", _e);
       MainFrm.ErrObj.ProcError ("APILocator", "ApiLocatorBeforeInsert", _e);
+      MainFrm.DTTObj.ExitProc("776E4437-F0B1-41A6-AE06-DCE83C482DE3", "Api Locator Before Insert", "", 0, "API Locator");
     }
   }
 
@@ -526,15 +547,24 @@ public partial class APILocator : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("15D8CB4C-6CC9-4055-9AE2-DB431A4DF9E9", "Dettagli Versione Before Insert", "", 0, "API Locator")) return;
+      MainFrm.DTTObj.AddParameter ("15D8CB4C-6CC9-4055-9AE2-DB431A4DF9E9", "E8692B18-7483-41E9-B0FD-75CFFAC246A6", "Cancel", Cancel);
       // 
       // Dettagli Versione Before Insert Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddAssign ("0DA7629C-4D76-4169-922C-F9AF2B982E4F", "ID Dettagli App Dettaglio Versione [API Locator - Dettagli Versione] := ID Dettagli App [API Locator - Api Locator]", "", IMDB.Value(IMDBDef1.PQRY_DETTAGVERSIO, IMDBDef1.PQSL_DETTAGVERSIO_ID_DETT_APP, 0));
+      MainFrm.DTTObj.AddToken ("0DA7629C-4D76-4169-922C-F9AF2B982E4F", "5DBCDD0D-03DC-47EB-A89E-A191FEA12917", 917504, "ID Dettagli App", IMDB.Value(IMDBDef1.PQRY_DETTAGLIAPP, IMDBDef1.PQSL_DETTAGLIAPP_ID, 0));
       IMDB.set_Value(IMDBDef1.PQRY_DETTAGVERSIO, IMDBDef1.PQSL_DETTAGVERSIO_ID_DETT_APP, 0, IMDB.Value(IMDBDef1.PQRY_DETTAGLIAPP, IMDBDef1.PQSL_DETTAGLIAPP_ID, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("0DA7629C-4D76-4169-922C-F9AF2B982E4F", "75C99615-BD15-4281-8A33-7068B686B2D4", IMDB.Value(IMDBDef1.PQRY_DETTAGVERSIO, IMDBDef1.PQSL_DETTAGVERSIO_ID_DETT_APP, 0));
+      MainFrm.DTTObj.ExitProc("15D8CB4C-6CC9-4055-9AE2-DB431A4DF9E9", "Dettagli Versione Before Insert", "", 0, "API Locator");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("15D8CB4C-6CC9-4055-9AE2-DB431A4DF9E9", "Dettagli Versione Before Insert", "", _e);
       MainFrm.ErrObj.ProcError ("APILocator", "DettagliVersioneBeforeInsert", _e);
+      MainFrm.DTTObj.ExitProc("15D8CB4C-6CC9-4055-9AE2-DB431A4DF9E9", "Dettagli Versione Before Insert", "", 0, "API Locator");
     }
   }
 
@@ -553,6 +583,8 @@ public partial class APILocator : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("F9839C48-4F23-4E03-B238-57293D9CBDA6", "Load", "", 0, "API Locator")) return;
       // 
       // Load Body
       // Corpo Procedura
@@ -564,10 +596,13 @@ public partial class APILocator : MyWebForm
       // PAN_APILOCATOR1.RefreshGrouping(true);
       // PAN_APILOCATOR1.RD3ExpandGroup((new IDVariant(0)).intValue(),(new IDVariant(-1)).booleanValue()); 
       // PAN_APILOCATOR1.set_ActualPosition(true, (new IDVariant(1)).intValue());
+      MainFrm.DTTObj.ExitProc("F9839C48-4F23-4E03-B238-57293D9CBDA6", "Load", "", 0, "API Locator");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("F9839C48-4F23-4E03-B238-57293D9CBDA6", "Load", "", _e);
       MainFrm.ErrObj.ProcError ("APILocator", "Load", _e);
+      MainFrm.DTTObj.ExitProc("F9839C48-4F23-4E03-B238-57293D9CBDA6", "Load", "", 0, "API Locator");
     }
   }
 
@@ -847,7 +882,7 @@ public partial class APILocator : MyWebForm
     SQL.Append("from ");
     SQL.Append("  PRODOTTI A ");
     SQL.Append("where (A.ID = ~~ID_PRODOTTO~~) ");
-    PAN_APILOCATOR1.SetQuery(PPQRY_PRODOTTI, 0, SQL, PFL_APILOCATOR1_PRODOTTO, "");
+    PAN_APILOCATOR1.SetQuery(PPQRY_PRODOTTI, 0, SQL, PFL_APILOCATOR1_PRODOTTO, "06234CB2-F68E-4116-9C5E-CA9966817050");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as ID, ");
@@ -867,7 +902,7 @@ public partial class APILocator : MyWebForm
     SQL.Append("  A.AUTH_KEY as AUTH_KEY, ");
     SQL.Append("  A.NOME_APP_STAT as NOME_APP_STAT, ");
     SQL.Append("  A.ID_PRODOTTO as ID_PRODOTTO ");
-    PAN_APILOCATOR1.SetQuery(PPQRY_APILOCATOR, 0, SQL, -1, "");
+    PAN_APILOCATOR1.SetQuery(PPQRY_APILOCATOR, 0, SQL, -1, "A47B1803-4FED-44A9-BD50-0544D741BC31");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPS A ");
@@ -1043,7 +1078,7 @@ public partial class APILocator : MyWebForm
     SQL.Append("  A.DES_MSG as DES_MSG, ");
     SQL.Append("  A.FLG_SHOW_UPD as FLG_SHOW_UPD, ");
     SQL.Append("  A.FLG_FORCE_UPD as FLG_FORCE_UPD ");
-    PAN_APILOCATOR.SetQuery(PPQRY_DETTAGLIAPP, 0, SQL, -1, "");
+    PAN_APILOCATOR.SetQuery(PPQRY_DETTAGLIAPP, 0, SQL, -1, "20173290-B97A-4DCA-B3F4-195335CC1551");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APP_DETAILS A ");
@@ -1187,7 +1222,7 @@ public partial class APILocator : MyWebForm
     SQL.Append("  A.APP_URL as APP_URL, ");
     SQL.Append("  A.DES_NOTA as DES_NOTA, ");
     SQL.Append("  A.FLG_ATTIVA as FLG_ATTIVA ");
-    PAN_DETTAGVERSIO.SetQuery(PPQRY_DETTAGVERSIO, 0, SQL, -1, "");
+    PAN_DETTAGVERSIO.SetQuery(PPQRY_DETTAGVERSIO, 0, SQL, -1, "766DB762-1613-4D7A-898E-E7EA614029CC");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  REL_DETAILS A ");
@@ -1441,6 +1476,10 @@ public partial class APILocator : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

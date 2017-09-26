@@ -1,6 +1,6 @@
 // **********************************************
 // Device Token IOS
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -357,22 +357,41 @@ public partial class DeviceTokenIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("808ACEDF-376E-40D4-89BE-DF4F31853A6C", "Device Token On Dynamic Properties", "", 1, "Device Token IOS")) return;
       // 
       // Device Token On Dynamic Properties Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("318D5F4C-DA31-4177-8F74-67CD0BC0A34E", "IF Data Principale [Device Token IOS - Device Token].Text = Data Ultimo Accesso Principale [Device Token IOS - Device Token].Text", "");
+      MainFrm.DTTObj.AddToken ("318D5F4C-DA31-4177-8F74-67CD0BC0A34E", "E05D0107-7CF4-484C-AD72-8F15D495D4C4", 2686976, "Data Principale [Device Token IOS - Device Token].Text", (new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATA))));
+      MainFrm.DTTObj.AddToken ("318D5F4C-DA31-4177-8F74-67CD0BC0A34E", "942A48CF-D7FC-421E-997E-BF67BA625156", 2686976, "Data Ultimo Accesso Principale [Device Token IOS - Device Token].Text", (new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATAULTIACCE))));
       if ((new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATA))).equals((new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATAULTIACCE))), true))
       {
+        MainFrm.DTTObj.EnterIf ("318D5F4C-DA31-4177-8F74-67CD0BC0A34E", "IF Data Principale [Device Token IOS - Device Token].Text = Data Ultimo Accesso Principale [Device Token IOS - Device Token].Text", "");
+        MainFrm.DTTObj.AddSubProc ("6E3713FD-F5BE-4FB4-8F3C-10D2D4C23033", "Data Ultimo Accesso.Set Visual Style", "");
+        MainFrm.DTTObj.AddParameter ("6E3713FD-F5BE-4FB4-8F3C-10D2D4C23033", "65F207C7-56FB-4BD5-9F82-9D4D696B7F04", "Stile", new IDVariant(MyGlb.VIS_SFONDOGIALLO));
         PAN_DEVICETOKEN.set_VisualStyle(Glb.OBJ_FIELD,PFL_DEVICETOKEN_DATAULTIACCE,new IDVariant(MyGlb.VIS_SFONDOGIALLO).intValue()); 
       }
+      MainFrm.DTTObj.EndIfBlk ("318D5F4C-DA31-4177-8F74-67CD0BC0A34E");
+      MainFrm.DTTObj.AddIf ("764E486B-8B77-41A0-A31B-6518E56E8508", "IF Rimosso Device Token [Device Token IOS - Device Token] = Si", "");
+      MainFrm.DTTObj.AddToken ("764E486B-8B77-41A0-A31B-6518E56E8508", "5735B45E-5002-4DC6-8AC7-D021BBC71E7B", 917504, "Rimosso Device Token", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN1, IMDBDef1.PQSL_DEVICETOKEN1_FLG_RIMOSSO, 0));
+      MainFrm.DTTObj.AddToken ("764E486B-8B77-41A0-A31B-6518E56E8508", "9575A2DC-7881-4521-9D86-3444CB6D5E8A", 589824, "Si", (new IDVariant("S")));
       if (IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN1, IMDBDef1.PQSL_DEVICETOKEN1_FLG_RIMOSSO, 0).equals((new IDVariant("S")), true))
       {
+        MainFrm.DTTObj.EnterIf ("764E486B-8B77-41A0-A31B-6518E56E8508", "IF Rimosso Device Token [Device Token IOS - Device Token] = Si", "");
+        MainFrm.DTTObj.AddSubProc ("19D9DAFB-71F3-4B71-918F-571B93C409B0", "Rimosso.Set Visual Style", "");
+        MainFrm.DTTObj.AddParameter ("19D9DAFB-71F3-4B71-918F-571B93C409B0", "328D2678-842D-4873-A336-03D20F3A8F74", "Stile", new IDVariant(MyGlb.VIS_SFONDOROSSO));
         PAN_DEVICETOKEN.set_VisualStyle(Glb.OBJ_FIELD,PFL_DEVICETOKEN_RIMOSSO,new IDVariant(MyGlb.VIS_SFONDOROSSO).intValue()); 
       }
+      MainFrm.DTTObj.EndIfBlk ("764E486B-8B77-41A0-A31B-6518E56E8508");
+      MainFrm.DTTObj.ExitProc("808ACEDF-376E-40D4-89BE-DF4F31853A6C", "Device Token On Dynamic Properties", "", 1, "Device Token IOS");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("808ACEDF-376E-40D4-89BE-DF4F31853A6C", "Device Token On Dynamic Properties", "", _e);
       MainFrm.ErrObj.ProcError ("DeviceTokenIOS", "DeviceTokenOnDynamicProperties", _e);
+      MainFrm.DTTObj.ExitProc("808ACEDF-376E-40D4-89BE-DF4F31853A6C", "Device Token On Dynamic Properties", "", 1, "Device Token IOS");
     }
   }
 
@@ -391,23 +410,36 @@ public partial class DeviceTokenIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("E73122F4-5E94-488C-A1E0-0C6625D98D2A", "Invia notifica", "", 3, "Device Token IOS")) return 0;
       // 
       // Invia notifica Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("FEA92D60-39AC-49C7-BAA3-06D66A504F31", "IF not (Is Null (ID Device Token [Device Token IOS - Device Token]))", "");
+      MainFrm.DTTObj.AddToken ("FEA92D60-39AC-49C7-BAA3-06D66A504F31", "B14FAEEC-A1E7-4DF3-8B10-005150F942EA", 917504, "ID Device Token", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN1, IMDBDef1.PQSL_DEVICETOKEN1_ID, 0));
       if (!(IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN1, IMDBDef1.PQSL_DEVICETOKEN1_ID, 0))))
       {
+        MainFrm.DTTObj.EnterIf ("FEA92D60-39AC-49C7-BAA3-06D66A504F31", "IF not (Is Null (ID Device Token [Device Token IOS - Device Token]))", "");
+        MainFrm.DTTObj.AddSubProc ("08B69F14-40CA-4BEA-AAE6-ED134623BDD3", "Invio Notifiche A Utenti IOS.Start Form", "");
         ((InvioNotificheAUtentiIOS)MainFrm.GetForm(MyGlb.FRM_INVNOTAUTEIO,1,true,this)).StartForm(IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN1, IMDBDef1.PQSL_DEVICETOKEN1_ID_APPLICAZIONE, 0), IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN1, IMDBDef1.PQSL_DEVICETOKEN1_DES_UTENTE, 0));
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("9518C987-9F7C-4700-8953-8F56058894F9", "ELSE", "", "FEA92D60-39AC-49C7-BAA3-06D66A504F31");
+        MainFrm.DTTObj.AddSubProc ("389CFBAB-7ACD-40CD-A267-7B15EAB70515", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("389CFBAB-7ACD-40CD-A267-7B15EAB70515", "879ADC1F-A148-4B26-8E46-1C90D1E03388", "Messaggio", (new IDVariant("Selezionare un utente")));
         MainFrm.set_AlertMessage((new IDVariant("Selezionare un utente"))); 
       }
+      MainFrm.DTTObj.EndIfBlk ("FEA92D60-39AC-49C7-BAA3-06D66A504F31");
+      MainFrm.DTTObj.ExitProc("E73122F4-5E94-488C-A1E0-0C6625D98D2A", "Invia notifica", "", 3, "Device Token IOS");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("E73122F4-5E94-488C-A1E0-0C6625D98D2A", "Invia notifica", "", _e);
       MainFrm.ErrObj.ProcError ("DeviceTokenIOS", "Invianotifica", _e);
+      MainFrm.DTTObj.ExitProc("E73122F4-5E94-488C-A1E0-0C6625D98D2A", "Invia notifica", "", 3, "Device Token IOS");
       return -1;
     }
   }
@@ -828,7 +860,7 @@ public partial class DeviceTokenIOS : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~ID_APPLICAZIONE~~) ");
     SQL.Append("and   (A.TYPE_OS = '1') ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_DEVICETOKEN_APPLICAZIONE, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_DEVICETOKEN_APPLICAZIONE, "97315832-EB41-4A19-A51B-BA1A83507866");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPPLICAZIO, ");
@@ -847,7 +879,7 @@ public partial class DeviceTokenIOS : MyWebForm
     SQL.Append("from ");
     SQL.Append("  LINGUE A ");
     SQL.Append("where (A.PRG_LINGUA = ~~PRG_LINGUA~~) ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_IDLINGUA, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_IDLINGUA, "A1EC6927-A211-4955-9120-89A9015D11F8");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.PRG_LINGUA as IDLINGUA, ");
@@ -882,7 +914,7 @@ public partial class DeviceTokenIOS : MyWebForm
     SQL.Append("where (B.DEV_TOKEN = A.DEV_TOKEN) ");
     SQL.Append(") as DISNOTDEVTOK, ");
     SQL.Append("  A.PRG_LINGUA as PRG_LINGUA ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN1, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN1, 0, SQL, -1, "53F66555-FDCD-4758-A141-781DFCEEB020");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  DEV_TOKENS A ");
@@ -1127,6 +1159,10 @@ public partial class DeviceTokenIOS : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

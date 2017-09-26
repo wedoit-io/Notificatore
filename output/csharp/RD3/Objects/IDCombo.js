@@ -1024,7 +1024,14 @@ IDCombo.prototype.SetHeight = function(h)
   // per quello custom invece, PCell.UpdateDims ne tiene conto gia' lui
   var margy = 0;
   if (this.VisualStyle && !RD3_Glb.IsMobile() && this.VisualStyle.GetBorders(this.Owner.InList?1:6)!=9)
+  {
     margy = this.VisualStyle.GetOffset(false, 1, this.Owner.InList, false)*2;
+    //
+    // Se non ho nessun bordo la classe CSS della COMBO imposta comunque un padding di 2+2.
+    // Dovrei scriverlo dentro la GetOffset ma per sicurezza lo applico solo qui
+    if (this.VisualStyle.GetBorders(this.Owner.InList?1:6) == 1 && margy == 0)
+      margy = 4;
+  }
   margy = (RD3_ServerParams.Theme == "zen" ? (this.Owner.InList ? 0 : 2) : margy);
   var newh = h - margy;
   if (newh<0) newh=0;
@@ -2885,6 +2892,10 @@ IDCombo.prototype.ShowMobileCombo = function(fl)
         if (parp.CaptionTxt.offsetLeft < 44)
           parp.CaptionTxt.style.marginLeft = "44px";
       }
+      //
+      // Se il pannello ha la scrollbar mobile visibile la nascondo quando apro la combo
+      if (parp.HasScrollbar && parp.PanelMode == RD3_Glb.PANEL_LIST)
+        parp.ScrollBoxMobile.style.display = "none";
     }
     //
     if (parp && parp.IDScroll)
@@ -2894,6 +2905,10 @@ IDCombo.prototype.ShowMobileCombo = function(fl)
   {
     if (this.IDScroll)
       this.IDScroll.Enabled = false;
+    //
+    // Se il pannello ha la scrollbar mobile visibile la mostro quando apro la combo
+    if (!this.SlideForm() && parp.HasScrollbar && parp.PanelMode == RD3_Glb.PANEL_LIST)
+      parp.ScrollBoxMobile.style.display = "";
   }
   //
   // Eseguo l'animazione

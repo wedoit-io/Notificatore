@@ -341,6 +341,10 @@ PCell.prototype.Render = function(parent)
           var o = this.GetDOMObj();
           if (o && o.style)
             o.style.padding = "";
+          //
+          // Lo devo fare anche sull'attivatore
+          if (this.ActObj)
+            this.ActObj.style.padding = "";
         }
         //
         // Normalmente non resetto i marcatori dello stile... ma qui ho clonato da un VS e non so 
@@ -563,7 +567,7 @@ PCell.prototype.Render = function(parent)
         this.ErrorBox.className = "panel-value-" + ((this.ErrorType==1)? "error":"warning");
         //
         // Gia' che ci sono, lo dimensiono come me... Puo' capitare che non venga chiamato l'UpdateDim
-        var margy = ((this.ControlType==2 && !RD3_Glb.IsMobile()) ? 5 : (RD3_ServerParams.Theme == "zen" ? 8 : 1));
+        var margy = ((this.ControlType==2 && !RD3_Glb.IsMobile()) ? 5 : 1);
         //
         // Questo e' lo stesso codice che c'e' nell'UpdateDims, nel Mobile lo metto perche'
         // tutti gli input hanno il margine, servirebbe anche in !Mobile, ma per sicurezza non lo metto; se qualcuno fa una cella con un
@@ -606,6 +610,17 @@ PCell.prototype.Render = function(parent)
       this.SetTooltip(this.PValue.ErrorText);
     else if (this.PValue.Tooltip != "")
       this.SetTooltip(this.PValue.Tooltip);
+    else if (ct == 30 && !RD3_Glb.IsMobile()) {
+      // Gestione del tooltip nel caso di disabled combo, e' speciale perche' invece di venire dal PValue puo'
+      // anche venire dall'item selezionato (vedi RenderDisabledCombo) - non lo faccio nel mobile, in quel caso non e' corretto mostrare sempre la descrizione
+      // dell'item selezionato, deve essere fatto esplicitamente dall'utente
+      var vl = this.PValue.GetValueList();
+      var selit = (vl ? vl.FindItemsByValue(this.PValue.Text, false) : null);
+      if (!selit || selit.length==0)
+        this.SetTooltip("");
+      else
+        this.SetTooltip(selit[0].Tooltip);
+    }
     else
       this.SetTooltip("");
     //
@@ -695,6 +710,10 @@ PCell.prototype.RenderEdit = function(vs, parent, cloned)
   var nr = (this.InList)?pf.ListNumRows:pf.FormNumRows;
   var en = this.PValue.IsEnabled();
   var created = false;
+  //
+  // I campi numerici li facciamo comunque diventare INPUT, altrimenti sulla TextArea la mascheratura non funziona
+  if (nr > 1 && RD3_Glb.IsNumericObject(pf.DataType))
+    nr = 1;
   //
   // Tutti i valori oltre la prima riga in QBE diventano disabilitati
   if (this.InList && pf.ListList && this.PValue.Index>1 && pp.Status==RD3_Glb.PS_QBE)
@@ -899,8 +918,15 @@ PCell.prototype.RenderEdit = function(vs, parent, cloned)
           var reActivate = false;
           if (RD3_DesktopManager.WebEntryPoint.HilightedCell==this && newMask!=this.Mask)
           {
+            // Se ho modificato il VS la SetInactive riesegue l'apply sporcando le variabili memorizzate, quindi le devo pulire e poi reimpostare
+            if (dynmask != "")
+              this.CleanVisualStyle(vs);
+            //
             reActivate = true;
             this.SetInactive();
+            //
+            if (dynmask != "")
+              this.ApplyDynPropToVisualStyle(vs);
           }
           //
           this.Mask = newMask;
@@ -986,14 +1012,14 @@ PCell.prototype.RenderEdit = function(vs, parent, cloned)
     if (this.Text != newText)
     {
       var toupdate = created || cloned || !this.IsUncommitted();
-    	//
+      //
       // Lo aggiorno
       this.Text = newText;
       //
       // Se ci sono cambiamenti nel testo inseriti dall'utente,
       // non voglio che il server mi mangi quello che l'utente sta facendo!
       if (toupdate)
-      	this.IntCtrl.value = newText;
+        this.IntCtrl.value = newText;
       //
       // Se non ho ricreato l'elemento ed il fuoco e' sul controllo che e'
       // abilitato e ha una maschera... riapplico la maschera
@@ -1223,6 +1249,12 @@ PCell.prototype.RenderEdit = function(vs, parent, cloned)
       else
       {
         this.IntCtrl.onfocus = fo;
+        //
+        // su questi browser il click su un campo clicccabile non readonly non scatta con il tasto destro e se fatto con il sinistro arriva al server troppo tardi 
+        // (il chgrow arriva dopo il click.. quindi il server non e' posizionato correttamente.. - solo se usi l'eveto onMouseClick - raw)
+        if ((RD3_Glb.IsFirefox() || RD3_Glb.IsChrome() || RD3_Glb.IsSafari()) && this.IsCellClickable)
+          this.IntCtrl.onmousedown = fo;   
+        //
         this.IntCtrl.onblur = lo;
       }
       //
@@ -1386,10 +1418,10 @@ PCell.prototype.RenderCombo = function(vs, parent, cloned)
   // che mi dice che non ho piu' la lista.
   var updatevl = true;
   if (oldopen && !vl && pf.HasValueSource)
-  	updatevl=false;
+    updatevl=false;
   //
   if (updatevl)
-  	this.IntCtrl.AssignValueList(vl, created || cloned);
+    this.IntCtrl.AssignValueList(vl, created || cloned);
   //
   // Mi preparo per gestire il watermark
   var newText = this.PValue.Text;
@@ -1430,7 +1462,7 @@ PCell.prototype.RenderCombo = function(vs, parent, cloned)
   {
     // Non aggiorno le combo aperte!
     var toupdate = created || cloned || !this.IntCtrl.IsOpen || !pf.SuperActive;
-		//
+    //
     this.Text = newText;
     //
     // Vediamo se devo informare la combo che il testo e' cambiato... C'e' solo un caso in cui 
@@ -1450,7 +1482,7 @@ PCell.prototype.RenderCombo = function(vs, parent, cloned)
       // Passo il testo alla combo. 
       // ATTENZIONE: La proprieta' this.Text contiene il valore dell'item e non il testo dell'item
       if (toupdate)
-      	this.IntCtrl.SetText(this.Text, true, closecombo);
+        this.IntCtrl.SetText(this.Text, true, closecombo);
     }
     //
     // La combo non e' piu' in fase di editing
@@ -1517,8 +1549,8 @@ PCell.prototype.RenderDisabledCombo = function(vs, parent, cloned)
     span.className = "combo-input";
     this.IntCtrl.appendChild(span);
     //
-    // Alle combo disabilitate metto sempre l'ellipsis
-    if (RD3_Glb.IsMobile() || RD3_Glb.IsTouch())
+    // Alle combo disabilitate metto sempre l'ellipsis (se non mostrano solo l'icona)
+    if ((RD3_Glb.IsMobile() || RD3_Glb.IsTouch()) && !pf.VisOnlyIcon())
       RD3_Glb.AddClass(this.IntCtrl, "panel-value-html");
     //
     // Ora questo e' il controllo di questa cella
@@ -1562,11 +1594,13 @@ PCell.prototype.RenderDisabledCombo = function(vs, parent, cloned)
     img.src = RD3_Glb.GetImgSrc("images/"+newimg);
     img.style.display = "";
     img.style.left = "";
+    this.ForeImage = newimg;
   }
   else
   {
     img.style.display = "none";
     img.style.left = "-999px";
+    this.ForeImage = "";
   }
   //
   // Aggiorno il testo
@@ -1722,29 +1756,29 @@ PCell.prototype.RenderCheck = function(vs, parent, cloned)
       this.SubIntCtrl.checked = true;
       if (RD3_Glb.IsQuadro())
       {
-      	var vl = this.PValue.GetValueList();
-      	//
-      	// Nel tema quadro, voglio costruire tutto il check io stesso
-      	var intdiv = document.createElement("div");
-      	intdiv.className = "radio-int-div";
-      	var s1 = document.createElement("span");
-      	s1.className = "radio-int-s1";
-      	s1.innerText =  (vl.ItemList.length>0)?vl.ItemList[0].Name:"ON";
-      	var s2 = document.createElement("span");
-      	s2.className = "radio-int-s2";
-      	var s3 = document.createElement("span");
-      	s3.className = "radio-int-s3";
-      	s3.innerText = (vl.ItemList.length>1)?vl.ItemList[1].Name:"OFF";
-      	intdiv.appendChild(s1);
-      	intdiv.appendChild(s2);
-      	intdiv.appendChild(s3);     		
-      	this.SubIntCtrl.appendChild(intdiv);
+        var vl = this.PValue.GetValueList();
+        //
+        // Nel tema quadro, voglio costruire tutto il check io stesso
+        var intdiv = document.createElement("div");
+        intdiv.className = "radio-int-div";
+        var s1 = document.createElement("span");
+        s1.className = "radio-int-s1";
+        s1.innerText =  (vl.ItemList.length>0)?vl.ItemList[0].Name:"ON";
+        var s2 = document.createElement("span");
+        s2.className = "radio-int-s2";
+        var s3 = document.createElement("span");
+        s3.className = "radio-int-s3";
+        s3.innerText = (vl.ItemList.length>1)?vl.ItemList[1].Name:"OFF";
+        intdiv.appendChild(s1);
+        intdiv.appendChild(s2);
+        intdiv.appendChild(s3);
+        this.SubIntCtrl.appendChild(intdiv);
       }
       else
       {
-	      // E' necessario uno span "a perdere" per avere un bordo
-	      this.SubIntCtrl.appendChild(document.createElement("span"));
-	    }
+        // E' necessario uno span "a perdere" per avere un bordo
+        this.SubIntCtrl.appendChild(document.createElement("span"));
+      }
     }
     else
     {
@@ -1802,6 +1836,12 @@ PCell.prototype.RenderCheck = function(vs, parent, cloned)
       //
       vl.SetCheck(this.SubIntCtrl, this.Text, inqbe);
       //
+      // Se non sono in QBE il Text "---" non viene accettato, quindi devo annullarlo in modo che 
+      // - se riscatta la render in QBE verra' impostato nuovamente
+      // - la change funzionera'
+      if (this.Text === "---" && !inqbe)
+        this.Text = "";
+      //
       // Su IE6 non si riesce a rendere checked un oggetto se viene spostato nel DOM
       if (RD3_Glb.IsIE(6) && this.Text == vl.ItemList[0].Value)
       {
@@ -1821,7 +1861,22 @@ PCell.prototype.RenderCheck = function(vs, parent, cloned)
   {
     var parFld = this.ParentField;
     var oc = function(ev) { parFld.OnThreeStateCheck(ev); RD3_KBManager.IDRO_OnChange(ev); };
-    var ocb = function(ev) { var srcobj=(window.event)?window.event.srcElement:ev.explicitOriginalTarget; if (srcobj.hasChildNodes()){srcobj.childNodes[0].click();} };
+    //
+    // Deve prima scattare il cambio riga e poi il click; quindi occorre dare il fuoco e (per IE)
+    // dare il tempo che questo venga gestito prima di cliccare il controllo
+    var ocb = function(ev) 
+    { 
+      var srcobj=(window.event)?window.event.srcElement:ev.explicitOriginalTarget; 
+      if (srcobj.hasChildNodes()){ 
+        srcobj.childNodes[0].focus();
+        //
+        // Per IE, perche' funzioni bene il cambio riga + selezione bisogna dargli tempo
+        window.setTimeout(function () {
+          srcobj.childNodes[0].click();
+        }, 0);
+      } 
+    };
+    //
     if (ie)
     {
       this.SubIntCtrl.attachEvent("onclick",oc);
@@ -2601,6 +2656,9 @@ PCell.prototype.ClearElement = function(keeppos)
     this.SubIntCtrl = null;   // Mi dimentico anche di eventuali sotto-controlli interni
   }
   //
+  if (this.ClassName)
+    delete this.ClassName;
+  //
   // Resetto alcune proprieta'
   this.InitProperties();
   //
@@ -2972,18 +3030,24 @@ PCell.prototype.UpdateDims = function(x, y)
         var ix = img.offsetWidth;
         var iy = img.offsetHeight;
         //
-        // Intanto imposto delle dimensioni standard, quando l'immagine arrivera' la posiziono correttamente
-        if (ix==0 || iy==0)
+        // Se devo retinare, nascondo l'immagine (cosi non si vede grande) e quando arriva la rimostro
+        if (this.PValue && RD3_Glb.Adapt4Retina(this.PValue.Identifier, this.ForeImage, 43, "FORE"))
+          img.style.display = "none";
+        else
         {
-          ix = (ix==0 ? 26 : ix);
-          iy = (iy==0 ? 26 : iy);
+          // Intanto imposto delle dimensioni standard, quando l'immagine arrivera' la posiziono correttamente
+          if (ix==0 || iy==0)
+          {
+            ix = (ix==0 ? 26 : ix);
+            iy = (iy==0 ? 26 : iy);
+            //
+            var parentContext = this.ParentField;
+            img.onload = function(ev) { parentContext.COMBOImageReadyStateChanged(ev); };
+          }        
           //
-          var parentContext = this.ParentField;
-          img.onload = function(ev) { parentContext.COMBOImageReadyStateChanged(ev); };
-        }        
-        //
-        img.style.left = ((this.CtrlRectW - ix)/2)+"px";
-        img.style.top = ((this.CtrlRectH + margy - iy)/2)+"px";
+          img.style.left = ((this.CtrlRectW - ix)/2)+"px";
+          img.style.top = ((this.CtrlRectH + margy - iy)/2)+"px";
+        }
       }
     }
     if (this.ControlType == 4) // CHECK
@@ -3287,6 +3351,9 @@ PCell.prototype.HideCellContent = function(hide, parent)
       break;
       
       case 6: // BUTTON
+        this.IntCtrl.style.display = (hide ? "none" : "");
+      break;
+      
       case 111: // ListGroup Header
       {
         if (this.InList && hide && this.IntCtrl)
@@ -3497,7 +3564,7 @@ PCell.prototype.UpdateVisualStyle = function(vs, extobj)
       //
       // In caso di combo devo aggiornare il posizionamento dell'input rispetto all'attivatore
       if (this.IntCtrl instanceof IDCombo)
-      	this.IntCtrl.SetLeft(this.IntCtrl.Left);
+        this.IntCtrl.SetLeft(this.IntCtrl.Left);
     }
     //
     // Se c'e' un oggetto in piu', applico anche a lui
@@ -3697,6 +3764,41 @@ PCell.prototype.SetTooltip = function(tip, recalc)
           intObj.style.paddingTop = "0px";
           this.TooltipDiv.style.display = "";
           //
+          // Gestione allineamento tooltip
+          var vs = this.PValue ? this.PValue.GetVisualStyle() : this.ParentField.VisualStyle;
+          if (vs)
+          {
+            var a = null;
+            if (this.PValue && this.PValue.Alignment != -1)
+              a = this.PValue.Alignment;
+            else if (this.ParentField.Alignment != -1)
+              a = this.ParentField.Alignment;
+            else
+              a = vs.GetAlignment(1);
+            //
+            var ali = "left";
+            switch(a)
+            {
+              case 1: // VISALN_AUTO
+                ali = this.ParentField.IsRightAligned()?"right":"left";
+              break;
+              case 2: // VISALN_SX
+                ali = "left";
+              break;
+              case 3: // VISALN_CX
+                ali = "center";
+              break;
+              case 4: // VISALN_DX
+                ali = "right";
+              break;
+              case 5: // VISALN_JX
+                ali = "justify";
+              break;
+            }
+            //
+            this.TooltipDiv.style.textAlign = ali;
+          }
+          //
           if (RD3_Glb.HasClass(intObj,"panel-field-selected") || RD3_Glb.HasClass(intObj,"panel-field-unselected"))
             RD3_Glb.SetClass(this.TooltipDiv, "panel-value-tooltip-multiplesel", true);
         }
@@ -3752,7 +3854,7 @@ PCell.prototype.SetTooltip = function(tip, recalc)
         this.TooltipErrorObj.ReusableTooltip = true;
       //
       // Se il parametro e' 3 e il tooltip non e' gia' visibile allora lo mostro
-      if (RD3_ServerParams.TooltipErrorMode == 3 && !this.TooltipErrorObj.Opened)
+      if ((RD3_ServerParams.TooltipErrorMode == 3 || (RD3_ServerParams.TooltipErrorMode == 2 && RD3_DesktopManager.WebEntryPoint.HilightedCell === this)) && !this.TooltipErrorObj.Opened)
         this.TooltipErrorObj.Activate();
     }
     else if (this.TooltipErrorObj)
@@ -3925,6 +4027,16 @@ PCell.prototype.Focus = function(selall, evento)
       }
       if (okt)
         RD3_Glb.SetTransform(objp, "translate3d(0px,-"+newt+"px,0px)");
+    }
+    //
+    // Se la cella usa il popup control apro quello anziche' dargli il fuoco che aprirebbe la tastiera
+    if (RD3_Glb.IsMobile() && this.ParentField.UsePopupControl() && this.IsEnabled && !(this.IntCtrl instanceof IDCombo))
+    {
+      var pc = new PopupControl(this.ParentField.GetPopupControlType(), this);
+      pc.Open();
+      pc.LastActiveObject = null;
+      pc.LastActiveElement = null;
+      return true;
     }
     //
     // Fuoco l'oggetto giusto
@@ -4490,6 +4602,8 @@ PCell.prototype.CloneFrom = function(srccell)
   //
   if (srccell.PopupControlReadOnly != undefined) 
     this.PopupControlReadOnly = srccell.PopupControlReadOnly;
+  if (srccell.ForeImage != undefined) 
+    this.ForeImage = srccell.ForeImage;
   //
   // Copio anche i rect della cella
   this.CtrlRectX = srccell.CtrlRectX;
@@ -4711,13 +4825,6 @@ PCell.prototype.ComputeDropList = function(list,dragobj)
     // Calcolo le coordinate assolute...
     this.AbsLeft = RD3_Glb.GetScreenLeft(o,true);
     this.AbsTop = RD3_Glb.GetScreenTop(o,true);
-    if (!RD3_Glb.IsIE())
-    {
-      // Sugli altri browser devo tenere conto della scrollbar...
-      this.AbsLeft -= this.ParentField.ParentPanel.ContentBox.scrollLeft;
-      this.AbsTop -= this.ParentField.ParentPanel.ContentBox.scrollTop;
-    }
-    //
     this.AbsRight = this.AbsLeft + o.offsetWidth - 1;
     this.AbsBottom = this.AbsTop + o.offsetHeight - 1;
     //
@@ -4810,6 +4917,8 @@ PCell.prototype.RenderPListGroup = function(parent)
     else
     {
       this.GroupLabel = document.createElement("SPAN");  
+      if (!this.PValue.Aggregations || this.PValue.Aggregations.length == 0)
+        this.IntCtrl.className = "group-container group-container-list";
     }
     //
     this.GroupLabel.className = "group-label";
@@ -4831,6 +4940,12 @@ PCell.prototype.RenderPListGroup = function(parent)
   {
     this.GroupId = this.ParentField.Identifier + ":lsg:"+this.PValue.Index;
     this.GroupLabel.setAttribute("id", this.GroupId);
+  }
+  //
+  // Il primo campo deve essere sempre visibile, mostriamo la Label
+  if (firstfield && !this.IsVisible) {
+    this.IntCtrl.style.display = "";
+    this.IsVisible = true;
   }
   //
   // Disabilito la cella: qui non ci si puo' scrivere!
@@ -4876,7 +4991,11 @@ PCell.prototype.RenderPListGroup = function(parent)
     {
       var parentContext = this.PValue;
       var oc = function(ev) { parentContext.OnExpandGrp(ev, ''); };
-      this.GroupCollapseButton.onclick = oc;
+      this.IntCtrl.onclick = oc;
+      //
+      this.IntCtrl.style.cursor = "pointer";
+      if (this.GroupLabel)
+        this.GroupLabel.style.cursor = "pointer";
     }
     //
     // Gestisco l'immagine dell'attivatore (se presente)
@@ -5380,40 +5499,52 @@ PCell.prototype.SetHilite = function(fl)
 // *****************************************************************
 PCell.prototype.IsUncommitted = function()
 {
-	var o = this.GetDOMObj();
-	//
-	// Lo faccio solo se l'elemento e' quello attivo, altrimenti e' una perdita di tempo
-	if (o && !this.HasWatermark && RD3_KBManager.ActiveElement==o && (o.tagName=="INPUT" || o.tagName=="TEXTAREA"))
-	{
-	  // Se infilo in un INPUT un testo contente \n questo se li mangia.. quindi facendo il confronto risulterebbe cambiato..
-	  // in questo caso mangio eventuali \n dal testo prima di fare il confronto, in modo che non risulti questa modifica
-	  var valTxt = this.Text;
-	  if (o.tagName=="INPUT")
-	    valTxt = valTxt.replace(/\n/g, "");
-	  //
-	  // Il \r me lo mangio dovunque
-	  valTxt = valTxt.replace(/\r/g, "");
-	 	//
-	 	// Su IE6-IE9 il campo ritorna i \r, che devono quindi essere mangiati
-	 	var valFld = o.value;
-	 	if (RD3_Glb.IsIE(10,false))
-			valFld = valFld.replace(/\r/g, "");
-	  //
-	  // Se ho una maschera devo mascherare il valore "" in modo da fare il confronto con il valore iniziale..
-	  // se il campo vale ",00" ed il Text e' "" in realta' sono uguali.. ma lo sapro' solo se applico la maschera a destra o tolgo la maschera a sinistra..
-	  // -> nel caso di valori gia' mascherati il server invia il Text buono.. quindi non dovrei avere problemi..
-	  // -> lo faccio solo se nel value c'e' qualcosa (valFld!=""), infatti "" viene mascherato solo se il campo ha il fuoco dentro..
-	  //    quindi ci potrebbero essere casi in cui entrambi valgono "".. ed in quel caso non devo mascherare
-	  if (this.Mask && this.Mask!="" && (valTxt=="" && valFld!=""))
-	    valTxt = GetInitValue(this.Mask, this.MaskType);
-	  //
-		if (valFld!=valTxt)
-			return true;
-	}
-	//
-	// cerco negli eventi
-	var ev = RD3_DesktopManager.MessagePump.GetEvent(this.PValue, "chg");
-	return (ev)?true:false;
+  var o = this.GetDOMObj();
+  //
+  // Lo faccio solo se l'elemento e' quello attivo, altrimenti e' una perdita di tempo
+  if (o && !this.HasWatermark && RD3_KBManager.ActiveElement==o && (o.tagName=="INPUT" || o.tagName=="TEXTAREA"))
+  {
+    // Se infilo in un INPUT un testo contente \n questo se li mangia.. quindi facendo il confronto risulterebbe cambiato..
+    // in questo caso mangio eventuali \n dal testo prima di fare il confronto, in modo che non risulti questa modifica
+    var valTxt = this.Text;
+    if (o.tagName=="INPUT")
+      valTxt = valTxt.replace(/\n/g, "");
+    //
+    // Il \r me lo mangio dovunque
+    valTxt = valTxt.replace(/\r/g, "");
+    //
+    // Su IE6-IE9 il campo ritorna i \r, che devono quindi essere mangiati
+    var valFld = o.value;
+    if (RD3_Glb.IsIE(10,false))
+      valFld = valFld.replace(/\r/g, "");
+    //
+    // Se ho una maschera devo mascherare il valore "" in modo da fare il confronto con il valore iniziale..
+    // se il campo vale ",00" ed il Text e' "" in realta' sono uguali.. ma lo sapro' solo se applico la maschera a destra o tolgo la maschera a sinistra..
+    // -> nel caso di valori gia' mascherati il server invia il Text buono.. quindi non dovrei avere problemi..
+    // -> lo faccio solo se nel value c'e' qualcosa (valFld!=""), infatti "" viene mascherato solo se il campo ha il fuoco dentro..
+    //    quindi ci potrebbero essere casi in cui entrambi valgono "".. ed in quel caso non devo mascherare
+    if (this.Mask && this.Mask!="" && (valTxt=="" && valFld!=""))
+      valTxt = GetInitValue(this.Mask, this.MaskType);
+    //
+    if (valFld!=valTxt)
+      return true;
+  }
+  //
+  // cerco negli eventi
+  var ev = null;
+  if (window.RD4_Enabled)
+    ev = RD3_DesktopManager.MessagePumpRD4.GetEvent(this.PValue, "chg");
+  else
+   ev = RD3_DesktopManager.MessagePump.GetEvent(this.PValue, "chg");
+  //
+  if (ev && this.ParentField && this.ParentField.ParentPanel && this.ParentField.ParentPanel.IsDO)
+  {
+    // Ho un evento di CHG per il mio PValue, in teoria dovrei essere uncommitted, ma devo verificare se effettivamente il mio Text e' uguale al Text
+    // del PValue, perche' potrebbe essere stata la cella della lista (o viceversa) ad essere stata modificata, in questo caso io devo adeguarmi..
+    // solo per i pannelli DO, solo in DO si puo' passare da lista a dettaglio con modifiche
+    return this.Text === this.PValue.Text;
+  }
+  return (ev)?true:false;
 }
 
 // *******************************************************************
@@ -5421,13 +5552,25 @@ PCell.prototype.IsUncommitted = function()
 // *******************************************************************
 PCell.prototype.OnAdaptRetina = function(w, h, par)
 {
-  if (this.IntCtrl)
-    this.IntCtrl.style.backgroundSize = w+"px "+h+"px";
-  //
-  // Ora posso dare l'immagine alla cella
-  this.BackGroundImage = par;
-  //
-  // Ora che la cella ha l'immagine, la adatto
-  if (this.ParentField.ImageResizeMode != 1 && RD3_ServerParams.ShowFieldImageInValue)
-    this.SetBackGroundImageRM(this.ParentField.ImageResizeMode);
+  if (par && par == "FORE" && this.ControlType == 30)
+  {
+    var imgS = this.IntCtrl.firstChild.style;
+    imgS.width = w+"px";
+    imgS.height = h+"px";
+    imgS.top = "2px";
+    imgS.left = "2px";
+    imgS.display = "";
+  }
+  else
+  {
+    if (this.IntCtrl)
+      this.IntCtrl.style.backgroundSize = w+"px "+h+"px";
+    //
+    // Ora posso dare l'immagine alla cella
+    this.BackGroundImage = par;
+    //
+    // Ora che la cella ha l'immagine, la adatto
+    if (this.ParentField.ImageResizeMode != 1 && RD3_ServerParams.ShowFieldImageInValue)
+      this.SetBackGroundImageRM(this.ParentField.ImageResizeMode);
+  }
 }

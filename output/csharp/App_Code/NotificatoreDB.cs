@@ -1,7 +1,7 @@
 // **********************************************
 // Connect to a database
 // Instant WEB Application: www.progamma.com
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -103,6 +103,10 @@ public partial class NotificatoreDB : IDBObject
   {
     return DB;
   }
+  public Object GetMainFrm()
+  {
+    return MainFrm;
+  }
   public void DBAdjustSchema(bool flForceNew)
   {
     if (DB.Parent != this)
@@ -184,9 +188,9 @@ public partial class NotificatoreDB : IDBObject
   {
     MainFrm = p;
     DB.Parent = this;
-    vDefaultUserId = "sa";
-    vDefaultPassword = "apice";
-    vDefaultConnStr = "Data Source=CORK;Initial Catalog=NOTIFICATORE;Persist Security Info=False";
+    vDefaultUserId = "NOTIFICATORE";
+    vDefaultPassword = "NOTIFICATORE";
+    vDefaultConnStr = "Data Source=94.177.170.127;Initial Catalog=NOTIFICATORE;Persist Security Info=False";
     DBType = 256;
     DB.Unicode = true;
     DBName = "NotificatoreDB";
@@ -367,151 +371,6 @@ public partial class NotificatoreDB : IDBObject
     DBO().RollbackTrans();
   }
 
-
-  // **********************************************
-  // Procedure Definition
-  // **********************************************
-
-  // **********************************************************************
-  // Write Message Log
-  // Spiega quale elaborazione viene eseguita da questa
-  // procedura
-  // Messaggio: Scrivi un commento per questo parametro o premi backspace per eliminare questo commento - Input
-  // Livello:  - Input
-  // Tipo:  - Input
-  // **********************************************************************
-  public int WriteMessageLog (IDVariant Messaggio, IDVariant Livello, IDVariant Tipo)
-  {
-    ArrayList SPPar  = new ArrayList();
-    ArrayList ParNames = new ArrayList();
-    ArrayList OutPar = new ArrayList();
-
-    SPPar.Add(Messaggio);
-    ParNames.Add("p_MESSAGGIO");
-    OutPar.Add(IDVariant.STRING);
-    SPPar.Add(Livello);
-    ParNames.Add("p_LIVELLO");
-    OutPar.Add(IDVariant.INTEGER);
-    SPPar.Add(Tipo);
-    ParNames.Add("p_TIPO");
-    OutPar.Add(IDVariant.STRING);
-    ClearErrors();
-    try
-    {
-      DBO().CallSP("WRITE_MSG_LOG",SPPar,ParNames,OutPar);
-      return 0;
-    }
-    catch(Exception s)
-    {
-      return SetError("WriteMessageLog",s);
-    }
-  }
-
-  // **********************************************************************
-  // Recupera Token
-  // Spiega quale elaborazione viene eseguita da questa
-  // procedura
-  // ID Apps Push Settings - Input
-  // **********************************************************************
-  public int RecuperaToken (IDVariant IDAppsPushSettings)
-  {
-    ArrayList SPPar  = new ArrayList();
-    ArrayList ParNames = new ArrayList();
-    ArrayList OutPar = new ArrayList();
-
-    SPPar.Add(IDAppsPushSettings);
-    ParNames.Add("p_IDAPPSPUSSET");
-    OutPar.Add(IDVariant.INTEGER);
-    ClearErrors();
-    try
-    {
-      DBO().CallSP("RECUPERA_TOKEN",SPPar,ParNames,OutPar);
-      return 0;
-    }
-    catch(Exception s)
-    {
-      return SetError("RecuperaToken",s);
-    }
-  }
-
-  // **********************************************************************
-  // Identifica Lingua
-  // Spiega quale elaborazione viene eseguita da questa
-  // procedura
-  // Codice Lingua1 - Input
-  // Id Lingua - Input/Output
-  // **********************************************************************
-  public int IdentificaLingua (IDVariant CodiceLingua1, IDVariant IdLingua)
-  {
-    ArrayList SPPar  = new ArrayList();
-    ArrayList ParNames = new ArrayList();
-    ArrayList OutPar = new ArrayList();
-
-    SPPar.Add(CodiceLingua1);
-    ParNames.Add("p_CODICELINGUA");
-    OutPar.Add(IDVariant.STRING);
-    SPPar.Add(IdLingua);
-    ParNames.Add("p_IDLINGUA");
-    OutPar.Add(-IDVariant.INTEGER);
-    ClearErrors();
-    try
-    {
-      DBO().CallSP("SP_GET_LANGUAGE",SPPar,ParNames,OutPar);
-      return 0;
-    }
-    catch(Exception s)
-    {
-      return SetError("IdentificaLingua",s);
-    }
-  }
-
-  // **********************************************************************
-  // Clean IOS Dev Token
-  // Spiega quale elaborazione viene eseguita da questa
-  // procedura
-  // **********************************************************************
-  public int CleanIOSDevToken ()
-  {
-    ArrayList SPPar  = new ArrayList();
-    ArrayList ParNames = new ArrayList();
-    ArrayList OutPar = new ArrayList();
-
-    ClearErrors();
-    try
-    {
-      DBO().CallSP("CLEAN_IOS_DEV_TOKEN",SPPar,ParNames,OutPar);
-      return 0;
-    }
-    catch(Exception s)
-    {
-      return SetError("CleanIOSDevToken",s);
-    }
-  }
-
-  // **********************************************************************
-  // Import Sales Data
-  // Spiega quale elaborazione viene eseguita da questa
-  // procedura
-  // **********************************************************************
-  public int ImportSalesData ()
-  {
-    ArrayList SPPar  = new ArrayList();
-    ArrayList ParNames = new ArrayList();
-    ArrayList OutPar = new ArrayList();
-
-    ClearErrors();
-    try
-    {
-      DBO().CallSP("IMP_SALES_DATA",SPPar,ParNames,OutPar);
-      return 0;
-    }
-    catch(Exception s)
-    {
-      return SetError("ImportSalesData",s);
-    }
-  }
-
-
   // **********************************************
   // SQLite schema adjustment
   // **********************************************
@@ -561,9 +420,10 @@ public partial class NotificatoreDB : IDBObject
         }
       }
       //
+      // Sistemo tutti gli oggetti del DB (tabelle, indici e viste)
+      AdjustObjects(Tabelle, Indici, Viste);
       //
-      // Distruggo oggetti ormai inutili, se effettivamente lo
-      // schema doveva essere gestito automaticamente
+      // Distruggo oggetti ormai inutili
       if (Tabelle.Count>0)
       {
         DBO().DropUselessObjects(MainFrm, Tabelle, "table");
@@ -576,7 +436,7 @@ public partial class NotificatoreDB : IDBObject
       // Riabilito supporto a FK
       DBO().Execute("PRAGMA foreign_keys = 1");
       //
-      MainFrm.DTTObj.AddMsg(DTTEngine.DTTMSG_INFO, "", 160, DBName + ".AdjustSchema", DBName + ": Finished to adjust schema");
+      MainFrm.DTTObj.AddMsg(DTTEngine.DTTMSG_INFO, "", 160, DBName + ".AdjustSchema", DBName + ": Finished adjusting database schema");
       //
       return true;
     }
@@ -597,5 +457,189 @@ public partial class NotificatoreDB : IDBObject
       return false;
     }
   }
+  public void AdjustObjects(ArrayList Tabelle, ArrayList Indici, ArrayList Viste)
+  {
+    //
+    // Verifico se ci sono componenti che vogliono aggiungere qualche oggetto a questo database
+    foreach (WebEntryPoint cmp in MainFrm.CompList)
+    {
+      IDBObject dbc = cmp.GetDBObjByName(DBName);
+      if (dbc == null || dbc.GetMainFrm() != cmp || dbc.GetDB() != DB)
+        continue;
+      //
+      // Questo componente usa un DB simile a questo. Vediamo se deve, anche lui, aggiungere oggetti allo schema
+      dbc.AdjustObjects(Tabelle, Indici, Viste);
+    }
+  }
+
+  // **********************************************
+  // Procedure Definition
+  // **********************************************
+
+  // **********************************************************************
+  // Write Message Log
+  // Spiega quale elaborazione viene eseguita da questa
+  // procedura
+  // Messaggio: Scrivi un commento per questo parametro o premi backspace per eliminare questo commento - Input
+  // Livello:  - Input
+  // Tipo:  - Input
+  // **********************************************************************
+  public int WriteMessageLog (IDVariant Messaggio, IDVariant Livello, IDVariant Tipo)
+  {
+
+    if (!MainFrm.DTTObj.EnterProc("BB573467-7C5F-4157-AA06-3C490D072595", "Write Message Log", "", 2, "Notificatore DB")) return 0;
+    MainFrm.DTTObj.AddParameter ("BB573467-7C5F-4157-AA06-3C490D072595", "48F04DD2-486F-4991-8E40-32E1CAFED783", "Messaggio", Messaggio);
+    MainFrm.DTTObj.AddParameter ("BB573467-7C5F-4157-AA06-3C490D072595", "29456D35-D9A8-4A87-A78F-3E05644F0A1B", "Livello", Livello);
+    MainFrm.DTTObj.AddParameter ("BB573467-7C5F-4157-AA06-3C490D072595", "FC5CDE41-416E-4FFF-B9DD-59FFC3428C1F", "Tipo", Tipo);
+    ArrayList SPPar  = new ArrayList();
+    ArrayList ParNames = new ArrayList();
+    ArrayList OutPar = new ArrayList();
+
+    SPPar.Add(Messaggio);
+    ParNames.Add("p_MESSAGGIO");
+    OutPar.Add(IDVariant.STRING);
+    SPPar.Add(Livello);
+    ParNames.Add("p_LIVELLO");
+    OutPar.Add(IDVariant.INTEGER);
+    SPPar.Add(Tipo);
+    ParNames.Add("p_TIPO");
+    OutPar.Add(IDVariant.STRING);
+    ClearErrors();
+    try
+    {
+      DBO().CallSP("WRITE_MSG_LOG",SPPar,ParNames,OutPar);
+      MainFrm.DTTObj.ExitProc("BB573467-7C5F-4157-AA06-3C490D072595", "Write Message Log", "", 2, "Notificatore DB");
+      return 0;
+    }
+    catch(Exception s)
+    {
+      MainFrm.DTTObj.ExitProc("BB573467-7C5F-4157-AA06-3C490D072595", "Write Message Log", "", 2, "Notificatore DB");
+      return SetError("WriteMessageLog",s);
+    }
+  }
+
+  // **********************************************************************
+  // Recupera Token
+  // Spiega quale elaborazione viene eseguita da questa
+  // procedura
+  // ID Apps Push Settings - Input
+  // **********************************************************************
+  public int RecuperaToken (IDVariant IDAppsPushSettings)
+  {
+
+    if (!MainFrm.DTTObj.EnterProc("6EEE1A2D-EE6E-43E7-A228-2B4D61907F2A", "Recupera Token", "", 2, "Notificatore DB")) return 0;
+    MainFrm.DTTObj.AddParameter ("6EEE1A2D-EE6E-43E7-A228-2B4D61907F2A", "371B2597-5F55-4B7F-8FAA-88270F856406", "ID Apps Push Settings", IDAppsPushSettings);
+    ArrayList SPPar  = new ArrayList();
+    ArrayList ParNames = new ArrayList();
+    ArrayList OutPar = new ArrayList();
+
+    SPPar.Add(IDAppsPushSettings);
+    ParNames.Add("p_IDAPPSPUSSET");
+    OutPar.Add(IDVariant.INTEGER);
+    ClearErrors();
+    try
+    {
+      DBO().CallSP("RECUPERA_TOKEN",SPPar,ParNames,OutPar);
+      MainFrm.DTTObj.ExitProc("6EEE1A2D-EE6E-43E7-A228-2B4D61907F2A", "Recupera Token", "", 2, "Notificatore DB");
+      return 0;
+    }
+    catch(Exception s)
+    {
+      MainFrm.DTTObj.ExitProc("6EEE1A2D-EE6E-43E7-A228-2B4D61907F2A", "Recupera Token", "", 2, "Notificatore DB");
+      return SetError("RecuperaToken",s);
+    }
+  }
+
+  // **********************************************************************
+  // Identifica Lingua
+  // Spiega quale elaborazione viene eseguita da questa
+  // procedura
+  // Codice Lingua1 - Input
+  // Id Lingua - Input/Output
+  // **********************************************************************
+  public int IdentificaLingua (IDVariant CodiceLingua1, IDVariant IdLingua)
+  {
+
+    if (!MainFrm.DTTObj.EnterProc("5FE95EA3-E318-4ED9-A443-D6B3FBD3CDB5", "Identifica Lingua", "", 2, "Notificatore DB")) return 0;
+    MainFrm.DTTObj.AddParameter ("5FE95EA3-E318-4ED9-A443-D6B3FBD3CDB5", "129AF9E2-A51B-4C28-8BD2-598CC9666559", "Codice Lingua1", CodiceLingua1);
+    MainFrm.DTTObj.AddParameter ("5FE95EA3-E318-4ED9-A443-D6B3FBD3CDB5", "EF971FB5-06F7-4722-B76B-9D881823ACC7", "Id Lingua", IdLingua);
+    ArrayList SPPar  = new ArrayList();
+    ArrayList ParNames = new ArrayList();
+    ArrayList OutPar = new ArrayList();
+
+    SPPar.Add(CodiceLingua1);
+    ParNames.Add("p_CODICELINGUA");
+    OutPar.Add(IDVariant.STRING);
+    SPPar.Add(IdLingua);
+    ParNames.Add("p_IDLINGUA");
+    OutPar.Add(-IDVariant.INTEGER);
+    ClearErrors();
+    try
+    {
+      DBO().CallSP("SP_GET_LANGUAGE",SPPar,ParNames,OutPar);
+      MainFrm.DTTObj.ExitProc("5FE95EA3-E318-4ED9-A443-D6B3FBD3CDB5", "Identifica Lingua", "", 2, "Notificatore DB");
+      return 0;
+    }
+    catch(Exception s)
+    {
+      MainFrm.DTTObj.ExitProc("5FE95EA3-E318-4ED9-A443-D6B3FBD3CDB5", "Identifica Lingua", "", 2, "Notificatore DB");
+      return SetError("IdentificaLingua",s);
+    }
+  }
+
+  // **********************************************************************
+  // Clean IOS Dev Token
+  // Spiega quale elaborazione viene eseguita da questa
+  // procedura
+  // **********************************************************************
+  public int CleanIOSDevToken ()
+  {
+
+    if (!MainFrm.DTTObj.EnterProc("5619B12D-B601-47E0-BEF3-55EB5DBF1A2C", "Clean IOS Dev Token", "", 2, "Notificatore DB")) return 0;
+    ArrayList SPPar  = new ArrayList();
+    ArrayList ParNames = new ArrayList();
+    ArrayList OutPar = new ArrayList();
+
+    ClearErrors();
+    try
+    {
+      DBO().CallSP("CLEAN_IOS_DEV_TOKEN",SPPar,ParNames,OutPar);
+      MainFrm.DTTObj.ExitProc("5619B12D-B601-47E0-BEF3-55EB5DBF1A2C", "Clean IOS Dev Token", "", 2, "Notificatore DB");
+      return 0;
+    }
+    catch(Exception s)
+    {
+      MainFrm.DTTObj.ExitProc("5619B12D-B601-47E0-BEF3-55EB5DBF1A2C", "Clean IOS Dev Token", "", 2, "Notificatore DB");
+      return SetError("CleanIOSDevToken",s);
+    }
+  }
+
+  // **********************************************************************
+  // Import Sales Data
+  // Spiega quale elaborazione viene eseguita da questa
+  // procedura
+  // **********************************************************************
+  public int ImportSalesData ()
+  {
+
+    if (!MainFrm.DTTObj.EnterProc("01DBC7E1-9EE2-4816-B67B-44C6EB3CF433", "Import Sales Data", "", 2, "Notificatore DB")) return 0;
+    ArrayList SPPar  = new ArrayList();
+    ArrayList ParNames = new ArrayList();
+    ArrayList OutPar = new ArrayList();
+
+    ClearErrors();
+    try
+    {
+      DBO().CallSP("IMP_SALES_DATA",SPPar,ParNames,OutPar);
+      MainFrm.DTTObj.ExitProc("01DBC7E1-9EE2-4816-B67B-44C6EB3CF433", "Import Sales Data", "", 2, "Notificatore DB");
+      return 0;
+    }
+    catch(Exception s)
+    {
+      MainFrm.DTTObj.ExitProc("01DBC7E1-9EE2-4816-B67B-44C6EB3CF433", "Import Sales Data", "", 2, "Notificatore DB");
+      return SetError("ImportSalesData",s);
+    }
+  }
+
 
 }

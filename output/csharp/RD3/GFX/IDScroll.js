@@ -98,7 +98,8 @@ IDScroll.prototype.Unrealize = function()
 	  this.ContainerBox.removeEventListener("mouseout", this.mo, true);
 	  this.ContainerBox.removeEventListener("mousewheel", this.mw, true);
 	}
-  RD3_Glb.RemoveEndTransaction(this.MyBox, this.ea, true);
+  if (this.MyBox)
+    RD3_Glb.RemoveEndTransaction(this.MyBox, this.ea, true);
 }
 
 

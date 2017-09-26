@@ -1704,6 +1704,9 @@ GFX.prototype.FrameFinish = function()
   // Adatto il layout della form per spostare i frames
   if (this.Obj.WebForm.Realized && this.OldValue!=this.Obj.Collapsed)
   {
+    // Devo forzare il ricalcolo del resize
+    this.Obj.RecalcResize = true;
+    //
     if (this.Immediate)
     {
       // Su chrome devo dargli un po' di tempo per applicare i cambiamenti prima di fare un Adapt immediato, se no
@@ -4830,6 +4833,15 @@ GFX.prototype.ComboFinish = function()
 // ***************************************************************
 GFX.prototype.GroupStart = function()
 {
+  // Creo un div per bloccare l'interfaccia utente durante l'animazione
+  if (!RD3_Glb.IsMobile())
+  {
+    this.BlockBox = document.createElement("div");
+    this.BlockBox.className = "blocking-box";
+    document.body.appendChild(this.BlockBox);
+    this.BlockBox.style.display = "block";
+  }
+  //
   // Aggiorno la visibilita' dei miei campi in quanto e' cambiato lo stato del gruppo
   if (this.Obj.Collapsed)
   {
@@ -4934,6 +4946,11 @@ GFX.prototype.GroupFinish = function()
   }
   //
   this.Obj.ParentPanel.CalcGroupsLayout();
+  //
+  // Rimuovo il blocco sulla UI
+  if (this.BlockBox)
+    this.BlockBox.parentNode.removeChild(this.BlockBox);
+  delete this.BlockBox;
 }
 
 

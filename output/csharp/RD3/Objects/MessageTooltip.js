@@ -1004,8 +1004,8 @@ MessageTooltip.prototype.Tick = function()
     //
     if (inDOM && RD3_TooltipManager.IsObjVisible(this.Obj))
     {
-      var deltaTop = this.LastObjTop - RD3_Glb.GetScreenTop(this.Obj, true);
-      var deltaLeft = this.LastObjLeft - RD3_Glb.GetScreenLeft(this.Obj, true);
+      var deltaTop =  RD3_Glb.GetScreenTop(this.Obj, true) - this.LastObjTop;
+      var deltaLeft = RD3_Glb.GetScreenLeft(this.Obj, true) - this.LastObjLeft;
       //
       // Se l'oggetto non si e' spostato ... non faccio nulla
       if (deltaTop==0 && deltaLeft==0)

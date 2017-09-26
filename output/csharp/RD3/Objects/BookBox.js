@@ -36,7 +36,8 @@ function BookBox(ppage)
   this.BackColor = ""; // Colore di background
   this.ForeColor = ""; // Colore di foreground
   this.FontMod = "";   // Proprieta' del carattere
-  this.Alignment = 1;  // Allineamento
+  this.Alignment = 1;  // Allineamento orizzontale
+  this.VAlignment = 1; // Allineamento verticale
   //
   // Oggetti figli di questo nodo
   this.SubSections = null;      // Sezioni dei sottoreport (solo se c'e' il sottoreport)
@@ -169,6 +170,7 @@ BookBox.prototype.LoadProperties = function(node)
       case "frc": this.SetForeColor(valore); break;
       case "ftm": this.SetFontMod(valore); break;
       case "aln": this.SetAlignment(parseInt(valore)); break;
+      case "valn":this.SetVAlignment(parseInt(valore)); break;
       case "bdg": this.SetBadge(valore); break;
       case "cln": this.SetClassName(valore); break;
       
@@ -858,6 +860,16 @@ BookBox.prototype.SetAlignment = function(value)
   }
 }
 
+BookBox.prototype.SetVAlignment = function(value)
+{
+  if (value != undefined)
+    this.VAlignment = value;
+  //
+  // L'allineamento verticale e' un mezzo delirio...
+  // Non posso usare verticalAlign... :-(
+  // e "flex" e' troppo evoluto... Gestisco l'allineamento nella AdaptBox
+}
+
 BookBox.prototype.SetBadge= function(value) 
 {
   if (value != undefined)
@@ -992,6 +1004,7 @@ BookBox.prototype.Realize = function(parent, before)
   this.SetForeColor();
   this.SetFontMod();
   this.SetAlignment();
+  this.SetVAlignment();
   this.SetBadge();
   this.ApplyVisualStyle();
   this.SetClassName();
@@ -1519,7 +1532,10 @@ BookBox.prototype.AdaptBox = function()
       // Pero' se io non ho bordo voglio che gli oggetti che contengo escano liberamente...
       var rbrd = this.VisStyle.GetBookOffset(true);
       this.BoxBox.style.overflowX = (this.CanScroll ? "hidden" : (rbrd.x||rbrd.w ? "hidden" : ""));
-      this.BoxBox.style.overflowY = (this.CanScroll ? "auto" : (rbrd.y||rbrd.h ? "hidden" : ""));
+      if (RD3_Glb.IsTouch())
+        this.BoxBox.style.overflowY = (this.CanScroll ? "scroll" : (rbrd.y||rbrd.h ? "hidden" : ""));
+      else
+        this.BoxBox.style.overflowY = (this.CanScroll ? "auto" : (rbrd.y||rbrd.h ? "hidden" : ""));
     }
     //
     // Ottimo. Ora se ho un badge, posiziono anche lui
@@ -1536,6 +1552,25 @@ BookBox.prototype.AdaptBox = function()
       //
       this.BadgeObj.style.left = x + "px"
       this.BadgeObj.style.top = y + "px"
+    }
+    //
+    // Vertical alignment
+    if (this.VAlignment != 1)     // VISVALN_TOP
+    {
+      var first = this.Spans[0].SpanObj;
+      var last = this.Spans[this.Spans.length - 1].SpanObj;
+      var TextHeight = last.offsetTop + last.offsetHeight - first.offsetTop;
+      //
+      var TextOfs = 0;
+      if (this.VAlignment == 2)   // VISVALN_CENTER
+        TextOfs = (rect.h - TextHeight) / 2 - 1;
+      else if (this.VAlignment == 3)   // VISVALN_BOTTOM
+        TextOfs = rect.h - TextHeight - 1;
+      //
+      this.BoxBox.style.paddingTop = (TextOfs + rpad.y) + "px";
+      //
+      // Dato che ho usato il padding e sono in box-model devo ridurre l'altezza della box
+      this.BoxBox.style.height = (rect.h - TextOfs) + "px";
     }
   }
 }

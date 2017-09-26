@@ -1,6 +1,6 @@
 // **********************************************
 // Impostazioni Android
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -336,15 +336,24 @@ public partial class ImpostazioniAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("54E51BB4-9E43-4152-BB9C-BB81670CFB3B", "Apps Push Settings Before Insert", "", 0, "Impostazioni Android")) return;
+      MainFrm.DTTObj.AddParameter ("54E51BB4-9E43-4152-BB9C-BB81670CFB3B", "7A1DB7CD-688A-417A-A452-0E27186FA033", "Cancel", Cancel);
       // 
       // Apps Push Settings Before Insert Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddAssign ("A8B55ED4-3001-45D7-9BC5-206A22CB7C55", "Type OS Applicazione [Impostazioni Android - Apps Push Settings] := Android", "", IMDB.Value(IMDBDef1.PQRY_APPLICAZION3, IMDBDef1.PQSL_APPLICAZION3_TYPE_OS, 0));
+      MainFrm.DTTObj.AddToken ("A8B55ED4-3001-45D7-9BC5-206A22CB7C55", "E9D1BD92-BCC3-4AA1-8A5C-CA0C6347ECDD", 589824, "Android", (new IDVariant("2")));
       IMDB.set_Value(IMDBDef1.PQRY_APPLICAZION3, IMDBDef1.PQSL_APPLICAZION3_TYPE_OS, 0, (new IDVariant("2")));
+      MainFrm.DTTObj.AddAssignNewValue ("A8B55ED4-3001-45D7-9BC5-206A22CB7C55", "7397142D-91C4-4C6B-907C-6F08E0666DC2", IMDB.Value(IMDBDef1.PQRY_APPLICAZION3, IMDBDef1.PQSL_APPLICAZION3_TYPE_OS, 0));
+      MainFrm.DTTObj.ExitProc("54E51BB4-9E43-4152-BB9C-BB81670CFB3B", "Apps Push Settings Before Insert", "", 0, "Impostazioni Android");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("54E51BB4-9E43-4152-BB9C-BB81670CFB3B", "Apps Push Settings Before Insert", "", _e);
       MainFrm.ErrObj.ProcError ("ImpostazioniAndroid", "AppsPushSettingsBeforeInsert", _e);
+      MainFrm.DTTObj.ExitProc("54E51BB4-9E43-4152-BB9C-BB81670CFB3B", "Apps Push Settings Before Insert", "", 0, "Impostazioni Android");
     }
   }
 
@@ -363,16 +372,22 @@ public partial class ImpostazioniAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("EA3D9A8B-27B5-4751-984C-30D8ACE1294B", "Apri Invia Push A Utenti", "", 3, "Impostazioni Android")) return 0;
       // 
       // Apri Invia Push A Utenti Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("FE2A3245-C647-4558-8D9C-49CA464CF777", "Invio Notifiche A Utenti Android.Start Form", "");
       ((InvioNotificheAUtentiAndroid)MainFrm.GetForm(MyGlb.FRM_INVNOTAUTEAN,1,true,this)).StartForm(IMDB.Value(IMDBDef1.PQRY_APPLICAZION3, IMDBDef1.PQSL_APPLICAZION3_ID, 0));
+      MainFrm.DTTObj.ExitProc("EA3D9A8B-27B5-4751-984C-30D8ACE1294B", "Apri Invia Push A Utenti", "", 3, "Impostazioni Android");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("EA3D9A8B-27B5-4751-984C-30D8ACE1294B", "Apri Invia Push A Utenti", "", _e);
       MainFrm.ErrObj.ProcError ("ImpostazioniAndroid", "ApriInviaPushAUtenti", _e);
+      MainFrm.DTTObj.ExitProc("EA3D9A8B-27B5-4751-984C-30D8ACE1294B", "Apri Invia Push A Utenti", "", 3, "Impostazioni Android");
       return -1;
     }
   }
@@ -661,7 +676,7 @@ public partial class ImpostazioniAndroid : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPS A ");
     SQL.Append("where (A.ID = ~~ID_APP~~) ");
-    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPS, 0, SQL, PFL_APPSPUSHSETT_APPLICAZIONE, "");
+    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPS, 0, SQL, PFL_APPSPUSHSETT_APPLICAZIONE, "A4EFEAF8-68CE-4006-B401-5363D55A4440");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPPS, ");
@@ -683,7 +698,7 @@ public partial class ImpostazioniAndroid : MyWebForm
     SQL.Append("  A.FLG_AMBIENTE as FLG_AMBIENTE, ");
     SQL.Append("  A.GOOGLE_API_ID as GOOGLE_API_ID, ");
     SQL.Append("  A.GOOGLE_PASSWORD as GOOGLE_PASSWORD ");
-    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZION3, 0, SQL, -1, "");
+    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZION3, 0, SQL, -1, "16F490E5-A387-462D-BC36-BFE60883F9A0");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPS_PUSH_SETTING A ");
@@ -925,6 +940,10 @@ public partial class ImpostazioniAndroid : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

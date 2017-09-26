@@ -460,6 +460,7 @@ IDEditor.prototype.UpdateToolbar = function(rng)
   var insideRight = false;
   var insideJust = false;
   var insideLink = false;
+  var canLink = false;
   var fntFamily = "-";
   var fntSize = "0";
   //
@@ -568,6 +569,11 @@ IDEditor.prototype.UpdateToolbar = function(rng)
           obj = null;
       }
     }
+    //
+    if (rng.text && rng.text != "")
+      canLink = true;
+    else if (!rng.collapsed)
+      canLink = true;
   }
   //
   // Gestisco il Font, se non l'ho trovato... allora lascio la combo cosi' com'e'
@@ -602,6 +608,10 @@ IDEditor.prototype.UpdateToolbar = function(rng)
   this.SetToolbarCommandStatus(RD3_Glb.IDE_CENTER, insideCenter);
   this.SetToolbarCommandStatus(RD3_Glb.IDE_JUSTIFY, insideJust);
   this.SetToolbarCommandStatus(RD3_Glb.IDE_RIGHT, insideRight);
+  this.SetToolbarCommandStatus(RD3_Glb.IDE_LINK, insideLink);
+  //
+  this.ToolLink.setAttribute("id_disabled", canLink ? "false" : "true");
+  this.ToolLink.style.cursor = (this.Layout==1 && this.Enabled && canLink ? "pointer" : "default");
   //
   // Posiziono le Combo (non e' necessario farlo sempre..)
   if (rng == undefined)
@@ -982,7 +992,7 @@ IDEditor.prototype.OnMouseOverObj= function(ev)
     var obj = this.ToolObjects[parseInt(key, 10)];
     //
     // Trovato, lo evidenzio
-    if (obj == srcobj)
+    if (obj == srcobj && obj.getAttribute("id_disabled") != "true")
       srcobj.style.backgroundColor = this.HilightColor;
   }
 }
@@ -2060,13 +2070,19 @@ IDEditor.prototype.onToolCommand = function(ev, cmd)
     break;
     
     case 'LINK':
-      if (!this.InputMsg)
+      var canLink = false;
+      if (this.ToolLink.getAttribute("id_disabled") != "true")
+        canLink = true;
+      if (canLink)
       {
-        this.InputMsg = new MessageBox(ClientMessages.IDE_LINK_MSG, RD3_Glb.MSG_INPUT, false);
-        this.InputMsg.CallBackFunction = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+this.Identifier+"', 'onLinkCallback', ev)");
+        if (!this.InputMsg)
+        {
+          this.InputMsg = new MessageBox(ClientMessages.IDE_LINK_MSG, RD3_Glb.MSG_INPUT, false);
+          this.InputMsg.CallBackFunction = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+this.Identifier+"', 'onLinkCallback', ev)");
+        }
+        //
+        this.InputMsg.Open();
       }
-      //
-      this.InputMsg.Open();
     break;
     
     case 'CHG':

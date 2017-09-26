@@ -1,6 +1,6 @@
 // **********************************************
 // Invio Notifiche A Utenti Android
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -380,6 +380,8 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("677830E8-05ED-4525-82B2-34CD39AA11AA", "Lancia Invio Notifica", "", 3, "Invio Notifiche A Utenti Android")) return 0;
       // 
       // Lancia Invio Notifica Body
       // Corpo Procedura
@@ -387,11 +389,18 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
       // 
       // Ho inserito un testo?
       // 
+      MainFrm.DTTObj.AddIf ("0CC70A02-6FAD-4CA4-A105-5402237A74A0", "IF Trim (Messaggio Notifica Record [Invio Notifiche A Utenti Android - Nuovo Pannello]) = \"\"", "Ho inserito un testo?");
+      MainFrm.DTTObj.AddToken ("0CC70A02-6FAD-4CA4-A105-5402237A74A0", "3B10EFE6-8129-4A58-A839-739DE0D8D104", 917504, "Messaggio Notifica", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_MESSAGNOTIFI, 0));
       if (IDL.Trim(IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_MESSAGNOTIFI, 0), true, true).equals((new IDVariant("")), true))
       {
+        MainFrm.DTTObj.EnterIf ("0CC70A02-6FAD-4CA4-A105-5402237A74A0", "IF Trim (Messaggio Notifica Record [Invio Notifiche A Utenti Android - Nuovo Pannello]) = \"\"", "Ho inserito un testo?");
+        MainFrm.DTTObj.AddSubProc ("D359DD91-DADA-47D0-A61E-5F7F693372FB", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("D359DD91-DADA-47D0-A61E-5F7F693372FB", "95441AB7-B469-4143-A7AC-F6F6854935E3", "Messaggio", (new IDVariant("Inserire unt Testo")));
         MainFrm.set_AlertMessage((new IDVariant("Inserire unt Testo"))); 
+        MainFrm.DTTObj.ExitProc ("677830E8-05ED-4525-82B2-34CD39AA11AA", "Lancia Invio Notifica", "Spiega quale elaborazione viene eseguita da questa procedura", 3, "Invio Notifiche A Utenti Android");
         return 0;
       }
+      MainFrm.DTTObj.EndIfBlk ("0CC70A02-6FAD-4CA4-A105-5402237A74A0");
       IDVariant v_VAUTHKEYAPPL = new IDVariant(0,IDVariant.STRING);
       IDVariant v_VCHIAVEAPPLI = new IDVariant(0,IDVariant.STRING);
       SQL = new StringBuilder();
@@ -403,40 +412,77 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
       SQL.Append("  APPS B ");
       SQL.Append("where B.ID = A.ID_APP ");
       SQL.Append("and   (A.ID = " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_IDAPPLINOTIF, 0), IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
+      MainFrm.DTTObj.AddQuery ("32AAB975-8F7E-4735-B4DD-2ED006CDEFA2", "Notificatore DB (Notificatore DB): Select into variables", "", 1280, SQL.ToString());
       QV = MainFrm.NotificatoreDBObject.DBO().OpenRS(SQL);
       if (!QV.EOF()) QV.MoveNext();
+      MainFrm.DTTObj.EndQuery ("32AAB975-8F7E-4735-B4DD-2ED006CDEFA2");
+      MainFrm.DTTObj.AddDBDataSource (QV, SQL);
       if (!QV.EOF())
       {
         v_VAUTHKEYAPPL = QV.Get("AUTHKEYAPPS", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("32AAB975-8F7E-4735-B4DD-2ED006CDEFA2", "3D6E0CA3-3898-4E3B-A5AC-3CC2E3FF8856", 1376256, "V Auth Key Applicazione", v_VAUTHKEYAPPL);
         v_VCHIAVEAPPLI = QV.Get("CHIAVEAPPS", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("32AAB975-8F7E-4735-B4DD-2ED006CDEFA2", "B68B7682-9734-495D-AC38-5ECE9911A344", 1376256, "v Chiave Applicazione", v_VCHIAVEAPPLI);
       }
       QV.Close();
       IDVariant v_SUTENTE = new IDVariant(0,IDVariant.STRING);
+      MainFrm.DTTObj.AddIf ("AA2821C8-FA65-49A8-A0B4-8E1EA6CAAA3E", "IF Utente Record [Invio Notifiche A Utenti Android - Nuovo Pannello] != \"[Tutti gli utenti]\"", "");
+      MainFrm.DTTObj.AddToken ("AA2821C8-FA65-49A8-A0B4-8E1EA6CAAA3E", "EC1C2715-83A0-4CE9-A862-5508E478346F", 917504, "Utente", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_DES_UTENTE, 0));
       if (IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_DES_UTENTE, 0).compareTo((new IDVariant("[Tutti gli utenti]")), true)!=0)
       {
+        MainFrm.DTTObj.EnterIf ("AA2821C8-FA65-49A8-A0B4-8E1EA6CAAA3E", "IF Utente Record [Invio Notifiche A Utenti Android - Nuovo Pannello] != \"[Tutti gli utenti]\"", "");
+        MainFrm.DTTObj.AddAssign ("B5C3D363-34D6-4CD6-8D29-AD5180D0124E", "s Utente := Utente Record [Invio Notifiche A Utenti Android - Nuovo Pannello]", "", v_SUTENTE);
+        MainFrm.DTTObj.AddToken ("B5C3D363-34D6-4CD6-8D29-AD5180D0124E", "EC1C2715-83A0-4CE9-A862-5508E478346F", 917504, "Utente", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_DES_UTENTE, 0));
         v_SUTENTE = IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_DES_UTENTE, 0);
+        MainFrm.DTTObj.AddAssignNewValue ("B5C3D363-34D6-4CD6-8D29-AD5180D0124E", "9D8BAE96-6DF2-4634-B2A5-0DE5168F8F4B", v_SUTENTE);
       }
+      MainFrm.DTTObj.EndIfBlk ("AA2821C8-FA65-49A8-A0B4-8E1EA6CAAA3E");
       // 
       // Invio della notifica push
       // 
       NotificatoreWS.Notificatore N = null;
+      MainFrm.DTTObj.AddAssign ("35F15701-9A98-43A8-AA88-B6E784CFE989", "n := new ()", "Invio della notifica push", N);
       N = (NotificatoreWS.Notificatore)new NotificatoreWS.Notificatore(); N.Url = (String)MainFrm.WebServicesUrl["NotificatoreWS"]; N.NameSpace = "http://www.progamma.com";
+      MainFrm.DTTObj.AddAssignNewValue ("35F15701-9A98-43A8-AA88-B6E784CFE989", "A3E1CB29-F63A-4F12-9968-92977ABFB972", N);
+      MainFrm.DTTObj.AddAssign ("62A6E988-7CB5-482D-AEEF-479D4273B679", "n.Url := Glb WS Url Notificatore", "", N.Url);
+      MainFrm.DTTObj.AddToken ("62A6E988-7CB5-482D-AEEF-479D4273B679", "10ADFF3C-9D96-4180-92DE-D5CA73B4ADA5", 1376256, "Glb WS Url", new IDVariant(MainFrm.GLBWSURL));
       N.Url = new IDVariant(MainFrm.GLBWSURL).stringValue();
+      MainFrm.DTTObj.AddAssignNewValue ("62A6E988-7CB5-482D-AEEF-479D4273B679", "A3E1CB29-F63A-4F12-9968-92977ABFB972", N.Url);
       IDVariant S = null;
+      MainFrm.DTTObj.AddAssign ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "s := n.Send Notification (V Auth Key Applicazione, v Chiave Applicazione, Messaggio Notifica Record [Invio Notifiche A Utenti Android - Nuovo Pannello], s Utente, Sound Record [Invio Notifiche A Utenti Android - Nuovo Pannello], Badge Recor", "", S);
+      MainFrm.DTTObj.AddToken ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "3D6E0CA3-3898-4E3B-A5AC-3CC2E3FF8856", 1376256, "V Auth Key Applicazione", v_VAUTHKEYAPPL);
+      MainFrm.DTTObj.AddToken ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "B68B7682-9734-495D-AC38-5ECE9911A344", 1376256, "v Chiave Applicazione", v_VCHIAVEAPPLI);
+      MainFrm.DTTObj.AddToken ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "3B10EFE6-8129-4A58-A839-739DE0D8D104", 917504, "Messaggio Notifica", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_MESSAGNOTIFI, 0));
+      MainFrm.DTTObj.AddToken ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "9D8BAE96-6DF2-4634-B2A5-0DE5168F8F4B", 1376256, "s Utente", v_SUTENTE);
+      MainFrm.DTTObj.AddToken ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "6286A099-25CC-4208-A5CA-F8C78F00A550", 917504, "Sound", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_SOUND, 0));
+      MainFrm.DTTObj.AddToken ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "673A55E7-F18D-4DAB-9399-D7A576298A2A", 917504, "Badge", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_BADGE, 0));
       S = N.SendNotification_ws(v_VAUTHKEYAPPL, v_VCHIAVEAPPLI, IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_MESSAGNOTIFI, 0), v_SUTENTE, IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_SOUND, 0), IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_BADGE, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("CE0D651E-F294-4DA8-8ACC-33D175E95FCA", "060B319F-8B3A-4A87-9AB0-E0486AE9F312", S);
+      MainFrm.DTTObj.AddIf ("F0792963-3209-4738-9411-7BAF93FB7F59", "IF s != \"\"", "");
+      MainFrm.DTTObj.AddToken ("F0792963-3209-4738-9411-7BAF93FB7F59", "060B319F-8B3A-4A87-9AB0-E0486AE9F312", 1376256, "s", S);
       if (S.compareTo((new IDVariant("")), true)!=0)
       {
+        MainFrm.DTTObj.EnterIf ("F0792963-3209-4738-9411-7BAF93FB7F59", "IF s != \"\"", "");
+        MainFrm.DTTObj.AddSubProc ("3BBECB71-4BA7-4C9D-A428-220533C296E1", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("3BBECB71-4BA7-4C9D-A428-220533C296E1", "E77397B0-C076-4DDB-BCDB-F903CB5BF9D9", "Messaggio", S);
         MainFrm.set_AlertMessage(S); 
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("6164EED3-F352-4F8F-99C7-4280F631DF45", "ELSE", "", "F0792963-3209-4738-9411-7BAF93FB7F59");
+        MainFrm.DTTObj.AddSubProc ("FE57E26A-3573-4F94-A467-78793E759923", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("FE57E26A-3573-4F94-A467-78793E759923", "16BF6978-3906-4C82-A1DB-069B15254DC1", "Messaggio", (new IDVariant("Invio messaggio in coda")));
         MainFrm.set_AlertMessage((new IDVariant("Invio messaggio in coda"))); 
       }
+      MainFrm.DTTObj.EndIfBlk ("F0792963-3209-4738-9411-7BAF93FB7F59");
+      MainFrm.DTTObj.ExitProc("677830E8-05ED-4525-82B2-34CD39AA11AA", "Lancia Invio Notifica", "", 3, "Invio Notifiche A Utenti Android");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("677830E8-05ED-4525-82B2-34CD39AA11AA", "Lancia Invio Notifica", "", _e);
       MainFrm.ErrObj.ProcError ("InvioNotificheAUtentiAndroid", "LanciaInvioNotifica", _e);
+      MainFrm.DTTObj.ExitProc("677830E8-05ED-4525-82B2-34CD39AA11AA", "Lancia Invio Notifica", "", 3, "Invio Notifiche A Utenti Android");
       return -1;
     }
   }
@@ -457,6 +503,9 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("7578ED51-133E-4569-9DA7-9F6BA4BECF19", "Start Form", "", 3, "Invio Notifiche A Utenti Android")) return 0;
+      MainFrm.DTTObj.AddParameter ("7578ED51-133E-4569-9DA7-9F6BA4BECF19", "ED72AF9D-1F07-4984-9EB2-DC303ACF40B7", "ID Apps Push Settings", IDAppsPushSettings);
       // 
       // Start Form Body
       // Corpo Procedura
@@ -470,21 +519,35 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
       SQL.Append("from ");
       SQL.Append("  APPS_PUSH_SETTING A ");
       SQL.Append("where (A.ID = " + IDL.CSql(IDAppsPushSettings, IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
+      MainFrm.DTTObj.AddQuery ("15691F91-6FB7-429D-9B68-BBE48C3DAB47", "Notificatore DB (Notificatore DB): Select into variables", "", 1280, SQL.ToString());
       QV = MainFrm.NotificatoreDBObject.DBO().OpenRS(SQL);
       if (!QV.EOF()) QV.MoveNext();
+      MainFrm.DTTObj.EndQuery ("15691F91-6FB7-429D-9B68-BBE48C3DAB47");
+      MainFrm.DTTObj.AddDBDataSource (QV, SQL);
       if (!QV.EOF())
       {
         v_VAMBAPPPUSSE = QV.Get("AMBIENTE", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("15691F91-6FB7-429D-9B68-BBE48C3DAB47", "B81F47EF-6664-4F23-89A4-9AB0DB2662FE", 1376256, "v Ambiente Apps Push Settings", v_VAMBAPPPUSSE);
         v_VIDAPPPUSSET = QV.Get("ID", IDVariant.INTEGER) ;
+        MainFrm.DTTObj.AddToken ("15691F91-6FB7-429D-9B68-BBE48C3DAB47", "C003571E-8C06-4D29-BC06-5982816868EC", 1376256, "v ID Apps Push Settings", v_VIDAPPPUSSET);
       }
       QV.Close();
+      MainFrm.DTTObj.AddAssign ("802AEFE6-FED0-4470-A036-C6757FFAC976", "Applicazione Record [Invio Notifiche A Utenti Android - Nuovo Pannello] := v ID Apps Push Settings", "", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_IDAPPLINOTIF, 0));
+      MainFrm.DTTObj.AddToken ("802AEFE6-FED0-4470-A036-C6757FFAC976", "C003571E-8C06-4D29-BC06-5982816868EC", 1376256, "v ID Apps Push Settings", new IDVariant(v_VIDAPPPUSSET));
       IMDB.set_Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_IDAPPLINOTIF, 0, new IDVariant(v_VIDAPPPUSSET));
+      MainFrm.DTTObj.AddAssignNewValue ("802AEFE6-FED0-4470-A036-C6757FFAC976", "F2541E2B-6C0D-4A0D-9CB5-3926C9EE33BD", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_IDAPPLINOTIF, 0));
+      MainFrm.DTTObj.AddAssign ("A161C732-0BE8-4187-AB4A-DFE9FA32D319", "Ambiente Notifica Record [Invio Notifiche A Utenti Android - Nuovo Pannello] := v Ambiente Apps Push Settings", "", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_AMBIENNOTIFI, 0));
+      MainFrm.DTTObj.AddToken ("A161C732-0BE8-4187-AB4A-DFE9FA32D319", "B81F47EF-6664-4F23-89A4-9AB0DB2662FE", 1376256, "v Ambiente Apps Push Settings", new IDVariant(v_VAMBAPPPUSSE));
       IMDB.set_Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_AMBIENNOTIFI, 0, new IDVariant(v_VAMBAPPPUSSE));
+      MainFrm.DTTObj.AddAssignNewValue ("A161C732-0BE8-4187-AB4A-DFE9FA32D319", "29C1DDC4-18F2-4E73-AF64-0CC59E4E6626", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE1, IMDBDef1.PQSL_NOTIFICHE1_AMBIENNOTIFI, 0));
+      MainFrm.DTTObj.ExitProc("7578ED51-133E-4569-9DA7-9F6BA4BECF19", "Start Form", "", 3, "Invio Notifiche A Utenti Android");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("7578ED51-133E-4569-9DA7-9F6BA4BECF19", "Start Form", "", _e);
       MainFrm.ErrObj.ProcError ("InvioNotificheAUtentiAndroid", "StartForm", _e);
+      MainFrm.DTTObj.ExitProc("7578ED51-133E-4569-9DA7-9F6BA4BECF19", "Start Form", "", 3, "Invio Notifiche A Utenti Android");
       return -1;
     }
   }
@@ -506,15 +569,24 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("39AE6D15-2B66-4914-8B23-7AB6635DBB02", "Unload", "", 0, "Invio Notifiche A Utenti Android")) return;
+      MainFrm.DTTObj.AddParameter ("39AE6D15-2B66-4914-8B23-7AB6635DBB02", "C91F15F4-09FC-4579-A8A7-F4CBD7B2D3B5", "Cancel", Cancel);
+      MainFrm.DTTObj.AddParameter ("39AE6D15-2B66-4914-8B23-7AB6635DBB02", "E460A4F4-AE0B-4E31-A010-E99B15134B5C", "Confirm", Confirm);
       // 
       // Unload Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddQuery ("0A958A65-0BA5-476F-B44E-DC8D17780FA4", "Notifiche: Delete", "", 256, "");
       UNLOAD_NOTIFIDELETE();
+      MainFrm.DTTObj.EndQuery ("0A958A65-0BA5-476F-B44E-DC8D17780FA4");
+      MainFrm.DTTObj.ExitProc("39AE6D15-2B66-4914-8B23-7AB6635DBB02", "Unload", "", 0, "Invio Notifiche A Utenti Android");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("39AE6D15-2B66-4914-8B23-7AB6635DBB02", "Unload", "", _e);
       MainFrm.ErrObj.ProcError ("InvioNotificheAUtentiAndroid", "Unload", _e);
+      MainFrm.DTTObj.ExitProc("39AE6D15-2B66-4914-8B23-7AB6635DBB02", "Unload", "", 0, "Invio Notifiche A Utenti Android");
     }
   }
 
@@ -832,7 +904,7 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
     SQL.Append("  APPS B ");
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~IDAPPLINOTIF~~) ");
-    PAN_NUOVOPANNELL.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_NUOVOPANNELL_APPLICAZIONE, "");
+    PAN_NUOVOPANNELL.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_NUOVOPANNELL_APPLICAZIONE, "FCE63016-08F9-47C6-9C9F-A7251FEE8CD8");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPPLICAZIO, ");
@@ -854,7 +926,7 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
     SQL.Append("where (A.ID_APPLICAZIONE = ~~IDAPPLINOTIF~~) ");
     SQL.Append("and   (A.TYPE_OS = '2') ");
     SQL.Append("and   (NOT ((A.DES_UTENTE IS NULL))) ");
-    PAN_NUOVOPANNELL.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, PFL_NUOVOPANNELL_UTENTE, "");
+    PAN_NUOVOPANNELL.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, PFL_NUOVOPANNELL_UTENTE, "EE45378D-CF63-437A-86C2-0F2631764E8B");
     PAN_NUOVOPANNELL.SetQueryDB(PPQRY_DEVICETOKEN, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_NUOVOPANNELL.SetIMDB(IMDB, "PQRY_NOTIFICHE1", true);
     PAN_NUOVOPANNELL.set_SetString(MyGlb.MASTER_ROWNAME, "Record");
@@ -1092,6 +1164,10 @@ public partial class InvioNotificheAUtentiAndroid : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

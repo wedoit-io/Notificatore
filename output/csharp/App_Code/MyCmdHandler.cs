@@ -1,7 +1,7 @@
 // **********************************************
 // Command Handler
 // Instant WEB Application: www.progamma.com
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Reflection;
@@ -16,8 +16,6 @@ public sealed class MyCmdHandler : CmdHandler
 {
   static int CMDS_OFFSET = 0;
   static int CMD_OFFSET = 0;
-  static int CMDS_BASEIDX = 0;
-  static int CMD_BASEIDX = 0;
 
   // **********************************************
   // Costruttore
@@ -34,6 +32,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_GENERALE].Caption = "Generale";
     CmdSets[MyGlb.CMDS_GENERALE].ToolTip = "";
     CmdSets[MyGlb.CMDS_GENERALE].Level = 1;
+    CmdSets[MyGlb.CMDS_GENERALE].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_GENERALE].IsMenu = true;
     CmdSets[MyGlb.CMDS_GENERALE].IsToolbar = false;
     CmdSets[MyGlb.CMDS_GENERALE].ShowNames = false;
@@ -172,6 +171,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_IOS].Caption = "iOS";
     CmdSets[MyGlb.CMDS_IOS].ToolTip = "";
     CmdSets[MyGlb.CMDS_IOS].Level = 1;
+    CmdSets[MyGlb.CMDS_IOS].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_IOS].IsMenu = true;
     CmdSets[MyGlb.CMDS_IOS].IsToolbar = false;
     CmdSets[MyGlb.CMDS_IOS].ShowNames = false;
@@ -234,6 +234,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdLin[MyGlb.CMD_SALESDATA1].Caption = "Sales Data";
     CmdLin[MyGlb.CMD_SALESDATA1].ToolTip = "";
     CmdLin[MyGlb.CMD_SALESDATA1].Level = 2;
+    CmdLin[MyGlb.CMD_SALESDATA1].IsCmdSet = true;
     CmdLin[MyGlb.CMD_SALESDATA1].IsMenu = true;
     CmdLin[MyGlb.CMD_SALESDATA1].IsToolbar = false;
     CmdLin[MyGlb.CMD_SALESDATA1].ShowNames = false;
@@ -372,6 +373,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_ANDROID].Caption = "Android";
     CmdSets[MyGlb.CMDS_ANDROID].ToolTip = "";
     CmdSets[MyGlb.CMDS_ANDROID].Level = 1;
+    CmdSets[MyGlb.CMDS_ANDROID].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_ANDROID].IsMenu = true;
     CmdSets[MyGlb.CMDS_ANDROID].IsToolbar = false;
     CmdSets[MyGlb.CMDS_ANDROID].ShowNames = false;
@@ -432,6 +434,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_WINPHONE].Caption = "Win Phone";
     CmdSets[MyGlb.CMDS_WINPHONE].ToolTip = "";
     CmdSets[MyGlb.CMDS_WINPHONE].Level = 1;
+    CmdSets[MyGlb.CMDS_WINPHONE].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_WINPHONE].IsMenu = true;
     CmdSets[MyGlb.CMDS_WINPHONE].IsToolbar = false;
     CmdSets[MyGlb.CMDS_WINPHONE].ShowNames = false;
@@ -492,6 +495,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_WINSTORE].Caption = "Win Store";
     CmdSets[MyGlb.CMDS_WINSTORE].ToolTip = "";
     CmdSets[MyGlb.CMDS_WINSTORE].Level = 1;
+    CmdSets[MyGlb.CMDS_WINSTORE].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_WINSTORE].IsMenu = true;
     CmdSets[MyGlb.CMDS_WINSTORE].IsToolbar = false;
     CmdSets[MyGlb.CMDS_WINSTORE].ShowNames = false;
@@ -553,6 +557,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_DEBUG1].Caption = "Debug";
     CmdSets[MyGlb.CMDS_DEBUG1].ToolTip = "";
     CmdSets[MyGlb.CMDS_DEBUG1].Level = 1;
+    CmdSets[MyGlb.CMDS_DEBUG1].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_DEBUG1].IsMenu = true;
     CmdSets[MyGlb.CMDS_DEBUG1].IsToolbar = false;
     CmdSets[MyGlb.CMDS_DEBUG1].ShowNames = false;
@@ -584,6 +589,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_TOOLBARLOG].Caption = "toolbar Log";
     CmdSets[MyGlb.CMDS_TOOLBARLOG].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_TOOLBARLOG].Level = 1;
+    CmdSets[MyGlb.CMDS_TOOLBARLOG].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_TOOLBARLOG].IsMenu = false;
     CmdSets[MyGlb.CMDS_TOOLBARLOG].IsToolbar = true;
     CmdSets[MyGlb.CMDS_TOOLBARLOG].ShowNames = false;
@@ -670,13 +676,14 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].iGuid = "A5DC93F2-94BD-4E3C-913C-C894F487101F";
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].IdxForm = MyGlb.FRM_IMPOSTAZIIOS;
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].ToolCont = -2;
-    CmdSets[MyGlb.CMDS_TOOLBARFORM1].ToolContCode = "PAN_APPSPUSHSETT";
+    CmdSets[MyGlb.CMDS_TOOLBARFORM1].ToolContCode = "PAN_APPLICATTIVE";
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].Index = MyGlb.CMDS_TOOLBARFORM1;
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].InitStatus(true, true, false);
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].SetNumCommands(4);
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].Caption = "toolbar form";
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].Level = 1;
+    CmdSets[MyGlb.CMDS_TOOLBARFORM1].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].IsMenu = false;
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].IsToolbar = true;
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].ShowNames = false;
@@ -685,7 +692,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].AddCommand(CmdLin[MyGlb.CMD_INVIADISPNOT]);
     CmdLin[MyGlb.CMD_INVIADISPNOT].Parent = CmdSets[MyGlb.CMDS_TOOLBARFORM1];
     CmdLin[MyGlb.CMD_INVIADISPNOT].iGuid = "F3A0563C-013B-49EB-ADAF-0AF041DB6F3D";
-    CmdLin[MyGlb.CMD_INVIADISPNOT].Caption = "Invia a dispositivi noti";
+    CmdLin[MyGlb.CMD_INVIADISPNOT].Caption = "Invia a disp. noti";
     CmdLin[MyGlb.CMD_INVIADISPNOT].ToolTip = "Genera il file JSON per l'iphone";
     CmdLin[MyGlb.CMD_INVIADISPNOT].RequireConfirmation = false;
     CmdLin[MyGlb.CMD_INVIADISPNOT].IsMenu = false;
@@ -713,22 +720,6 @@ public sealed class MyCmdHandler : CmdHandler
     CmdLin[MyGlb.CMD_INVIAAUTENTI].Index = MyGlb.CMD_INVIAAUTENTI;
     CmdLin[MyGlb.CMD_INVIAAUTENTI].Level = 2;
     CmdLin[MyGlb.CMD_INVIAAUTENTI].InitStatus(true, true, false);
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1] = new ACommand();
-    CmdSets[MyGlb.CMDS_TOOLBARFORM1].AddCommand(CmdLin[MyGlb.CMD_CHECKFEEDBA1]);
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Parent = CmdSets[MyGlb.CMDS_TOOLBARFORM1];
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].iGuid = "37615828-062C-464D-B707-584CB58CF651";
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Caption = "Check Feedback";
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].ToolTip = "";
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].RequireConfirmation = false;
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].IsMenu = false;
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].IsToolbar = true;
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].ShowNames = false;
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].ToolName = "Check";
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].UseHilight = false;
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Code = "CHECKFEEDBA1";
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Index = MyGlb.CMD_CHECKFEEDBA1;
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Level = 2;
-    CmdLin[MyGlb.CMD_CHECKFEEDBA1].InitStatus(true, true, false);
     CmdLin[MyGlb.CMD_CHECKCERTS] = new ACommand();
     CmdSets[MyGlb.CMDS_TOOLBARFORM1].AddCommand(CmdLin[MyGlb.CMD_CHECKCERTS]);
     CmdLin[MyGlb.CMD_CHECKCERTS].Parent = CmdSets[MyGlb.CMDS_TOOLBARFORM1];
@@ -745,6 +736,22 @@ public sealed class MyCmdHandler : CmdHandler
     CmdLin[MyGlb.CMD_CHECKCERTS].Index = MyGlb.CMD_CHECKCERTS;
     CmdLin[MyGlb.CMD_CHECKCERTS].Level = 2;
     CmdLin[MyGlb.CMD_CHECKCERTS].InitStatus(true, true, false);
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1] = new ACommand();
+    CmdSets[MyGlb.CMDS_TOOLBARFORM1].AddCommand(CmdLin[MyGlb.CMD_CHECKFEEDBA1]);
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Parent = CmdSets[MyGlb.CMDS_TOOLBARFORM1];
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].iGuid = "37615828-062C-464D-B707-584CB58CF651";
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Caption = "Check Feedback";
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].ToolTip = "";
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].RequireConfirmation = false;
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].IsMenu = false;
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].IsToolbar = true;
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].ShowNames = false;
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].ToolName = "Check";
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].UseHilight = false;
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Code = "CHECKFEEDBA1";
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Index = MyGlb.CMD_CHECKFEEDBA1;
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].Level = 2;
+    CmdLin[MyGlb.CMD_CHECKFEEDBA1].InitStatus(true, true, false);
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF] = new ACommand();
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].iGuid = "54932451-2AE5-4DE9-9E41-316F0C83A8D0";
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].IdxForm = MyGlb.FRM_DEVICTOKEIOS;
@@ -756,6 +763,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].Caption = "toolbarNotifiche";
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].Level = 1;
+    CmdSets[MyGlb.CMDS_TOOLBARNOTIF].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].IsMenu = false;
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].IsToolbar = true;
     CmdSets[MyGlb.CMDS_TOOLBARNOTIF].ShowNames = false;
@@ -787,6 +795,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_TOOLBASPEDIZ].Caption = "toolbar Spedizioni";
     CmdSets[MyGlb.CMDS_TOOLBASPEDIZ].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_TOOLBASPEDIZ].Level = 1;
+    CmdSets[MyGlb.CMDS_TOOLBASPEDIZ].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_TOOLBASPEDIZ].IsMenu = false;
     CmdSets[MyGlb.CMDS_TOOLBASPEDIZ].IsToolbar = true;
     CmdSets[MyGlb.CMDS_TOOLBASPEDIZ].ShowNames = false;
@@ -834,6 +843,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_TOOLBARFORM].Caption = "toolbar form";
     CmdSets[MyGlb.CMDS_TOOLBARFORM].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_TOOLBARFORM].Level = 1;
+    CmdSets[MyGlb.CMDS_TOOLBARFORM].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_TOOLBARFORM].IsMenu = false;
     CmdSets[MyGlb.CMDS_TOOLBARFORM].IsToolbar = true;
     CmdSets[MyGlb.CMDS_TOOLBARFORM].ShowNames = false;
@@ -865,6 +875,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE1].Caption = "Nuovo Command Set";
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE1].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE1].Level = 1;
+    CmdSets[MyGlb.CMDS_NUOVOCOMMSE1].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE1].IsMenu = false;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE1].IsToolbar = true;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE1].ShowNames = false;
@@ -896,6 +907,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_INVIOMANUAL1].Caption = "Invio Manuale";
     CmdSets[MyGlb.CMDS_INVIOMANUAL1].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_INVIOMANUAL1].Level = 1;
+    CmdSets[MyGlb.CMDS_INVIOMANUAL1].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_INVIOMANUAL1].IsMenu = false;
     CmdSets[MyGlb.CMDS_INVIOMANUAL1].IsToolbar = true;
     CmdSets[MyGlb.CMDS_INVIOMANUAL1].ShowNames = false;
@@ -943,6 +955,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_NUOVOCOMMSET].Caption = "Nuovo Command Set";
     CmdSets[MyGlb.CMDS_NUOVOCOMMSET].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_NUOVOCOMMSET].Level = 1;
+    CmdSets[MyGlb.CMDS_NUOVOCOMMSET].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSET].IsMenu = false;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSET].IsToolbar = true;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSET].ShowNames = false;
@@ -974,6 +987,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_INVIOMANUAL3].Caption = "Invio Manuale";
     CmdSets[MyGlb.CMDS_INVIOMANUAL3].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_INVIOMANUAL3].Level = 1;
+    CmdSets[MyGlb.CMDS_INVIOMANUAL3].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_INVIOMANUAL3].IsMenu = false;
     CmdSets[MyGlb.CMDS_INVIOMANUAL3].IsToolbar = true;
     CmdSets[MyGlb.CMDS_INVIOMANUAL3].ShowNames = false;
@@ -1005,6 +1019,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE2].Caption = "Nuovo Command Set";
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE2].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE2].Level = 1;
+    CmdSets[MyGlb.CMDS_NUOVOCOMMSE2].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE2].IsMenu = false;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE2].IsToolbar = true;
     CmdSets[MyGlb.CMDS_NUOVOCOMMSE2].ShowNames = false;
@@ -1036,6 +1051,7 @@ public sealed class MyCmdHandler : CmdHandler
     CmdSets[MyGlb.CMDS_INVIOMANUAL2].Caption = "Invio Manuale";
     CmdSets[MyGlb.CMDS_INVIOMANUAL2].ToolTip = "Quali comandi saranno contenuti qui?";
     CmdSets[MyGlb.CMDS_INVIOMANUAL2].Level = 1;
+    CmdSets[MyGlb.CMDS_INVIOMANUAL2].IsCmdSet = true;
     CmdSets[MyGlb.CMDS_INVIOMANUAL2].IsMenu = false;
     CmdSets[MyGlb.CMDS_INVIOMANUAL2].IsToolbar = true;
     CmdSets[MyGlb.CMDS_INVIOMANUAL2].ShowNames = false;
@@ -1064,22 +1080,6 @@ public sealed class MyCmdHandler : CmdHandler
   // **********************************************
   // Appende gli oggetti al CmdHandler fornito
   // **********************************************
-  public override int GetCmdSetBaseIndex()
-  {
-    return MyCmdHandler.CMDS_BASEIDX;
-  }
-  public override void SetCmdSetBaseIndex(int newIndex)
-  {
-    MyCmdHandler.CMDS_BASEIDX = newIndex;
-  }
-  public override int GetCmdBaseIndex()
-  {
-    return MyCmdHandler.CMD_BASEIDX;
-  }
-  public override void SetCmdBaseIndex(int newIndex)
-  {
-    MyCmdHandler.CMD_BASEIDX = newIndex;
-  }
   public override void AppendTo(CmdHandler Dst)
   {
     // Se ho command set
@@ -1088,39 +1088,16 @@ public sealed class MyCmdHandler : CmdHandler
       // Se è la prima volta, appendo
       if (MyCmdHandler.CMDS_OFFSET == 0)
       {
+        // Se vengono caricati componenti dinamicamente devo tenere conto del fatto che c'è una "zona" dell'array
+        // che è riservata a componenti che ho già caricato ma che non sono presenti nell'array di questa sessione. 
+        // Es: sessione 1 carica Comp1, sessione 2 carica Comp2 in questo caso la sessione 2 non ha mai caricato 
+        // Comp1 ma se dovesse farlo deve esserci spazio per le sue tabelle IMDB nello stesso posto in cui erano prima!)
+        // Pertanto se lo stato di riempimento è inferiore o uguale alla lunghezza dell'array, appendo in fondo
+        //
         // Per cominciare appendo tutti i CmdSet contenuti in Dst dentro al mio array
-        int idx = Dst.CmdSets.Length;
+        int idx = Math.Max(Dst.CmdSets.Length, com.progamma.ids.CmdHandler.FilledTo[0]);
         if (idx == 0) idx = 1;    // L'array dei cmdset è 1-based
-        //
-        // Non ho mai caricato prima questo componente ma l'array che riceverà i miei oggetti
-        // ha un baseidx diverso da 0 (questo può succedere se vengono caricati componenti dinamici
-        // e vengono caricati in ordine diverso. Es: sessione 1 carica Comp1, sessione 2 carica Comp2
-        // in questo caso la sessione 2 non ha mai caricato Comp1 ma se dovesse farlo deve esserci spazio
-        // per i suoi oggetti nello stesso posto in cui erano prima!)
-        // Quindi se il componente base ha delle zone che non possono essere occupate (causa componenti
-        // già caricati in altre sessioni) sposto i miei oggetti in avanti di quell'offset così la
-        // Append funziona correttamente
-        int baseidx = Dst.GetCmdSetBaseIndex();
-        if (baseidx != 0)
-        {
-          baseidx--;    // L'array dei cmdset è 1-based
-          //
-          // Baseidx è l'indice del primo slot libero. Shifto i miei oggetti in avanti di baseidx
-          // (in altre parole inserisco baseidx nulli all'inizio dell'array)
-          ACommand[] oldCmdSets = CmdSets;
-          CmdSets = new ACommand[baseidx + oldCmdSets.Length];
-          for (int i = baseidx; i < CmdSets.Length; i++)
-            CmdSets[i] = oldCmdSets[i - baseidx];
-          //
-          // Questo è l'indice del mio primo oggetto
-          MyCmdHandler.CMDS_OFFSET = baseidx;
-          //
-          idx = baseidx + 1;
-          Array.Resize(ref Dst.CmdSets, CmdSets.Length);
-        }
-        else
-          Array.Resize(ref Dst.CmdSets, idx + CmdSets.Length - 1);
-        //
+        Array.Resize(ref Dst.CmdSets, idx + CmdSets.Length - 1);
         for (int i = 1; i < CmdSets.Length; i++)
         {
           ACommand c = CmdSets[i];
@@ -1133,14 +1110,26 @@ public sealed class MyCmdHandler : CmdHandler
           c.Index = idx;
           Dst.CmdSets[idx++] = c;
         }
-        //
-        // Se non l'ho ancora fatto, il mio offset è il numero di commandset di tutti i miei padri...
+      }
+      else // Il componente è già stato inizializzato in precedenza... infilo i CmdSet dove li ho messi l'ultima volta
+      {
+        // L'array di mio padre potrebbe essere più grande del mio se i componenti sono "dinamici" e vengono caricati in un 
+        // ordine diverso da quello precedente (es: app->cmp1->cmp2 e poi, in una sessione differente app->cmp2->cmp1)
+        Array.Resize(ref Dst.CmdSets, Math.Max(CmdSets.Length, Dst.CmdSets.Length));
+        Array.Copy(CmdSets, MyCmdHandler.CMDS_OFFSET + 1, Dst.CmdSets, MyCmdHandler.CMDS_OFFSET + 1, CmdSets.Length - (MyCmdHandler.CMDS_OFFSET + 1));
+      }
+      //
+      // Aggiorno lo stato di riempimento dell'array
+      com.progamma.ids.CmdHandler.FilledTo[0] = Math.Max(Dst.CmdSets.Length, com.progamma.ids.CmdHandler.FilledTo[0]);
+      //
+      // Se non l'ho ancora fatto shifto tutte le costanti contenute in MyGlb
+      if (MyCmdHandler.CMDS_OFFSET == 0)
+      {
+        // Il mio offset è il numero di commandset di tutti i miei padri...
         // Per calcolarlo guardo a dove è finito il mio primo commandset (l'elemento 0 è NULL)
         // Quello è l'offset dei miei commandset rispetto all'array che contiene tutti i commandset di tutti i componenti
-        if (MyCmdHandler.CMDS_OFFSET == 0)
-          MyCmdHandler.CMDS_OFFSET = CmdSets[1].Index - 1;
+        MyCmdHandler.CMDS_OFFSET = CmdSets[1].Index - 1;
         //
-        // Shifto tutte le costanti contenute in MyGlb
         String tn = (MainFrm.CompNameSpace != null ? MainFrm.CompNameSpace + "." : "");
         FieldInfo[] props = Assembly.GetExecutingAssembly().GetType(tn + "MyGlb").GetFields();
         for (int j = 0; j < props.Length; j++)
@@ -1149,17 +1138,6 @@ public sealed class MyCmdHandler : CmdHandler
           if (p.Name.StartsWith("CMDS_") || p.Name.Equals("MAX_COMMAND_SETS"))
             p.SetValue(null, ((int)p.GetValue(null)) + MyCmdHandler.CMDS_OFFSET);
         }
-        //
-        // Aggiorno l'indice di "riempimento" del DST. Se verrà caricato un nuovo componente 
-        // i suoi oggetti dovranno finire dopo il mio ultimo oggetto
-        Dst.SetCmdSetBaseIndex(Dst.CmdSets.Length);
-      }
-      else // Il componente è già stato inizializzato in precedenza... infilo i CmdSet dove li ho messi l'ultima volta
-      {
-        // L'array di mio padre potrebbe essere più grande del mio se i componenti sono "dinamici" e vengono caricati in un 
-        // ordine diverso da quello precedente (es: app->cmp1->cmp2 e poi, in una sessione differente app->cmp2->cmp1)
-        Array.Resize(ref Dst.CmdSets, Math.Max(CmdSets.Length, Dst.CmdSets.Length));
-        Array.Copy(CmdSets, MyCmdHandler.CMDS_OFFSET + 1, Dst.CmdSets, MyCmdHandler.CMDS_OFFSET + 1, CmdSets.Length - (MyCmdHandler.CMDS_OFFSET + 1));
       }
     }
     //
@@ -1170,38 +1148,15 @@ public sealed class MyCmdHandler : CmdHandler
       // Se è la prima volta, appendo
       if (MyCmdHandler.CMD_OFFSET == 0)
       {
-        int idx = Dst.CmdLin.Length;
+        // Se vengono caricati componenti dinamicamente devo tenere conto del fatto che c'è una "zona" dell'array
+        // che è riservata a componenti che ho già caricato ma che non sono presenti nell'array di questa sessione. 
+        // Es: sessione 1 carica Comp1, sessione 2 carica Comp2 in questo caso la sessione 2 non ha mai caricato 
+        // Comp1 ma se dovesse farlo deve esserci spazio per le sue tabelle IMDB nello stesso posto in cui erano prima!)
+        // Pertanto se lo stato di riempimento è inferiore o uguale alla lunghezza dell'array, appendo in fondo
+        //
+        int idx = Math.Max(Dst.CmdLin.Length, com.progamma.ids.CmdHandler.FilledTo[1]);
         if (idx == 0) idx = 1;    // L'array dei cmdset è 1-based
-        //
-        // Non ho mai caricato prima questo componente ma l'array che riceverà i miei oggetti
-        // ha un baseidx diverso da 0 (questo può succedere se vengono caricati componenti dinamici
-        // e vengono caricati in ordine diverso. Es: sessione 1 carica Comp1, sessione 2 carica Comp2
-        // in questo caso la sessione 2 non ha mai caricato Comp1 ma se dovesse farlo deve esserci spazio
-        // per i suoi oggetti nello stesso posto in cui erano prima!)
-        // Quindi se il componente base ha delle zone che non possono essere occupate (causa componenti
-        // già caricati in altre sessioni) sposto i miei oggetti in avanti di quell'offset così la
-        // Append funziona correttamente
-        int baseidx = Dst.GetCmdBaseIndex();
-        if (baseidx != 0)
-        {
-          baseidx--;    // L'array dei cmdset è 1-based
-          //
-          // Baseidx è l'indice del primo slot libero. Shifto i miei oggetti in avanti di baseidx
-          // (in altre parole inserisco baseidx nulli all'inizio dell'array)
-          ACommand[] oldCmdLin = CmdLin;
-          CmdLin = new ACommand[baseidx + oldCmdLin.Length];
-          for (int i = baseidx; i < CmdLin.Length; i++)
-            CmdLin[i] = oldCmdLin[i - baseidx];
-          //
-          // Questo è l'indice del mio primo oggetto
-          MyCmdHandler.CMD_OFFSET = baseidx;
-          //
-          idx = baseidx + 1;
-          Array.Resize(ref Dst.CmdLin, CmdLin.Length);
-        }
-        else
-          Array.Resize(ref Dst.CmdLin, idx + CmdLin.Length - 1);
-        //
+        Array.Resize(ref Dst.CmdLin, idx + CmdLin.Length - 1);
         for (int i = 1; i < CmdLin.Length; i++)
         {
           ACommand c = CmdLin[i];
@@ -1214,14 +1169,26 @@ public sealed class MyCmdHandler : CmdHandler
           c.Index = idx;
           Dst.CmdLin[idx++] = c;
         }
-        //
-        // Se non l'ho ancora fatto, il mio offset è il numero di comandi di tutti i miei padri...
+      }
+      else  // Il componente è già stato inizializzato in precedenza... infilo i comandi dove li ho messi l'ultima volta
+      {
+        // L'array di mio padre potrebbe essere più grande del mio se i componenti sono "dinamici" e vengono caricati in un 
+        // ordine diverso da quello precedente (es: app->cmp1->cmp2 e poi, in una sessione differente app->cmp2->cmp1)
+        Array.Resize(ref Dst.CmdLin, Math.Max(CmdLin.Length, Dst.CmdLin.Length));
+        Array.Copy(CmdLin, MyCmdHandler.CMD_OFFSET + 1, Dst.CmdLin, MyCmdHandler.CMD_OFFSET + 1, CmdLin.Length - (MyCmdHandler.CMD_OFFSET + 1));
+      }
+      //
+      // Aggiorno lo stato di riempimento dell'array
+      com.progamma.ids.CmdHandler.FilledTo[1] = Math.Max(Dst.CmdLin.Length, com.progamma.ids.CmdHandler.FilledTo[1]);
+      //
+      // Se non l'ho ancora fatto shifto tutte le costanti contenute in MyGlb
+      if (MyCmdHandler.CMD_OFFSET == 0)
+      {
+        // Il mio offset è il numero di comandi di tutti i miei padri...
         // Per calcolarlo guardo a dove è finito il mio primo comando (l'elemento 0 è NULL)
         // Quello è l'offset dei miei comandi rispetto all'array che contiene tutti i comandi di tutti i componenti
-        if (MyCmdHandler.CMD_OFFSET == 0)
-          MyCmdHandler.CMD_OFFSET = CmdLin[1].Index - 1;
+        MyCmdHandler.CMD_OFFSET = CmdLin[1].Index - 1;
         //
-        // Shifto tutte le costanti contenute in MyGlb
         String tn = (MainFrm.CompNameSpace != null ? MainFrm.CompNameSpace + "." : "");
         FieldInfo[] props = Assembly.GetExecutingAssembly().GetType(tn + "MyGlb").GetFields();
         for (int j = 0; j < props.Length; j++)
@@ -1230,17 +1197,6 @@ public sealed class MyCmdHandler : CmdHandler
           if (p.Name.StartsWith("CMD_") || p.Name.Equals("MAX_COMMANDS"))
             p.SetValue(null, ((int)p.GetValue(null)) + MyCmdHandler.CMD_OFFSET);
         }
-        //
-        // Aggiorno l'indice di "riempimento" del DST. Se verrà caricato un nuovo componente 
-        // i suoi oggetti dovranno finire dopo il mio ultimo oggetto
-        Dst.SetCmdBaseIndex(Dst.CmdLin.Length);
-      }
-      else  // Il componente è già stato inizializzato in precedenza... infilo i comandi dove li ho messi l'ultima volta
-      {
-        // L'array di mio padre potrebbe essere più grande del mio se i componenti sono "dinamici" e vengono caricati in un 
-        // ordine diverso da quello precedente (es: app->cmp1->cmp2 e poi, in una sessione differente app->cmp2->cmp1)
-        Array.Resize(ref Dst.CmdLin, Math.Max(CmdLin.Length, Dst.CmdLin.Length));
-        Array.Copy(CmdLin, MyCmdHandler.CMD_OFFSET + 1, Dst.CmdLin, MyCmdHandler.CMD_OFFSET + 1, CmdLin.Length - (MyCmdHandler.CMD_OFFSET + 1));
       }
     }
   }

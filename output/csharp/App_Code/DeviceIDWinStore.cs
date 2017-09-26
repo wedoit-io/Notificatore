@@ -1,6 +1,6 @@
 // **********************************************
 // Device ID Win Store
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -348,18 +348,30 @@ public partial class DeviceIDWinStore : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("B3AC7B1B-0973-4420-8CAB-97E518B8E174", "Device Token On Dynamic Properties", "", 1, "Device ID Win Store")) return;
       // 
       // Device Token On Dynamic Properties Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("B8CA2F21-74EA-45B9-A27C-7412927F0748", "IF Data Device Token [Device ID Win Store - Device Token].Text = Data Ultimo Accesso Device Token [Device ID Win Store - Device Token].Text", "");
+      MainFrm.DTTObj.AddToken ("B8CA2F21-74EA-45B9-A27C-7412927F0748", "C09D3B9A-7712-47F5-BAEB-64342C8C348A", 2686976, "Data Device Token [Device ID Win Store - Device Token].Text", (new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATA))));
+      MainFrm.DTTObj.AddToken ("B8CA2F21-74EA-45B9-A27C-7412927F0748", "AF6D152F-FEFB-4C61-BADD-1582CDE27A1E", 2686976, "Data Ultimo Accesso Device Token [Device ID Win Store - Device Token].Text", (new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATAULTIACCE))));
       if ((new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATA))).equals((new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATAULTIACCE))), true))
       {
+        MainFrm.DTTObj.EnterIf ("B8CA2F21-74EA-45B9-A27C-7412927F0748", "IF Data Device Token [Device ID Win Store - Device Token].Text = Data Ultimo Accesso Device Token [Device ID Win Store - Device Token].Text", "");
+        MainFrm.DTTObj.AddSubProc ("3BCCA958-12AB-4B65-B45A-72DD08924CDD", "Data Ultimo Accesso.Set Visual Style", "");
+        MainFrm.DTTObj.AddParameter ("3BCCA958-12AB-4B65-B45A-72DD08924CDD", "AEFE2949-21AA-4B67-9B98-A4FD3DF0CCA8", "Stile", new IDVariant(MyGlb.VIS_SFONDOGIALLO));
         PAN_DEVICETOKEN.set_VisualStyle(Glb.OBJ_FIELD,PFL_DEVICETOKEN_DATAULTIACCE,new IDVariant(MyGlb.VIS_SFONDOGIALLO).intValue()); 
       }
+      MainFrm.DTTObj.EndIfBlk ("B8CA2F21-74EA-45B9-A27C-7412927F0748");
+      MainFrm.DTTObj.ExitProc("B3AC7B1B-0973-4420-8CAB-97E518B8E174", "Device Token On Dynamic Properties", "", 1, "Device ID Win Store");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("B3AC7B1B-0973-4420-8CAB-97E518B8E174", "Device Token On Dynamic Properties", "", _e);
       MainFrm.ErrObj.ProcError ("DeviceIDWinStore", "DeviceTokenOnDynamicProperties", _e);
+      MainFrm.DTTObj.ExitProc("B3AC7B1B-0973-4420-8CAB-97E518B8E174", "Device Token On Dynamic Properties", "", 1, "Device ID Win Store");
     }
   }
 
@@ -378,6 +390,8 @@ public partial class DeviceIDWinStore : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("59896D67-519A-4D44-A189-C4108CD47454", "Invio Manuale", "", 3, "Device ID Win Store")) return 0;
       // 
       // Invio Manuale Body
       // Corpo Procedura
@@ -396,28 +410,59 @@ public partial class DeviceIDWinStore : MyWebForm
       SQL.Append("where B.ID = A.ID_APP ");
       SQL.Append("and   (A.TYPE_OS = '5') ");
       SQL.Append("and   (A.ID = " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN4, IMDBDef1.PQSL_DEVICETOKEN4_ID_APPLICAZIONE, 0), IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
+      MainFrm.DTTObj.AddQuery ("65499689-B645-4877-AE67-CC2448907610", "Notificatore DB (Notificatore DB): Select into variables", "", 1280, SQL.ToString());
       QV = MainFrm.NotificatoreDBObject.DBO().OpenRS(SQL);
       if (!QV.EOF()) QV.MoveNext();
+      MainFrm.DTTObj.EndQuery ("65499689-B645-4877-AE67-CC2448907610");
+      MainFrm.DTTObj.AddDBDataSource (QV, SQL);
       if (!QV.EOF())
       {
         v_VWNSSEAPPUSE = QV.Get("WNSSECAPPUSE", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("65499689-B645-4877-AE67-CC2448907610", "03DCC66B-E29C-406B-BF58-A1E752147FBB", 1376256, "v Wns Secret Apps Push Settings", v_VWNSSEAPPUSE);
         v_VWNPASEIDAPS = QV.Get("WNPASEIDAPPS", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("65499689-B645-4877-AE67-CC2448907610", "C2719F55-C447-4A47-86B9-C146DCDCEA5D", 1376256, "v Wns Package Security Identifier Apps Push Settings", v_VWNPASEIDAPS);
         v_VWNXMTEAPPUS = QV.Get("WNXMTEAPPUSE", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("65499689-B645-4877-AE67-CC2448907610", "CA230DE3-52A5-4728-9DFB-55536B887A94", 1376256, "v Wns Xml Template Apps Push Settings", v_VWNXMTEAPPUS);
       }
       QV.Close();
+      MainFrm.DTTObj.AddAssign ("507307C5-D65E-4963-8A54-68BDE95B45D3", "Regid Spedizione Nome Oggetto := Reg Url Device Token [Device ID Win Store - Device Token]", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_REG_ID, 0));
+      MainFrm.DTTObj.AddToken ("507307C5-D65E-4963-8A54-68BDE95B45D3", "A6ECA0E8-BE4E-4517-B6B9-57E929F2D610", 917504, "Reg Url", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN4, IMDBDef1.PQSL_DEVICETOKEN4_REG_ID, 0));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_REG_ID, 0, IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN4, IMDBDef1.PQSL_DEVICETOKEN4_REG_ID, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("507307C5-D65E-4963-8A54-68BDE95B45D3", "DABA2862-C97C-411C-9A73-136D6DAC6E2E", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_REG_ID, 0));
+      MainFrm.DTTObj.AddAssign ("77847D22-1FBA-4491-956F-C0FD61C3A8B7", "ID Apps Push Settings Spedizione Nome Oggetto := Applicazione Device Token [Device ID Win Store - Device Token]", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ID_APPLICAZIONE, 0));
+      MainFrm.DTTObj.AddToken ("77847D22-1FBA-4491-956F-C0FD61C3A8B7", "C29C07DE-2D16-4E5F-9130-68427C8C62ED", 917504, "Applicazione", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN4, IMDBDef1.PQSL_DEVICETOKEN4_ID_APPLICAZIONE, 0));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ID_APPLICAZIONE, 0, IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN4, IMDBDef1.PQSL_DEVICETOKEN4_ID_APPLICAZIONE, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("77847D22-1FBA-4491-956F-C0FD61C3A8B7", "81C2F942-E36B-4881-AE4F-9B5F35E1520C", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ID_APPLICAZIONE, 0));
+      MainFrm.DTTObj.AddAssign ("A9EFE7E6-A983-4F6F-B6BE-D86A6C1972A0", "Device Token Spedizione Nome Oggetto := Dev Token Device Token [Device ID Win Store - Device Token]", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_DEV_TOKEN, 0));
+      MainFrm.DTTObj.AddToken ("A9EFE7E6-A983-4F6F-B6BE-D86A6C1972A0", "732EEAA5-8D19-4489-B84A-870E2970F80A", 917504, "Dev Token Device Token", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN4, IMDBDef1.PQSL_DEVICETOKEN4_DEV_TOKEN, 0));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_DEV_TOKEN, 0, IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN4, IMDBDef1.PQSL_DEVICETOKEN4_DEV_TOKEN, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("A9EFE7E6-A983-4F6F-B6BE-D86A6C1972A0", "22F1EE91-3F9C-4698-8067-59393FBF450A", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_DEV_TOKEN, 0));
+      MainFrm.DTTObj.AddAssign ("50255605-434D-44A0-BAD8-6BA0D1FD26D7", "Wns Secret Apps Push Settings Nome Oggetto := v Wns Secret Apps Push Settings", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_SECRET, 0));
+      MainFrm.DTTObj.AddToken ("50255605-434D-44A0-BAD8-6BA0D1FD26D7", "03DCC66B-E29C-406B-BF58-A1E752147FBB", 1376256, "v Wns Secret Apps Push Settings", new IDVariant(v_VWNSSEAPPUSE));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_SECRET, 0, new IDVariant(v_VWNSSEAPPUSE));
+      MainFrm.DTTObj.AddAssignNewValue ("50255605-434D-44A0-BAD8-6BA0D1FD26D7", "9798DD27-FAD2-43D0-A60A-42E766C89A92", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_SECRET, 0));
+      MainFrm.DTTObj.AddAssign ("CDF425B1-6BA9-4ADE-A1C8-AA8CEA4B95C1", "Wns Package Security Identifier Apps Push Settings Nome Oggetto := v Wns Package Security Identifier Apps Push Settings", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_SID, 0));
+      MainFrm.DTTObj.AddToken ("CDF425B1-6BA9-4ADE-A1C8-AA8CEA4B95C1", "C2719F55-C447-4A47-86B9-C146DCDCEA5D", 1376256, "v Wns Package Security Identifier Apps Push Settings", new IDVariant(v_VWNPASEIDAPS));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_SID, 0, new IDVariant(v_VWNPASEIDAPS));
+      MainFrm.DTTObj.AddAssignNewValue ("CDF425B1-6BA9-4ADE-A1C8-AA8CEA4B95C1", "C3F92F9A-3AC5-4126-B82E-D00E89EDC5C0", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_SID, 0));
+      MainFrm.DTTObj.AddAssign ("0350128E-843F-415F-B06C-B75220B8D937", "Wns Xml Template Apps Push Settings Nome Oggetto := v Wns Xml Template Apps Push Settings", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_XML, 0));
+      MainFrm.DTTObj.AddToken ("0350128E-843F-415F-B06C-B75220B8D937", "CA230DE3-52A5-4728-9DFB-55536B887A94", 1376256, "v Wns Xml Template Apps Push Settings", new IDVariant(v_VWNXMTEAPPUS));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_XML, 0, new IDVariant(v_VWNXMTEAPPUS));
+      MainFrm.DTTObj.AddAssignNewValue ("0350128E-843F-415F-B06C-B75220B8D937", "0E8B77BA-4B08-4E18-A7A4-F2FEBD4BBC57", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_WNS_XML, 0));
+      MainFrm.DTTObj.AddAssign ("03774A7B-2B98-40C6-A5C7-2E7A11F1C305", "Messaggio Spedizione Nome Oggetto := v Wns Xml Template Apps Push Settings", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_DES_MESSAGGIO, 0));
+      MainFrm.DTTObj.AddToken ("03774A7B-2B98-40C6-A5C7-2E7A11F1C305", "CA230DE3-52A5-4728-9DFB-55536B887A94", 1376256, "v Wns Xml Template Apps Push Settings", new IDVariant(v_VWNXMTEAPPUS));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_DES_MESSAGGIO, 0, new IDVariant(v_VWNXMTEAPPUS));
+      MainFrm.DTTObj.AddAssignNewValue ("03774A7B-2B98-40C6-A5C7-2E7A11F1C305", "35B1C52C-0A34-4197-BCDF-C0C6184AE530", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_DES_MESSAGGIO, 0));
+      MainFrm.DTTObj.AddSubProc ("1419CE01-E3B9-4C00-81BB-54D8CDCA9B0C", "Invio WNS Manuale.Show", "");
       MainFrm.Show(MyGlb.FRM_INVIOWNSMANU, (new IDVariant(0)).intValue(), this); 
+      MainFrm.DTTObj.ExitProc("59896D67-519A-4D44-A189-C4108CD47454", "Invio Manuale", "", 3, "Device ID Win Store");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("59896D67-519A-4D44-A189-C4108CD47454", "Invio Manuale", "", _e);
       MainFrm.ErrObj.ProcError ("DeviceIDWinStore", "InvioManuale", _e);
+      MainFrm.DTTObj.ExitProc("59896D67-519A-4D44-A189-C4108CD47454", "Invio Manuale", "", 3, "Device ID Win Store");
       return -1;
     }
   }
@@ -785,7 +830,7 @@ public partial class DeviceIDWinStore : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~ID_APPLICAZIONE~~) ");
     SQL.Append("and   (A.TYPE_OS = '5') ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_DEVICETOKEN_APPLICAZIONE, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_DEVICETOKEN_APPLICAZIONE, "F3C69B99-3057-4745-ADD6-57573D78E568");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as ID, ");
@@ -804,7 +849,7 @@ public partial class DeviceIDWinStore : MyWebForm
     SQL.Append("from ");
     SQL.Append("  LINGUE A ");
     SQL.Append("where (A.PRG_LINGUA = ~~PRG_LINGUA~~) ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_IDLINGUA, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_IDLINGUA, "798F17AA-92B7-4433-BF4B-C00239910BCF");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.PRG_LINGUA as IDLINGUA, ");
@@ -837,7 +882,7 @@ public partial class DeviceIDWinStore : MyWebForm
     SQL.Append("where (B.DEV_TOKEN = A.DEV_TOKEN) ");
     SQL.Append(") as DISNOTDEVTOK, ");
     SQL.Append("  A.PRG_LINGUA as PRG_LINGUA ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN4, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN4, 0, SQL, -1, "1CE103DA-C9FB-42DA-ADE3-49431EB9F23B");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  DEV_TOKENS A ");
@@ -1082,6 +1127,10 @@ public partial class DeviceIDWinStore : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

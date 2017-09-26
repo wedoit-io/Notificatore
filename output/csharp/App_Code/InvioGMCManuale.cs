@@ -1,6 +1,6 @@
 // **********************************************
 // Invio GMC Manuale
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -368,18 +368,33 @@ public partial class InvioGMCManuale : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("80BB865C-7F25-457C-826A-3ECA8F399E77", "Etichetta Invia", "", 3, "Invio GMC Manuale")) return 0;
       // 
       // Etichetta Invia Body
       // Corpo Procedura
       // 
       IDVariant v_ESITO = new IDVariant(0,IDVariant.STRING);
+      MainFrm.DTTObj.AddAssign ("D458F2BC-9F99-4CC5-9948-F1B1BE5C5FF4", "esito := Call GMC Helper Send Notification (Google Api Browser Nome Oggetto [Invio GMC Manuale - Parametri], Regid Spedizione Nome Oggetto [Invio GMC Manuale - Parametri], Messaggio Spedizione Nome Oggetto [Invio GMC Manuale - Parametri], C", "", v_ESITO);
+      MainFrm.DTTObj.AddToken ("D458F2BC-9F99-4CC5-9948-F1B1BE5C5FF4", "95288B14-A2DD-49B2-BB64-130FF3A28B11", 917504, "Google Api Browser", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_GOOGLE_API_ID, 0));
+      MainFrm.DTTObj.AddToken ("D458F2BC-9F99-4CC5-9948-F1B1BE5C5FF4", "A18A566E-32C0-45C3-A2B7-1E8D3A8C1434", 917504, "Regid Spedizione Nome Oggetto", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_REG_ID, 0));
+      MainFrm.DTTObj.AddToken ("D458F2BC-9F99-4CC5-9948-F1B1BE5C5FF4", "2AEE34DA-7870-4F20-80BA-F3090FEC2D6A", 917504, "Messaggio Spedizione Nome Oggetto", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_DES_MESSAGGIO, 0));
+      MainFrm.DTTObj.AddToken ("D458F2BC-9F99-4CC5-9948-F1B1BE5C5FF4", "CD04F994-9227-4643-82B0-F5F437AC66C8", 917504, "Custom Field 1", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_CUSTOM_FIELD1, 0));
+      MainFrm.DTTObj.AddToken ("D458F2BC-9F99-4CC5-9948-F1B1BE5C5FF4", "C4D55FA7-F911-4167-A68D-A7EF9DEDF4EF", 917504, "Custom Field 2", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_CUSTOM_FIELD2, 0));
       v_ESITO = MainFrm.CallGMCHelperSendNotification(IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_GOOGLE_API_ID, 0), IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_REG_ID, 0), IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_DES_MESSAGGIO, 0), IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_CUSTOM_FIELD1, 0), IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_CUSTOM_FIELD2, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("D458F2BC-9F99-4CC5-9948-F1B1BE5C5FF4", "43C49FC9-58D0-429F-B296-179D85F7DF07", v_ESITO);
+      MainFrm.DTTObj.AddAssign ("CF2AB1CE-EE7C-44FF-A925-B65EEE16928F", "Risultato Nome Oggetto [Invio GMC Manuale - Parametri] := esito", "", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_RISUNOMEOGGE, 0));
+      MainFrm.DTTObj.AddToken ("CF2AB1CE-EE7C-44FF-A925-B65EEE16928F", "43C49FC9-58D0-429F-B296-179D85F7DF07", 1376256, "esito", new IDVariant(v_ESITO));
       IMDB.set_Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_RISUNOMEOGGE, 0, new IDVariant(v_ESITO));
+      MainFrm.DTTObj.AddAssignNewValue ("CF2AB1CE-EE7C-44FF-A925-B65EEE16928F", "54946AB8-42C5-4014-A54A-4C8712E2EE7B", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_RISUNOMEOGGE, 0));
+      MainFrm.DTTObj.ExitProc("80BB865C-7F25-457C-826A-3ECA8F399E77", "Etichetta Invia", "", 3, "Invio GMC Manuale");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("80BB865C-7F25-457C-826A-3ECA8F399E77", "Etichetta Invia", "", _e);
       MainFrm.ErrObj.ProcError ("InvioGMCManuale", "EtichettaInvia", _e);
+      MainFrm.DTTObj.ExitProc("80BB865C-7F25-457C-826A-3ECA8F399E77", "Etichetta Invia", "", 3, "Invio GMC Manuale");
       return -1;
     }
   }
@@ -399,12 +414,17 @@ public partial class InvioGMCManuale : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("66C59401-C9DD-4B0C-9784-D59681EBAAE1", "Etichetta Crea spedizione", "", 3, "Invio GMC Manuale")) return 0;
       // 
       // Etichetta Crea spedizione Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("E7A1EDE7-0720-48B0-90DE-FCDB8DB3F70E", "IF not (Is Null (ID Apps Push Settings Spedizione Nome Oggetto))", "");
+      MainFrm.DTTObj.AddToken ("E7A1EDE7-0720-48B0-90DE-FCDB8DB3F70E", "51431304-4E0A-4F3D-9D44-A98D180382A7", 327680, "ID Apps Push Settings Spedizione", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_ID_APPLICAZIONE, 0));
       if (!(IDL.IsNull(IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_ID_APPLICAZIONE, 0))))
       {
+        MainFrm.DTTObj.EnterIf ("E7A1EDE7-0720-48B0-90DE-FCDB8DB3F70E", "IF not (Is Null (ID Apps Push Settings Spedizione Nome Oggetto))", "");
         SQL = new StringBuilder();
         SQL.Append("insert into SPEDIZIONI ");
         SQL.Append("( ");
@@ -430,13 +450,19 @@ public partial class InvioGMCManuale : MyWebForm
         SQL.Append("  " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_NUOVATABELL2, IMDBDef1.PQSL_NUOVATABELL2_REG_ID, 0), IDL.FMT_CHAR, MainFrm.NotificatoreDBObject.DBO()) + ", ");
         SQL.Append("  '2' ");
         SQL.Append(") ");
+        MainFrm.DTTObj.AddQuery ("E2B599DE-721D-43C3-851E-3FDCC5956E29", "Spedizioni (Notificatore DB): Insert into", "", 768, SQL.ToString());
         MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+        MainFrm.DTTObj.EndQuery ("E2B599DE-721D-43C3-851E-3FDCC5956E29");
       }
+      MainFrm.DTTObj.EndIfBlk ("E7A1EDE7-0720-48B0-90DE-FCDB8DB3F70E");
+      MainFrm.DTTObj.ExitProc("66C59401-C9DD-4B0C-9784-D59681EBAAE1", "Etichetta Crea spedizione", "", 3, "Invio GMC Manuale");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("66C59401-C9DD-4B0C-9784-D59681EBAAE1", "Etichetta Crea spedizione", "", _e);
       MainFrm.ErrObj.ProcError ("InvioGMCManuale", "EtichettaCreaspedizione", _e);
+      MainFrm.DTTObj.ExitProc("66C59401-C9DD-4B0C-9784-D59681EBAAE1", "Etichetta Crea spedizione", "", 3, "Invio GMC Manuale");
       return -1;
     }
   }
@@ -954,6 +980,10 @@ public partial class InvioGMCManuale : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

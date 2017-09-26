@@ -1,6 +1,6 @@
 // **********************************************
 // Spedizioni Android
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -369,41 +369,74 @@ public partial class SpedizioniAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("6F6199A8-F646-402F-8206-E051170DB1B1", "Invia subito", "", 3, "Spedizioni Android")) return 0;
       // 
       // Invia subito Body
       // Corpo Procedura
       // 
       IDVariant v_IRIGAATTIVA = null;
+      MainFrm.DTTObj.AddAssign ("11F2ACC7-8DF3-448A-9C0D-CE2C849DACDC", "i Riga Attiva := C1", "", v_IRIGAATTIVA);
       v_IRIGAATTIVA = (new IDVariant(1));
+      MainFrm.DTTObj.AddAssignNewValue ("11F2ACC7-8DF3-448A-9C0D-CE2C849DACDC", "F1C7D559-7B3D-4885-BFA6-EBC3DD34F1D6", v_IRIGAATTIVA);
+      MainFrm.DTTObj.AddIf ("ECE30FB7-55FD-4136-8CFB-A52C115B906B", "IF Spedizioni [Spedizioni Android].Show Multiple Selection", "");
+      MainFrm.DTTObj.AddToken ("ECE30FB7-55FD-4136-8CFB-A52C115B906B", "05052C51-D10F-462A-95D1-0DC842B80607", 2621440, "Spedizioni [Spedizioni Android].Show Multiple Selection", PAN_SPEDIZIONI.ShowMultipleSel());
       if (PAN_SPEDIZIONI.ShowMultipleSel())
       {
+        MainFrm.DTTObj.EnterIf ("ECE30FB7-55FD-4136-8CFB-A52C115B906B", "IF Spedizioni [Spedizioni Android].Show Multiple Selection", "");
+        int DTT_C3 = 0;
+        MainFrm.DTTObj.AddForEach ("68736E62-98D2-42CD-80B2-66A4127D4FAC", "FOR EACH Spedizioni ROW", "");
+        MainFrm.DTTObj.AddDBDataSource (PAN_SPEDIZIONI.MasterRS(), new StringBuilder(""));
         C3 = PAN_SPEDIZIONI.MasterRS();
         if (C3.size()>0) CurPos = C3.getRow(); else CurPos = 0;
         if (!C3.Bof()) PAN_SPEDIZIONI.GotoFirst();
         while (!PAN_SPEDIZIONI.RSEOF())
         {
+          DTT_C3 = DTT_C3 + 1;
+          if (!MainFrm.DTTObj.CheckLoop("68736E62-98D2-42CD-80B2-66A4127D4FAC", DTT_C3)) break;
+          MainFrm.DTTObj.AddIf ("2B9EC0E7-3D3A-4B56-BCE1-3B1B0B21DBC6", "IF Spedizioni [Spedizioni Android].Is Row Selected (i Riga Attiva)", "");
+          MainFrm.DTTObj.AddToken ("2B9EC0E7-3D3A-4B56-BCE1-3B1B0B21DBC6", "05052C51-D10F-462A-95D1-0DC842B80607", 2621440, "Spedizioni [Spedizioni Android].Is Row Selected (i Riga Attiva)", PAN_SPEDIZIONI.IsRowSelected(v_IRIGAATTIVA.intValue()));
+          MainFrm.DTTObj.AddToken ("2B9EC0E7-3D3A-4B56-BCE1-3B1B0B21DBC6", "F1C7D559-7B3D-4885-BFA6-EBC3DD34F1D6", 1376256, "i Riga Attiva", v_IRIGAATTIVA);
           if (PAN_SPEDIZIONI.IsRowSelected(v_IRIGAATTIVA.intValue()))
           {
+            MainFrm.DTTObj.EnterIf ("2B9EC0E7-3D3A-4B56-BCE1-3B1B0B21DBC6", "IF Spedizioni [Spedizioni Android].Is Row Selected (i Riga Attiva)", "");
+            MainFrm.DTTObj.AddSubProc ("834670BE-61C0-4BC8-BA3E-3A9CF6257A84", "Notificatore.Send GCMNotification", "");
             MainFrm.SendGCMNotification(C3.Get("ID"));
           }
+          MainFrm.DTTObj.EndIfBlk ("2B9EC0E7-3D3A-4B56-BCE1-3B1B0B21DBC6");
+          MainFrm.DTTObj.AddAssign ("7E6CB42B-7E52-4CC3-BC97-4F48FEDFC6F1", "i Riga Attiva := i Riga Attiva + 1", "", v_IRIGAATTIVA);
+          MainFrm.DTTObj.AddToken ("7E6CB42B-7E52-4CC3-BC97-4F48FEDFC6F1", "F1C7D559-7B3D-4885-BFA6-EBC3DD34F1D6", 1376256, "i Riga Attiva", v_IRIGAATTIVA);
           v_IRIGAATTIVA = IDL.Add(v_IRIGAATTIVA, (new IDVariant(1)));
+          MainFrm.DTTObj.AddAssignNewValue ("7E6CB42B-7E52-4CC3-BC97-4F48FEDFC6F1", "F1C7D559-7B3D-4885-BFA6-EBC3DD34F1D6", v_IRIGAATTIVA);
           PAN_SPEDIZIONI.GotoNext();
         }
         if (CurPos>0) C3.absolute(CurPos);
+        MainFrm.DTTObj.EndForEach ("68736E62-98D2-42CD-80B2-66A4127D4FAC", "FOR EACH Spedizioni ROW", "", DTT_C3);
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("D77B2C8D-5CB6-4912-A1C7-843B2E5F0876", "ELSE", "", "ECE30FB7-55FD-4136-8CFB-A52C115B906B");
+        MainFrm.DTTObj.AddIf ("CFEB80A2-712E-449A-AA50-945766A085D5", "IF not (Is Null (ID Spedizione [Spedizioni Android - Spedizioni]))", "");
+        MainFrm.DTTObj.AddToken ("CFEB80A2-712E-449A-AA50-945766A085D5", "E9169CE3-6815-4640-B96C-F5FC44EA48F4", 917504, "ID Spedizione", IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI3, IMDBDef1.PQSL_SPEDIZIONI3_ID, 0));
         if (!(IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI3, IMDBDef1.PQSL_SPEDIZIONI3_ID, 0))))
         {
+          MainFrm.DTTObj.EnterIf ("CFEB80A2-712E-449A-AA50-945766A085D5", "IF not (Is Null (ID Spedizione [Spedizioni Android - Spedizioni]))", "");
+          MainFrm.DTTObj.AddSubProc ("D1104AD4-5C1E-4055-8AA1-ED3FB9D1EB9F", "Notificatore.Send GCMNotification", "");
           MainFrm.SendGCMNotification(IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI3, IMDBDef1.PQSL_SPEDIZIONI3_ID, 0));
         }
+        MainFrm.DTTObj.EndIfBlk ("CFEB80A2-712E-449A-AA50-945766A085D5");
       }
+      MainFrm.DTTObj.EndIfBlk ("ECE30FB7-55FD-4136-8CFB-A52C115B906B");
+      MainFrm.DTTObj.AddSubProc ("2E120CB9-A110-4B56-8FD3-7C913D1F19FE", "Spedizioni.Refresh Query", "");
       PAN_SPEDIZIONI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("6F6199A8-F646-402F-8206-E051170DB1B1", "Invia subito", "", 3, "Spedizioni Android");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("6F6199A8-F646-402F-8206-E051170DB1B1", "Invia subito", "", _e);
       MainFrm.ErrObj.ProcError ("SpedizioniAndroid", "Inviasubito", _e);
+      MainFrm.DTTObj.ExitProc("6F6199A8-F646-402F-8206-E051170DB1B1", "Invia subito", "", 3, "Spedizioni Android");
       return -1;
     }
   }
@@ -423,16 +456,22 @@ public partial class SpedizioniAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("B459A0E3-A83A-4735-8761-9E79DE473874", "Test spedizione", "", 3, "Spedizioni Android")) return 0;
       // 
       // Test spedizione Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("28D53D62-FDE8-464E-8EDA-8D0596A9E728", "Test Spedizione.Show", "");
       MainFrm.Show(MyGlb.FRM_TESTSPEDIZIO, (new IDVariant(0)).intValue(), this); 
+      MainFrm.DTTObj.ExitProc("B459A0E3-A83A-4735-8761-9E79DE473874", "Test spedizione", "", 3, "Spedizioni Android");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("B459A0E3-A83A-4735-8761-9E79DE473874", "Test spedizione", "", _e);
       MainFrm.ErrObj.ProcError ("SpedizioniAndroid", "Testspedizione", _e);
+      MainFrm.DTTObj.ExitProc("B459A0E3-A83A-4735-8761-9E79DE473874", "Test spedizione", "", 3, "Spedizioni Android");
       return -1;
     }
   }
@@ -875,7 +914,7 @@ public partial class SpedizioniAndroid : MyWebForm
     SQL.Append("and   (A.TYPE_OS = '2') ");
     SQL.Append("and   (A.DEV_TOKEN = ~~DEV_TOKEN~~) ");
     SQL.Append("and   (A.ID_APPLICAZIONE = ~~ID_APPLICAZIONE~~) ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, -1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, -1, "49487123-A7D7-4DA7-9F36-644012BBA0E9");
     PAN_SPEDIZIONI.SetQueryDB(PPQRY_DEVICETOKEN, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_SPEDIZIONI.SetMasterTable(PPQRY_DEVICETOKEN, "DEV_TOKENS");
     SQL = new StringBuilder();
@@ -888,7 +927,7 @@ public partial class SpedizioniAndroid : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~ID_APPLICAZIONE~~) ");
     SQL.Append("and   (A.TYPE_OS = '2') ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "900B58C1-13EA-44BC-BAC6-B9E5795BFE2E");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPPLICAZIO, ");
@@ -928,7 +967,7 @@ public partial class SpedizioniAndroid : MyWebForm
     SQL.Append("  A.GUID_GRUPPO as GUID_GRUPPO, ");
     SQL.Append("  A.CUSTOM_FIELD1 as CUSTOM_FIELD1, ");
     SQL.Append("  A.CUSTOM_FIELD2 as CUSTOM_FIELD2 ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI3, 0, SQL, -1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI3, 0, SQL, -1, "6CAC703C-E7AF-4051-8BDE-8572E75872E2");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  SPEDIZIONI A ");
@@ -1169,6 +1208,10 @@ public partial class SpedizioniAndroid : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

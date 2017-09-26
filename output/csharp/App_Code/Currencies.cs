@@ -1,6 +1,6 @@
 // **********************************************
 // Currencies
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -439,7 +439,7 @@ public partial class Currencies : MyWebForm
     SQL.Append("select ");
     SQL.Append("  A.CODE as CODE, ");
     SQL.Append("  A.DESCRIPTION as DESCRIPTION ");
-    PAN_CURRENCIES.SetQuery(PPQRY_CURRENCIES, 0, SQL, -1, "");
+    PAN_CURRENCIES.SetQuery(PPQRY_CURRENCIES, 0, SQL, -1, "280CDA1C-1F21-47B1-B97F-E80E3773259E");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPLE_CURRENCY_CODES A ");
@@ -677,6 +677,10 @@ public partial class Currencies : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

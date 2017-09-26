@@ -1,6 +1,6 @@
 // **********************************************
 // Wikipedia
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;

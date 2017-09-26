@@ -1,7 +1,7 @@
 // **********************************************
 // Global parameters
 // Instant WEB Application: www.progamma.com
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using com.progamma;
@@ -77,6 +77,8 @@ public class MyParams : Params
   public String UseIDEditor = "NO";
   public String EnterChangeFocus = "NO";
   public String PanelsLikeMode = "STARTSWITH";
+  public String PanelRefreshOnSort = "NO";
+  public int ICDebug = 1;
   public bool UseRD4 = false;
   public bool UseDynVS = true;
 
@@ -190,6 +192,8 @@ public class MyParams : Params
       base.PanelsLikeMode = MyGlb.PAN_LIKESTARTS;
     else if (this.PanelsLikeMode == "CONTAINS")
       base.PanelsLikeMode = MyGlb.PAN_LIKECONTAINS;
+    //
+    base.PanelRefreshOnSort = this.PanelRefreshOnSort.Equals("YES");
     //
     // Se non sono in un componente (ma sono parte della App_Code.dll)
     if (this.GetType().Assembly.GetName().Name.IndexOf("App_Code") != -1)

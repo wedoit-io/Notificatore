@@ -445,7 +445,13 @@ PopupFrame.prototype.Close = function()
 	if (RD3_Glb.IsMobile())
 	{
 	 	var ea = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+this.Identifier+"', 'Close2', ev)");
-	  RD3_Glb.AddEndTransaction(this.PopupBox, ea, false);  
+    //
+    // Su IE Mobile non sempre scatta l'endTransaction lasciando il poup frame in uno stato sbagliato, quindi uso un semplice timer per impostare la chiusura
+    if (RD3_Glb.IsIE())
+      window.setTimeout(ea, 500);
+    else
+	    RD3_Glb.AddEndTransaction(this.PopupBox, ea, false); 
+    //
 		this.ModalBox.style.opacity = 0;
 	  //
 		// Qui mi preparo per la chiusura tramite animazione

@@ -238,18 +238,36 @@ PopupControl.prototype.RealizeTimeControl = function()
 // ********************************************************************************
 PopupControl.prototype.FillPicker = function(from, to, obj, ids, lista)
 {
-  var s = "<br> <br> ";
+  // Creo due prime righe vuote
+  var sp = document.createElement("div");
+  sp.className = "ctrl-picker-cell";
+  obj.appendChild(sp);
+  sp = document.createElement("div");
+  sp.className = "ctrl-picker-cell";
+  obj.appendChild(sp);
+  //
   for (var i = from; i<=to; i++)
   {
-    if (i!=from)
-      s+="<br>";
-    if (lista==undefined)
+    var s = "";
+  	if (lista==undefined)
       s+=i;
     else
       s+=lista[i-1];
+    //
+    sp = document.createElement("div");
+    sp.className = "ctrl-picker-cell";
+    sp.textContent = s;
+    obj.appendChild(sp);
   }
-  s += "<br> <br> <br>";
-  obj.innerHTML = s;
+  //
+  // Creo due righe vuote in fondo
+  sp = document.createElement("div");
+  sp.className = "ctrl-picker-cell";
+  obj.appendChild(sp);
+  sp = document.createElement("div");
+  sp.className = "ctrl-picker-cell";
+  obj.appendChild(sp);
+  //
   ids.DisplayScrollbar = false;
   ids.SetSnap(0,44);
   ids.ChangeSize();

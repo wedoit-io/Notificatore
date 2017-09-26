@@ -393,76 +393,76 @@ function RD3_DeviceOrientation(ev)
 // ********************************************************
 function RD3_DeviceMotion(ev)
 {
-	if (ev)
-	{
-		var t = RD3_DesktopManager.WebEntryPoint.MotionThreshold;
-		var ot = Math.abs(ev.acceleration.x)>=t.accel;
-		ot = ot || Math.abs(ev.acceleration.y)>=t.accel;
-		ot = ot || Math.abs(ev.acceleration.z)>=t.accel;
-		ot = ot || Math.abs(ev.rotationRate.alpha)>=t.rot;
-		ot = ot || Math.abs(ev.rotationRate.beta)>=t.rot;
-		ot = ot || Math.abs(ev.rotationRate.gamma)>=t.rot;
-		//
-		// Se sono sopra soglia, genero l'evento solo se non c'e' n'e' un altro in coda uguale al mio ancora non lanciato
-		if (ot && !RD3_DesktopManager.MessagePump.GetEvent("wep","chgmot"))
-		{
-			var s = ev.acceleration.x+"|";
-		  s += ev.acceleration.y+"|"
-		  s += ev.acceleration.z +"|";
-		  s += ev.accelerationIncludingGravity.x +"|";
-		  s += ev.accelerationIncludingGravity.y +"|";
-		  s += ev.accelerationIncludingGravity.z +"|";		  
-		  s += ev.rotationRate.alpha +"|";
-		  s += ev.rotationRate.beta+"|";
-		  s += ev.rotationRate.gamma+"|";
-		  var or = RD3_DesktopManager.WebEntryPoint.LastOrientationEvent;
-		  if (or)
-		  {
-			  s += or.alpha+"|";  
-			  s += or.beta+"|";  
-			  s += or.gamma+"|";
-			  if (or.webkitCompassHeading)
-			  {
-				  s += or.webkitCompassHeading+"|";  
-				  s += or.webkitCompassAccuracy+"|";  			  	
-			  }
-			  else
-			  {
-			  	s+= "||";
-			  }
-			}
-			else
-			{
-				s += "|||||";
-			}
-		 	s += (new Date()).getTime()+"|";
-		  var ev = new IDEvent("chgmot","wep",undefined,RD3_Glb.EVENT_ACTIVE,"mot",s,null,null,null,100);	
-		}
-	}
-	else
-	{
-		// simulator
-		var s = Math.random()*10+"|";
-	  s += Math.random()*10+"|"
-	  s += Math.random()*10+"|";
-	  s += Math.random()*20+"|";
-	  s += Math.random()*20+"|"
-	  s += Math.random()*20+"|";
-	  //
-	  s += Math.random()*30+"|";
-	  s += Math.random()*30+"|";
-	  s += Math.random()*30+"|";
-	  //
-	  s += Math.random()*90+"|";
-	  s += Math.random()*90+"|";
-	  s += Math.random()*90+"|";
-	  //
-	  s += Math.random()*360+"|";
-	  s += Math.random()*30+"|";
-	  //
-	 	s += (new Date()).getTime()+"|";
-	  var ev = new IDEvent("chgmot","wep",undefined,RD3_Glb.EVENT_ACTIVE,"mot",s,null,null,null,100);	
-	}
+  if (ev)
+  {
+    var t = RD3_DesktopManager.WebEntryPoint.MotionThreshold;
+    var ot = Math.abs(ev.acceleration.x)>=t.accel;
+    ot = ot || Math.abs(ev.acceleration.y)>=t.accel;
+    ot = ot || Math.abs(ev.acceleration.z)>=t.accel;
+    ot = ot || Math.abs(ev.rotationRate.alpha)>=t.rot;
+    ot = ot || Math.abs(ev.rotationRate.beta)>=t.rot;
+    ot = ot || Math.abs(ev.rotationRate.gamma)>=t.rot;
+    //
+    // Se sono sopra soglia, genero l'evento solo se non c'e' n'e' un altro in coda uguale al mio ancora non lanciato
+    if (ot && !RD3_DesktopManager.MessagePump.GetEvent("wep","chgmot"))
+    {
+      var s = ev.acceleration.x+"|";
+      s += ev.acceleration.y+"|"
+      s += ev.acceleration.z +"|";
+      s += ev.accelerationIncludingGravity.x +"|";
+      s += ev.accelerationIncludingGravity.y +"|";
+      s += ev.accelerationIncludingGravity.z +"|";      
+      s += ev.rotationRate.alpha +"|";
+      s += ev.rotationRate.beta+"|";
+      s += ev.rotationRate.gamma+"|";
+      var or = RD3_DesktopManager.WebEntryPoint.LastOrientationEvent;
+      if (or)
+      {
+        s += or.alpha+"|";  
+        s += or.beta+"|";  
+        s += or.gamma+"|";
+        if (or.webkitCompassHeading)
+        {
+          s += or.webkitCompassHeading+"|";  
+          s += or.webkitCompassAccuracy+"|";            
+        }
+        else
+        {
+          s+= "||";
+        }
+      }
+      else
+      {
+        s += "|||||";
+      }
+      s += (new Date()).getTime()+"|";
+      var ev = new IDEvent("chgmot","wep",undefined,RD3_Glb.EVENT_ACTIVE,"mot",s,null,null,null,100); 
+    }
+  }
+  else
+  {
+    // simulator
+    var s = Math.random()*10+"|";
+    s += Math.random()*10+"|"
+    s += Math.random()*10+"|";
+    s += Math.random()*20+"|";
+    s += Math.random()*20+"|"
+    s += Math.random()*20+"|";
+    //
+    s += Math.random()*30+"|";
+    s += Math.random()*30+"|";
+    s += Math.random()*30+"|";
+    //
+    s += Math.random()*90+"|";
+    s += Math.random()*90+"|";
+    s += Math.random()*90+"|";
+    //
+    s += Math.random()*360+"|";
+    s += Math.random()*30+"|";
+    //
+    s += (new Date()).getTime()+"|";
+    var ev = new IDEvent("chgmot","wep",undefined,RD3_Glb.EVENT_ACTIVE,"mot",s,null,null,null,100); 
+  }
 }
 
 
@@ -505,38 +505,38 @@ WebEntryPoint.prototype.SetRefreshLocation = function(value)
 // ******************************************************
 WebEntryPoint.prototype.SetMotionThreshold = function(value)
 {
-	if (value!=undefined)
+  if (value!=undefined)
   {
-  	var x = value.split("|");
-  	this.MotionThreshold.accel = parseFloat(x[0]);
-  	this.MotionThreshold.rot = parseFloat(x[1]);
+    var x = value.split("|");
+    this.MotionThreshold.accel = parseFloat(x[0]);
+    this.MotionThreshold.rot = parseFloat(x[1]);
   }
   //
   // Se la videata e' gia' stata realizzata, aggiusto il timer
   if (this.Realized)
   {
-  	if (this.MotionThreshold.accel!=999 || this.MotionThreshold.rot!=999)
-  	{
-  		if (RD3_Glb.IsTouch())
-  		{
-	  		window.addEventListener("devicemotion", RD3_DeviceMotion);
-				window.addEventListener("deviceorientation", RD3_DeviceOrientation);
-			}
-			else
-			{
-				this.MotionTimerID =  window.setInterval(RD3_DeviceMotion,1000*this.MotionThreshold.accel);
-			}
-  	}
-  	else
-  	{
-  		if (window.removeEventListener)
-  		{
-	  		window.removeEventListener("devicemotion", RD3_DeviceMotion);
-				window.removeEventListener("deviceorientation", RD3_DeviceOrientation);
-			}
-			window.clearInterval(this.MotionTimerID);
-			RD3_DesktopManager.WebEntryPoint.LastOrientationEvent = null;
-  	}
+    if (this.MotionThreshold.accel!=999 || this.MotionThreshold.rot!=999)
+    {
+      if (RD3_Glb.IsTouch())
+      {
+        window.addEventListener("devicemotion", RD3_DeviceMotion);
+        window.addEventListener("deviceorientation", RD3_DeviceOrientation);
+      }
+      else
+      {
+        this.MotionTimerID =  window.setInterval(RD3_DeviceMotion,1000*this.MotionThreshold.accel);
+      }
+    }
+    else
+    {
+      if (window.removeEventListener)
+      {
+        window.removeEventListener("devicemotion", RD3_DeviceMotion);
+        window.removeEventListener("deviceorientation", RD3_DeviceOrientation);
+      }
+      window.clearInterval(this.MotionTimerID);
+      RD3_DesktopManager.WebEntryPoint.LastOrientationEvent = null;
+    }
   }
 }
 
@@ -573,7 +573,7 @@ WebEntryPoint.prototype.SetVisualFlags= function(value)
   var oht = this.HasToolbar();
   var ohs = this.HasStatusBar();
   if (value!=undefined)
-  	this.VisualFlags = value;
+    this.VisualFlags = value;
   //
   if (this.Realized && (this.VisualFlags != old || value==undefined) && !RD3_Glb.IsMobile())
   {
@@ -594,15 +594,15 @@ WebEntryPoint.prototype.SetVisualFlags= function(value)
     //
     if (value!=undefined)
     {
-    	if (oht!=this.HasToolbar() || ohs!=this.HasStatusBar)
-    	{
-    		this.AdaptLayout();
-    	}
-			else
-			{
-    		this.AdaptHeader();
-    	}
-   	}
+      if (oht!=this.HasToolbar() || ohs!=this.HasStatusBar)
+      {
+        this.AdaptLayout();
+      }
+      else
+      {
+        this.AdaptHeader();
+      }
+    }
   }
 }
 
@@ -682,13 +682,13 @@ WebEntryPoint.prototype.SetAccentColor = function(value)
   //
   if (this.AccentColor != oldv || value==undefined)
   {
-		var reg = new RegExp(oldv.replace("(","\\(").replace(")","\\)"),"g");
-  	//
-  	// Aggiorno tutte le regole dei css
-  	for (var i = 0; i < document.styleSheets.length; i++)
-  	{
-  		var cs = ""
-    	if (document.styleSheets[i]["rules"]) 
+    var reg = new RegExp(oldv.replace("(","\\(").replace(")","\\)"),"g");
+    //
+    // Aggiorno tutte le regole dei css
+    for (var i = 0; i < document.styleSheets.length; i++)
+    {
+      var cs = ""
+      if (document.styleSheets[i]["rules"]) 
         cs = "rules";
       if (document.styleSheets[i]["cssRules"]) 
         cs = "cssRules";
@@ -696,34 +696,34 @@ WebEntryPoint.prototype.SetAccentColor = function(value)
       if (!ar)
         continue;
       //  
-	    for (var j = 0; j < ar.length; j++) 
-	    {
-	      // Solo le regole che hanno STYLE
-	      var ru = ar[j];
-	      if (!ru.style)
-	        continue;
-	      //
-	    	var s = ru.style.cssText;
-	    	var ns = s.replace(reg,this.AccentColor);
-	    	if (s!=ns)
-	    		ru.style.cssText = ns;
+      for (var j = 0; j < ar.length; j++) 
+      {
+        // Solo le regole che hanno STYLE
+        var ru = ar[j];
+        if (!ru.style)
+          continue;
+        //
+        var s = ru.style.cssText;
+        var ns = s.replace(reg,this.AccentColor);
+        if (s!=ns)
+          ru.style.cssText = ns;
       }
     }
     if (this.Realized)
     {
-    	// mando un messaggio a tutta l'applicazione per dire che
-    	// e' cambiato il colore di accento
-    	this.CmdObj.AccentColorChanged(reg,this.AccentColor);
-    	//
-    	var n = this.StackForm.length;
-		  for(var i=0; i<n; i++)
-		  {
-		    var f = this.StackForm[i];
-		    for (var j=0; j<f.Frames.length; j++) 
-		    {
-		    	f.Frames[j].AccentColorChanged(reg,this.AccentColor);
-		    }
-		  }
+      // mando un messaggio a tutta l'applicazione per dire che
+      // e' cambiato il colore di accento
+      this.CmdObj.AccentColorChanged(reg,this.AccentColor);
+      //
+      var n = this.StackForm.length;
+      for(var i=0; i<n; i++)
+      {
+        var f = this.StackForm[i];
+        for (var j=0; j<f.Frames.length; j++) 
+        {
+          f.Frames[j].AccentColorChanged(reg,this.AccentColor);
+        }
+      }
     }
   }
 }
@@ -869,8 +869,8 @@ WebEntryPoint.prototype.SetMainCaption = function(value)
   // Se la videata e' gia' stata realizzata, aggiusto le proprieta' visuali
   if (this.Realized && this.MainCaptionBox)
    {
-    document.title = this.MainCaption;
     this.MainCaptionBox.innerHTML = this.MainCaption;
+    document.title = this.MainCaptionBox.innerText;
     //
     // E' cambiata la caption... devo ricalcolare la dimensione del DIVIDERBOX
     if (this.DividerBox)
@@ -908,7 +908,7 @@ WebEntryPoint.prototype.SetMainImage = function(value)
     }
     //
     if (this.MainImage!=old)
-    	this.AdaptHeader();
+      this.AdaptHeader();
   }
 }
 
@@ -1091,10 +1091,10 @@ WebEntryPoint.prototype.ApplyLanguage = function()
 // ***************************************************************
 WebEntryPoint.prototype.Realize = function(parent)
 {
-	// Applico subito un particolare colore di accento
-	if (typeof(RD3_AccentColor) != "undefined")
-		this.SetAccentColor(RD3_AccentColor);
-	//
+  // Applico subito un particolare colore di accento
+  if (typeof(RD3_AccentColor) != "undefined")
+    this.SetAccentColor(RD3_AccentColor);
+  //
   // Creo i miei oggetti visuali
   this.RealizeWep(parent);
   this.RealizeHeader(this.HeaderBox);
@@ -1222,11 +1222,11 @@ WebEntryPoint.prototype.RealizeWep = function(parent)
     var done = false;
     try
     {
-	    if (RD3_Glb.IsIE(10, false))
-	    {
-	      this.WelcomeBox = document.createElement("<iframe id='welcome-container' frameBorder='0' onload='RD3_DesktopManager.WebEntryPoint.OnWelcomeBoxLoad();'></iframe>");
-		    done = true;
-	    }
+      if (RD3_Glb.IsIE(10, false))
+      {
+        this.WelcomeBox = document.createElement("<iframe id='welcome-container' frameBorder='0' onload='RD3_DesktopManager.WebEntryPoint.OnWelcomeBoxLoad();'></iframe>");
+        done = true;
+      }
     }
     catch (ex) {}
     //
@@ -1536,11 +1536,11 @@ WebEntryPoint.prototype.RealizeWep = function(parent)
     var done = false;
     try
     {
-	    if (RD3_Glb.IsIE(10, false))
-	    {
-	      this.BlobFrame = document.createElement("<iframe name='blobframe' onload='RD3_DesktopManager.WebEntryPoint.OnBlobUpload();'></iframe>");
-		    done = true;
-	    }
+      if (RD3_Glb.IsIE(10, false))
+      {
+        this.BlobFrame = document.createElement("<iframe name='blobframe' onload='RD3_DesktopManager.WebEntryPoint.OnBlobUpload();'></iframe>");
+        done = true;
+      }
     }
     catch (ex) {}
     //
@@ -1962,7 +1962,7 @@ WebEntryPoint.prototype.AdaptLayout = function()
       this.ToolBarBox.style.paddingTop = "2px";
     var t = SideBarTop;
     if (this.HasStatusBar())
-    	t = this.StatusBarBox.offsetTop + this.StatusBarBox.offsetHeight;
+      t = this.StatusBarBox.offsetTop + this.StatusBarBox.offsetHeight;
     if (RD3_Glb.IsIE(6) && this.StatusBarBox.offsetHeight==2)
       t -= 2;
     this.ToolBarBox.style.top = t + "px";
@@ -1977,9 +1977,9 @@ WebEntryPoint.prototype.AdaptLayout = function()
   //
   var tbbot = SideBarTop;
   if (this.HasToolbar())
-  	tbbot = this.ToolBarBox.offsetTop + this.ToolBarBox.offsetHeight;
+    tbbot = this.ToolBarBox.offsetTop + this.ToolBarBox.offsetHeight;
   else if (this.HasStatusBar())
-  	tbbot = this.StatusBarBox.offsetTop + this.StatusBarBox.offsetHeight;
+    tbbot = this.StatusBarBox.offsetTop + this.StatusBarBox.offsetHeight;
   //
   // Raramente puo succedere che la toolbar diventi figlia di document (errore del browser): in quel caso l'offsetTop diventa 0
   // anche se non lo dovrebbe essere : allora quando e' 0 proviamo a ricalcolarlo correttamente prendendo le dimensioni della status bar (la toolbar 
@@ -1995,7 +1995,7 @@ WebEntryPoint.prototype.AdaptLayout = function()
   //
   var tophei = 0;
   if (this.HasStatusBar())
-  	tophei = this.StatusBarBox.offsetHeight+this.ToolBarBox.offsetHeight;
+    tophei = this.StatusBarBox.offsetHeight+this.ToolBarBox.offsetHeight;
   if (RD3_Glb.IsIE(6))
   {
     if (this.ToolBarBox.offsetHeight==2) 
@@ -2279,14 +2279,14 @@ WebEntryPoint.prototype.AdaptHeader = function()
       var c = this.HeaderBox.childNodes[i];
       //
       // Se questo oggetto e' piu' a destra del DIVIDER, allora ne tengo conto
-      if ((c.offsetLeft > this.DividerBox.offsetLeft) && (c.style.display!="none"))
+      if (c!==this.DividerBox && (c.offsetLeft >= this.DividerBox.offsetLeft) && (c.style.display!="none"))
       {
-      	var mx = c.offsetLeft+c.offsetWidth;
-      	//
-      	// Su IE devo considerare anche il margine
-      	if (RD3_Glb.IsIE(10, true) && !isNaN(parseFloat(RD3_Glb.GetStyleProp(c, "marginRight"), 10)))
-      	  mx += parseFloat(RD3_Glb.GetStyleProp(c, "marginRight"), 10);
-      	//
+        var mx = c.offsetLeft+c.offsetWidth;
+        //
+        // Se presente devo considerare anche il margine
+        if (!isNaN(parseFloat(RD3_Glb.GetStyleProp(c, "marginRight"), 10)))
+          mx += parseFloat(RD3_Glb.GetStyleProp(c, "marginRight"), 10);
+        //
         // Memorizzo la massima coordinata RIGHT dell'oggetto
         if (maxx < mx) 
         {
@@ -2315,13 +2315,13 @@ WebEntryPoint.prototype.AdaptHeader = function()
 // ********************************************************************************
 WebEntryPoint.prototype.Unrealize = function()
 { 
-	// Tolgo gli eventi motion
-	if (window.removeEventListener)
-	{	
-		window.removeEventListener("devicemotion", RD3_DeviceMotion);
-		window.removeEventListener("deviceorientation", RD3_DeviceOrientation);
-	}
-	//
+  // Tolgo gli eventi motion
+  if (window.removeEventListener)
+  { 
+    window.removeEventListener("devicemotion", RD3_DeviceMotion);
+    window.removeEventListener("deviceorientation", RD3_DeviceOrientation);
+  }
+  //
   // Tolgo WepBox dal DOM
   this.WepBox.parentNode.removeChild(this.WepBox);
   //
@@ -2486,16 +2486,16 @@ WebEntryPoint.prototype.AfterProcessResponse= function(force)
     }  
     //
     // Se ho dei comandi ritardati li eseguo ora
-    if (this.ExecuteRitardati.length>0)
+    while (this.ExecuteRitardati.length > 0)
     {
-      // Ciclo sui comandi e li eseguo, poi svuoto l'array
-      var nex = this.ExecuteRitardati.length;
-      for (var iex=0;iex<nex;iex++)
+      try
       {
-        eval(this.ExecuteRitardati[iex]);
+        eval(this.ExecuteRitardati.shift());
       }
-      //
-      this.ExecuteRitardati.splice(0, nex);
+      catch(e)
+      {
+        console.error(e);
+      }
     }
     //
     RD3_KBManager.ActiveButton = null;
@@ -2578,6 +2578,9 @@ WebEntryPoint.prototype.OnResize = function(evento)
           }
         }
         //
+        // Ora sappiamo che la tastiera e' aperta
+        this.openKeyboard = true;
+        //
         // Qui dobbiamo saltare il resize: la tastiera e' aperta
         return;
       }
@@ -2592,6 +2595,12 @@ WebEntryPoint.prototype.OnResize = function(evento)
           this.ScrollMobilePage = true;
           this.WepBox.scrollTop = 0;
         }
+        //
+        // Sono mobile e ho una tastiera aperta con combo aperta, al prossimo resize non devo chiudere la combo perche'
+        // il resize e' dato dalla chiusura della tastiera
+        if (RD3_Glb.IsMobile() && RD3_DDManager.OpenCombo && this.openKeyboard)
+          this.notCloseComboOnResize = true;
+        this.openKeyboard = false;
       }
     }
     else
@@ -2649,7 +2658,7 @@ WebEntryPoint.prototype.TickResize = function(delayed)
     this.InResize = false;
     //
     // Se c'e' una combo aperta, chiudo anche quella
-    if (RD3_DDManager.OpenCombo)
+    if (RD3_DDManager.OpenCombo && !this.notCloseComboOnResize)
     {
       // Se sono su mobile e la combo non e' popover)
       if (RD3_Glb.IsMobile() && !RD3_DDManager.OpenCombo.UsePopover)
@@ -2657,10 +2666,18 @@ WebEntryPoint.prototype.TickResize = function(delayed)
       else
         RD3_DDManager.OpenCombo.Close();
     }
+    else if (RD3_DDManager.OpenCombo && this.notCloseComboOnResize) {
+      // IN questo caso e' necessario fare il blur dell'input (o dare il fuoco al body)
+      // in modo che allo scroll non si riapra la tastiera
+      if (RD3_DDManager.OpenCombo.ComboPopupInput)
+        RD3_DDManager.OpenCombo.ComboPopupInput.blur();
+      RD3_KBManager.activeElement = null;
+    }
     RD3_DDManager.ClosePopup();
     //
     // Ripristino l'elemento che aveva il fuoco in precedenza
     RD3_KBManager.ActiveElement = oldfoc;
+    this.notCloseComboOnResize = false;
   }
   else
   {
@@ -3014,14 +3031,14 @@ WebEntryPoint.prototype.ActivateForm = function(ident, isopening)
             try
             {
               if (popupObj.OrgContentParent)
-            	{
-            		while(popupObj.ContentBox.firstChild)
-            		{
-            			var objV = popupObj.ContentBox.firstChild;
-            			popupObj.ContentBox.removeChild(objV);
-            			popupObj.OrgContentParent.appendChild(objV);
-            		}
-            	}
+              {
+                while(popupObj.ContentBox.firstChild)
+                {
+                  var objV = popupObj.ContentBox.firstChild;
+                  popupObj.ContentBox.removeChild(objV);
+                  popupObj.OrgContentParent.appendChild(objV);
+                }
+              }
               //
               // Rimetto a posto la vecchia Caption
               if (popupObj.OrgHeaderParent)
@@ -3032,9 +3049,9 @@ WebEntryPoint.prototype.ActivateForm = function(ident, isopening)
               }
             }
             catch (ex) { }
-          	//
-          	// Adesso il Popup puo' prendere la nuova Form
-  		      popupObj.HostForm(this.ActiveForm);
+            //
+            // Adesso il Popup puo' prendere la nuova Form
+            popupObj.HostForm(this.ActiveForm);
           }
           else
           {
@@ -4751,7 +4768,7 @@ WebEntryPoint.prototype.OnBackButton = function()
   if (RD3_Glb.IsSmartPhone() && this.SideMenuBox && this.SideMenuBox.style.display == "")
   {
     // Menu smartPhone: se c'e' un commandset attivo allora lo chiudo direttamente
-    if (this.CmdObj.ActiveCommand && this.CmdObj.ActiveCommand.Commands.length>0)
+    if (this.CmdObj.ActiveCommand && this.CmdObj.ActiveCommand.IsCmdSet)
     {
       this.CmdObj.ActiveCommand.OnBack({});
       return true;
@@ -4769,7 +4786,7 @@ WebEntryPoint.prototype.OnBackButton = function()
       if (RD3_DDManager.iOpenPopup[i].ObjToAttach == this.CmdObj.MenuButton)
       {
         // Se non sono al primo livello, si torna al livello superiore
-        if (this.CmdObj.ActiveCommand && this.CmdObj.ActiveCommand.Commands.length>0)
+        if (this.CmdObj.ActiveCommand && this.CmdObj.ActiveCommand.IsCmdSet)
         {
           this.CmdObj.ActiveCommand.OnBack({});
           return true;
@@ -4790,12 +4807,18 @@ WebEntryPoint.prototype.OnBackButton = function()
   // Se c'e' il menu' presente a video: si torna al livello superiore.
   if (!RD3_Glb.IsSmartPhone() && this.SideMenuBox && this.SideMenuBox.style.display == "")
   {
-    if (this.CmdObj.ActiveCommand && this.CmdObj.ActiveCommand.Commands.length>0)
+    if (this.CmdObj.ActiveCommand && this.CmdObj.ActiveCommand.IsCmdSet)
     {
       this.CmdObj.ActiveCommand.OnBack({});
       return true;
     }
   }
+  //
+  // Chiudo l'app
+  if (RD3_ShellObject.IsInsideShell())
+    RD3_ShellObject.SendCmd("EXIT");
+  else
+    top.close();
 }
 
 //********************************************************************
@@ -4819,8 +4842,8 @@ WebEntryPoint.prototype.GetScreenZone = function(zonePos)
 // ********************************************************************************
 WebEntryPoint.prototype.OnIconClick = function(evento)
 { 
-	if (this.IsIconActive())
-		RD3_SendCommand("IconClick");	
+  if (this.IsIconActive())
+    RD3_SendCommand("IconClick"); 
 }
 
 WebEntryPoint.prototype.OnTouchDown = function(ev)

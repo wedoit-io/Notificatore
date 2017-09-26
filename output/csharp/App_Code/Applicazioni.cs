@@ -1,6 +1,6 @@
 // **********************************************
 // Applicazioni
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -325,18 +325,30 @@ public partial class Applicazioni : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("76B301B0-4A97-4C14-B841-9B6062AF8AE1", "Applicazioni Before Insert", "", 0, "Applicazioni")) return;
+      MainFrm.DTTObj.AddParameter ("76B301B0-4A97-4C14-B841-9B6062AF8AE1", "1E4C5CFD-BFAC-4936-B4A5-C4CAAFB35B24", "Cancel", Cancel);
       // 
       // Applicazioni Before Insert Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("5933C024-1D76-495D-9706-B571F61EA138", "IF Is Null (Auth Key Apps Applicazione [Applicazioni - Applicazioni])", "");
+      MainFrm.DTTObj.AddToken ("5933C024-1D76-495D-9706-B571F61EA138", "E80B2E6F-F308-4D85-9EEE-042F91020F5B", 917504, "Auth Key Apps", IMDB.Value(IMDBDef1.PQRY_APPLICAZION2, IMDBDef1.PQSL_APPLICAZION2_AUTH_KEY, 0));
       if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_APPLICAZION2, IMDBDef1.PQSL_APPLICAZION2_AUTH_KEY, 0)))
       {
+        MainFrm.DTTObj.EnterIf ("5933C024-1D76-495D-9706-B571F61EA138", "IF Is Null (Auth Key Apps Applicazione [Applicazioni - Applicazioni])", "");
+        MainFrm.DTTObj.AddAssign ("56249C0B-EAC8-4063-BC67-9EF23A649B78", "Auth Key Apps Applicazione [Applicazioni - Applicazioni] := Lower (Doc ID To Guid (New Doc ID ()))", "", IMDB.Value(IMDBDef1.PQRY_APPLICAZION2, IMDBDef1.PQSL_APPLICAZION2_AUTH_KEY, 0));
         IMDB.set_Value(IMDBDef1.PQRY_APPLICAZION2, IMDBDef1.PQSL_APPLICAZION2_AUTH_KEY, 0, IDL.Lower(new IDVariant(com.progamma.GUID.DocID2GUID (com.progamma.doc.MDOInit.GetNewDocID().stringValue()))));
+        MainFrm.DTTObj.AddAssignNewValue ("56249C0B-EAC8-4063-BC67-9EF23A649B78", "E80B2E6F-F308-4D85-9EEE-042F91020F5B", IMDB.Value(IMDBDef1.PQRY_APPLICAZION2, IMDBDef1.PQSL_APPLICAZION2_AUTH_KEY, 0));
       }
+      MainFrm.DTTObj.EndIfBlk ("5933C024-1D76-495D-9706-B571F61EA138");
+      MainFrm.DTTObj.ExitProc("76B301B0-4A97-4C14-B841-9B6062AF8AE1", "Applicazioni Before Insert", "", 0, "Applicazioni");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("76B301B0-4A97-4C14-B841-9B6062AF8AE1", "Applicazioni Before Insert", "", _e);
       MainFrm.ErrObj.ProcError ("Applicazioni", "ApplicazioniBeforeInsert", _e);
+      MainFrm.DTTObj.ExitProc("76B301B0-4A97-4C14-B841-9B6062AF8AE1", "Applicazioni Before Insert", "", 0, "Applicazioni");
     }
   }
 
@@ -355,6 +367,8 @@ public partial class Applicazioni : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("D22AF6C7-92BD-4BDF-AD70-1EEFCD2AED1A", "Load", "", 0, "Applicazioni")) return;
       // 
       // Load Body
       // Corpo Procedura
@@ -366,10 +380,13 @@ public partial class Applicazioni : MyWebForm
       // PAN_APPLICAZIONI.RefreshGrouping(true);
       // PAN_APPLICAZIONI.RD3ExpandGroup((new IDVariant(0)).intValue(),(new IDVariant(-1)).booleanValue()); 
       // PAN_APPLICAZIONI.set_ActualPosition(true, (new IDVariant(1)).intValue());
+      MainFrm.DTTObj.ExitProc("D22AF6C7-92BD-4BDF-AD70-1EEFCD2AED1A", "Load", "", 0, "Applicazioni");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("D22AF6C7-92BD-4BDF-AD70-1EEFCD2AED1A", "Load", "", _e);
       MainFrm.ErrObj.ProcError ("Applicazioni", "Load", _e);
+      MainFrm.DTTObj.ExitProc("D22AF6C7-92BD-4BDF-AD70-1EEFCD2AED1A", "Load", "", 0, "Applicazioni");
     }
   }
 
@@ -498,7 +515,7 @@ public partial class Applicazioni : MyWebForm
     PAN_APPLICAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_APPLICAZIONI_LINGUA, "Lingua");
     PAN_APPLICAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_APPLICAZIONI_LINGUA, "");
     PAN_APPLICAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_APPLICAZIONI_LINGUA, MyGlb.VIS_FOREIKEYFIEL);
-    PAN_APPLICAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_APPLICAZIONI_LINGUA, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_AUTOLOOKUP | MyGlb.FLD_ISOPT, -1);
+    PAN_APPLICAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_APPLICAZIONI_LINGUA, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_AUTOLOOKUP, -1);
   }
 
   private void PAN_APPLICAZIONI_InitFields()
@@ -589,7 +606,7 @@ public partial class Applicazioni : MyWebForm
     SQL.Append("from ");
     SQL.Append("  PRODOTTI A ");
     SQL.Append("where (A.ID = ~~ID_PRODOTTO~~) ");
-    PAN_APPLICAZIONI.SetQuery(PPQRY_PRODOTTI, 0, SQL, PFL_APPLICAZIONI_PRODOTTO, "");
+    PAN_APPLICAZIONI.SetQuery(PPQRY_PRODOTTI, 0, SQL, PFL_APPLICAZIONI_PRODOTTO, "E976DFE3-D4C0-4F44-93B8-7FBA7C7C44FF");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDPRODOTTO, ");
@@ -605,7 +622,7 @@ public partial class Applicazioni : MyWebForm
     SQL.Append("from ");
     SQL.Append("  LINGUE A ");
     SQL.Append("where (A.PRG_LINGUA = ~~PRG_LINGUA~~) ");
-    PAN_APPLICAZIONI.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_APPLICAZIONI_LINGUA, "");
+    PAN_APPLICAZIONI.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_APPLICAZIONI_LINGUA, "52AC3675-C203-42A7-BDA8-D830F1668F7E");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.PRG_LINGUA as IDLINGUA, ");
@@ -625,7 +642,7 @@ public partial class Applicazioni : MyWebForm
     SQL.Append("  A.AUTH_KEY as AUTH_KEY, ");
     SQL.Append("  A.ID_PRODOTTO as ID_PRODOTTO, ");
     SQL.Append("  A.PRG_LINGUA as PRG_LINGUA ");
-    PAN_APPLICAZIONI.SetQuery(PPQRY_APPLICAZION2, 0, SQL, -1, "");
+    PAN_APPLICAZIONI.SetQuery(PPQRY_APPLICAZION2, 0, SQL, -1, "9233339D-85AD-4F3B-8D9E-A9906195DB75");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPS A ");
@@ -866,6 +883,10 @@ public partial class Applicazioni : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

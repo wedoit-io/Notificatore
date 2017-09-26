@@ -1,6 +1,6 @@
 // **********************************************
 // Configurazione
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -19,6 +19,7 @@ public partial class Configurazione : MyWebForm
   private const int GRP_IMPOSTAZIONI_GENERALE = 0;
   private const int GRP_IMPOSTAZIONI_APPLEIOS = 1;
   private const int GRP_IMPOSTAZIONI_ANDROID = 2;
+  private const int GRP_IMPOSTAZIONI_ACDIPOPELIDE = 3;
 
   private const int PFL_IMPOSTAZIONI_ID = 0;
   private const int PFL_IMPOSTAZIONI_URLDIBASEAPP = 1;
@@ -32,13 +33,22 @@ public partial class Configurazione : MyWebForm
   private const int PFL_IMPOSTAZIONI_IMILLIDITVTL = 9;
   private const int PFL_IMPOSTAZIONI_PERCERNOTPUS = 10;
   private const int PFL_IMPOSTAZIONI_ATAUFEOG60MI = 11;
-  private const int PFL_IMPOSTAZIONI_NUMADIMEPESP = 12;
-  private const int PFL_IMPOSTAZIONI_BOTTCHECFEED = 13;
-  private const int PFL_IMPOSTAZIONI_BOTELMAITORI = 14;
-  private const int PFL_IMPOSTAZIONI_RESTARAPPLIC = 15;
-  private const int PFL_IMPOSTAZIONI_RIFRLESPINSE = 16;
-  private const int PFL_IMPOSTAZIONI_ELIDEFTOKRIM = 17;
+  private const int PFL_IMPOSTAZIONI_ELIDEFTOKRIM = 12;
+  private const int PFL_IMPOSTAZIONI_NUMMESPERSPE = 13;
+  private const int PFL_IMPOSTAZIONI_RIFRLESPINSE = 14;
+  private const int PFL_IMPOSTAZIONI_BOTTCHECFEED = 15;
+  private const int PFL_IMPOSTAZIONI_BOTELMAITORI = 16;
+  private const int PFL_IMPOSTAZIONI_RESTARAPPLIC = 17;
   private const int PFL_IMPOSTAZIONI_MAXMESMEPESP = 18;
+  private const int PFL_IMPOSTAZIONI_MITTENTE = 19;
+  private const int PFL_IMPOSTAZIONI_INDIRIZZO = 20;
+  private const int PFL_IMPOSTAZIONI_POSTAINUSCIT = 21;
+  private const int PFL_IMPOSTAZIONI_UTENTE = 22;
+  private const int PFL_IMPOSTAZIONI_PASSWORD = 23;
+  private const int PFL_IMPOSTAZIONI_PORTPOSTUSCI = 24;
+  private const int PFL_IMPOSTAZIONI_EMAILSUPPORT = 25;
+  private const int PFL_IMPOSTAZIONI_ATTIVASSL = 26;
+  private const int PFL_IMPOSTAZIONI_TESTINVIO = 27;
 
   private const int PPQRY_IMPOSTAZIONI = 0;
 
@@ -61,7 +71,7 @@ public partial class Configurazione : MyWebForm
   // IMDB DDL Procedures
   private static void Init_PQRY_IMPOSTAZIONI(IMDBObj IMDB)
   {
-    IMDB.set_TblNumField(IMDBDef1.PQRY_IMPOSTAZIONI, 13);
+    IMDB.set_TblNumField(IMDBDef1.PQRY_IMPOSTAZIONI, 21);
     IMDB.set_TblCode(IMDBDef1.PQRY_IMPOSTAZIONI, "PQRY_IMPOSTAZIONI");
     IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_ID, "ID");
     IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_ID,1,9,0);
@@ -89,6 +99,22 @@ public partial class Configurazione : MyWebForm
     IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_MAX_MESSAGGI_C2DM,1,5,0);
     IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_FLG_DEBUG, "FLG_DEBUG");
     IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_FLG_DEBUG,1,2,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_MITTENTE, "DES_MITTENTE");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_MITTENTE,5,100,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_INDIRIZZO, "DES_INDIRIZZO");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_INDIRIZZO,5,100,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_SERVER_OUT, "DES_SERVER_OUT");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_SERVER_OUT,5,200,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_LOGIN, "DES_LOGIN");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_LOGIN,5,100,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_PASSWORD, "DES_PASSWORD");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_PASSWORD,5,200,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_CDN_PORTA_OUT, "CDN_PORTA_OUT");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_CDN_PORTA_OUT,1,4,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_INDIRIZZO_SUPP, "DES_INDIRIZZO_SUPP");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_DES_INDIRIZZO_SUPP,5,100,0);
+    IMDB.set_FldCode(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_FLG_SSL, "FLG_SSL");
+    IMDB.SetFldParams(IMDBDef1.PQRY_IMPOSTAZIONI,IMDBDef1.PQSL_IMPOSTAZIONI_FLG_SSL,5,1,0);
     IMDB.TblAddNew(IMDBDef1.PQRY_IMPOSTAZIONI, 0);
   }
 
@@ -154,30 +180,30 @@ public partial class Configurazione : MyWebForm
     //
     //
     RTCGuid = "FB53D905-D5ED-4B9E-A156-953B72B9C172";
-    ResModeW = 1;
-    ResModeH = 1;
+    ResModeW = 3;
+    ResModeH = 3;
     iVisualFlags = -2049;
-    DesignWidth = 732;
-    DesignHeight = 612;
+    DesignWidth = 772;
+    DesignHeight = 900;
     set_Caption(new IDVariant("Configurazione"));
     //
     Frames = new AFrame[2];
     Frames[1] = new AFrame(1);
     Frames[1].Parent = this;
-    Frames[1].Width = 732;
-    Frames[1].Height = 552;
+    Frames[1].Width = 772;
+    Frames[1].Height = 840;
     Frames[1].Caption = "Impostazioni";
     Frames[1].Parent = this;
-    Frames[1].FixedHeight = 552;
+    Frames[1].FixedHeight = 840;
     PAN_IMPOSTAZIONI = new IDPanel(w, this, 1, "PAN_IMPOSTAZIONI");
     Frames[1].Content = PAN_IMPOSTAZIONI;
     PAN_IMPOSTAZIONI.ShowRowSelector = false;
     PAN_IMPOSTAZIONI.ShowStatusbar = false;
     PAN_IMPOSTAZIONI.set_VisualFlag(Glb.PANVISPROP_HILITEROW,true);
     PAN_IMPOSTAZIONI.VS = MainFrm.VisualStyleList;
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_RECT, 0, 0, 0, 0, 732-MyGlb.PAN_OFFS_X, 552-MyGlb.PAN_OFFS_Y, 0, 0);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_RECT, 0, 0, 0, 0, 772-MyGlb.PAN_OFFS_X, 840-MyGlb.PAN_OFFS_Y, 0, 0);
     PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_PANEL, 0, "685A9980-B698-4845-943E-36293FBDE485");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_PANEL, 0, 0, 0, 0, 2324, 156, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_STRETCH);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_PANEL, 0, 0, 0, 0, 4440, 156, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_STRETCH);
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_PANEL, 0, MyGlb.VIS_DEFAPANESTYL);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_PANEL, 0, 0, 32);
     PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_PANEL, 0, MainFrm.GlbPanelFlags | MyGlb.PAN_SCROLLREC | MyGlb.PAN_HASFORM | MyGlb.PAN_STARTFORM | MyGlb.PAN_CANUPDATE | MyGlb.PAN_CANINSERT | MyGlb.PAN_AUTOSAVE | MyGlb.OBJ_VISIBLE | MyGlb.OBJ_ENABLED, -1);
@@ -355,6 +381,14 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "Impostazioni On Updating Row", "", 0, "Configurazione")) return;
+      MainFrm.DTTObj.AddParameter ("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "637F678D-EDB4-4E1B-8460-B8BA029ECC78", "Column", Column);
+      MainFrm.DTTObj.AddParameter ("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "1E8E70FB-A7ED-4C23-B101-BB50970A9CB5", "Field Modified", FieldModified);
+      MainFrm.DTTObj.AddParameter ("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "36BB2180-A293-4616-BAE9-080D661CE2E0", "Field Was Modified", FieldWasModified);
+      MainFrm.DTTObj.AddParameter ("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "64856EBC-348A-4387-88D3-28E1E1E0852F", "Row Was Modified", RowWasModified);
+      MainFrm.DTTObj.AddParameter ("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "250E89AE-A9EA-4C2F-A5A4-0F826B786BC4", "Inserting", Inserting);
+      MainFrm.DTTObj.AddParameter ("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "81F93F8D-52B4-470B-B017-65AAB373EFDA", "Cancel", Cancel);
       // 
       // Impostazioni On Updating Row Body
       // Corpo Procedura
@@ -369,10 +403,13 @@ public partial class Configurazione : MyWebForm
         // PAN_IMPOSTAZIONI.SetFlags (Glb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, ((new IDVariant(-1)).booleanValue())? Glb.OBJ_VISIBLE : 0, Glb.OBJ_VISIBLE); 
         // PAN_IMPOSTAZIONI.SetFlags (Glb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, ((new IDVariant(-1)).booleanValue())? Glb.OBJ_VISIBLE : 0, Glb.OBJ_VISIBLE); 
       // }
+      MainFrm.DTTObj.ExitProc("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "Impostazioni On Updating Row", "", 0, "Configurazione");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "Impostazioni On Updating Row", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "ImpostazioniOnUpdatingRow", _e);
+      MainFrm.DTTObj.ExitProc("06ACA01F-2E1E-45C2-BBA0-F1013F75D90F", "Impostazioni On Updating Row", "", 0, "Configurazione");
     }
   }
 
@@ -391,24 +428,43 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("49B81863-D35A-4729-BFD4-608FDC545E62", "Impostazioni On Dynamic Properties", "", 1, "Configurazione")) return;
       // 
       // Impostazioni On Dynamic Properties Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("C4103E2A-129F-4196-ADD8-E0FFAAD7E20B", "IF Attiva Autorefresh Dei Dati Ogni 4 Sec Impostazione [Configurazione - Impostazioni] = Si", "");
+      MainFrm.DTTObj.AddToken ("C4103E2A-129F-4196-ADD8-E0FFAAD7E20B", "8605DDBB-2562-41AC-9CDA-7EEAD4E16CF3", 917504, "Attiva Autorefresh Dei Dati Ogni 4 Sec", IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_REFRESH, 0));
+      MainFrm.DTTObj.AddToken ("C4103E2A-129F-4196-ADD8-E0FFAAD7E20B", "607309F9-0C4D-4257-B6D9-D73344CC3ACA", 589824, "Si", (new IDVariant("S")));
       if (IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_REFRESH, 0).equals((new IDVariant("S")), true))
       {
+        MainFrm.DTTObj.EnterIf ("C4103E2A-129F-4196-ADD8-E0FFAAD7E20B", "IF Attiva Autorefresh Dei Dati Ogni 4 Sec Impostazione [Configurazione - Impostazioni] = Si", "");
+        MainFrm.DTTObj.AddSubProc ("5EA85E7E-88F5-4F50-8630-A5CBCF23E2B9", "Bottone Invia Notifiche.Set Visible", "");
+        MainFrm.DTTObj.AddParameter ("5EA85E7E-88F5-4F50-8630-A5CBCF23E2B9", "FA8897CC-F9D9-4AE1-AC82-1118B1A00C7D", "Stato", (new IDVariant(0)).booleanValue());
         PAN_IMPOSTAZIONI.SetFlags (Glb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, ((new IDVariant(0)).booleanValue())? Glb.OBJ_VISIBLE : 0, Glb.OBJ_VISIBLE); 
+        MainFrm.DTTObj.AddSubProc ("C388917A-0E85-4484-B74F-33EEE7A40D6B", "Bottone Check feedback.Set Visible", "");
+        MainFrm.DTTObj.AddParameter ("C388917A-0E85-4484-B74F-33EEE7A40D6B", "0DD4B961-26AF-4AF0-8511-3376712B58FB", "Stato", (new IDVariant(0)).booleanValue());
         PAN_IMPOSTAZIONI.SetFlags (Glb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, ((new IDVariant(0)).booleanValue())? Glb.OBJ_VISIBLE : 0, Glb.OBJ_VISIBLE); 
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("83F453DA-77C2-49E0-9E7E-830788B3CAA2", "ELSE", "", "C4103E2A-129F-4196-ADD8-E0FFAAD7E20B");
+        MainFrm.DTTObj.AddSubProc ("E347D371-0A05-41F0-A9CA-E8A203617416", "Bottone Invia Notifiche.Set Visible", "");
+        MainFrm.DTTObj.AddParameter ("E347D371-0A05-41F0-A9CA-E8A203617416", "4AB71AAB-EAD5-4C2B-8848-2B998C729429", "Stato", (new IDVariant(-1)).booleanValue());
         PAN_IMPOSTAZIONI.SetFlags (Glb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, ((new IDVariant(-1)).booleanValue())? Glb.OBJ_VISIBLE : 0, Glb.OBJ_VISIBLE); 
+        MainFrm.DTTObj.AddSubProc ("F366BBD8-BC2E-461E-BD2D-0001FD05DE9B", "Bottone Check feedback.Set Visible", "");
+        MainFrm.DTTObj.AddParameter ("F366BBD8-BC2E-461E-BD2D-0001FD05DE9B", "9D2EE6A9-F40F-4245-B0E5-1B7962375CD1", "Stato", (new IDVariant(-1)).booleanValue());
         PAN_IMPOSTAZIONI.SetFlags (Glb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, ((new IDVariant(-1)).booleanValue())? Glb.OBJ_VISIBLE : 0, Glb.OBJ_VISIBLE); 
       }
+      MainFrm.DTTObj.EndIfBlk ("C4103E2A-129F-4196-ADD8-E0FFAAD7E20B");
+      MainFrm.DTTObj.ExitProc("49B81863-D35A-4729-BFD4-608FDC545E62", "Impostazioni On Dynamic Properties", "", 1, "Configurazione");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("49B81863-D35A-4729-BFD4-608FDC545E62", "Impostazioni On Dynamic Properties", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "ImpostazioniOnDynamicProperties", _e);
+      MainFrm.DTTObj.ExitProc("49B81863-D35A-4729-BFD4-608FDC545E62", "Impostazioni On Dynamic Properties", "", 1, "Configurazione");
     }
   }
 
@@ -427,17 +483,24 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("AE7D2994-2A3E-48DF-8E74-F93D7EDFF7D6", "Bottone Invia Notifiche", "", 3, "Configurazione")) return 0;
       // 
       // Bottone Invia Notifiche Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("76263C1C-BACC-4D15-AF9C-3527AB3EDB39", "Notificatore.Send APNS Push Notification", "");
       MainFrm.SendAPNSPushNotification();
+      MainFrm.DTTObj.AddSubProc ("8C320736-3798-42D1-8372-D32219EF55E0", "Notificatore.Send GCMNotification", "");
       MainFrm.SendGCMNotification((new IDVariant()));
+      MainFrm.DTTObj.ExitProc("AE7D2994-2A3E-48DF-8E74-F93D7EDFF7D6", "Bottone Invia Notifiche", "", 3, "Configurazione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("AE7D2994-2A3E-48DF-8E74-F93D7EDFF7D6", "Bottone Invia Notifiche", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "BottoneInviaNotifiche", _e);
+      MainFrm.DTTObj.ExitProc("AE7D2994-2A3E-48DF-8E74-F93D7EDFF7D6", "Bottone Invia Notifiche", "", 3, "Configurazione");
       return -1;
     }
   }
@@ -457,15 +520,20 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("D66CD681-3DE8-4A92-A03E-5C03E9E68FF5", "Bottone Check feedback", "", 3, "Configurazione")) return 0;
       // 
       // Bottone Check feedback Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.ExitProc("D66CD681-3DE8-4A92-A03E-5C03E9E68FF5", "Bottone Check feedback", "", 3, "Configurazione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("D66CD681-3DE8-4A92-A03E-5C03E9E68FF5", "Bottone Check feedback", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "BottoneCheckfeedback", _e);
+      MainFrm.DTTObj.ExitProc("D66CD681-3DE8-4A92-A03E-5C03E9E68FF5", "Bottone Check feedback", "", 3, "Configurazione");
       return -1;
     }
   }
@@ -485,6 +553,8 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("A8E4F42B-A90A-48C7-84C3-A8A995BA9009", "Ripulisci Spedizioni Inviate", "", 3, "Configurazione")) return 0;
       // 
       // Ripulisci Spedizioni Inviate Body
       // Corpo Procedura
@@ -492,12 +562,18 @@ public partial class Configurazione : MyWebForm
       SQL = new StringBuilder();
       SQL.Append("delete from SPEDIZIONI ");
       SQL.Append("where (FLG_STATO = 'S') ");
+      MainFrm.DTTObj.AddQuery ("1F0B5740-3017-4848-A67E-1D7827658F69", "Spedizioni (Notificatore DB): Delete", "", 256, SQL.ToString());
       MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+      MainFrm.DTTObj.EndQuery ("1F0B5740-3017-4848-A67E-1D7827658F69");
+      MainFrm.DTTObj.AddParameter ("1F0B5740-3017-4848-A67E-1D7827658F69", "", "Records affected", MainFrm.NotificatoreDBObject.DBO().RecordsAffected());
+      MainFrm.DTTObj.ExitProc("A8E4F42B-A90A-48C7-84C3-A8A995BA9009", "Ripulisci Spedizioni Inviate", "", 3, "Configurazione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("A8E4F42B-A90A-48C7-84C3-A8A995BA9009", "Ripulisci Spedizioni Inviate", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "RipulisciSpedizioniInviate", _e);
+      MainFrm.DTTObj.ExitProc("A8E4F42B-A90A-48C7-84C3-A8A995BA9009", "Ripulisci Spedizioni Inviate", "", 3, "Configurazione");
       return -1;
     }
   }
@@ -517,6 +593,8 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("B3D616A2-33EF-4CE0-B6E7-08E5264BB63F", "Elimina Token Rimossi", "", 3, "Configurazione")) return 0;
       // 
       // Elimina Token Rimossi Body
       // Corpo Procedura
@@ -524,12 +602,18 @@ public partial class Configurazione : MyWebForm
       SQL = new StringBuilder();
       SQL.Append("delete from DEV_TOKENS ");
       SQL.Append("where (FLG_RIMOSSO = 'S') ");
+      MainFrm.DTTObj.AddQuery ("66DC064B-651B-4D3F-8DAB-0C823CA6940E", "Device Token (Notificatore DB): Delete", "", 256, SQL.ToString());
       MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+      MainFrm.DTTObj.EndQuery ("66DC064B-651B-4D3F-8DAB-0C823CA6940E");
+      MainFrm.DTTObj.AddParameter ("66DC064B-651B-4D3F-8DAB-0C823CA6940E", "", "Records affected", MainFrm.NotificatoreDBObject.DBO().RecordsAffected());
+      MainFrm.DTTObj.ExitProc("B3D616A2-33EF-4CE0-B6E7-08E5264BB63F", "Elimina Token Rimossi", "", 3, "Configurazione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("B3D616A2-33EF-4CE0-B6E7-08E5264BB63F", "Elimina Token Rimossi", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "EliminaTokenRimossi", _e);
+      MainFrm.DTTObj.ExitProc("B3D616A2-33EF-4CE0-B6E7-08E5264BB63F", "Elimina Token Rimossi", "", 3, "Configurazione");
       return -1;
     }
   }
@@ -549,18 +633,26 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("49745E72-0CA4-4AB9-9631-092D0C2682A6", "Ripulisci Spedizioni", "", 3, "Configurazione")) return 0;
       // 
       // Ripulisci Spedizioni Body
       // Corpo Procedura
       // 
       SQL = new StringBuilder();
       SQL.Append("delete from SPEDIZIONI ");
+      MainFrm.DTTObj.AddQuery ("96B713F7-B4B8-4A85-86E7-7DA64D44665C", "Spedizioni (Notificatore DB): Delete", "", 256, SQL.ToString());
       MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+      MainFrm.DTTObj.EndQuery ("96B713F7-B4B8-4A85-86E7-7DA64D44665C");
+      MainFrm.DTTObj.AddParameter ("96B713F7-B4B8-4A85-86E7-7DA64D44665C", "", "Records affected", MainFrm.NotificatoreDBObject.DBO().RecordsAffected());
+      MainFrm.DTTObj.ExitProc("49745E72-0CA4-4AB9-9631-092D0C2682A6", "Ripulisci Spedizioni", "", 3, "Configurazione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("49745E72-0CA4-4AB9-9631-092D0C2682A6", "Ripulisci Spedizioni", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "RipulisciSpedizioni", _e);
+      MainFrm.DTTObj.ExitProc("49745E72-0CA4-4AB9-9631-092D0C2682A6", "Ripulisci Spedizioni", "", 3, "Configurazione");
       return -1;
     }
   }
@@ -580,10 +672,13 @@ public partial class Configurazione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("D646AB83-F207-4E38-BF75-068F02D813BD", "Restart Applicazione", "", 3, "Configurazione")) return 0;
       // 
       // Restart Applicazione Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("D028A11A-D324-4242-8B26-C941267A0FA7", "Notificatore.Restart Application", "");
       try
       {
           // *** This requires full trust so this will fail
@@ -596,11 +691,49 @@ public partial class Configurazione : MyWebForm
           System.IO.File.SetLastWriteTimeUtc(ConfigPath, DateTime.UtcNow);
        }
        
+      MainFrm.DTTObj.ExitProc("D646AB83-F207-4E38-BF75-068F02D813BD", "Restart Applicazione", "", 3, "Configurazione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("D646AB83-F207-4E38-BF75-068F02D813BD", "Restart Applicazione", "", _e);
       MainFrm.ErrObj.ProcError ("Configurazione", "RestartApplicazione", _e);
+      MainFrm.DTTObj.ExitProc("D646AB83-F207-4E38-BF75-068F02D813BD", "Restart Applicazione", "", 3, "Configurazione");
+      return -1;
+    }
+  }
+
+  // **********************************************************************
+  // Test invio
+  // Spiega quale elaborazione viene eseguita da questa
+  // procedura
+  // **********************************************************************
+  public int Testinvio ()
+  {
+    StringBuilder SQL = new StringBuilder();
+    int TransCount   = 0;
+    int ReturnStatus = 0;
+    IDCachedRowSet QV;
+
+    try
+    {
+      TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("1B3710C3-C3A8-4A0F-9EF7-F9B77E090FB0", "Test invio", "", 3, "Configurazione")) return 0;
+      // 
+      // Test invio Body
+      // Corpo Procedura
+      // 
+      MainFrm.DTTObj.AddSubProc ("DD346D9D-1D15-4E22-9500-D1692228B7AB", "Notificatore.Send Mail", "");
+      MainFrm.SendMail((new IDVariant("Test invio mail da notificatore")), (new IDVariant("FUNZIONAAAA!")));
+      MainFrm.DTTObj.ExitProc("1B3710C3-C3A8-4A0F-9EF7-F9B77E090FB0", "Test invio", "", 3, "Configurazione");
+      return 0;
+    }
+    catch (Exception _e)
+    {
+      MainFrm.DTTObj.AddException("1B3710C3-C3A8-4A0F-9EF7-F9B77E090FB0", "Test invio", "", _e);
+      MainFrm.ErrObj.ProcError ("Configurazione", "Testinvio", _e);
+      MainFrm.DTTObj.ExitProc("1B3710C3-C3A8-4A0F-9EF7-F9B77E090FB0", "Test invio", "", 3, "Configurazione");
       return -1;
     }
   }
@@ -720,6 +853,13 @@ public partial class Configurazione : MyWebForm
       RestartApplicazione();
       Cancel.set(IDVariant.TRUE);
     }
+    if (ColIndex.intValue() == PFL_IMPOSTAZIONI_TESTINVIO)
+    {
+      this.IdxPanelActived = this.PAN_IMPOSTAZIONI.FrIndex;
+      this.IdxFieldActived = ColIndex.intValue();
+      Testinvio();
+      Cancel.set(IDVariant.TRUE);
+    }
   }
 
   private void PAN_IMPOSTAZIONI_ValidateCell(IDVariant ColIndex, IDVariant CellModified, IDVariant Cancel, IDVariant FldWasModified, IDVariant RowWasModified, IDVariant IsInsert)
@@ -751,6 +891,10 @@ public partial class Configurazione : MyWebForm
       {
         IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_CHECK, 0, (new IDVariant("N")));
       }
+      if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_DEL_REMOVED_TK, 0)))
+      {
+        IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_DEL_REMOVED_TK, 0, (new IDVariant("S")));
+      }
       if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_MAX_MESSAGGI, 0)))
       {
         IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_MAX_MESSAGGI, 0, (new IDVariant(200)));
@@ -759,13 +903,17 @@ public partial class Configurazione : MyWebForm
       {
         IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_NUM_TIMEOUT, 0, (new IDVariant(1)));
       }
-      if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_DEL_REMOVED_TK, 0)))
-      {
-        IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_DEL_REMOVED_TK, 0, (new IDVariant("S")));
-      }
       if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_MAX_MESSAGGI_C2DM, 0)))
       {
         IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_MAX_MESSAGGI_C2DM, 0, (new IDVariant(200)));
+      }
+      if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_DES_PASSWORD, 0)))
+      {
+        IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_DES_PASSWORD, 0, (new IDVariant("31/12/1999")));
+      }
+      if (IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_SSL, 0)))
+      {
+        IMDB.set_Value(IMDBDef1.PQRY_IMPOSTAZIONI, IMDBDef1.PQSL_IMPOSTAZIONI_FLG_SSL, 0, (new IDVariant("N")));
       }
     } catch ( Exception e) { }
   }
@@ -779,13 +927,13 @@ public partial class Configurazione : MyWebForm
   {
 
     PAN_IMPOSTAZIONI.SetSize(MyGlb.OBJ_PAGE, 0);
-    PAN_IMPOSTAZIONI.SetSize(MyGlb.OBJ_GROUP, 3);
+    PAN_IMPOSTAZIONI.SetSize(MyGlb.OBJ_GROUP, 4);
     PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, "797B8E46-E368-4B80-A3FE-F6A2B4119E54");
     PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, "Generale");
     PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, "");
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, MyGlb.VIS_DEFAPANESTYL);
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, MyGlb.PANEL_LIST, 0, -9999, 432, 16, 0, 0);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, MyGlb.PANEL_FORM, 8, 32, 636, 200, 0, 0);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, MyGlb.PANEL_FORM, 8, 32, 656, 200, 0, 0);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, 0, 51);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, 1, 15);
     PAN_IMPOSTAZIONI.SetHeaderPos(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_GENERALE, 0, 4);
@@ -796,7 +944,7 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, "");
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, MyGlb.VIS_DEFAPANESTYL);
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, MyGlb.PANEL_LIST, 0, -9999, 432, 16, 0, 0);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, MyGlb.PANEL_FORM, 8, 272, 636, 164, 0, 0);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, MyGlb.PANEL_FORM, 8, 272, 656, 164, 0, 0);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, 0, 55);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, 1, 15);
     PAN_IMPOSTAZIONI.SetHeaderPos(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_APPLEIOS, 0, 4);
@@ -813,7 +961,18 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetHeaderPos(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ANDROID, 0, 4);
     PAN_IMPOSTAZIONI.SetHeaderPos(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ANDROID, 1, 3);
     PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ANDROID, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE, -1);
-    PAN_IMPOSTAZIONI.SetSize(MyGlb.OBJ_FIELD, 19);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, "AE184661-EE50-41C2-9610-08FDC839B3BE");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, "Account di posta per l'invio degli errori");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, "");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, MyGlb.VIS_DEFAPANESTYL);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, MyGlb.PANEL_LIST, 0, -9999, 404, 16, 0, 0);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, MyGlb.PANEL_FORM, 8, 492, 656, 260, 0, 0);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, 0, 217);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, 1, 15);
+    PAN_IMPOSTAZIONI.SetHeaderPos(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, 0, 4);
+    PAN_IMPOSTAZIONI.SetHeaderPos(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, 1, 3);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_GROUP, GRP_IMPOSTAZIONI_ACDIPOPELIDE, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE, -1);
+    PAN_IMPOSTAZIONI.SetSize(MyGlb.OBJ_FIELD, 28);
     PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ID, "34E7468A-67A9-475C-999E-3EA95B3A9DEB");
     PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ID, "ID");
     PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ID, "Identificativo univoco");
@@ -825,10 +984,10 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.VIS_NORMALFIELDS);
     PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
     PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, "6ECBC05F-AC85-4FC1-97E8-3752FA2009C7");
-    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, "Invio Report Estrazioni");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, "Invio Report Estrazioni (not used)");
     PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, "Indirizzo di posta a cui inviare le estrazioni");
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.VIS_NORMALFIELDS);
-    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, 0 | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
     PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, "DEF66869-BF5B-4C34-B2FC-9781950BF0EB");
     PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, "Web Service Reference");
     PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, "");
@@ -871,11 +1030,21 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, "");
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.VIS_NORMALFIELDS);
     PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ACTIVE | MyGlb.FLD_ISOPT, -1);
-    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, "AFC3B42B-D7C9-4E70-A4FE-3266A9E3CB31");
-    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, "Numero massimo di messaggi per spedizione");
-    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, "Numero massimo di messaggi per spedizione singola");
-    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.VIS_NORMALFIELDS);
-    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, "168DAB52-D64B-45B7-8C10-A9099CE8D4B3");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, "Elimina definitivamente Token Rimossi");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, "");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, "AFC3B42B-D7C9-4E70-A4FE-3266A9E3CB31");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, "Numero messaggi per spedizione");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, "Numero massimo di messaggi per spedizione singola");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, "9BCA7537-2962-4DC4-9274-400210B00948");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, "Ritardo fra le spedizioni (in sec.)");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, "Ritardo in secondi fra una spedizione e l'altra");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
     PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, "1A3B0AF6-D6AF-423A-BD71-F7E29359D88D");
     PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, "Check manuale Feedback");
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.VIS_COMMANBUTTO1);
@@ -888,21 +1057,55 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, "Restart Applicazione");
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.VIS_COMMANBUTTO1);
     PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_INFORM | MyGlb.FLD_NOACTD | MyGlb.FLD_CANACTIVATE, -1);
-    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, "9BCA7537-2962-4DC4-9274-400210B00948");
-    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, "Ritardo fra le spedizioni (in sec.)");
-    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, "Ritardo in secondi fra una spedizione e l'altra");
-    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.VIS_NORMALFIELDS);
-    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
-    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, "168DAB52-D64B-45B7-8C10-A9099CE8D4B3");
-    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, "Elimina definitivamente Token Rimossi");
-    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, "");
-    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.VIS_NORMALFIELDS);
-    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
     PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, "A03F54BE-4FA5-46F6-9246-B4ACFC4DBC90");
     PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, "Max Messaggi Messaggi per spedizione");
     PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, "");
     PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, MyGlb.VIS_NORMALFIELDS);
     PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, 0 | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, "C6C8C004-30C5-47DA-AE62-958529D6528A");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, "Mittente");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, "Nome del Mittente (From Name)");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, "F5C61F2A-BA42-4FE0-BB81-FC945C5F6E9F");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, "Indirizzo");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, "Indirizzo della posta elettronica (From Address)");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT | MyGlb.FLD_ISDESCR, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, "57FDAE62-3806-4535-8724-4FC6A0E9C05B");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, "Posta In Uscita");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, "Indirizzo IP del mail server della posta in uscita (SMTP)");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, "EC54E0F6-7069-4CC7-8BA9-B10828A0D585");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, "Utente");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, "Utente di accesso alla posta");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, "25FB385E-9776-4A3A-8AD6-CEBCCA84F0B4");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, "Password");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, "Pasword user");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.VIS_PASSWORSTYLE);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, "9A680188-EEA0-416C-BD3E-B3B8064D38C6");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, "Porta Posta Uscita");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, "Porta SMTP posta in uscita (Default 25, 587 per gmail in SSL)");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, "FE7DEC28-46E6-4B19-9679-4EB3793E9F25");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, "Email Supporto");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, "Indirizzo della posta elettronica (From Address)");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT | MyGlb.FLD_ISDESCR, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, "1B329299-6129-483B-9674-6DE4A1EF2080");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, "Attiva SSL");
+    PAN_IMPOSTAZIONI.set_ToolTip(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, "Attiva il collegamento SSL");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.VIS_NORMALFIELDS);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_LISTLIST | MyGlb.FLD_INLIST | MyGlb.FLD_INFORM | MyGlb.FLD_ISOPT, -1);
+    PAN_IMPOSTAZIONI.SetRTCGuid(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, "59C1862D-9058-49E6-BB2A-499C770A47F9");
+    PAN_IMPOSTAZIONI.set_Header(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, "Test invio");
+    PAN_IMPOSTAZIONI.set_VisualStyle(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, MyGlb.VIS_COMMANBUTTO1);
+    PAN_IMPOSTAZIONI.SetFlags(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, 0 | MyGlb.OBJ_ENABLED | MyGlb.OBJ_VISIBLE | MyGlb.FLD_INFORM | MyGlb.FLD_NOACTD | MyGlb.FLD_CANACTIVATE, -1);
   }
 
   private void PAN_IMPOSTAZIONI_InitFields()
@@ -923,8 +1126,8 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_LIST, 116);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_LIST, 2);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_LIST, "Url Di Base Applicativo");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_FORM, 12, 36, 628, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_FORM, 12, 36, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_URLDIBASEAPP, MyGlb.PANEL_FORM, "Url Di Base Applicativo");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_URLDIBASEAPP, -1, GRP_IMPOSTAZIONI_GENERALE);
@@ -932,19 +1135,19 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_LIST, 0, 32, 432, 44, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_LIST, 120);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_LIST, 2);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_LIST, "Invio Report Estrazioni");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_FORM, 12, 68, 628, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_LIST, "Invio Report Estrazioni (not used)");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_FORM, 12, 68, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_FORM, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_FORM, "Invio Report Estrazioni");
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INVIREPOESTR, MyGlb.PANEL_FORM, "Invio Report Estrazioni (not used)");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_INVIREPOESTR, -1, GRP_IMPOSTAZIONI_GENERALE);
     PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_INVIREPOESTR, PPQRY_IMPOSTAZIONI, "A.ADMIN_MAIL", "ADMIN_MAIL", 5, 500, 0, -1709);
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_LIST, 0, 32, 432, 44, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_LIST, 124);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_LIST, 2);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_LIST, "Web Service Reference");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_FORM, 12, 100, 628, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_FORM, 12, 100, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_WEBSERVIREFE, MyGlb.PANEL_FORM, "Web Service Reference");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_WEBSERVIREFE, -1, GRP_IMPOSTAZIONI_GENERALE);
@@ -953,8 +1156,8 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_LIST, 100);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_LIST, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_LIST, "A. A. d. d. o. 4 s.");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_FORM, 12, 136, 364, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_FORM, 12, 136, 400, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUDEDAOG4S, MyGlb.PANEL_FORM, "Attiva Autorefresh dei dati (ogni 4 sec.)");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_ATAUDEDAOG4S, -1, GRP_IMPOSTAZIONI_GENERALE);
@@ -965,16 +1168,16 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_LIST, 88);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_LIST, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_LIST, "G. d. r. p. l. c. m.");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_FORM, 12, 168, 364, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_FORM, 12, 168, 392, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_FORM, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_FORM, "Gior. di retention per la coda messaggi");
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_GIDIREPELACM, MyGlb.PANEL_FORM, "Giorni di retention per la coda messaggi");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_GIDIREPELACM, -1, GRP_IMPOSTAZIONI_GENERALE);
     PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_GIDIREPELACM, PPQRY_IMPOSTAZIONI, "A.MAX_DAYS_RET", "MAX_DAYS_RET", 1, 5, 0, -1709);
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, MyGlb.PANEL_LIST, 376, 8, 120, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, MyGlb.PANEL_LIST, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, MyGlb.PANEL_FORM, 448, 136, 192, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, MyGlb.PANEL_FORM, 428, 136, 232, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, MyGlb.PANEL_FORM, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTINVINOTI, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_BOTTINVINOTI, -1, GRP_IMPOSTAZIONI_GENERALE);
@@ -982,7 +1185,7 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTRIPSPEINV, MyGlb.PANEL_LIST, 392, 24, 120, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTRIPSPEINV, MyGlb.PANEL_LIST, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTRIPSPEINV, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTRIPSPEINV, MyGlb.PANEL_FORM, 448, 168, 192, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTRIPSPEINV, MyGlb.PANEL_FORM, 428, 168, 232, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTRIPSPEINV, MyGlb.PANEL_FORM, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTRIPSPEINV, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_BOTRIPSPEINV, -1, GRP_IMPOSTAZIONI_GENERALE);
@@ -990,7 +1193,7 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTRIPUSPED, MyGlb.PANEL_LIST, 400, 32, 120, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTRIPUSPED, MyGlb.PANEL_LIST, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTRIPUSPED, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTRIPUSPED, MyGlb.PANEL_FORM, 448, 200, 192, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTRIPUSPED, MyGlb.PANEL_FORM, 428, 200, 232, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTRIPUSPED, MyGlb.PANEL_FORM, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTRIPUSPED, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_BOTTRIPUSPED, -1, GRP_IMPOSTAZIONI_GENERALE);
@@ -999,10 +1202,10 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_LIST, 40);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_LIST, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_LIST, "I. i. l. d. T. v. t. l.");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_FORM, 12, 200, 364, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_FORM, 12, 200, 392, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_FORM, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_FORM, "Imp. il livello di Trace vedi tabella log");
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_IMILLIDITVTL, MyGlb.PANEL_FORM, "Imposta il livello di Trace (vedi tabella log)");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_IMILLIDITVTL, -1, GRP_IMPOSTAZIONI_GENERALE);
     PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_IMILLIDITVTL, PPQRY_IMPOSTAZIONI, "A.FLG_DEBUG", "FLG_DEBUG", 1, 2, 0, -1709);
     PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_IMILLIDITVTL, (new IDVariant(0)), "Spento", "", "", -1);
@@ -1012,8 +1215,8 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_LIST, 100);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_LIST, 2);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_LIST, "Percorso Certificati notifiche push");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_FORM, 12, 276, 628, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_FORM, 12, 276, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PERCERNOTPUS, MyGlb.PANEL_FORM, "Percorso Certificati notifiche push");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_PERCERNOTPUS, -1, GRP_IMPOSTAZIONI_APPLEIOS);
@@ -1022,28 +1225,50 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_LIST, 140);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_LIST, 1);
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_LIST, "Att. Aut. Fd. og. 6. mn.");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_FORM, 12, 308, 364, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_FORM, 232);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_FORM, 12, 308, 400, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_FORM, 280);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_FORM, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_FORM, "Att. Autocheck Feedback ogni 60 min");
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATAUFEOG60MI, MyGlb.PANEL_FORM, "Attiva Autocheck Feedback (ogni 60 min.)");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_ATAUFEOG60MI, -1, GRP_IMPOSTAZIONI_APPLEIOS);
     PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_ATAUFEOG60MI, PPQRY_IMPOSTAZIONI, "A.FLG_CHECK", "FLG_CHECK", 5, 1, 0, -1709);
     PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ATAUFEOG60MI, (new IDVariant("N")), "No", "", "", -1);
     PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ATAUFEOG60MI, (new IDVariant("S")), "Si", "", "", -1);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_LIST, 0, 32, 76, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_LIST, 76);
-    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_LIST, "N. m. d. m. p. s.");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_FORM, 12, 372, 364, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_FORM, 232);
-    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_FORM, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMADIMEPESP, MyGlb.PANEL_FORM, "Num. mass. di mess. per spedizione");
-    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_NUMADIMEPESP, -1, GRP_IMPOSTAZIONI_APPLEIOS);
-    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_NUMADIMEPESP, PPQRY_IMPOSTAZIONI, "A.MAX_MESSAGGI", "MAX_MESSAGGI", 1, 5, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, 0, 32, 112, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, 112);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, "Elm. def. Tk. Rim.");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, 12, 340, 400, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, 280);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, "Elimina definitivamente Token Rimossi");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, -1, GRP_IMPOSTAZIONI_APPLEIOS);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, PPQRY_IMPOSTAZIONI, "A.FLG_DEL_REMOVED_TK", "FLG_DEL_REMOVED_TK", 5, 1, 0, -1709);
+    PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, (new IDVariant("S")), "Si", "", "", -1);
+    PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, (new IDVariant("N")), "No", "", "", -1);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_LIST, 0, 32, 76, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_LIST, 76);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_LIST, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_LIST, "N. m. p. sp.");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_FORM, 12, 372, 400, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_FORM, 280);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_NUMMESPERSPE, MyGlb.PANEL_FORM, "Numero messaggi per spedizione");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_NUMMESPERSPE, -1, GRP_IMPOSTAZIONI_APPLEIOS);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_NUMMESPERSPE, PPQRY_IMPOSTAZIONI, "A.MAX_MESSAGGI", "MAX_MESSAGGI", 1, 5, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, 0, 32, 100, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, 100);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, "Rt. f. l. spd. i. s.");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, 12, 404, 400, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, 280);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, "Ritardo fra le spedizioni (in sec.)");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_RIFRLESPINSE, -1, GRP_IMPOSTAZIONI_APPLEIOS);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_RIFRLESPINSE, PPQRY_IMPOSTAZIONI, "A.NUM_TIMEOUT", "NUM_TIMEOUT", 1, 8, 0, -1709);
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.PANEL_LIST, 384, 16, 120, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.PANEL_LIST, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.PANEL_FORM, 396, 308, 244, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.PANEL_FORM, 428, 308, 232, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.PANEL_FORM, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTTCHECFEED, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_BOTTCHECFEED, -1, GRP_IMPOSTAZIONI_APPLEIOS);
@@ -1051,7 +1276,7 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTELMAITORI, MyGlb.PANEL_LIST, 400, 32, 120, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTELMAITORI, MyGlb.PANEL_LIST, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTELMAITORI, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTELMAITORI, MyGlb.PANEL_FORM, 396, 344, 244, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTELMAITORI, MyGlb.PANEL_FORM, 428, 344, 232, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTELMAITORI, MyGlb.PANEL_FORM, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_BOTELMAITORI, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_BOTELMAITORI, -1, GRP_IMPOSTAZIONI_APPLEIOS);
@@ -1059,33 +1284,11 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.PANEL_LIST, 408, 40, 120, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.PANEL_LIST, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.PANEL_FORM, 396, 404, 244, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.PANEL_FORM, 428, 404, 232, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.PANEL_FORM, 0);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RESTARAPPLIC, MyGlb.PANEL_FORM, 1);
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_RESTARAPPLIC, -1, GRP_IMPOSTAZIONI_APPLEIOS);
     PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_RESTARAPPLIC, -1, "", "RESTARAPPLIC", 0, 0, 0, -1709);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, 0, 32, 100, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, 100);
-    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_LIST, "Rt. f. l. spd. i. s.");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, 12, 404, 364, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, 232);
-    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_RIFRLESPINSE, MyGlb.PANEL_FORM, "Ritardo fra le spedizioni (in sec.)");
-    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_RIFRLESPINSE, -1, -1);
-    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_RIFRLESPINSE, PPQRY_IMPOSTAZIONI, "A.NUM_TIMEOUT", "NUM_TIMEOUT", 1, 8, 0, -1709);
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, 0, 32, 112, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, 112);
-    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_LIST, "Elm. def. Tk. Rim.");
-    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, 12, 340, 364, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
-    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, 232);
-    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, 1);
-    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ELIDEFTOKRIM, MyGlb.PANEL_FORM, "Elimina definitivamente Token Rimossi");
-    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, -1, -1);
-    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, PPQRY_IMPOSTAZIONI, "A.FLG_DEL_REMOVED_TK", "FLG_DEL_REMOVED_TK", 5, 1, 0, -1709);
-    PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, (new IDVariant("S")), "Si", "", "", -1);
-    PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ELIDEFTOKRIM, (new IDVariant("N")), "No", "", "", -1);
     PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, MyGlb.PANEL_LIST, 0, 32, 108, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
     PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, MyGlb.PANEL_LIST, 108);
     PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, MyGlb.PANEL_LIST, 1);
@@ -1096,6 +1299,96 @@ public partial class Configurazione : MyWebForm
     PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MAXMESMEPESP, MyGlb.PANEL_FORM, "Max Messaggi Messaggi per spedizione");
     PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_MAXMESMEPESP, -1, GRP_IMPOSTAZIONI_ANDROID);
     PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_MAXMESMEPESP, PPQRY_IMPOSTAZIONI, "A.MAX_MESSAGGI_C2DM", "MAX_MESSAGGI_C2DM", 1, 5, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_LIST, 0, 36, 304, 48, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_LIST, 56);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_LIST, 2);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_LIST, "Mittente");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_FORM, 12, 496, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_MITTENTE, MyGlb.PANEL_FORM, "Mittente");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_MITTENTE, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_MITTENTE, PPQRY_IMPOSTAZIONI, "A.DES_MITTENTE", "DES_MITTENTE", 5, 100, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_LIST, 0, 36, 304, 48, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_LIST, 56);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_LIST, 2);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_LIST, "Indirizzo");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_FORM, 12, 528, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_INDIRIZZO, MyGlb.PANEL_FORM, "Indirizzo");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_INDIRIZZO, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_INDIRIZZO, PPQRY_IMPOSTAZIONI, "A.DES_INDIRIZZO", "DES_INDIRIZZO", 5, 100, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_LIST, 0, 36, 404, 64, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_LIST, 100);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_LIST, 3);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_LIST, "Posta In Uscita");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_FORM, 12, 560, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_POSTAINUSCIT, MyGlb.PANEL_FORM, "Posta In Uscita");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_POSTAINUSCIT, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_POSTAINUSCIT, PPQRY_IMPOSTAZIONI, "A.DES_SERVER_OUT", "DES_SERVER_OUT", 5, 200, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_LIST, 0, 36, 304, 48, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_LIST, 48);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_LIST, 2);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_LIST, "Utente");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_FORM, 12, 592, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_UTENTE, MyGlb.PANEL_FORM, "Utente");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_UTENTE, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_UTENTE, PPQRY_IMPOSTAZIONI, "A.DES_LOGIN", "DES_LOGIN", 5, 100, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_LIST, 0, 36, 304, 48, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_LIST, 68);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_LIST, 2);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_LIST, "Password");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_FORM, 12, 624, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PASSWORD, MyGlb.PANEL_FORM, "Password");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_PASSWORD, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_PASSWORD, PPQRY_IMPOSTAZIONI, "A.DES_PASSWORD", "DES_PASSWORD", 5, 200, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_LIST, 0, 36, 120, 32, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_LIST, 120);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_LIST, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_LIST, "Porta Posta Uscita");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_FORM, 12, 656, 348, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_PORTPOSTUSCI, MyGlb.PANEL_FORM, "Porta Posta Uscita");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_PORTPOSTUSCI, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_PORTPOSTUSCI, PPQRY_IMPOSTAZIONI, "A.CDN_PORTA_OUT", "CDN_PORTA_OUT", 1, 4, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_LIST, 0, 36, 304, 48, MyGlb.RESMODE_STRETCH, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_LIST, 100);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_LIST, 2);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_LIST, "Email Supporto");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_FORM, 12, 688, 648, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_EMAILSUPPORT, MyGlb.PANEL_FORM, "Email Supporto");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_EMAILSUPPORT, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_EMAILSUPPORT, PPQRY_IMPOSTAZIONI, "A.DES_INDIRIZZO_SUPP", "DES_INDIRIZZO_SUPP", 5, 100, 0, -1709);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_LIST, 0, 36, 72, 32, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_LIST, 72);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_LIST, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_LIST, "Attiva SSL");
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_FORM, 12, 720, 348, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_FORM, 276);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetAbbrHeader(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_ATTIVASSL, MyGlb.PANEL_FORM, "Attiva SSL");
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_ATTIVASSL, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_ATTIVASSL, PPQRY_IMPOSTAZIONI, "A.FLG_SSL", "FLG_SSL", 5, 1, 0, -1709);
+    PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ATTIVASSL, (new IDVariant("N")), "No", "", "", -1);
+    PAN_IMPOSTAZIONI.SetValueListItem(PFL_IMPOSTAZIONI_ATTIVASSL, (new IDVariant("S")), "Si", "", "", -1);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, MyGlb.PANEL_LIST, 416, 48, 120, 20, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, MyGlb.PANEL_LIST, 0);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, MyGlb.PANEL_LIST, 1);
+    PAN_IMPOSTAZIONI.SetRect(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, MyGlb.PANEL_FORM, 428, 720, 232, 28, MyGlb.RESMODE_NONE, MyGlb.RESMODE_NONE);
+    PAN_IMPOSTAZIONI.SetHeaderSize(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, MyGlb.PANEL_FORM, 0);
+    PAN_IMPOSTAZIONI.SetNumRow(MyGlb.OBJ_FIELD, PFL_IMPOSTAZIONI_TESTINVIO, MyGlb.PANEL_FORM, 1);
+    PAN_IMPOSTAZIONI.SetFieldPage(PFL_IMPOSTAZIONI_TESTINVIO, -1, GRP_IMPOSTAZIONI_ACDIPOPELIDE);
+    PAN_IMPOSTAZIONI.SetFieldPanel(PFL_IMPOSTAZIONI_TESTINVIO, -1, "", "TESTINVIO", 0, 0, 0, -1709);
   }
 
   private void PAN_IMPOSTAZIONI_InitQueries()
@@ -1119,8 +1412,16 @@ public partial class Configurazione : MyWebForm
     SQL.Append("  A.MAX_DAYS_RET as MAX_DAYS_RET, ");
     SQL.Append("  A.FLG_DEL_REMOVED_TK as FLG_DEL_REMOVED_TK, ");
     SQL.Append("  A.MAX_MESSAGGI_C2DM as MAX_MESSAGGI_C2DM, ");
-    SQL.Append("  A.FLG_DEBUG as FLG_DEBUG ");
-    PAN_IMPOSTAZIONI.SetQuery(PPQRY_IMPOSTAZIONI, 0, SQL, -1, "");
+    SQL.Append("  A.FLG_DEBUG as FLG_DEBUG, ");
+    SQL.Append("  A.DES_MITTENTE as DES_MITTENTE, ");
+    SQL.Append("  A.DES_INDIRIZZO as DES_INDIRIZZO, ");
+    SQL.Append("  A.DES_SERVER_OUT as DES_SERVER_OUT, ");
+    SQL.Append("  A.DES_LOGIN as DES_LOGIN, ");
+    SQL.Append("  A.DES_PASSWORD as DES_PASSWORD, ");
+    SQL.Append("  A.CDN_PORTA_OUT as CDN_PORTA_OUT, ");
+    SQL.Append("  A.DES_INDIRIZZO_SUPP as DES_INDIRIZZO_SUPP, ");
+    SQL.Append("  A.FLG_SSL as FLG_SSL ");
+    PAN_IMPOSTAZIONI.SetQuery(PPQRY_IMPOSTAZIONI, 0, SQL, -1, "7865C433-1536-4464-B2D8-7236AEFB4711");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  IMPOSTAZIONI A ");
@@ -1361,6 +1662,10 @@ public partial class Configurazione : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

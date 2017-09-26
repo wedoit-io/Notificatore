@@ -1,6 +1,6 @@
 // **********************************************
 // Impostazioni Win Store
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -331,15 +331,24 @@ public partial class ImpostazioniWinStore : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("1700D462-BDD8-4F8F-A1EC-900355141F6E", "Apps Push Settings Before Insert", "", 0, "Impostazioni Win Store")) return;
+      MainFrm.DTTObj.AddParameter ("1700D462-BDD8-4F8F-A1EC-900355141F6E", "37A3E210-9CE0-4D2F-9288-5A1FB2D29898", "Cancel", Cancel);
       // 
       // Apps Push Settings Before Insert Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddAssign ("9C5D7227-5CAC-4889-91A7-538FC65838A0", "Type OS Applicazione [Impostazioni Win Store - Apps Push Settings] := Windows Store", "", IMDB.Value(IMDBDef1.PQRY_APPLICAZION4, IMDBDef1.PQSL_APPLICAZION4_TYPE_OS, 0));
+      MainFrm.DTTObj.AddToken ("9C5D7227-5CAC-4889-91A7-538FC65838A0", "A7370DFC-A1F6-441C-A770-C4B9D3C303F6", 589824, "Windows Store", (new IDVariant("5")));
       IMDB.set_Value(IMDBDef1.PQRY_APPLICAZION4, IMDBDef1.PQSL_APPLICAZION4_TYPE_OS, 0, (new IDVariant("5")));
+      MainFrm.DTTObj.AddAssignNewValue ("9C5D7227-5CAC-4889-91A7-538FC65838A0", "B4185487-6BA3-431C-8EDB-0DDEAF720129", IMDB.Value(IMDBDef1.PQRY_APPLICAZION4, IMDBDef1.PQSL_APPLICAZION4_TYPE_OS, 0));
+      MainFrm.DTTObj.ExitProc("1700D462-BDD8-4F8F-A1EC-900355141F6E", "Apps Push Settings Before Insert", "", 0, "Impostazioni Win Store");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("1700D462-BDD8-4F8F-A1EC-900355141F6E", "Apps Push Settings Before Insert", "", _e);
       MainFrm.ErrObj.ProcError ("ImpostazioniWinStore", "AppsPushSettingsBeforeInsert", _e);
+      MainFrm.DTTObj.ExitProc("1700D462-BDD8-4F8F-A1EC-900355141F6E", "Apps Push Settings Before Insert", "", 0, "Impostazioni Win Store");
     }
   }
 
@@ -627,7 +636,7 @@ public partial class ImpostazioniWinStore : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPS A ");
     SQL.Append("where (A.ID = ~~ID_APP~~) ");
-    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPS, 0, SQL, PFL_APPSPUSHSETT_APPLICAZIONE, "");
+    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPS, 0, SQL, PFL_APPSPUSHSETT_APPLICAZIONE, "560F5B83-7869-4ABE-B8D0-BD361A5C7449");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as ID, ");
@@ -649,7 +658,7 @@ public partial class ImpostazioniWinStore : MyWebForm
     SQL.Append("  A.WNS_SECRET as WNS_SECRET, ");
     SQL.Append("  A.WNS_SID as WNS_SID, ");
     SQL.Append("  A.WNS_XML as WNS_XML ");
-    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZION4, 0, SQL, -1, "");
+    PAN_APPSPUSHSETT.SetQuery(PPQRY_APPLICAZION4, 0, SQL, -1, "E83E86B3-B888-4A39-84AD-D88476B557AA");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPS_PUSH_SETTING A ");
@@ -891,6 +900,10 @@ public partial class ImpostazioniWinStore : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

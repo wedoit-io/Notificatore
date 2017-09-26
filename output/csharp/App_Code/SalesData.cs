@@ -1,6 +1,6 @@
 // **********************************************
 // Sales Data
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -788,7 +788,7 @@ public partial class SalesData : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPLE_PROD_TYPES_IDENT A ");
     SQL.Append("where (A.IDENTIFIER = ~~PROD_TYPE_IDENTIFIER~~) ");
-    PAN_SALESDATA.SetQuery(PPQRY_PRODTYPEIDEN, 0, SQL, PFL_SALESDATA_PRODTYPEIDEN, "");
+    PAN_SALESDATA.SetQuery(PPQRY_PRODTYPEIDEN, 0, SQL, PFL_SALESDATA_PRODTYPEIDEN, "A226C27C-50DC-4129-B7B6-E0617762E034");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.IDENTIFIER as IDEPROTYPIDE, ");
@@ -806,7 +806,7 @@ public partial class SalesData : MyWebForm
     SQL.Append("where (A.CODE = ~~CUST_CURRENCY~~) ");
     SQL.Append("order by ");
     SQL.Append("  A.DESCRIPTION ");
-    PAN_SALESDATA.SetQuery(PPQRY_CURRENCIES1, 0, SQL, PFL_SALESDATA_CUSTOMCURREN, "");
+    PAN_SALESDATA.SetQuery(PPQRY_CURRENCIES1, 0, SQL, PFL_SALESDATA_CUSTOMCURREN, "7510CABC-86B8-4042-949E-CAE3CAF624A8");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.CODE as CODECURRENCY, ");
@@ -826,7 +826,7 @@ public partial class SalesData : MyWebForm
     SQL.Append("where (A.CODE = ~~COUNTRY_CODE~~) ");
     SQL.Append("order by ");
     SQL.Append("  A.DESCRIPTION ");
-    PAN_SALESDATA.SetQuery(PPQRY_COUNTRYCODES, 0, SQL, PFL_SALESDATA_COUNTRYCODE, "");
+    PAN_SALESDATA.SetQuery(PPQRY_COUNTRYCODES, 0, SQL, PFL_SALESDATA_COUNTRYCODE, "B6742405-ABF5-4046-98D2-E798701B6E64");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.CODE as CODECOUNCODE, ");
@@ -846,7 +846,7 @@ public partial class SalesData : MyWebForm
     SQL.Append("where (A.CODE = ~~CURRENCY_PROCEED~~) ");
     SQL.Append("order by ");
     SQL.Append("  A.DESCRIPTION ");
-    PAN_SALESDATA.SetQuery(PPQRY_CURRENCIES, 0, SQL, PFL_SALESDATA_CURRENPROCEE, "");
+    PAN_SALESDATA.SetQuery(PPQRY_CURRENCIES, 0, SQL, PFL_SALESDATA_CURRENPROCEE, "53C7414D-5728-40BC-BBD5-0EB5E55449E1");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.CODE as CODECURRENCY, ");
@@ -866,7 +866,7 @@ public partial class SalesData : MyWebForm
     SQL.Append("where (A.CODE = ~~CODE~~) ");
     SQL.Append("order by ");
     SQL.Append("  A.DESCRIPTION ");
-    PAN_SALESDATA.SetQuery(PPQRY_PROMOCODES, 0, SQL, PFL_SALESDATA_PROMOCODE, "");
+    PAN_SALESDATA.SetQuery(PPQRY_PROMOCODES, 0, SQL, PFL_SALESDATA_PROMOCODE, "6EF12705-2376-457E-AA6E-7CB99529B159");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.CODE as CODEPROMCODE, ");
@@ -902,7 +902,7 @@ public partial class SalesData : MyWebForm
     SQL.Append("  A.SUBSCRIPTION as SUBSCRIPTION, ");
     SQL.Append("  A.PERIOD as PERIOD, ");
     SQL.Append("  A.ID as ID ");
-    PAN_SALESDATA.SetQuery(PPQRY_SALESDATA1, 0, SQL, -1, "");
+    PAN_SALESDATA.SetQuery(PPQRY_SALESDATA1, 0, SQL, -1, "E30F0CA8-BDF8-4B7D-A898-AB3545CA7A43");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPLE_SALES_DATA A ");
@@ -1142,6 +1142,10 @@ public partial class SalesData : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

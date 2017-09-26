@@ -78,12 +78,21 @@ MessageBox.prototype.Realize = function()
   //
   // Testo del messaggio vero e proprio
   this.MsgTxt = document.createElement("span");
-  this.MsgTxt.innerHTML = this.MessageText;
   this.MsgTxt.className = "popup-text";
+  //
+  if (this.MessageText.indexOf("cls=") == 0 && this.MessageText.indexOf(",") != -1)
+  {
+    // Il testo contiene una classe CSS, la uso
+    var cls = this.MessageText.split(",")[0].substring(4);
+    this.MsgTxt.innerHTML = this.MessageText.split(",")[1];
+    RD3_Glb.AddClass(this.PopupBox, cls);
+  }
+  else
+    this.MsgTxt.innerHTML = this.MessageText;
   //
   // Se c'e' un solo nodo di tipo TEXT allora e' testo puro. Cambio i \n in <br/>
   if (this.MsgTxt.childNodes.length==1 && !this.MsgTxt.childNodes[0].tagName)
-    this.MsgTxt.innerHTML = this.MessageText.replace(/\n/g, "<br/>");
+    this.MsgTxt.innerHTML = this.MsgTxt.innerHTML.replace(/\n/g, "<br/>");
   //
   // DIV contenente l'eventuale input per l'InputBox
   this.MsgInputDiv = document.createElement("div");
@@ -106,16 +115,14 @@ MessageBox.prototype.Realize = function()
 	  if (this.Options == "")
 	  {
   	  // Creo i pulsanti per confermare o annullare
-  	  this.ConfirmButton = document.createElement("input");
-  	  this.ConfirmButton.type = "button";
-  	  this.ConfirmButton.value = ClientMessages.MSG_POPUP_YesButton;
-  	  this.ConfirmButton.className = "popup-button";
+  	  this.ConfirmButton = document.createElement("button");
+  	  this.ConfirmButton.innerHTML = ClientMessages.MSG_POPUP_YesButton;
+  	  this.ConfirmButton.className = "popup-button popup-button-yes";
   	  this.ConfirmButton.id = this.Identifier + ":yes";
   	  //
-  	  this.CancelButton = document.createElement("input");
-  	  this.CancelButton.type = "button";
-  	  this.CancelButton.value = ClientMessages.MSG_POPUP_NoButton;
-  	  this.CancelButton.className = "popup-button";
+  	  this.CancelButton = document.createElement("button");
+  	  this.CancelButton.innerHTML = ClientMessages.MSG_POPUP_NoButton;
+  	  this.CancelButton.className = "popup-button popup-button-no";
   	  this.CancelButton.id = this.Identifier + ":no";
   	  //
   	  RD3_Glb.AddClass(RD3_ClientParams.DefaultButton?this.ConfirmButton:this.CancelButton,"popup-button-default");
@@ -143,9 +150,8 @@ MessageBox.prototype.Realize = function()
       //
       for (var i=0; i<opts.length; i++)
       {
-        var optButton = document.createElement("input");
-    	  optButton.type = "button";
-    	  optButton.value = opts[i];
+        var optButton = document.createElement("button");
+    	  optButton.innerHTML = opts[i];
     	  optButton.className = "popup-button-opt";
     	  optButton.id = this.Identifier + ":opt" + i;
     	  if (RD3_Glb.IsMobile7())
@@ -186,16 +192,14 @@ MessageBox.prototype.Realize = function()
       this.MsgInput.onblur = new Function("ev","document.body.scrollTop = 0;");
     //
 	  // Creo i pulsanti  per confermare o annullare
-	  this.ConfirmButton = document.createElement("input");
-	  this.ConfirmButton.type = "button";
-	  this.ConfirmButton.value = ClientMessages.MSG_POPUP_OkButton;
-	  this.ConfirmButton.className = "popup-button";
+	  this.ConfirmButton = document.createElement("button");
+	  this.ConfirmButton.innerHTML = ClientMessages.MSG_POPUP_OkButton;
+	  this.ConfirmButton.className = "popup-button popup-button-yes";
 	  this.ConfirmButton.id = this.Identifier + ":yes";
 	  //
-	  this.CancelButton = document.createElement("input");
-	  this.CancelButton.type = "button";
-	  this.CancelButton.value = ClientMessages.MSG_POPUP_CancelButton;
-	  this.CancelButton.className = "popup-button";
+	  this.CancelButton = document.createElement("button");
+	  this.CancelButton.innerHTML = ClientMessages.MSG_POPUP_CancelButton;
+	  this.CancelButton.className = "popup-button popup-button-no";
 	  this.CancelButton.id = this.Identifier + ":no";
 	  //
 	  RD3_Glb.AddClass(RD3_ClientParams.DefaultButton?this.ConfirmButton:this.CancelButton,"popup-button-default");
@@ -223,10 +227,9 @@ MessageBox.prototype.Realize = function()
 	  if (!mob) this.MsgIcon.src = RD3_Glb.GetImgSrc("images/dlg_warn.gif");
 	  //
 	  // Creo il pulsante di chiusura message box
-	  this.ConfirmButton = document.createElement("input");
-	  this.ConfirmButton.type = "button";
-	  this.ConfirmButton.value = ClientMessages.MSG_POPUP_OkButton;
-	  this.ConfirmButton.className = "popup-button";
+	  this.ConfirmButton = document.createElement("button");
+	  this.ConfirmButton.innerHTML = "<span>" + ClientMessages.MSG_POPUP_OkButton + "</span>";
+	  this.ConfirmButton.className = "popup-button popup-button-yes";
 	  this.ConfirmButton.id = this.Identifier + ":yes";
 	  //
 	  // Gestisco il click sul pulsante

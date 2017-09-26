@@ -601,7 +601,7 @@ TabbedView.prototype.AdaptLayout = function()
 	}
 	if (this.Placement == RD3_Glb.TABOR_RIGHT)
 	{
-	  this.ToolbarBox.style.left = RD3_Glb.IsMobile() ? this.ContentBox.offsetWidth + "px" : (this.ContentBox.offsetWidth + this.ToolbarBox.offsetHeight + 2) + "px";
+	  this.ToolbarBox.style.left = RD3_Glb.IsMobile() ? this.ContentBox.offsetWidth + "px" : (this.ContentBox.offsetWidth + this.ToolbarBox.offsetHeight) + "px";
 	  this.ToolbarBox.style.top = "0px";
 	  this.ContentBox.style.left = "0px";
 	  this.ContentBox.style.top = "0px";

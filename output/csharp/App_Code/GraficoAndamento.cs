@@ -1,6 +1,6 @@
 // **********************************************
 // Grafico Andamento
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -280,7 +280,7 @@ public partial class GraficoAndamento : MyWebForm
     SQL.Append("and   (~~PQRY_SELETTGRAFI1.DATAASELEGRA~~ >= A.DATA OR (~~PQRY_SELETTGRAFI1.DATAASELEGRA~~ IS NULL)) ");
     SQL.Append("group by ");
     SQL.Append("  A.DATA ");
-    GRH_GRAFTEMPORAL.SetQuery(SQL, MainFrm.NotificatoreDBObject.DB, MainFrm, "");
+    GRH_GRAFTEMPORAL.SetQuery(SQL, MainFrm.NotificatoreDBObject.DB, MainFrm, "576EEBA1-76E8-4A70-A1AA-593D155A0DBA");
     GRH_GRAFTEMPORAL.SetIMDBTable(IMDBDef1.PQRY_STATAPPLE1);
     GRH_GRAFTEMPORAL.set_NumSeries(1);
     GRH_GRAFTEMPORAL.set_SerieLabel(1,"Units");
@@ -496,16 +496,25 @@ public partial class GraficoAndamento : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("4419AA2A-ECFD-4195-9553-C27E69C60EFA", "Load", "", 0, "Grafico Andamento")) return;
       // 
       // Load Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("B930A9F9-E049-473A-AE6B-99A867DD1E35", "Graf Temporale.Set Type", "");
+      MainFrm.DTTObj.AddParameter ("B930A9F9-E049-473A-AE6B-99A867DD1E35", "D4D1886A-BBAF-4327-A40E-41F2EC1455A1", "Graph Type", (new IDVariant(2)));
       GRH_GRAFTEMPORAL.set_ChartType((new IDVariant(2)).intValue()); 
+      MainFrm.DTTObj.AddSubProc ("5701B254-A9AF-4300-8347-11D3826ECB26", "Graf Temporale.Set Library", "");
+      MainFrm.DTTObj.AddParameter ("5701B254-A9AF-4300-8347-11D3826ECB26", "5CCE4546-BA8B-4F84-B04E-9308F9F5DD9A", "Library", (new IDVariant(2)));
       GRH_GRAFTEMPORAL.setLibrary((new IDVariant(2)).intValue()); 
+      MainFrm.DTTObj.ExitProc("4419AA2A-ECFD-4195-9553-C27E69C60EFA", "Load", "", 0, "Grafico Andamento");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("4419AA2A-ECFD-4195-9553-C27E69C60EFA", "Load", "", _e);
       MainFrm.ErrObj.ProcError ("GraficoAndamento", "Load", _e);
+      MainFrm.DTTObj.ExitProc("4419AA2A-ECFD-4195-9553-C27E69C60EFA", "Load", "", 0, "Grafico Andamento");
     }
   }
 
@@ -778,7 +787,7 @@ public partial class GraficoAndamento : MyWebForm
     SQL.Append("from ");
     SQL.Append("  UTENTI A ");
     SQL.Append("where (A.ID = ~~ID_UTENTE~~) ");
-    PAN_SELETTORE.SetQuery(PPQRY_UTENTI, 0, SQL, PFL_SELETTORE_UTENTE, "");
+    PAN_SELETTORE.SetQuery(PPQRY_UTENTI, 0, SQL, PFL_SELETTORE_UTENTE, "2387A4B9-B92B-4255-9ACD-5D192B1DE864");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDUTENTE, ");
@@ -800,7 +809,7 @@ public partial class GraficoAndamento : MyWebForm
     SQL.Append("and   ((~~ID_UTENTE~~ = B.ID_UTENTE) OR (~~ID_UTENTE~~ IS NULL)) ");
     SQL.Append("order by ");
     SQL.Append("  A.NOME_APP ");
-    PAN_SELETTORE.SetQuery(PPQRY_APPS, 0, SQL, PFL_SELETTORE_APP, "");
+    PAN_SELETTORE.SetQuery(PPQRY_APPS, 0, SQL, PFL_SELETTORE_APP, "ADC75E07-9F42-47A9-8D70-E0E287AB1986");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPP, ");
@@ -933,7 +942,7 @@ public partial class GraficoAndamento : MyWebForm
     SQL.Append("  A.GIORNO as GIOSTAAPPREC, ");
     SQL.Append("  A.DATA as DATSTAAPPREC, ");
     SQL.Append("  SUM(A.UNITS) as UNITSRECORD ");
-    PAN_DATI.SetQuery(PPQRY_STATAPPLE, 0, SQL, -1, "");
+    PAN_DATI.SetQuery(PPQRY_STATAPPLE, 0, SQL, -1, "48826B01-EB98-4E1A-9AF7-F244610492D8");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  V_STAT_APPLE A ");
@@ -1002,7 +1011,7 @@ public partial class GraficoAndamento : MyWebForm
     SQL = new StringBuilder();
     SQL.Append("select distinct ");
     SQL.Append("  A.BEGIN_DATE as DATEMANCRECO ");
-    PAN_DATENONCARIC.SetQuery(PPQRY_SALESDATA, 0, SQL, -1, "");
+    PAN_DATENONCARIC.SetQuery(PPQRY_SALESDATA, 0, SQL, -1, "1044AD02-542A-4D2A-BA6B-0636E4F66C45");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPLE_SALES_DATA A ");
@@ -1256,6 +1265,10 @@ public partial class GraficoAndamento : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

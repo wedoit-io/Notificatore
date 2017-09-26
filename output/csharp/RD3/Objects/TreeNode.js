@@ -1170,6 +1170,10 @@ TreeNode.prototype.OnTouchUp= function(evento, click)
 				this.OnExpandNode(evento);
 			else
 				this.OnClickNode(evento);
+      //
+      // Anche qui tolgo l'evidenziazione, ci pensera' l'activate
+      this.ParentTree.ActiveNode = null;
+      this.SetNodeClass(false, true);	  
 		}
 		else
 		{

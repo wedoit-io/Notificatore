@@ -1,6 +1,6 @@
 // **********************************************
 // Logs
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -333,19 +333,28 @@ public partial class Logs : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("6AA55357-543C-455E-A695-EE89CC4BBF95", "Svuota log", "", 3, "Logs")) return 0;
       // 
       // Svuota log Body
       // Corpo Procedura
       // 
       SQL = new StringBuilder();
       SQL.Append("delete from LOGS ");
+      MainFrm.DTTObj.AddQuery ("2933944A-37E9-4BF5-894E-8AB7A35DEA31", "Logs (Notificatore DB): Delete", "", 256, SQL.ToString());
       MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+      MainFrm.DTTObj.EndQuery ("2933944A-37E9-4BF5-894E-8AB7A35DEA31");
+      MainFrm.DTTObj.AddParameter ("2933944A-37E9-4BF5-894E-8AB7A35DEA31", "", "Records affected", MainFrm.NotificatoreDBObject.DBO().RecordsAffected());
+      MainFrm.DTTObj.AddSubProc ("79763834-D0E2-42B0-B456-16D51795D81D", "Logs.Refresh Query", "");
       PAN_LOGS.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("6AA55357-543C-455E-A695-EE89CC4BBF95", "Svuota log", "", 3, "Logs");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("6AA55357-543C-455E-A695-EE89CC4BBF95", "Svuota log", "", _e);
       MainFrm.ErrObj.ProcError ("Logs", "Svuotalog", _e);
+      MainFrm.DTTObj.ExitProc("6AA55357-543C-455E-A695-EE89CC4BBF95", "Svuota log", "", 3, "Logs");
       return -1;
     }
   }
@@ -365,19 +374,28 @@ public partial class Logs : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("E669A68B-C87C-4DAE-B33E-C1491D2CCC67", "Etichetta Apri log spedizioni", "", 3, "Logs")) return 0;
       // 
       // Etichetta Apri log spedizioni Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("55CEEE40-8DED-4B05-959E-B59ADCF76107", "Notificatore.Open Document", "");
+      MainFrm.DTTObj.AddParameter ("55CEEE40-8DED-4B05-959E-B59ADCF76107", "32ED4490-BF24-425F-AB81-BA3B34E173C4", "documento", (new IDVariant("temp\\NotificationLOG.txt")));
+      MainFrm.DTTObj.AddParameter ("55CEEE40-8DED-4B05-959E-B59ADCF76107", "35F3EAD7-F6CE-4DD4-B5CC-D28894B0C7EC", "nuova finestra", (new IDVariant(-1)).booleanValue());
       MainFrm.set_RedirectTo((new IDVariant("temp\\NotificationLOG.txt")));
       MainFrm.set_RedirectNewWindow((new IDVariant(-1)).booleanValue());
       MainFrm.set_RedirectFeatures((new IDVariant(""))); 
+      MainFrm.DTTObj.AddSubProc ("EC899756-A61B-426C-B190-FBEE906DE3A8", "Logs.Refresh Query", "");
       PAN_LOGS.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("E669A68B-C87C-4DAE-B33E-C1491D2CCC67", "Etichetta Apri log spedizioni", "", 3, "Logs");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("E669A68B-C87C-4DAE-B33E-C1491D2CCC67", "Etichetta Apri log spedizioni", "", _e);
       MainFrm.ErrObj.ProcError ("Logs", "EtichettaAprilogspedizioni", _e);
+      MainFrm.DTTObj.ExitProc("E669A68B-C87C-4DAE-B33E-C1491D2CCC67", "Etichetta Apri log spedizioni", "", 3, "Logs");
       return -1;
     }
   }
@@ -397,19 +415,28 @@ public partial class Logs : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("E0933FE6-EDC5-49C9-A6FA-8C329E9EEE5E", "Etichetta Apri log feedback", "", 3, "Logs")) return 0;
       // 
       // Etichetta Apri log feedback Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("1DD257CD-0FB4-420C-AF9F-E0BCC8616203", "Notificatore.Open Document", "");
+      MainFrm.DTTObj.AddParameter ("1DD257CD-0FB4-420C-AF9F-E0BCC8616203", "510E7335-9F41-47C4-A8A8-AB17C690C0DA", "documento", (new IDVariant("temp\\FeedbackLOG.txt")));
+      MainFrm.DTTObj.AddParameter ("1DD257CD-0FB4-420C-AF9F-E0BCC8616203", "05AB5FE1-480B-4109-84A0-2C500C977B01", "nuova finestra", (new IDVariant(-1)).booleanValue());
       MainFrm.set_RedirectTo((new IDVariant("temp\\FeedbackLOG.txt")));
       MainFrm.set_RedirectNewWindow((new IDVariant(-1)).booleanValue());
       MainFrm.set_RedirectFeatures((new IDVariant(""))); 
+      MainFrm.DTTObj.AddSubProc ("4C9557F6-AAA2-4CAA-A22D-D25A260DD0A9", "Logs.Refresh Query", "");
       PAN_LOGS.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("E0933FE6-EDC5-49C9-A6FA-8C329E9EEE5E", "Etichetta Apri log feedback", "", 3, "Logs");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("E0933FE6-EDC5-49C9-A6FA-8C329E9EEE5E", "Etichetta Apri log feedback", "", _e);
       MainFrm.ErrObj.ProcError ("Logs", "EtichettaAprilogfeedback", _e);
+      MainFrm.DTTObj.ExitProc("E0933FE6-EDC5-49C9-A6FA-8C329E9EEE5E", "Etichetta Apri log feedback", "", 3, "Logs");
       return -1;
     }
   }
@@ -429,17 +456,26 @@ public partial class Logs : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("97CE1CCA-C813-4B59-A35F-19054B483C39", "Elimina LOG Filesystem", "", 3, "Logs")) return 0;
       // 
       // Elimina LOG Filesystem Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("51152A31-D821-447F-8867-0C5EAFD896CC", "Notificatore.Delete File", "");
+      MainFrm.DTTObj.AddParameter ("51152A31-D821-447F-8867-0C5EAFD896CC", "07FE6228-8341-4EC2-B3C1-F1BC40BE9C97", "Percorso", IDL.Add(IDL.Add((new IDVariant(MainFrm.RealPath)), (new IDVariant("\\temp\\"))), (new IDVariant("NotificationLOG.txt"))));
       VBFiles.Kill(IDL.Add(IDL.Add((new IDVariant(MainFrm.RealPath)), (new IDVariant("\\temp\\"))), (new IDVariant("NotificationLOG.txt")))); 
+      MainFrm.DTTObj.AddSubProc ("0210BC5F-2B82-4EFB-A0CF-97D5D283C04C", "Notificatore.Delete File", "");
+      MainFrm.DTTObj.AddParameter ("0210BC5F-2B82-4EFB-A0CF-97D5D283C04C", "3704F930-6086-4B82-A0E1-DD769F3A18C8", "Percorso", IDL.Add(IDL.Add((new IDVariant(MainFrm.RealPath)), (new IDVariant("\\temp\\"))), (new IDVariant("FeedbackLOG.txt"))));
       VBFiles.Kill(IDL.Add(IDL.Add((new IDVariant(MainFrm.RealPath)), (new IDVariant("\\temp\\"))), (new IDVariant("FeedbackLOG.txt")))); 
+      MainFrm.DTTObj.ExitProc("97CE1CCA-C813-4B59-A35F-19054B483C39", "Elimina LOG Filesystem", "", 3, "Logs");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("97CE1CCA-C813-4B59-A35F-19054B483C39", "Elimina LOG Filesystem", "", _e);
       MainFrm.ErrObj.ProcError ("Logs", "EliminaLOGFilesystem", _e);
+      MainFrm.DTTObj.ExitProc("97CE1CCA-C813-4B59-A35F-19054B483C39", "Elimina LOG Filesystem", "", 3, "Logs");
       return -1;
     }
   }
@@ -459,15 +495,22 @@ public partial class Logs : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("FA0BFAF7-AB83-4E47-85E1-A6EE2F3BA438", "Load", "", 0, "Logs")) return;
       // 
       // Load Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("9087346A-0D76-4AB6-B40B-AD0052589F7A", "Logs.Set Can Sort", "");
+      MainFrm.DTTObj.AddParameter ("9087346A-0D76-4AB6-B40B-AD0052589F7A", "EF4F6E01-498E-4EF4-99FF-24372C17B9E0", "Abilitato", (new IDVariant(0)).booleanValue());
       PAN_LOGS.SetFlags (Glb.OBJ_PANEL, 0, ((new IDVariant(0)).booleanValue())? Glb.PAN_CANSORT : 0, Glb.PAN_CANSORT); 
+      MainFrm.DTTObj.ExitProc("FA0BFAF7-AB83-4E47-85E1-A6EE2F3BA438", "Load", "", 0, "Logs");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("FA0BFAF7-AB83-4E47-85E1-A6EE2F3BA438", "Load", "", _e);
       MainFrm.ErrObj.ProcError ("Logs", "Load", _e);
+      MainFrm.DTTObj.ExitProc("FA0BFAF7-AB83-4E47-85E1-A6EE2F3BA438", "Load", "", 0, "Logs");
     }
   }
 
@@ -670,7 +713,7 @@ public partial class Logs : MyWebForm
     SQL.Append("  A.TESTO as TESTO, ");
     SQL.Append("  A.DATA_LOG as DATA_LOG, ");
     SQL.Append("  A.TIPO as TIPO ");
-    PAN_LOGS.SetQuery(PPQRY_MESSAGGI, 0, SQL, -1, "");
+    PAN_LOGS.SetQuery(PPQRY_MESSAGGI, 0, SQL, -1, "0FA60411-AEAF-4758-82E1-B3C8EF23CF06");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  LOGS A ");
@@ -913,6 +956,10 @@ public partial class Logs : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

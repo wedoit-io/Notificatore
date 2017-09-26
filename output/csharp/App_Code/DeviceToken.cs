@@ -1,6 +1,6 @@
 // **********************************************
 // Device Token
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -763,7 +763,7 @@ public partial class DeviceToken : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPS_PUSH_SETTING A ");
     SQL.Append("where (A.ID = ~~ID_APPLICAZIONE~~) ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_LOOAPPPUSSET, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_LOOAPPPUSSET, 0, SQL, -1, "D953401C-E996-471D-85DC-6CDF106D9CF6");
     PAN_DEVICETOKEN.SetQueryDB(PPQRY_LOOAPPPUSSET, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_DEVICETOKEN.SetMasterTable(PPQRY_LOOAPPPUSSET, "APPS_PUSH_SETTING");
     PAN_DEVICETOKEN.SetQueryLKE(PPQRY_LOOAPPPUSSET, PFL_DEVICETOKEN_IDAPPSPUSSET, "IDAPPUSENOOG");
@@ -782,7 +782,7 @@ public partial class DeviceToken : MyWebForm
     SQL.Append("from ");
     SQL.Append("  LINGUE A ");
     SQL.Append("where (A.PRG_LINGUA = ~~PRG_LINGUA~~) ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_LOOKUPLINGUA, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_LOOKUPLINGUA, 0, SQL, -1, "CBCF25AB-966E-476B-A9EF-26415B81CE8A");
     PAN_DEVICETOKEN.SetQueryDB(PPQRY_LOOKUPLINGUA, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_DEVICETOKEN.SetMasterTable(PPQRY_LOOKUPLINGUA, "LINGUE");
     PAN_DEVICETOKEN.SetQueryLKE(PPQRY_LOOKUPLINGUA, PFL_DEVICETOKEN_IDLINGUA, "IDLINGNOMOGG");
@@ -802,7 +802,7 @@ public partial class DeviceToken : MyWebForm
     SQL.Append("  APPS_PUSH_SETTING A ");
     SQL.Append("order by ");
     SQL.Append("  A.DES_NOTA ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_APPSPUSHSETT, 0, SQL, PFL_DEVICETOKEN_IDAPPSPUSSET, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_APPSPUSHSETT, 0, SQL, PFL_DEVICETOKEN_IDAPPSPUSSET, "2425877B-2B31-4B3F-9E02-8A064A9C2833");
     PAN_DEVICETOKEN.SetQueryDB(PPQRY_APPSPUSHSETT, MainFrm.NotificatoreDBObject.DB, 256);
     SQL = new StringBuilder();
     SQL.Append("select ");
@@ -812,7 +812,7 @@ public partial class DeviceToken : MyWebForm
     SQL.Append("  LINGUE A ");
     SQL.Append("order by ");
     SQL.Append("  A.DES_LINGUA ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_IDLINGUA, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_IDLINGUA, "D504C00C-7156-46BC-B496-7C5D855E062C");
     PAN_DEVICETOKEN.SetQueryDB(PPQRY_LINGUE, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_DEVICETOKEN.SetIMDB(IMDB, "PQRY_DEVICETOKEN", true);
     PAN_DEVICETOKEN.set_SetString(MyGlb.MASTER_ROWNAME, "Device Token");
@@ -834,7 +834,7 @@ public partial class DeviceToken : MyWebForm
     SQL.Append("  A.TYPE_OS as TYPE_OS, ");
     SQL.Append("  A.DATA_CUPERTINO as DATA_CUPERTINO, ");
     SQL.Append("  A.PRG_LINGUA as PRG_LINGUA ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, -1, "867499D1-604F-4DDC-BB29-B87D107A3708");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  DEV_TOKENS A ");
@@ -1074,6 +1074,10 @@ public partial class DeviceToken : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

@@ -1,6 +1,6 @@
 // **********************************************
 // Invio Winphone Manuale
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -347,20 +347,34 @@ public partial class InvioWinphoneManuale : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("D5B61B01-E9FA-4930-8544-BB6BE5A74F53", "Etichetta Invia", "", 3, "Invio Winphone Manuale")) return 0;
       // 
       // Etichetta Invia Body
       // Corpo Procedura
       // 
       IDVariant v_ESITO = new IDVariant(0,IDVariant.STRING);
       IDVariant v_CODE = new IDVariant(0,IDVariant.INTEGER);
+      MainFrm.DTTObj.AddAssign ("02B2E151-1FA8-4747-BFC6-226EF2779FFC", "code := Wnshelperinde.SendWinPhonePushNotification (Regurl Nome Oggetto [Invio Winphone Manuale - Parametri], Messaggio Spedizione Nome Oggetto [Invio Winphone Manuale - Parametri], esito)", "", v_CODE);
+      MainFrm.DTTObj.AddToken ("02B2E151-1FA8-4747-BFC6-226EF2779FFC", "912E9942-E7B1-4235-911E-8F5D3C882F11", 917504, "Regurl", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL1, IMDBDef1.PQSL_NUOVATABELL1_REG_ID, 0));
+      MainFrm.DTTObj.AddToken ("02B2E151-1FA8-4747-BFC6-226EF2779FFC", "D7E4FAC0-3968-4EEC-ABD8-7892432AE918", 917504, "Messaggio Spedizione Nome Oggetto", IMDB.Value(IMDBDef1.PQRY_NUOVATABELL1, IMDBDef1.PQSL_NUOVATABELL1_DES_MESSAGGIO, 0));
+      MainFrm.DTTObj.AddToken ("02B2E151-1FA8-4747-BFC6-226EF2779FFC", "7FD9B730-A044-4D3F-BCB6-61958A2D29AE", 1376256, "esito", v_ESITO);
       v_CODE = new IDVariant(WNSHelperInde.SendWinPhonePushNotification(IMDB.Value(IMDBDef1.PQRY_NUOVATABELL1, IMDBDef1.PQSL_NUOVATABELL1_REG_ID, 0).stringValue(), IMDB.Value(IMDBDef1.PQRY_NUOVATABELL1, IMDBDef1.PQSL_NUOVATABELL1_DES_MESSAGGIO, 0).stringValue(), out v_ESITO));
+      MainFrm.DTTObj.AddAssignNewValue ("02B2E151-1FA8-4747-BFC6-226EF2779FFC", "94346F34-FE33-4CE9-B19A-09627070C848", v_CODE);
+      MainFrm.DTTObj.AddAssign ("880DC959-73AA-4E55-AF49-E9215C3206C8", "Risultato Nome Oggetto := esito", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI2, IMDBDef1.FLD_PARAMETRI2_RISUNOMEOGGE, 0));
+      MainFrm.DTTObj.AddToken ("880DC959-73AA-4E55-AF49-E9215C3206C8", "7FD9B730-A044-4D3F-BCB6-61958A2D29AE", 1376256, "esito", new IDVariant(v_ESITO));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI2, IMDBDef1.FLD_PARAMETRI2_RISUNOMEOGGE, 0, new IDVariant(v_ESITO));
+      MainFrm.DTTObj.AddAssignNewValue ("880DC959-73AA-4E55-AF49-E9215C3206C8", "AC044702-2FF8-43B2-BB90-799CFC7454A7", IMDB.Value(IMDBDef1.TBL_PARAMETRI2, IMDBDef1.FLD_PARAMETRI2_RISUNOMEOGGE, 0));
+      MainFrm.DTTObj.AddSubProc ("71EF87AF-278A-47F7-99EA-798F956D9B5D", "Parametri.Refresh Query", "");
       PAN_PARAMETRI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("D5B61B01-E9FA-4930-8544-BB6BE5A74F53", "Etichetta Invia", "", 3, "Invio Winphone Manuale");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("D5B61B01-E9FA-4930-8544-BB6BE5A74F53", "Etichetta Invia", "", _e);
       MainFrm.ErrObj.ProcError ("InvioWinphoneManuale", "EtichettaInvia", _e);
+      MainFrm.DTTObj.ExitProc("D5B61B01-E9FA-4930-8544-BB6BE5A74F53", "Etichetta Invia", "", 3, "Invio Winphone Manuale");
       return -1;
     }
   }
@@ -380,12 +394,17 @@ public partial class InvioWinphoneManuale : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("258EC5AF-1DC9-40B2-BEDB-D84F8C58C28E", "Etichetta Crea spedizione", "", 3, "Invio Winphone Manuale")) return 0;
       // 
       // Etichetta Crea spedizione Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("EF01771D-A63F-4150-803D-381A19FE127C", "IF not (Is Null (ID Apps Push Settings Spedizione Nome Oggetto))", "");
+      MainFrm.DTTObj.AddToken ("EF01771D-A63F-4150-803D-381A19FE127C", "C1A524EF-F145-4C56-A1CE-11979F7B5327", 327680, "ID Apps Push Settings Spedizione", IMDB.Value(IMDBDef1.TBL_PARAMETRI2, IMDBDef1.FLD_PARAMETRI2_ID_APPLICAZIONE, 0));
       if (!(IDL.IsNull(IMDB.Value(IMDBDef1.TBL_PARAMETRI2, IMDBDef1.FLD_PARAMETRI2_ID_APPLICAZIONE, 0))))
       {
+        MainFrm.DTTObj.EnterIf ("EF01771D-A63F-4150-803D-381A19FE127C", "IF not (Is Null (ID Apps Push Settings Spedizione Nome Oggetto))", "");
         SQL = new StringBuilder();
         SQL.Append("insert into SPEDIZIONI ");
         SQL.Append("( ");
@@ -407,13 +426,19 @@ public partial class InvioWinphoneManuale : MyWebForm
         SQL.Append("  " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_NUOVATABELL1, IMDBDef1.PQSL_NUOVATABELL1_REG_ID, 0), IDL.FMT_CHAR, MainFrm.NotificatoreDBObject.DBO()) + ", ");
         SQL.Append("  '3' ");
         SQL.Append(") ");
+        MainFrm.DTTObj.AddQuery ("7CBC6C09-E2EC-48DB-800F-AB8C77035FD6", "Spedizioni (Notificatore DB): Insert into", "", 768, SQL.ToString());
         MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+        MainFrm.DTTObj.EndQuery ("7CBC6C09-E2EC-48DB-800F-AB8C77035FD6");
       }
+      MainFrm.DTTObj.EndIfBlk ("EF01771D-A63F-4150-803D-381A19FE127C");
+      MainFrm.DTTObj.ExitProc("258EC5AF-1DC9-40B2-BEDB-D84F8C58C28E", "Etichetta Crea spedizione", "", 3, "Invio Winphone Manuale");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("258EC5AF-1DC9-40B2-BEDB-D84F8C58C28E", "Etichetta Crea spedizione", "", _e);
       MainFrm.ErrObj.ProcError ("InvioWinphoneManuale", "EtichettaCreaspedizione", _e);
+      MainFrm.DTTObj.ExitProc("258EC5AF-1DC9-40B2-BEDB-D84F8C58C28E", "Etichetta Crea spedizione", "", 3, "Invio Winphone Manuale");
       return -1;
     }
   }
@@ -880,6 +905,10 @@ public partial class InvioWinphoneManuale : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

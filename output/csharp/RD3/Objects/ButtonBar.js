@@ -87,6 +87,10 @@ ButtonBar.prototype.Realize = function(parent)
 // ********************************************************************************
 ButtonBar.prototype.AdaptLayout = function()
 { 
+  // Se sono vuota, non faccio altro
+  if (!this.ButtonBarContainer)
+    return;
+  //
 	// Chiamo la classe base
 	WebFrame.prototype.AdaptLayout.call(this);
 	//

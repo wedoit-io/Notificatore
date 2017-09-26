@@ -11,7 +11,8 @@ public class MyMDOInit : MDOInit
   // **********************************************
   // Create a new document
   // **********************************************
-  public static IDDocument CreateDocument(String DOName)
+  public static IDDocument CreateDocument(String DOName) { return CreateDocument(DOName, null); }
+  public static IDDocument CreateDocument(String DOName, Object mainfrmCF)
   {
     //
     return null;

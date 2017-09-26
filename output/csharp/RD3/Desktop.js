@@ -90,17 +90,17 @@ function InitRD3()
   if (window.RD4_Enabled)
   {
     var ok = false;
-    if (RD3_Glb.IsSafari())       // Safari va sempre bene
+    if (RD3_Glb.IsSafari() || RD3_Glb.IsChrome())       // Safari e Chrome vanno sempre bene
       ok = true;
-    else if (RD3_Glb.IsMobile())  // Se non e' safari e l'app e' mobile devo essere dentro alla SHELL
+    else if (RD3_Glb.IsMobile())  // Se non e' safari ne' chrome e l'app e' mobile devo essere dentro alla SHELL
       ok = RD3_ShellObject.IsInsideShell();
-    else                          // Se non e' safari e l'app e' "desktop" il browser deve essere per forza SAFARI o una shell... non posso controllare IsInsideShell perche' non sempre funziona nelle app desktop offline
-      ok = !RD3_Glb.IsChrome() && RD3_Glb.IsTouch();   // pero' posso controllare che non sia chrome e che sia un dispositivo touch
+    else                          // Se non e' safari ne' chrome e l'app e' "desktop" il browser deve essere per forza essere una shell... non posso controllare IsInsideShell perche' non sempre funziona nelle app desktop offline
+      ok = RD3_Glb.IsTouch();     // pero' posso controllare che sia un dispositivo touch
     //
     if (!ok)
     {
-      var msg = "<br><br>This application is offline and requires a native shell or <a href='http://support.apple.com/kb/DL1531'>Safari</a>.";
-      msg += "<br><br>Questa applicazione &egrave; offline e richiede una shell nativa oppure <a href='http://support.apple.com/kb/DL1531'>Safari</a>.";
+      var msg = "<br><br>This application is offline and requires a native shell, Chrome or <a href='http://support.apple.com/kb/DL1531'>Safari</a>.";
+      msg += "<br><br>Questa applicazione &egrave; offline e richiede una shell nativa, Chrome oppure <a href='http://support.apple.com/kb/DL1531'>Safari</a>.";
       var box = document.getElementById("wait-box");
       box.className = "wait-box-error";
       box.innerHTML = msg;
@@ -971,7 +971,7 @@ DesktopManager.prototype.HandleMessageBox = function(node)
   var voice = node.getAttribute("voice");
   //
   // Se e' una messagebox conseguente ad un comando vocale, passo l'informazione al VoiceObj
-  if (voice && type == "0")		// Vera Message box con comandi vocali
+  if (voice && type == "0")   // Vera Message box con comandi vocali
   {
     this.WebEntryPoint.VoiceObj.HandleMessageBox(text, parseInt(type), options);
   }
@@ -1279,7 +1279,11 @@ DesktopManager.prototype.HandleFocus2 = function(id, row)
   }
   //
   // Attivo l'oggetto (dopo aver eseguito tutto lo script...)
-  RD3_KBManager.FocusFieldTimerId = window.setTimeout(function() { RD3_DesktopManager.CallEventHandler(id, 'Focus', null, row); }, 10);
+  RD3_KBManager.FocusFieldTimerId = window.setTimeout(function() 
+  {
+    RD3_KBManager.FocusFieldTimerId = 0;
+    RD3_DesktopManager.CallEventHandler(id, 'Focus', null, row); 
+  }, 10);
 }
 
 // **********************************************
@@ -1517,12 +1521,12 @@ DesktopManager.prototype.OpenDocument = function(docurl, docname, features)
   var newdoc = window.open(docurl, docname, features);
   //
   // Non e' detto che sia stata aperta una nuova finestra del browser
-  // ad esempio se l'url inizia con "mail:"
+  // ad esempio se l'url inizia con "mailto:"
   if (newdoc)
   {
     try
     {
-    newdoc.focus();
+      newdoc.focus();
     }
     catch(ex)
     {}
@@ -1530,7 +1534,7 @@ DesktopManager.prototype.OpenDocument = function(docurl, docname, features)
   else if (!RD3_Glb.IsIE(10, false))
   {
     // Se la finestra e' stata bloccata, la apro con un redirect
-    var ok = docurl.indexOf("mail:")==-1;
+    var ok = docurl.indexOf("mailto:")==-1;
     //
     if (ok)
     {
@@ -1765,7 +1769,8 @@ function OnWorkerMessage(message)
           
         case "Remove":
         {
-          ServerSessions[message.data.name] == undefined;
+          ServerSessions[message.data.name].terminate();
+          delete ServerSessions[message.data.name];
           break;
         }
           

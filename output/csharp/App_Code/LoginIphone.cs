@@ -1,6 +1,6 @@
 // **********************************************
 // Login Iphone
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -336,23 +336,37 @@ public partial class LoginIphone : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("FEF03126-2661-4658-8388-E223198A6597", "Bottone Login", "Esegue il login", 3, "Login Iphone")) return 0;
       // 
       // Bottone Login Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("3903ED4A-EB41-4BDE-BD6A-BF02B2F4D807", "IF Esegue Login (Email Nuovo Pannello, PIN Nuovo Pannello)", "");
+      MainFrm.DTTObj.AddToken ("3903ED4A-EB41-4BDE-BD6A-BF02B2F4D807", "EC37344F-64F9-4AC0-AD32-61C138D5F9FD", 327680, "Email", IMDB.Value(IMDBDef1.TBL_DATIDILOGIN3, IMDBDef1.FLD_DATIDILOGIN3_EMAINUOVPANN, 0));
+      MainFrm.DTTObj.AddToken ("3903ED4A-EB41-4BDE-BD6A-BF02B2F4D807", "1C2CB2D0-E651-487B-AA4B-72DBF329EBCA", 327680, "PIN", IMDB.Value(IMDBDef1.TBL_DATIDILOGIN3, IMDBDef1.FLD_DATIDILOGIN3_PINNUOVOPANN, 0));
       if (MainFrm.EsegueLogin(IMDB.Value(IMDBDef1.TBL_DATIDILOGIN3, IMDBDef1.FLD_DATIDILOGIN3_EMAINUOVPANN, 0), IMDB.Value(IMDBDef1.TBL_DATIDILOGIN3, IMDBDef1.FLD_DATIDILOGIN3_PINNUOVOPANN, 0)))
       {
+        MainFrm.DTTObj.EnterIf ("3903ED4A-EB41-4BDE-BD6A-BF02B2F4D807", "IF Esegue Login (Email Nuovo Pannello, PIN Nuovo Pannello)", "");
+        MainFrm.DTTObj.AddSubProc ("EA8D896D-64C6-44CA-99A6-E99112135404", "Login Iphone.Close", "");
         MainFrm.UnloadForm(FormIdx,(new IDVariant(0)).booleanValue()); 
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("5F3408A4-3057-416F-B24A-4D1EA405CB08", "ELSE", "", "3903ED4A-EB41-4BDE-BD6A-BF02B2F4D807");
+        MainFrm.DTTObj.AddSubProc ("3A1A43BC-D941-4E79-83C5-9A4E3A979B61", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("3A1A43BC-D941-4E79-83C5-9A4E3A979B61", "47B9C053-DD93-4025-9454-3AEFF386B352", "Messaggio", (new IDVariant("I dati inseriti non sono stati riconosciuti. Correggili e riprova.")));
         MainFrm.set_AlertMessage((new IDVariant("I dati inseriti non sono stati riconosciuti. Correggili e riprova."))); 
       }
+      MainFrm.DTTObj.EndIfBlk ("3903ED4A-EB41-4BDE-BD6A-BF02B2F4D807");
+      MainFrm.DTTObj.ExitProc("FEF03126-2661-4658-8388-E223198A6597", "Bottone Login", "Esegue il login", 3, "Login Iphone");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("FEF03126-2661-4658-8388-E223198A6597", "Bottone Login", "Esegue il login", _e);
       MainFrm.ErrObj.ProcError ("LoginIphone", "BottoneLogin", _e);
+      MainFrm.DTTObj.ExitProc("FEF03126-2661-4658-8388-E223198A6597", "Bottone Login", "Esegue il login", 3, "Login Iphone");
       return -1;
     }
   }
@@ -810,6 +824,10 @@ public partial class LoginIphone : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

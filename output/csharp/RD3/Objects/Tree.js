@@ -238,6 +238,8 @@ Tree.prototype.SetSelectedNode= function(value)
 		  // Seleziono il nodo anche visualmente
 		  if (this.SelectedNode.NodeText)
 		  	this.SelectedNode.NodeText.className = "tree-selected-node-text";
+      else if (RD3_Glb.IsMobile() && (this.SelectedNode.AlreadyExpanded && this.SelectedNode.Nodes.length == 0))
+        RD3_Glb.AddClass(this.SelectedNode.CaptionBox, "tree-node-selected-node");
 		  //
 		  // Dopo un refresh arriva un selected node che e' uguale a quello precedente: in questo caso non devo
 		  // togliere la selezione
@@ -245,6 +247,8 @@ Tree.prototype.SetSelectedNode= function(value)
 		  {
 		  	if (this.Prevsel.NodeText)
 		    	this.Prevsel.NodeText.className = "tree-node-text";
+				else if (RD3_Glb.IsMobile())
+          RD3_Glb.RemoveClass(this.Prevsel.CaptionBox, "tree-node-selected-node");
 		    this.Prevsel = null;
 		  }
 		  else
@@ -337,6 +341,9 @@ Tree.prototype.Realize = function(parent)
       if (this.RootNodes[i].ExpandSkipped && this.RootNodes[i].Expanded)
     	  this.RootNodes[i].SetExpanded(this.RootNodes[i].Expanded, true, true);
     }
+    //
+    // Applico le impostazioni della scrollbar (lo fa anche WebFrame.Realize, ma quando la chiamiamo ancora non c'e' IDScroll)
+    this.SetScrollbar();
 	}
 }
 

@@ -485,7 +485,7 @@ PValue.prototype.ActivatorImage = function(vs, ignoreWidth)
     return pf.ActImage;
   //
   // I campi data mostrano l'attivatore specifico
-  if (RD3_Glb.IsDateTimeObject(pf.DataType) && !RD3_Glb.IsMobile())
+  if (RD3_Glb.IsDateOrTimeObject(pf.DataType) && !RD3_Glb.IsMobile())
     return en ? "aeda.gif" : "adda.gif";
   //
   // I campi smart lookup mostrano l'attivatore combo se richiesto
@@ -576,26 +576,28 @@ PValue.prototype.OnDoubleClick= function(evento)
   var vs = this.GetVisualStyle();
   if (canclick && this.ActivatorImage(vs, true)!="")
   {
+    // Prima di attivare invio eventuali variazioni
+    this.SendChanges(evento);
     this.ParentField.OnClickActivator(evento);
   }
   else
   {
-  	var sendactivate = true;
-  	//
-  	// Non mando activate row se il doppio click e' avvenuto sull'attivatore combo
-  	if (RD3_Glb.HasClass(srcobj,"combo-activator"))
-  		sendactivate = false;
-  	// Nemmeno se faccio doppio click su un checkbox, radio, button (probabimente non volevo!)
-  	if (cell && cell.ControlType>=4 && cell.ControlType<=6)
-  		sendactivate = false;
-  	//
-  	if (sendactivate)
-  	{
-	    if (this.ParentField.ParentPanel.IsGrouped())
-	      this.ParentField.ParentPanel.OnRowSelectorClick(evento, this.ParentField.ParentPanel.GetRowForIndex(this.Index));
-	    else
-	      this.ParentField.ParentPanel.OnRowSelectorClick(evento, this.Index-this.ParentField.ParentPanel.ActualPosition);
-	  }
+    var sendactivate = true;
+    //
+    // Non mando activate row se il doppio click e' avvenuto sull'attivatore combo
+    if (RD3_Glb.HasClass(srcobj,"combo-activator"))
+      sendactivate = false;
+    // Nemmeno se faccio doppio click su un checkbox, radio, button (probabimente non volevo!)
+    if (cell && cell.ControlType>=4 && cell.ControlType<=6)
+      sendactivate = false;
+    //
+    if (sendactivate)
+    {
+      if (this.ParentField.ParentPanel.IsGrouped())
+        this.ParentField.ParentPanel.OnRowSelectorClick(evento, this.ParentField.ParentPanel.GetRowForIndex(this.Index));
+      else
+        this.ParentField.ParentPanel.OnRowSelectorClick(evento, this.Index-this.ParentField.ParentPanel.ActualPosition);
+    }
   }
 }
 
@@ -692,9 +694,9 @@ PValue.prototype.SendChanges = function(evento, flag)
   // in questo caso torno all'input
   if (srcobj && srcobj.tagName=="SPAN")
   {
-  	var v = srcobj.previousSibling;
-  	if (v && v.tagName=="INPUT")
-  		srcobj = v;
+    var v = srcobj.previousSibling;
+    if (v && v.tagName=="INPUT")
+      srcobj = v;
   }
   //
   if (this.IsEnabled())
@@ -743,8 +745,8 @@ PValue.prototype.SendChanges = function(evento, flag)
         s = cell.IntCtrl.getData();
       if (cell && cell.ControlType==4 && RD3_Glb.IsMobile())
       {
-      	if (srcobj.tagName=="SPAN")
-      		srcobj = srcobj.parentNode;
+        if (srcobj.tagName=="SPAN")
+          srcobj = srcobj.parentNode;
         s = srcobj.checked?"on":"";
       }
     }
@@ -769,8 +771,8 @@ PValue.prototype.SendChanges = function(evento, flag)
     // Se il testo e' vuoto e lo avevo svuotato io, non mando al server l'evento
     if (cell && cell.PwdSvuotata && s=="")
     {
-  		sendev = false;
-  		s = this.Text;
+      sendev = false;
+      s = this.Text;
     }
     //
     if (srcobj)
@@ -1198,7 +1200,7 @@ PValue.prototype.SetFCK= function(ev, list)
     {
       // se non sono l'elemento attivo cerco tra gli eventi che ancora non sono stati inviati
       var ev = RD3_DesktopManager.MessagePump.GetEvent(this, "chg");
-    	setVal = (ev ? false : true);
+      setVal = (ev ? false : true);
     }
     // 
     if (setVal)
@@ -1356,7 +1358,7 @@ PValue.prototype.OnRadioLabelClick = function(ev)
   }
   //
   if (RD3_Glb.IsMobile())
-  	this.GetValueList().SetOptionClass(obj.parentNode,obj);
+    this.GetValueList().SetOptionClass(obj.parentNode,obj);
 }
 
 // *********************************************************
@@ -1381,23 +1383,23 @@ PValue.prototype.ShowHTML = function()
 // ********************************************************************************
 PValue.prototype.TouchMulSel= function(evento)
 { 
-	// Vediamo se la cella e' scrivibile
+  // Vediamo se la cella e' scrivibile
   var cell = RD3_KBManager.GetCell(evento.target);
-	if (cell && cell.IsEnabled)
-	{
-		// Se non ho cliccato proprio sul pallino, allora lascio passare l'evento
-		if (RD3_Glb.HasClass(cell.IntCtrl,"panel-field-selected")||RD3_Glb.HasClass(cell.IntCtrl,"panel-field-unselected"))
-		{
-			var x = RD3_Glb.GetScreenLeft(cell.IntCtrl,true);
-			//
-			var xe = evento.clientX;
-			if (RD3_Glb.IsTouch() && !RD3_Glb.IsIE(10, true))
-				xe = evento.targetTouches.length>0? evento.targetTouches[0].clientX:evento.changedTouches[0].clientX;
-			//
-			if (xe>=x && xe<=x+32)
-				return true; // cliccato su pallino
-		}
-	}
+  if (cell && cell.IsEnabled)
+  {
+    // Se non ho cliccato proprio sul pallino, allora lascio passare l'evento
+    if (RD3_Glb.HasClass(cell.IntCtrl,"panel-field-selected")||RD3_Glb.HasClass(cell.IntCtrl,"panel-field-unselected"))
+    {
+      var x = RD3_Glb.GetScreenLeft(cell.IntCtrl,true);
+      //
+      var xe = evento.clientX;
+      if (RD3_Glb.IsTouch() && !RD3_Glb.IsIE(10, true))
+        xe = evento.targetTouches.length>0? evento.targetTouches[0].clientX:evento.changedTouches[0].clientX;
+      //
+      if (xe>=x && xe<=x+32)
+        return true; // cliccato su pallino
+    }
+  }
 }
 
 
@@ -1408,116 +1410,116 @@ PValue.prototype.TouchMulSel= function(evento)
 // ********************************************************************************
 PValue.prototype.OnTouchDown= function(evento, scrollinput, target)
 { 
-	// Se sono in lista, evidenzio e seleziono la riga
-	var parp = this.ParentField.ParentPanel;
-	if (target==undefined)
-		target = evento.target ? evento.target : evento.srcElement;
+  // Se sono in lista, evidenzio e seleziono la riga
+  var parp = this.ParentField.ParentPanel;
+  if (target==undefined)
+    target = evento.target ? evento.target : evento.srcElement;
   //
   parp.OnTouchDown(evento);
-	//
-	if (parp.PanelMode == RD3_Glb.PANEL_LIST && parp.Locked && this.ParentField.ListList)
-	{
-		// Evidenzio la riga, a meno che non tocchi un campo di pannello attivabile
-		// con OnlyIcon
-		if (!this.ParentField.CanActivate || !this.ParentField.VisOnlyIcon())
-		{
-		  parp.HiliteRow(this.Index);
-		}
-	}
-	else
-	{
-		// Se sono in form e posso scrivere questo valore, non eseguo lo scroll
-		if (this.IsEnabled())
-		{
-		  // Se ho toccato un editor
-		  if (this.ParentField.IsIDEditor(target))
-		  {
-		    // Posso arrivare qui anche dal touch sulla caption del campo: in questo caso non devo mai bloccare lo scroll, perche' non ci sono problemi..
-		    var realTarget = evento.target ? evento.target : evento.srcElement;
-		    if (!this.ParentField.IsIDEditor(realTarget))
-		    {
-		      // Non blocco lo scroll, ma se sonin lista eseguo l'hilight
-		      if (parp.PanelMode == RD3_Glb.PANEL_LIST)
-					  parp.HiliteRow(this.Index);
-					return true;
-		    }
-		    //
-		    // Bene, ho toccato veramente un Editor.. innazitutto se ho toccato la toolbar devo solo stoppare lo scroll.. poi ci pensano i gestori a gestire il tocco
-		    if (this.ParentField.IsIDEditorToolbar(target))
-		    {
-		      // Il click sulla toolbar toglie la selezione.. la devo salvare!
-		      var cell = RD3_KBManager.GetCell(target);
-		      if (cell && cell.IntCtrl && cell.IntCtrl instanceof IDEditor)
-		      {
-		        var edObj = cell.IntCtrl;
-		        if (edObj.SelectionTimer != null)
+  //
+  if (parp.PanelMode == RD3_Glb.PANEL_LIST && parp.Locked && this.ParentField.ListList)
+  {
+    // Evidenzio la riga, a meno che non tocchi un campo di pannello attivabile
+    // con OnlyIcon
+    if (!this.ParentField.CanActivate || !this.ParentField.VisOnlyIcon())
+    {
+      parp.HiliteRow(this.Index);
+    }
+  }
+  else
+  {
+    // Se sono in form e posso scrivere questo valore, non eseguo lo scroll
+    if (this.IsEnabled())
+    {
+      // Se ho toccato un editor
+      if (this.ParentField.IsIDEditor(target))
+      {
+        // Posso arrivare qui anche dal touch sulla caption del campo: in questo caso non devo mai bloccare lo scroll, perche' non ci sono problemi..
+        var realTarget = evento.target ? evento.target : evento.srcElement;
+        if (!this.ParentField.IsIDEditor(realTarget))
+        {
+          // Non blocco lo scroll, ma se sonin lista eseguo l'hilight
+          if (parp.PanelMode == RD3_Glb.PANEL_LIST)
+            parp.HiliteRow(this.Index);
+          return true;
+        }
+        //
+        // Bene, ho toccato veramente un Editor.. innazitutto se ho toccato la toolbar devo solo stoppare lo scroll.. poi ci pensano i gestori a gestire il tocco
+        if (this.ParentField.IsIDEditorToolbar(target))
+        {
+          // Il click sulla toolbar toglie la selezione.. la devo salvare!
+          var cell = RD3_KBManager.GetCell(target);
+          if (cell && cell.IntCtrl && cell.IntCtrl instanceof IDEditor)
+          {
+            var edObj = cell.IntCtrl;
+            if (edObj.SelectionTimer != null)
             {
               window.clearTimeout(edObj.SelectionTimer);
               edObj.SelectionTimer = null;
             }
             edObj.OnSelectionTimer();
-		      }
-		      //
-		      return true;
-		    }
-		    //
-		    // Ho toccato uno dei due editor.. beh se non devo scrollare allora blocco direttamente lo scroll
-		    return false;
-		  }
-		  //
-			// Se l'oggetto vuole il controllo e non e' una combo, non faccio nulla qui
-			if (this.ParentField.UsePopupControl() && !this.ParentField.IsCombo(target))
-			{
-				// Se sono in lista, pero' evidenzio la riga
-				if (parp.PanelMode == RD3_Glb.PANEL_LIST)
-					parp.HiliteRow(this.Index);
-				return true;
-			}
-			//
-			if (target.tagName=="INPUT" || target.tagName=="TEXTAREA")
-			{
-			  // Posso arrivare qui anche dal touch sulla caption del campo: in questo caso non devo mai bloccare lo scroll, perche' non ci sono problemi
-			  var realTarget = evento.target ? evento.target : evento.srcElement;
-			  var realInput = (realTarget.tagName=="INPUT" || realTarget.tagName=="TEXTAREA");
-			  //
-				// Ho toccato un input. Se e' attivo lo scroll sui campi attivi, allora
-				// evidenzio la riga anche in questo caso, altrimenti blocco scroll e fuoco il campo
-				if (scrollinput || !realInput)
-				{
-					if (parp.PanelMode == RD3_Glb.PANEL_LIST)
-						parp.HiliteRow(this.Index);
-				}
-				else
-				{
-					return false;
-				}
-			}
-			//
-			// Ho toccato una combo, la evidenzio
-			if (this.ParentField.IsCombo(target))
-			{
-				if (parp.PanelMode == RD3_Glb.PANEL_FORM)
-					this.ParentField.HiliteCombo(target, true);
-				else
-					parp.HiliteRow(this.Index);
-			}
-			//
-			// Ho toccato un radio verticale abilitato con tema iOS7, ci metto evidenziazione grigia
-			if (RD3_Glb.IsMobile7() && RD3_Glb.HasClass(target,"book-span-radio-text-vertical"))
-			{
-				target.style.backgroundColor = RD3_ClientParams.GetColorHL1();
-			}
-		}
-		else
-		{
-			// lo faccio sia per le combo che per i campi attivabili. In questo modo se un campo
-			// ha una procedura attaccata, lo evidenzio lo stesso. Pero' il campo in se DEVE essere abilitato.
-			// Se il campo e' disabilitato proprio lui, non lo evidenzio comunque.
-			if (this.ParentField.CanActivate && this.ParentField.ActivableDisabled && this.ParentField.Enabled)
-				this.ParentField.HiliteCombo(target, true);
-		}
-	}
-	return true;
+          }
+          //
+          return true;
+        }
+        //
+        // Ho toccato uno dei due editor.. beh se non devo scrollare allora blocco direttamente lo scroll
+        return false;
+      }
+      //
+      // Se l'oggetto vuole il controllo e non e' una combo, non faccio nulla qui
+      if (this.ParentField.UsePopupControl() && !this.ParentField.IsCombo(target))
+      {
+        // Se sono in lista, pero' evidenzio la riga
+        if (parp.PanelMode == RD3_Glb.PANEL_LIST)
+          parp.HiliteRow(this.Index);
+        return true;
+      }
+      //
+      if (target.tagName=="INPUT" || target.tagName=="TEXTAREA")
+      {
+        // Posso arrivare qui anche dal touch sulla caption del campo: in questo caso non devo mai bloccare lo scroll, perche' non ci sono problemi
+        var realTarget = evento.target ? evento.target : evento.srcElement;
+        var realInput = (realTarget.tagName=="INPUT" || realTarget.tagName=="TEXTAREA");
+        //
+        // Ho toccato un input. Se e' attivo lo scroll sui campi attivi, allora
+        // evidenzio la riga anche in questo caso, altrimenti blocco scroll e fuoco il campo
+        if (scrollinput || !realInput)
+        {
+          if (parp.PanelMode == RD3_Glb.PANEL_LIST)
+            parp.HiliteRow(this.Index);
+        }
+        else
+        {
+          return false;
+        }
+      }
+      //
+      // Ho toccato una combo, la evidenzio
+      if (this.ParentField.IsCombo(target))
+      {
+        if (parp.PanelMode == RD3_Glb.PANEL_FORM)
+          this.ParentField.HiliteCombo(target, true);
+        else
+          parp.HiliteRow(this.Index);
+      }
+      //
+      // Ho toccato un radio verticale abilitato con tema iOS7, ci metto evidenziazione grigia
+      if (RD3_Glb.IsMobile7() && RD3_Glb.HasClass(target,"book-span-radio-text-vertical"))
+      {
+        target.style.backgroundColor = RD3_ClientParams.GetColorHL1();
+      }
+    }
+    else
+    {
+      // lo faccio sia per le combo che per i campi attivabili. In questo modo se un campo
+      // ha una procedura attaccata, lo evidenzio lo stesso. Pero' il campo in se DEVE essere abilitato.
+      // Se il campo e' disabilitato proprio lui, non lo evidenzio comunque.
+      if (this.ParentField.CanActivate && this.ParentField.ActivableDisabled && this.ParentField.Enabled)
+        this.ParentField.HiliteCombo(target, true);
+    }
+  }
+  return true;
 }
 
 // ********************************************************************************
@@ -1525,84 +1527,84 @@ PValue.prototype.OnTouchDown= function(evento, scrollinput, target)
 // ********************************************************************************
 PValue.prototype.OnTouchUp= function(evento, click, target)
 { 
-	var parp = this.ParentField.ParentPanel;
-	if (target==undefined)
-		target = evento.target ? evento.target : evento.srcElement;
+  var parp = this.ParentField.ParentPanel;
+  if (target==undefined)
+    target = evento.target ? evento.target : evento.srcElement;
   //
   parp.OnTouchUp(evento, click);
   //
-	// Ho toccato un radio verticale abilitato con tema iOS7, rimetto a posto
-	if (RD3_Glb.IsMobile7() && RD3_Glb.HasClass(target,"book-span-radio-text-vertical"))
-	{
-		target.style.backgroundColor = "";
-	}
-	//
-	if (click)
-	{
-		// Voglio evitare un doppio click sugli oggetti
-		if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
-			RD3_DDManager.ChompClick();
-		//
-		// Ho cliccato, segnalo che questa e' la riga attiva
-		this.ParentField.GotFocus(target,evento);
-		//
-		// Se quando tocco un campo la form si deve chiudere, lo faccio ora
-		if (parp.WebForm.CloseOnSelection)
-		{
-			this.OnDoubleClick(evento);
-			return true;
-		}
-		//
-		if (evento && parp.PanelMode == RD3_Glb.PANEL_LIST && parp.ShowMultipleSel && this.ParentField.ListList)
-		{
-			// Multiselezione? eseguo commit
-			if (parp.Locked || this.TouchMulSel(evento))
-			{
-				parp.OnMultiSelClick(evento, this.Index-1);
-				return true;
-			}
-		}
-		//
-	  var cell = RD3_KBManager.GetCell(target);
-	  //
-	  // Se l'oggetto vuole il controllo, non faccio nulla qui
-		if (this.ParentField.UsePopupControl() && cell.IsEnabled && !(cell.IntCtrl instanceof IDCombo))
-		{
-			// Se sono in lista, de-evidenzio la riga
-			if (parp.PanelMode == RD3_Glb.PANEL_LIST)
-			{
-		    this.ParentField.ParentPanel.HiliteRow(0);
-		    //
-		    // In IE10 [ParentField.GotFocus(target,evento)] fa si che se clicco su un'altra riga viene impostato il timer che dopo 10 
-		    // milli da fuoco al campo aprendo la tastiera.. non voglio che si apra perche' ho cliccato su un PopupControl, quindi
-		    // annullo il timer
-		    if (RD3_Glb.IsIE(10, true))
-  			{
-    			if (RD3_KBManager.FocusFieldTimerId)
+  // Ho toccato un radio verticale abilitato con tema iOS7, rimetto a posto
+  if (RD3_Glb.IsMobile7() && RD3_Glb.HasClass(target,"book-span-radio-text-vertical"))
+  {
+    target.style.backgroundColor = "";
+  }
+  //
+  if (click)
+  {
+    // Voglio evitare un doppio click sugli oggetti
+    if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
+      RD3_DDManager.ChompClick();
+    //
+    // Ho cliccato, segnalo che questa e' la riga attiva
+    this.ParentField.GotFocus(target,evento);
+    //
+    // Se quando tocco un campo la form si deve chiudere, lo faccio ora
+    if (parp.WebForm.CloseOnSelection)
+    {
+      this.OnDoubleClick(evento);
+      return true;
+    }
+    //
+    if (evento && parp.PanelMode == RD3_Glb.PANEL_LIST && parp.ShowMultipleSel && this.ParentField.ListList)
+    {
+      // Multiselezione? eseguo commit
+      if (parp.Locked || this.TouchMulSel(evento))
+      {
+        parp.OnMultiSelClick(evento, this.Index-1);
+        return true;
+      }
+    }
+    //
+    var cell = RD3_KBManager.GetCell(target);
+    //
+    // Se l'oggetto vuole il controllo, non faccio nulla qui
+    if (this.ParentField.UsePopupControl() && cell.IsEnabled && !(cell.IntCtrl instanceof IDCombo))
+    {
+      // Se sono in lista, de-evidenzio la riga
+      if (parp.PanelMode == RD3_Glb.PANEL_LIST)
+      {
+        this.ParentField.ParentPanel.HiliteRow(0);
+        //
+        // In IE10 [ParentField.GotFocus(target,evento)] fa si che se clicco su un'altra riga viene impostato il timer che dopo 10 
+        // milli da fuoco al campo aprendo la tastiera.. non voglio che si apra perche' ho cliccato su un PopupControl, quindi
+        // annullo il timer
+        if (RD3_Glb.IsIE(10, true))
+        {
+          if (RD3_KBManager.FocusFieldTimerId)
             window.clearTimeout(RD3_KBManager.FocusFieldTimerId);
           RD3_KBManager.FocusFieldTimerId = 0;
-  		  }
-  		  
-		  }
-			//
-			var pc = new PopupControl(this.ParentField.GetPopupControlType(),cell);
-			pc.Open();
-			pc.LastActiveObject = null;
-			pc.LastActiveElement = null;
-			//
-			return true;
-		}		
-	  //
-	  // Se clicco su un campo attivabile con solo l'icona, attivo il campo
-	  if (this.ParentField.CanActivate && this.ParentField.VisOnlyIcon())
-		{
-			this.ParentField.OnClickActivator(evento);
-		}
-		else
-		{
-	  	// Se clicco mando il pannello in form (se posso)
-			if (parp.PanelMode == RD3_Glb.PANEL_LIST && parp.HasForm && parp.AutomaticLayout && this.ParentField.ListList)
-			{
+        }
+        
+      }
+      //
+      var pc = new PopupControl(this.ParentField.GetPopupControlType(),cell);
+      pc.Open();
+      pc.LastActiveObject = null;
+      pc.LastActiveElement = null;
+      //
+      return true;
+    }   
+    //
+    // Se clicco su un campo attivabile con solo l'icona, attivo il campo
+    if (this.ParentField.CanActivate && this.ParentField.VisOnlyIcon())
+    {
+      this.ParentField.OnClickActivator(evento);
+    }
+    else
+    {
+      // Se clicco mando il pannello in form (se posso)
+      if (parp.PanelMode == RD3_Glb.PANEL_LIST && parp.HasForm && parp.AutomaticLayout && this.ParentField.ListList)
+      {
         // Se sono su una nuova riga
         if (this.IsNewRow())
         {
@@ -1616,80 +1618,80 @@ PValue.prototype.OnTouchUp= function(evento, click, target)
           this.ParentField.ParentPanel.OnToolbarClick(evento,"list");
       }
       else
-			{
-				// Non posso cambiare layout. Se ho cliccato su una combo in lista, tolgo evidenziazione dalla riga
-				if (this.ParentField.IsCombo(target))
-					this.ParentField.ParentPanel.HiliteRow(0);
-				//
-				// Se non posso cambiare layout, attivo il campo
-			  if (this.ParentField.CanActivate)
-			  	this.ParentField.OnClickActivator(evento);
-			}
-		}
-		//
-		// Se la cella e' un check e sono in un dispositivo touch, allora
-		// eseguo toggle
-		if (RD3_Glb.IsTouch())
-		{
-		  if (cell && cell.ControlType==4 && cell.IsEnabled)
-		  	this.ParentField.OnToggleCheck(evento);
-	  }
-	  //
-	  if (RD3_Glb.IsTouch())
-		{
-		  if (cell && cell.ControlType==5 && cell.IsEnabled)
-		  	this.OnRadioLabelClick(evento);
-	  }
-	  //
-	  if (RD3_Glb.IsTouch())
-		{
-		  // Se e' arrivato il click su di una cella di tipo BLOB ed il suo PVal (che sarei io ma e' meglio non correrre rischi..)
-		  // mostra il link lancio l'eento giusto sul PField
-		  if (cell && cell.ControlType==10 && cell.PValue.BlobMime=="size")
-		  	cell.PValue.ParentField.OnBlobCommand(evento, "link");
-	  }
-	  //
-		// Se sono in form e tocco una combo, la apro
-		if (!parp.Locked)
-		{
-			if (cell.IntCtrl instanceof IDCombo && cell.IsEnabled && !this.ParentField.CanActivate)
-			{
-			  if (cell.HasWatermark)
-			    cell.RemoveWatermark();
-				cell.IntCtrl.Open();
-			}
-			else
-			{
-				// Avevo toccato una combo o un campo, tolgo evidenziazione
-				if (parp.HilitedCombo)
-					parp.HilitedCombo.HiliteCombo(null, false);
-			}
-		}
-		//
-		if (this.ParentField.IsIDEditorToolbar(target))
-		{
-		  if (cell && cell.IntCtrl instanceof IDEditor && cell.IsEnabled)
-			  cell.IntCtrl.OnEditorTouchUp(evento, target);
-		}
-		//
-		// Avevo evidenziato un campo che non e' una combo, oppure era una combo ma bloccata
-		// Anche se ci clicco sopra deve subito andare via l'evidenziazione
-		if (parp.HilitedCombo && (!this.ParentField.IsCombo(target) || !cell.IsEnabled || !this.ParentField.VisSlidePad()))
-			parp.HilitedCombo.HiliteCombo(null, false);
-	}
-	else
-	{
-		// Tolgo riga evidenziata
-		if (parp.PanelMode == RD3_Glb.PANEL_LIST)
-		{
-		  this.ParentField.ParentPanel.HiliteRow(0);
-		}
-		//
-		// Avevo toccato una combo, tolgo evidenziazione
-		if (parp.HilitedCombo)
-			parp.HilitedCombo.HiliteCombo(null, false);
-	}
-	return true;
+      {
+        // Non posso cambiare layout. Se ho cliccato su una combo in lista, tolgo evidenziazione dalla riga
+        if (this.ParentField.IsCombo(target))
+          this.ParentField.ParentPanel.HiliteRow(0);
+        //
+        // Se non posso cambiare layout, attivo il campo
+        if (this.ParentField.CanActivate)
+          this.ParentField.OnClickActivator(evento);
+      }
+    }
+    //
+    // Se la cella e' un check e sono in un dispositivo touch, allora
+    // eseguo toggle
+    if (RD3_Glb.IsTouch())
+    {
+      if (cell && cell.ControlType==4 && cell.IsEnabled)
+        this.ParentField.OnToggleCheck(evento);
+    }
+    //
+    if (RD3_Glb.IsTouch())
+    {
+      if (cell && cell.ControlType==5 && cell.IsEnabled)
+        this.OnRadioLabelClick(evento);
+    }
+    //
+    if (RD3_Glb.IsTouch())
+    {
+      // Se e' arrivato il click su di una cella di tipo BLOB ed il suo PVal (che sarei io ma e' meglio non correrre rischi..)
+      // mostra il link lancio l'eento giusto sul PField
+      if (cell && cell.ControlType==10 && cell.PValue.BlobMime=="size")
+        cell.PValue.ParentField.OnBlobCommand(evento, "link");
+    }
+    //
+    // Se sono in form e tocco una combo, la apro
+    if (!parp.Locked)
+    {
+      if (cell.IntCtrl instanceof IDCombo && cell.IsEnabled && !this.ParentField.CanActivate)
+      {
+        if (cell.HasWatermark)
+          cell.RemoveWatermark();
+        cell.IntCtrl.Open();
+      }
+      else
+      {
+        // Avevo toccato una combo o un campo, tolgo evidenziazione
+        if (parp.HilitedCombo)
+          parp.HilitedCombo.HiliteCombo(null, false);
+      }
+    }
+    //
+    if (this.ParentField.IsIDEditorToolbar(target))
+    {
+      if (cell && cell.IntCtrl instanceof IDEditor && cell.IsEnabled)
+        cell.IntCtrl.OnEditorTouchUp(evento, target);
+    }
+    //
+    // Avevo evidenziato un campo che non e' una combo, oppure era una combo ma bloccata
+    // Anche se ci clicco sopra deve subito andare via l'evidenziazione
+    if (parp.HilitedCombo && (!this.ParentField.IsCombo(target) || !cell.IsEnabled || !this.ParentField.VisSlidePad()))
+      parp.HilitedCombo.HiliteCombo(null, false);
+  }
+  else
+  {
+    // Tolgo riga evidenziata
+    if (parp.PanelMode == RD3_Glb.PANEL_LIST)
+    {
+      this.ParentField.ParentPanel.HiliteRow(0);
+    }
+    //
+    // Avevo toccato una combo, tolgo evidenziazione
+    if (parp.HilitedCombo)
+      parp.HilitedCombo.HiliteCombo(null, false);
+  }
+  return true;
 }
 
 
@@ -1698,15 +1700,15 @@ PValue.prototype.OnTouchUp= function(evento, click, target)
 // ********************************************************************************
 PValue.prototype.OnSwipe= function(evento, toright)
 { 
-	// Se il campo e' in lista, attivo swipe sul pannello
-	if (!toright)
-	{
-		var parf = this.ParentField;
-	  var parp = parf.ParentPanel;	
-	  if (parf.InList && parf.ListList && parp.PanelMode == RD3_Glb.PANEL_LIST)
-	  {
-	  	parp.SetSwipe(true, parf, this.Index, evento);
-	  }
-	}
+  // Se il campo e' in lista, attivo swipe sul pannello
+  if (!toright)
+  {
+    var parf = this.ParentField;
+    var parp = parf.ParentPanel;  
+    if (parf.InList && parf.ListList && parp.PanelMode == RD3_Glb.PANEL_LIST)
+    {
+      parp.SetSwipe(true, parf, this.Index, evento);
+    }
+  }
 }
 

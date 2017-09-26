@@ -161,6 +161,8 @@ function PField(ppanel)
   
   //this.BadgeObjForm=null;                 // Oggetto utilizzato per il Badge
   //this.BadgeObjList=null;                 // Oggetto utilizzato per il Badge
+
+  this.AggregateOfField = -1;      // Indice del campo di cui mostra valori aggregati
 }
 
 
@@ -402,6 +404,7 @@ PField.prototype.LoadProperties = function(node)
       case "itc": this.SetEditorCommands(parseInt(valore)); break;
       case "def": this.SetDefaultFormatting(valore); break;
       case "cln": this.SetClassName(valore); break;
+      case "aof": this.SetAggregateOfField(parseInt(valore)); break;
       
       case "clk": this.ClickEventDef = parseInt(valore); break;
       case "chg": this.ChangeEventDef = parseInt(valore); break;
@@ -510,13 +513,13 @@ PField.prototype.SetVisualFlags= function(value)
 {
   var old = this.VisualFlags;
   if (value!=undefined)
-	  this.VisualFlags = value;
+    this.VisualFlags = value;
   //
   if (old != this.VisualFlags && this.Realized)
   {
-	  // Ricalcolo lo stato del mio CanSort
-	  // e poi aggiorno il campo
-	  this.SetCanSort();
+    // Ricalcolo lo stato del mio CanSort
+    // e poi aggiorno il campo
+    this.SetCanSort();
     if (this.IsStatic())
       this.UpdateVisualStyle(this.VisualStyle);
     else
@@ -985,6 +988,17 @@ PField.prototype.SetHeader= function(value)
         else
           this.FormCaptionBox.innerHTML = head;
       }
+      //
+      // Potrei aver rimosso i pulsanti del blob: se sono definiti li reinserisco
+      if (this.FormBlobUploadImg)
+      {
+        this.FormCaptionBox.appendChild(this.FormBlobUploadImg);
+        this.FormCaptionBox.appendChild(this.FormBlobDeleteImg);
+        this.FormCaptionBox.appendChild(this.FormBlobZoomImg);
+        //
+        if (this.UseHTML5ForUpload() && this.FormFlashUploader)
+          this.FormCaptionBox.appendChild(this.FormFlashUploader);
+      }
     }
     //
     head = ((this.ListHeader=="" && this.Header!="") || this.IsStatic()) ? this.Header : this.ListHeader;
@@ -1257,9 +1271,9 @@ PField.prototype.SetSortMode= function(value)
     //
     var oldsrc = this.SortImage.src;
     if ((RD3_Glb.IsMobile7() || RD3_Glb.IsQuadro()) && !RD3_Glb.IsIE() && !RD3_Glb.IsEdge())
-    	this.SortImage.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/"+im)+"')";
+      this.SortImage.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/"+im)+"')";
     else
-    	this.SortImage.src = RD3_Glb.GetImgSrc("images/"+im);
+      this.SortImage.src = RD3_Glb.GetImgSrc("images/"+im);
     //
     // Se e' cambiata l'immagine, chiedo al pannello di riposizionarla a fine richiesta (quando
     // tutto e' nel DOM!)
@@ -1617,10 +1631,10 @@ PField.prototype.AdjustHeaderSize= function()
     if (RD3_Glb.IsChrome() && !RD3_Glb.IsTouch() && RD3_Glb.HasClass(this.FormCaptionBox, "last-group-field") && this.FormCaptionBox.scrollHeight-this.FormCaptionBox.offsetHeight==1)
       applyLine = false;
     //
-  	if (this.FormCaptionBox.scrollHeight>this.FormCaptionBox.offsetHeight && applyLine)
-  		this.FormCaptionBox.style.setProperty("line-height","100%","important");
-  	else
-  		this.FormCaptionBox.style.setProperty("line-height","","");
+    if (this.FormCaptionBox.scrollHeight>this.FormCaptionBox.offsetHeight && applyLine)
+      this.FormCaptionBox.style.setProperty("line-height","100%","important");
+    else
+      this.FormCaptionBox.style.setProperty("line-height","","");
   }
 }
 
@@ -1835,6 +1849,11 @@ PField.prototype.SetClassName = function(value)
   }
 }
 
+PField.prototype.SetAggregateOfField = function(value)
+{
+  this.AggregateOfField = value;
+}
+
 PField.prototype.SetIsPK = function(value) 
 {
   if (value!=undefined)
@@ -1869,19 +1888,19 @@ PField.prototype.SetBadge = function(value)
       if (this.BadgeObjForm == null && this.InForm && this.ParentPanel.HasForm)
       {
         this.BadgeObjForm = document.createElement("div");
-	      this.BadgeObjForm.className = "badge-red";
-	      this.BadgeObjForm.style.position = "absolute";
-	      //
-	      this.ParentPanel.FormBox.appendChild(this.BadgeObjForm);
+        this.BadgeObjForm.className = "badge-red";
+        this.BadgeObjForm.style.position = "absolute";
+        //
+        this.ParentPanel.FormBox.appendChild(this.BadgeObjForm);
       }
       //
       if (this.BadgeObjList == null && this.InList && this.ParentPanel.HasList)
       {
         this.BadgeObjList = document.createElement("div");
-	      this.BadgeObjList.className = "badge-red";
-	      this.BadgeObjList.style.position = "absolute";
-	      //
-	      this.ParentPanel.ListBox.appendChild(this.BadgeObjList);
+        this.BadgeObjList.className = "badge-red";
+        this.BadgeObjList.style.position = "absolute";
+        //
+        this.ParentPanel.ListBox.appendChild(this.BadgeObjList);
       }
       //
       if (this.BadgeObjForm)
@@ -2254,17 +2273,17 @@ PField.prototype.SetListListPosition= function(left, top, par)
     // Se il pannello ha il bordo verticale e l'intestazione no, la sposto
     if ((panbrd == 4 || panbrd == 3) && intbrd != 4 && intbrd != 3) 
     {
-    	rc.x++;
-    	rc.w--;
-    	if (rc.x + rc.w == pp.ListWidth - 4)
-    		rc.w--;
+      rc.x++;
+      rc.w--;
+      if (rc.x + rc.w == pp.ListWidth - 4)
+        rc.w--;
     }
     //
     // Se il pannello ha il bordo orizzontale e l'intestazione no, la sposto
     if ((panbrd == 4 || panbrd == 2) && intbrd != 4 && intbrd != 2) 
     {
-    	rc.y++;
-    	rc.h--;
+      rc.y++;
+      rc.h--;
     }
     //
     var s = this.ListCaptionBox.style;
@@ -2292,13 +2311,13 @@ PField.prototype.SetListListPosition= function(left, top, par)
     //
     // Se il campo ha il bordo (oriz) e il pannello no devo spostare in giu
     if ((fldbrd == 4 || fldbrd == 2) && panbrd != 4 && panbrd != 2) 
-    	ofsy = 1;
+      ofsy = 1;
     //
-   	// Se il campo non ha il bordo (vert) e il pannello si' devo spostare a dx
+    // Se il campo non ha il bordo (vert) e il pannello si' devo spostare a dx
     if ((panbrd == 4 || panbrd == 3) && fldbrd != 4 && fldbrd != 3) 
-    {	
-    	if (left==-1)
-    		ofsx=1;
+    { 
+      if (left==-1)
+        ofsx=1;
     }
     //
     // Posiziono il DIV che contiene tutte le mie celle
@@ -2312,9 +2331,9 @@ PField.prototype.SetListListPosition= function(left, top, par)
     if (pp.HeaderSize>0)
       newh -= pp.HeaderSize+pp.VisStyle.GetHeaderOffset();
     //
-	  if (RD3_Glb.IsQuadro() || RD3_Glb.IsMobile7())
-	  	newh++;
-		//
+    if (RD3_Glb.IsQuadro() || RD3_Glb.IsMobile7() || RD3_Glb.IsMobile())
+      newh++;
+    //
     if (newh<0) newh=0;
     s.height = newh + "px";
     //
@@ -2342,6 +2361,22 @@ PField.prototype.SetListListPosition= function(left, top, par)
     //
     // Mi memorizzo la mia posizione
     this.PGroupListLeft = left;
+    //
+    // Allineo anche i campi con valori aggregati
+    var n = pp.Fields.length;
+    for (var i = 0; i < n; i++)
+    {
+      var f = pp.Fields[i];
+      if (f.AggregateOfField != this.Index)
+        continue;
+      //
+      // Cambio parent se richiesto
+      if (f.ListCaptionBox.parentNode != par)
+        par.appendChild(f.ListCaptionBox);
+      //
+      f.SetListLeft(parseInt(s.left) - pp.RowSelWidth());
+      f.SetListWidth(parseInt(s.width));
+    }
   }
 }
 
@@ -2866,8 +2901,8 @@ PField.prototype.OnClickCaption= function(evento)
   if (this.IsStatic())
   {
     // Voglio evitare un doppio click sugli oggetti
-		if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
-			RD3_DDManager.ChompClick();
+    if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
+      RD3_DDManager.ChompClick();
     //
     // Un campo statico e' cliccabile se e' abilitato oppure se e' attivo il flag ActivableDisabled e il suo visual style ha il flag cliccabile
     if ((this.IsEnabled() || this.ActivableDisabled) && !this.SubFrame && this.VisHyperLink(this.VisualStyle))
@@ -2894,8 +2929,8 @@ PField.prototype.OnClickCaption= function(evento)
   else if (this.ParentPanel.CanSort && this.CanSort && this.VisCanSort() && this.ListList)
   {
     // Voglio evitare un doppio click sugli oggetti
-		if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
-			RD3_DDManager.ChompClick();
+    if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
+      RD3_DDManager.ChompClick();
     //
     var sendev = true;
     //
@@ -3191,7 +3226,7 @@ PField.prototype.UpdateSubFrameVisibility = function()
       //
       // Se e' una pannello, allora aggiusto la lista
       if (this.SubFrame instanceof IDPanel)
-      	this.SubFrame.AdjustSubFrame(this,obj);
+        this.SubFrame.AdjustSubFrame(this,obj);
       //
       // Annullo i margini del subframe, perche' basta il mio padding.
       this.SubFrame.ContentBox.style.margin = "0px";
@@ -3199,7 +3234,7 @@ PField.prototype.UpdateSubFrameVisibility = function()
       // Nel mobile tengo conto che i sotto pannelli probabilmente sono nei gruppi e
       // non voglio che sbordino
       if (obj.style.paddingBottom=="0px" && RD3_Glb.IsMobile())
-      	this.SubFrame.ContentBox.style.marginBottom = "4px";
+        this.SubFrame.ContentBox.style.marginBottom = "4px";
     }
     //
     // Faccio l'append senza controllare se e' gia' nel layout giusto perche' UpdateFieldVisibility viene chiamata o quando cambio layout
@@ -3370,9 +3405,9 @@ PField.prototype.Focus = function(evento, row, selall)
   //
   // C'e' aperta una combo non popover... meglio non dare il fuoco adesso
   if (RD3_DDManager.OpenCombo && !RD3_DDManager.OpenCombo.IsPopOver() && RD3_Glb.IsMobile())
-	{
-		return;
-	}
+  {
+    return;
+  }
   //
   // Cerco l'elemento da fuocare... prima il box
   var cell = null;
@@ -3958,7 +3993,7 @@ PField.prototype.OnBlobCommand= function(evento, button)
       if (button == "zoom" && RD3_Glb.BlobShowPreview(pv.HTMLBlobMime))
       {
         // Eseguo la preview del blob
-        var m = new PopupPreview(url, RD3_ServerParams.VisualizzaDocumento);
+        var m = new PopupPreview(url, RD3_ServerParams.VisualizzaDocumento, pv.HTMLBlobMime);
         m.Open();
       }
       else
@@ -4120,6 +4155,10 @@ PField.prototype.IsRightAligned = function()
 // **********************************************************************
 PField.prototype.CanHaveFocus= function(nr)
 {
+  // Un campo statico non puo' prendere il fuoco, ma se e' un pulsante si
+  if (this.IsStatic())
+    return this.IsButton();
+  //
   // Prelevo il visual style della riga nr
   if (nr==undefined)
     nr = this.ParentPanel.ActualRow;
@@ -4134,10 +4173,13 @@ PField.prototype.CanHaveFocus= function(nr)
   var cell = this.GetCurrentCell(nr);
   //
   // Vediamo i vari casi
-  var ct = cell.ControlType;
-  //
-  if (ct == 6) // VISCTRL_BUTTON
-    en = cell.IsEnabled;
+  var ct = -1;
+  if (cell) 
+  {
+    ct = cell.ControlType;
+    if (ct == 6) // VISCTRL_BUTTON
+      en = cell.IsEnabled;
+  }
   //
   // Se il campo e' disabilitato ed il pannello non e' in QBE non devo avere il fuoco
   if (!en && this.ParentPanel.Status != RD3_Glb.PS_QBE)
@@ -4148,7 +4190,7 @@ PField.prototype.CanHaveFocus= function(nr)
     return false;
   //
   var vs = this.VisualStyle;
-  if (this.PValues[np])
+  if (this.PValues[np] && !(this.PValues[np] instanceof PListGroup))
   {
     en = this.PValues[np].IsEnabled();
     vs = this.PValues[np].GetVisualStyle();
@@ -4186,6 +4228,11 @@ PField.prototype.CanHaveFocus= function(nr)
         
     case 101: // VISCTRL_FCK
       return (en && RD3_ServerParams.UseIDEditor); // non includo il campo FCK nella lista dei fuocabili per ora...        
+    
+    case -1:
+        // Nessuna cella in quello che e' un campo non statico... forse non sono state ancora renderizzate.. comunque non lo posso fuocare
+        return false;
+      break;
   }
   //
   return true;
@@ -4204,31 +4251,31 @@ PField.prototype.ResizeForm = function(dw, dh, ex, ey)
   //
   if (this.FormHResMode==RD3_Glb.RESMODE_STRETCH)
   {
-  	// In questo caso voglio calcolare l'aspect ratio della caption, se essa e' a sx
-  	if (!this.IsStatic() && !this.HdrFormAbove && this.HdrForm && RD3_Glb.IsSmartPhone())
-  	{
-  		if (this.OrgFormHeaderSize==undefined)
-  			this.OrgFormHeaderSize = this.FormHeaderSize;
-  		//
-  		var asorg = (this.OrgFormHeaderSize+0.0)/this.OrgFormWidth;
-			//
-			// quindi il dw deve essere spartito, fra la caption e il campo
-			var dwh = Math.floor(dw*asorg);
-			var newfh = this.FormHeaderSize+dwh;
-			if (dwh<0 && newfh<80 && this.OrgFormHeaderSize>80)
-			{
-				newfh = 80;
-				dwh = this.FormHeaderSize-newfh;
-			}
-			//
-			this.SetFormHeaderSize(newfh);
-  	}
-  	//
+    // In questo caso voglio calcolare l'aspect ratio della caption, se essa e' a sx
+    if (!this.IsStatic() && !this.HdrFormAbove && this.HdrForm && RD3_Glb.IsSmartPhone())
+    {
+      if (this.OrgFormHeaderSize==undefined)
+        this.OrgFormHeaderSize = this.FormHeaderSize;
+      //
+      var asorg = (this.OrgFormHeaderSize+0.0)/this.OrgFormWidth;
+      //
+      // quindi il dw deve essere spartito, fra la caption e il campo
+      var dwh = Math.floor(dw*asorg);
+      var newfh = this.FormHeaderSize+dwh;
+      if (dwh<0 && newfh<80 && this.OrgFormHeaderSize>80)
+      {
+        newfh = 80;
+        dwh = this.FormHeaderSize-newfh;
+      }
+      //
+      this.SetFormHeaderSize(newfh);
+    }
+    //
     var neww = this.FormWidth+dw;
     var minw = ex?this.OrgFormWidth:48;
     if (dw<0 && neww<minw)
       neww = minw;    
-  	//
+    //
     this.SetFormWidth(neww);
   }
   //
@@ -4401,7 +4448,7 @@ PField.prototype.OnClickActivator= function(evento)
   // A volte se tocco la caption in form e' come cliccare sul campo in se
   if (RD3_Glb.IsMobile() && srcobj==this.FormCaptionBox && this.PFormCell)
   {
-  	srcobj = this.PFormCell.IntCtrl.ComboInput?this.PFormCell.IntCtrl.ComboInput:this.PFormCell.IntCtrl;
+    srcobj = this.PFormCell.IntCtrl.ComboInput?this.PFormCell.IntCtrl.ComboInput:this.PFormCell.IntCtrl;
   }
   //
   // Il campo di input e' il nodo precedente all'attivatore
@@ -4673,6 +4720,8 @@ PField.prototype.GetCurrentCell = function(nr, srcobj)
   var cell = null;
   if (this.ParentPanel.PanelMode == RD3_Glb.PANEL_LIST && this.InList)
   {
+    if (!this.PListCells)
+      return null;
     if (this.ListList)
       return this.PListCells[nr];
     else
@@ -4979,7 +5028,11 @@ PField.prototype.RenderMultiUpload = function()
     this.FormFlashUploader = this.CreateFlashUploader();
   this.SelectFilesImg = this.FormFlashUploader.getMovieElement();
   this.SelectFilesImg.className = "mup-header-button";
-  this.SelectFilesImg.style.backgroundImage = "url(" + RD3_Glb.GetAbsolutePath() + "images/find.gif)";
+  //
+  // Su zen find.gif e find_sprite.gif sono diverse..
+  if (RD3_ServerParams.Theme !== "zen")
+    this.SelectFilesImg.style.backgroundImage = "url(" + RD3_Glb.GetAbsolutePath() + "images/find.gif)";
+  //
   RD3_TooltipManager.SetObjTitle(this.SelectFilesImg, ClientMessages.SWF_TP_SELECTFILES);
   td.appendChild(this.SelectFilesImg);
   //
@@ -5211,6 +5264,11 @@ PField.prototype.CreateFlashUploader = function()
     {
       settings.button_width = "22";
       settings.button_height = "22";
+    }
+    else if (RD3_ServerParams.Theme == "zen")
+    {
+      settings.button_width = "20";
+      settings.button_height = "20";
     }
     else
     {
@@ -5804,8 +5862,8 @@ PField.prototype.SWFUpload_Destroy = function (swfobj)
 // *********************************************************
 PField.prototype.GetTooltip = function(tip, obj)
 {
-  // Sono sulla caption in lista o in form
-  if (obj == this.FormCaptionBox || obj == this.ListCaptionBox)
+  // Sono sulla caption in lista o in form o un figliodiretto (tema ZEN)
+  if (obj == this.FormCaptionBox || obj == this.ListCaptionBox || (obj.parentNode && obj.parentNode == this.FormCaptionBox && obj.tagName=="SPAN") || (obj.parentNode && obj.parentNode == this.ListCaptionBox && obj.tagName=="SPAN"))
   {
     if (this.Tooltip == "")
       return false;
@@ -5936,13 +5994,13 @@ PField.prototype.VisHyperLink = function(vs)
 
 PField.prototype.VisSlidePad = function()
 {
-	// Il flag visuale "popup control" deve essere disabilitato
+  // Il flag visuale "popup control" deve essere disabilitato
   return (this.VisualFlags & 0x40)==0 || RD3_Glb.IsSmartPhone();
 }
 
 PField.prototype.UsePopupControl = function()
 {
-	// Popup control vale per data, ora e numerico. Non puo' essere combo
+  // Popup control vale per data, ora e numerico. Non puo' essere combo
   return (this.VisualFlags & 0x40) && !this.ValueList && (RD3_Glb.IsDateOrTimeObject(this.DataType) || RD3_Glb.IsNumericObject(this.DataType));
 }
 
@@ -5956,17 +6014,22 @@ PField.prototype.UseWatermarkAsNull = function()
   return (this.VisualFlags & 0x00000400);
 }
 
+PField.prototype.HandlesTabOrder = function()
+{
+  return (this.VisualFlags & 0x00000800);
+}
+
 PField.prototype.GetPopupControlType = function()
 {
   switch(this.DataType)
   {
-  	case 6: return RD3_Glb.CTRL_DATE;
-  	case 7: return RD3_Glb.CTRL_TIME;
-  	case 8: return RD3_Glb.CTRL_DATETIME;
-  	case 1:
-  	case 2:
-  	case 3:
-  	case 4: return RD3_Glb.CTRL_KEYNUM;
+    case 6: return RD3_Glb.CTRL_DATE;
+    case 7: return RD3_Glb.CTRL_TIME;
+    case 8: return RD3_Glb.CTRL_DATETIME;
+    case 1:
+    case 2:
+    case 3:
+    case 4: return RD3_Glb.CTRL_KEYNUM;
   }
 }
 
@@ -6117,8 +6180,8 @@ PField.prototype.OnTransform = function(x, y, w, h, evento)
   this.VisualStyle.AdaptCaptionRect(rc, true, true);
   var wid = w>rc.w ? w + (w - rc.w) : w;
   //
-  // Dimensione minima 6 px
-  wid = wid<6 ? 6 : Math.ceil(wid);
+  // Dimensione minima 50 px
+  wid = wid<50 ? 50 : Math.ceil(wid);
   //
   // Se la dimensione non e' cambiata non faccio nulla...
   if (wid == this.ListWidth)
@@ -6710,10 +6773,10 @@ PField.prototype.UpdateVisualStyle = function(vs)
       //
       // Questa eccezione rende possibile impostare il colore del testo dei bottoni
       // anche nel tema mobile 7
-	    if (RD3_Glb.IsMobile7() && this.IsButton() && this.ForeColor!="")
-	    {
-	    	this.ListCaptionBox.style.setProperty("color",this.ForeColor,"important");
-	    }
+      if (RD3_Glb.IsMobile7() && this.IsButton() && this.ForeColor!="")
+      {
+        this.ListCaptionBox.style.setProperty("color",this.ForeColor,"important");
+      }
     }
   }
   if (this.FormCaptionBox)
@@ -6725,6 +6788,20 @@ PField.prototype.UpdateVisualStyle = function(vs)
     }
     //
     var aa = (cr && this.HdrFormAbove) ?"right":"left";
+    if (this.HdrFormAbove) {
+      // Se il VS e' centrato allora devo centrare
+      var al = this.Alignment;
+      if (al==1 || al==-1)
+        al = vs.GetAlignment(!st?2:1);
+      //
+      switch (al)
+      {
+        case 2: aa = "left";    break;
+        case 3: aa = "center";  break;      
+        case 4: aa = "right";   break;
+        case 5: aa = "justify"; break;
+      }
+    }
     vs.ApplyValueStyle(this.FormCaptionBox, false, !st, false, false, false, false, false, aa, false, nn, false, false, this.IsButton()); // Header in form
     //
     if (hasDynProp)
@@ -6734,7 +6811,7 @@ PField.prototype.UpdateVisualStyle = function(vs)
     // anche nel tema mobile 7
     if (RD3_Glb.IsMobile7() && this.IsButton() && this.ForeColor!="")
     {
-    	this.FormCaptionBox.style.setProperty("color",this.ForeColor,"important");
+      this.FormCaptionBox.style.setProperty("color",this.ForeColor,"important");
     }
   }
 }
@@ -6806,25 +6883,27 @@ PField.prototype.OnTouchDown= function(evento, scrollinput)
     //
     if (!RD3_Glb.IsMobile7())
     {
-	    var st = "-webkit-gradient(linear, 0% 0%, 0% 100%, from("+RD3_ClientParams.GetColorHL1()+"), to("+RD3_ClientParams.GetColorHL2()+"))";
-	    if (RD3_Glb.IsIE(10, true))
-	      st = "linear-gradient(180deg, "+RD3_ClientParams.GetColorHL1()+", "+RD3_ClientParams.GetColorHL2()+")";
-	    //
-	    if (this.VisShowActivator() && this.IsButton())
-	    {
-	      // Mi memorizzo l'immagine, cosi' posso riprisitnarla nel touch up
-	      obj.setAttribute("OldBkgImage", obj.style.backgroundImage);
-	      //
-	      obj.style.backgroundImage = "url("+RD3_Glb.GetAbsolutePath()+"images/detailw.png), "+st;
-	      obj.style.backgroundPosition = (obj.offsetWidth-27)+"px 50%, 0% 0%";
-	    }
-	    else
-	    {
-	      // Mi memorizzo l'immagine, cosi' posso riprisitnarla nel touch up
-	      obj.setAttribute("OldBkgImage", obj.style.backgroundImage);
-	      this.ApplyBackgroundImage(obj.style, st);
-	    }
-	  }
+      var st = "-webkit-gradient(linear, 0% 0%, 0% 100%, from("+RD3_ClientParams.GetColorHL1()+"), to("+RD3_ClientParams.GetColorHL2()+"))";
+      if (RD3_Glb.IsIE(10, true))
+        st = "linear-gradient(180deg, "+RD3_ClientParams.GetColorHL1()+", "+RD3_ClientParams.GetColorHL2()+")";
+      //
+      if (this.VisShowActivator() && this.IsButton())
+      {
+        // Mi memorizzo l'immagine, cosi' posso riprisitnarla nel touch up
+        obj.setAttribute("OldBkgImage", obj.style.backgroundImage);
+        //
+        obj.style.backgroundImage = "url("+RD3_Glb.GetAbsolutePath()+"images/detailw.png), "+st;
+        obj.style.backgroundPosition = (obj.offsetWidth-27)+"px 50%, 0% 0%";
+      }
+      else
+      {
+        // Mi memorizzo l'immagine, cosi' posso riprisitnarla nel touch up
+        obj.setAttribute("OldBkgImage", obj.style.backgroundImage);
+        this.ApplyBackgroundImage(obj.style, st);
+      }
+      //
+      this.ParentPanel.hilitedButton = this;
+    }
   }
   //
   // Se sono in form, giro l'evento alla cella, cioe' al PValue ad essa associato.
@@ -6834,7 +6913,7 @@ PField.prototype.OnTouchDown= function(evento, scrollinput)
     if (objt instanceof IDEditor)
       objt = objt.GetDOMObj();
     //
-  	return this.PFormCell.PValue.OnTouchDown(evento, scrollinput, objt);
+    return this.PFormCell.PValue.OnTouchDown(evento, scrollinput, objt);
   }
   else // In questo caso devo lanciare io il touch al padre
   {
@@ -6856,19 +6935,19 @@ PField.prototype.OnTouchUp= function(evento, click)
     if (objt instanceof IDEditor)
       objt = objt.GetDOMObj();
     //
-  	return this.PFormCell.PValue.OnTouchUp(evento, click, objt);
+    return this.PFormCell.PValue.OnTouchUp(evento, click, objt);
   }
   else
   {
     this.ParentPanel.OnTouchUp(evento, click);
   }
-	// Altrimenti me lo gestisco in proprio.
+  // Altrimenti me lo gestisco in proprio.
   if (click)
   {
-		// Voglio evitare un doppio click sugli oggetti
-		if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
-			RD3_DDManager.ChompClick();
-		//
+    // Voglio evitare un doppio click sugli oggetti
+    if (RD3_Glb.IsAndroid() || (RD3_Glb.IsIE(10, true) && RD3_Glb.IsTouch()))
+      RD3_DDManager.ChompClick();
+    //
     if (this.ParentPanel.PanelMode==RD3_Glb.PANEL_LIST || this.IsStatic())
       this.OnClickCaption(evento);
     //
@@ -6908,6 +6987,9 @@ PField.prototype.OnTouchUp= function(evento, click)
       // Se ho un'immagine allora vince quella (altrimenti si accodano..)
       st = this.Image != "" ? "" : st; 
       this.ApplyBackgroundImage(obj.style, st);
+      //
+      if (this.ParentPanel.hilitedButton == this)
+        delete this.ParentPanel.hilitedButton;
     }
   }
   return true;
@@ -6926,29 +7008,29 @@ PField.prototype.OnToggleCheck = function(evento)
   while (obj.className.substr(0,9)=="radio-int")
     obj = obj.parentNode;
   if (obj.firstChild && obj.firstChild.className=="panel-value-check")
-  	obj = obj.firstChild;
+    obj = obj.firstChild;
   if (obj.tagName=="SPAN")
     obj = obj.parentNode;
-	//
+  //
   var objf = RD3_KBManager.GetObject(obj, true);
   if (!objf || !objf.IsEnabled())
     return;
   //
   obj.checked = !obj.checked;
   if (RD3_Glb.IsQuadro())
-	{
-		var io = obj.firstChild;
-	  RD3_Glb.SetTransitionDuration(io, "200ms");
-		var x = "translate3d("+(obj.checked?0:-53)+"px, 0px, 0px)";
-		RD3_Glb.SetTransform(io, x);
-	  RD3_Glb.AddEndTransaction(io, this.ea, false);
-	}
-	else
-	{
-	  RD3_Glb.SetTransitionDuration(obj, "200ms");
-	  obj.style.backgroundPosition = (obj.checked?"0%":"100%")+" -27px";
-	  RD3_Glb.AddEndTransaction(obj, this.ea, false);
-	}
+  {
+    var io = obj.firstChild;
+    RD3_Glb.SetTransitionDuration(io, "200ms");
+    var x = "translate3d("+(obj.checked?0:-53)+"px, 0px, 0px)";
+    RD3_Glb.SetTransform(io, x);
+    RD3_Glb.AddEndTransaction(io, this.ea, false);
+  }
+  else
+  {
+    RD3_Glb.SetTransitionDuration(obj, "200ms");
+    obj.style.backgroundPosition = (obj.checked?"0%":"100%")+" -27px";
+    RD3_Glb.AddEndTransaction(obj, this.ea, false);
+  }
   //
   // Mando i cambiamenti dell'oggetto?
   if (objf.OnChange)
@@ -7027,7 +7109,7 @@ PField.prototype.HiliteCombo= function(obj, fl)
   else
     cell = RD3_KBManager.GetCell(obj);
   if (cell==null)
-  	return;
+    return;
   //
   if (fl)
   {
@@ -7038,18 +7120,18 @@ PField.prototype.HiliteCombo= function(obj, fl)
     parp.HilitedCombo = this;
     //
     if (parf.FormCaptionBox && !RD3_Glb.IsQuadro())
-    	RD3_Glb.AddClass(parf.FormCaptionBox,"combo-hover");
+      RD3_Glb.AddClass(parf.FormCaptionBox,"combo-hover");
     if (cell.IntCtrl.ComboInput)
     {
       RD3_Glb.AddClass(cell.IntCtrl.ComboInput,"combo-hover");
       if (this.ActImage=="")
-      	cell.IntCtrl.ComboActivator.style.setProperty("background-image","url(images/detailw.png)","important");
+        cell.IntCtrl.ComboActivator.style.setProperty("background-image","url(images/detailw.png)","important");
     }
     else
     {
       RD3_Glb.AddClass(cell.IntCtrl,"combo-hover");
       if (cell.ActObj && this.ActImage=="")
-      	cell.ActObj.style.setProperty("background-image","url(images/detailw.png)","important");
+        cell.ActObj.style.setProperty("background-image","url(images/detailw.png)","important");
     }
     //
     // Aggiungo e posiziono al volo un div prima della caption form in modo che mostri la riga evidenziata nel modo giusto
@@ -7065,7 +7147,7 @@ PField.prototype.HiliteCombo= function(obj, fl)
       if (RD3_Glb.HasClass(cell.IntCtrl.ComboInput?cell.IntCtrl.ComboInput:cell.IntCtrl,"last-group-field"))
         brbottom = "6px 6px";
       if (!RD3_Glb.IsMobile7())
-      	RD3_Glb.SetBorderRadius(parp.HiliteBox, brtop+brbottom);
+        RD3_Glb.SetBorderRadius(parp.HiliteBox, brtop+brbottom);
       parp.HiliteBox.style.position = "absolute";
     }
     //
@@ -7075,17 +7157,17 @@ PField.prototype.HiliteCombo= function(obj, fl)
     s.width = parf.FormWidth + "px";
     s.height = (parf.FormHeight-2) + "px";
     if (parf.FormCaptionBox)
-	    parf.FormCaptionBox.parentNode.insertBefore(parp.HiliteBox, parf.FormCaptionBox);
+      parf.FormCaptionBox.parentNode.insertBefore(parp.HiliteBox, parf.FormCaptionBox);
   }
   else
   {
     if (parf.FormCaptionBox)
-	    RD3_Glb.RemoveClass(parf.FormCaptionBox,"combo-hover");
+      RD3_Glb.RemoveClass(parf.FormCaptionBox,"combo-hover");
     if (cell.IntCtrl.ComboInput)
     {
       RD3_Glb.RemoveClass(cell.IntCtrl.ComboInput,"combo-hover");
       if (this.ActImage=="")
-      	cell.IntCtrl.ComboActivator.style.backgroundImage = "";
+        cell.IntCtrl.ComboActivator.style.backgroundImage = "";
     }
     else
     {
@@ -7190,10 +7272,10 @@ PField.prototype.UpdateMultipleSel= function(attivo, stati, onlyback)
   if (!this.PListCells)
     return;
   //
-	for (var i=0;i<this.PListCells.length;i++)
-	{
-		this.UpdateMultiSelCell(i, attivo && i<this.ParentPanel.TotalRows, stati[i+1], onlyback);
-	}	
+  for (var i=0;i<this.PListCells.length;i++)
+  {
+    this.UpdateMultiSelCell(i, attivo && i<this.ParentPanel.TotalRows, stati[i+1], onlyback);
+  } 
 }
 
 PField.prototype.UpdateMultiSelCell= function(riga, attivo, stato, onlyback)
@@ -7201,20 +7283,20 @@ PField.prototype.UpdateMultiSelCell= function(riga, attivo, stato, onlyback)
   if (!this.PListCells[riga] || !this.PListCells[riga].IntCtrl)
     return;
   //
-	var obj = this.PListCells[riga].IntCtrl;
-	if (obj instanceof IDCombo)
-		obj = obj.ComboInput;
-	if (onlyback)
-		RD3_Glb.SetClass(obj, "panel-field-selected-back", attivo && stato);
-	else
-	{
-		RD3_Glb.SetClass(obj, "panel-field-selected", attivo && stato);
-		RD3_Glb.SetClass(obj, "panel-field-unselected", attivo && !stato);
-		//
-		if (this.PListCells[riga].Tooltip!="" && this.PListCells[riga].TooltipDiv)
-		  RD3_Glb.SetClass(this.PListCells[riga].TooltipDiv, "panel-value-tooltip-multiplesel", attivo);
-		  
-	}
+  var obj = this.PListCells[riga].IntCtrl;
+  if (obj instanceof IDCombo)
+    obj = obj.ComboInput;
+  if (onlyback)
+    RD3_Glb.SetClass(obj, "panel-field-selected-back", attivo && stato);
+  else
+  {
+    RD3_Glb.SetClass(obj, "panel-field-selected", attivo && stato);
+    RD3_Glb.SetClass(obj, "panel-field-unselected", attivo && !stato);
+    //
+    if (this.PListCells[riga].Tooltip!="" && this.PListCells[riga].TooltipDiv)
+      RD3_Glb.SetClass(this.PListCells[riga].TooltipDiv, "panel-value-tooltip-multiplesel", attivo);
+      
+  }
 }
 
 // ********************************************************************************
@@ -7462,6 +7544,7 @@ PField.prototype.OnHTML5Upload = function(ev, idUploader, dropFiles)
       // Se ho selezionato almeno un file invio la richiesta, altrimenti segnalo eventuali errori
       if (accepted)
       {
+        RD3_DesktopManager.SendEvents(true);
         req.send(formData);
       }
       else
@@ -7540,16 +7623,16 @@ PField.prototype.OnHTML5Drop = function(ev)
 PField.prototype.OnHTML5Drag = function(ev)
 {
   // Abilito il Drag dei file
-	if (ev && ev.dataTransfer)
-	{
-	  var srcobj = window.event ? window.event.srcElement : ev.explicitOriginalTarget;
-	  var obj = RD3_KBManager.GetObject(srcobj, true);
-	  //
-	  var upl = this.DataType == 10 || this.MultiUpload;
-	  //
-	  // Verifico se e' consentito l'upload per i blob attivi
-	  if (this.DataType == 10)
-	  {
+  if (ev && ev.dataTransfer)
+  {
+    var srcobj = window.event ? window.event.srcElement : ev.explicitOriginalTarget;
+    var obj = RD3_KBManager.GetObject(srcobj, true);
+    //
+    var upl = this.DataType == 10 || this.MultiUpload;
+    //
+    // Verifico se e' consentito l'upload per i blob attivi
+    if (this.DataType == 10)
+    {
       upl = false;
       var m = this.ParentPanel.ActualPosition + this.ParentPanel.ActualRow;
       if (this.IsEnabled(m+1) && this.ParentPanel.Status!=RD3_Glb.PS_QBE && !this.ParentPanel.IsNewRow(this.ParentPanel.ActualPosition, this.ParentPanel.ActualRow))
@@ -7558,9 +7641,9 @@ PField.prototype.OnHTML5Drag = function(ev)
     //
     // Se il pannello e' in lista ed il campo BLOB e' in lista consento l'upload solo sulla riga attiva (altrimenti lato server fa casino)
     if (upl && this.ParentPanel.PanelMode == RD3_Glb.PANEL_LIST && this.InList && this.ListList && obj != null && obj instanceof PValue)
-	  {
-	    upl = obj.Index == this.ParentPanel.ActualPosition + this.ParentPanel.ActualRow;
-	  }
+    {
+      upl = obj.Index == this.ParentPanel.ActualPosition + this.ParentPanel.ActualRow;
+    }
     //
     if (upl)
       ev.dataTransfer.dropEffect = "copy";

@@ -1,6 +1,6 @@
 // **********************************************
 // Spedizioni Win Store
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -352,41 +352,74 @@ public partial class SpedizioniWinStore : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("8890146D-D389-4649-9D36-2FE21A5C07D5", "Invia subito", "", 3, "Spedizioni Win Store")) return 0;
       // 
       // Invia subito Body
       // Corpo Procedura
       // 
       IDVariant v_IRIGAATTIVA = null;
+      MainFrm.DTTObj.AddAssign ("77386A5B-B9A2-49A7-9314-F842E8BE0F2E", "i Riga Attiva := C1", "", v_IRIGAATTIVA);
       v_IRIGAATTIVA = (new IDVariant(1));
+      MainFrm.DTTObj.AddAssignNewValue ("77386A5B-B9A2-49A7-9314-F842E8BE0F2E", "33865222-3D11-4786-A510-ADFFF3FB2C4A", v_IRIGAATTIVA);
+      MainFrm.DTTObj.AddIf ("F8258284-3131-4CC8-9B39-3088306970E4", "IF Spedizioni [Spedizioni Win Store].Show Multiple Selection", "");
+      MainFrm.DTTObj.AddToken ("F8258284-3131-4CC8-9B39-3088306970E4", "B780712E-DBC3-4357-A4D8-E9C00DE7F608", 2621440, "Spedizioni [Spedizioni Win Store].Show Multiple Selection", PAN_SPEDIZIONI.ShowMultipleSel());
       if (PAN_SPEDIZIONI.ShowMultipleSel())
       {
+        MainFrm.DTTObj.EnterIf ("F8258284-3131-4CC8-9B39-3088306970E4", "IF Spedizioni [Spedizioni Win Store].Show Multiple Selection", "");
+        int DTT_C3 = 0;
+        MainFrm.DTTObj.AddForEach ("709083AD-91B8-4B18-8090-A69B4ECA802D", "FOR EACH Spedizioni ROW", "");
+        MainFrm.DTTObj.AddDBDataSource (PAN_SPEDIZIONI.MasterRS(), new StringBuilder(""));
         C3 = PAN_SPEDIZIONI.MasterRS();
         if (C3.size()>0) CurPos = C3.getRow(); else CurPos = 0;
         if (!C3.Bof()) PAN_SPEDIZIONI.GotoFirst();
         while (!PAN_SPEDIZIONI.RSEOF())
         {
+          DTT_C3 = DTT_C3 + 1;
+          if (!MainFrm.DTTObj.CheckLoop("709083AD-91B8-4B18-8090-A69B4ECA802D", DTT_C3)) break;
+          MainFrm.DTTObj.AddIf ("6C864229-DF26-4B87-98CD-ED31E6583AF2", "IF Spedizioni [Spedizioni Win Store].Is Row Selected (i Riga Attiva)", "");
+          MainFrm.DTTObj.AddToken ("6C864229-DF26-4B87-98CD-ED31E6583AF2", "B780712E-DBC3-4357-A4D8-E9C00DE7F608", 2621440, "Spedizioni [Spedizioni Win Store].Is Row Selected (i Riga Attiva)", PAN_SPEDIZIONI.IsRowSelected(v_IRIGAATTIVA.intValue()));
+          MainFrm.DTTObj.AddToken ("6C864229-DF26-4B87-98CD-ED31E6583AF2", "33865222-3D11-4786-A510-ADFFF3FB2C4A", 1376256, "i Riga Attiva", v_IRIGAATTIVA);
           if (PAN_SPEDIZIONI.IsRowSelected(v_IRIGAATTIVA.intValue()))
           {
+            MainFrm.DTTObj.EnterIf ("6C864229-DF26-4B87-98CD-ED31E6583AF2", "IF Spedizioni [Spedizioni Win Store].Is Row Selected (i Riga Attiva)", "");
+            MainFrm.DTTObj.AddSubProc ("5EBEDCF2-02A5-461E-93DF-4AA17D820C6E", "Notificatore.Send Win Store Notification", "");
             MainFrm.SendWinStoreNotification(C3.Get("ID"));
           }
+          MainFrm.DTTObj.EndIfBlk ("6C864229-DF26-4B87-98CD-ED31E6583AF2");
+          MainFrm.DTTObj.AddAssign ("B3FE237E-D99A-454B-AFAD-5744B99D90A2", "i Riga Attiva := i Riga Attiva + 1", "", v_IRIGAATTIVA);
+          MainFrm.DTTObj.AddToken ("B3FE237E-D99A-454B-AFAD-5744B99D90A2", "33865222-3D11-4786-A510-ADFFF3FB2C4A", 1376256, "i Riga Attiva", v_IRIGAATTIVA);
           v_IRIGAATTIVA = IDL.Add(v_IRIGAATTIVA, (new IDVariant(1)));
+          MainFrm.DTTObj.AddAssignNewValue ("B3FE237E-D99A-454B-AFAD-5744B99D90A2", "33865222-3D11-4786-A510-ADFFF3FB2C4A", v_IRIGAATTIVA);
           PAN_SPEDIZIONI.GotoNext();
         }
         if (CurPos>0) C3.absolute(CurPos);
+        MainFrm.DTTObj.EndForEach ("709083AD-91B8-4B18-8090-A69B4ECA802D", "FOR EACH Spedizioni ROW", "", DTT_C3);
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("60BCC87B-A330-4275-8183-F0ADF3EA528C", "ELSE", "", "F8258284-3131-4CC8-9B39-3088306970E4");
+        MainFrm.DTTObj.AddIf ("D51B4CDA-71B0-41D9-92B2-774EEC9051F9", "IF not (Is Null (ID Spedizione [Spedizioni Win Store - Spedizioni]))", "");
+        MainFrm.DTTObj.AddToken ("D51B4CDA-71B0-41D9-92B2-774EEC9051F9", "0E54C6EB-FA84-4102-840D-2610ABD0C421", 917504, "ID Spedizione", IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI4, IMDBDef1.PQSL_SPEDIZIONI4_ID, 0));
         if (!(IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI4, IMDBDef1.PQSL_SPEDIZIONI4_ID, 0))))
         {
+          MainFrm.DTTObj.EnterIf ("D51B4CDA-71B0-41D9-92B2-774EEC9051F9", "IF not (Is Null (ID Spedizione [Spedizioni Win Store - Spedizioni]))", "");
+          MainFrm.DTTObj.AddSubProc ("0EDC64DE-F238-4841-9A80-3511DA9433CF", "Notificatore.Send Win Store Notification", "");
           MainFrm.SendWinStoreNotification(IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI4, IMDBDef1.PQSL_SPEDIZIONI4_ID, 0));
         }
+        MainFrm.DTTObj.EndIfBlk ("D51B4CDA-71B0-41D9-92B2-774EEC9051F9");
       }
+      MainFrm.DTTObj.EndIfBlk ("F8258284-3131-4CC8-9B39-3088306970E4");
+      MainFrm.DTTObj.AddSubProc ("AED43847-66C7-47EE-B71D-1283AF4C8B98", "Spedizioni.Refresh Query", "");
       PAN_SPEDIZIONI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("8890146D-D389-4649-9D36-2FE21A5C07D5", "Invia subito", "", 3, "Spedizioni Win Store");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("8890146D-D389-4649-9D36-2FE21A5C07D5", "Invia subito", "", _e);
       MainFrm.ErrObj.ProcError ("SpedizioniWinStore", "Inviasubito", _e);
+      MainFrm.DTTObj.ExitProc("8890146D-D389-4649-9D36-2FE21A5C07D5", "Invia subito", "", 3, "Spedizioni Win Store");
       return -1;
     }
   }
@@ -769,7 +802,7 @@ public partial class SpedizioniWinStore : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~ID_APPLICAZIONE~~) ");
     SQL.Append("and   (A.TYPE_OS = '5') ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "397B22DD-023D-4766-A124-D7F7154BEAE0");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as ID, ");
@@ -806,7 +839,7 @@ public partial class SpedizioniWinStore : MyWebForm
     SQL.Append("  A.INFO as INFO, ");
     SQL.Append("  A.TENTATIVI as TENTATIVI, ");
     SQL.Append("  A.GUID_GRUPPO as GUID_GRUPPO ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI4, 0, SQL, -1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI4, 0, SQL, -1, "E2958DEA-348B-4653-8489-9EEE4D40658F");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  SPEDIZIONI A ");
@@ -1047,6 +1080,10 @@ public partial class SpedizioniWinStore : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

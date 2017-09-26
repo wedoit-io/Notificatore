@@ -1,7 +1,7 @@
 // **********************************************
 // Global functions and constants
 // Instant WEB Application: www.progamma.com
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using com.progamma.ids;
@@ -145,6 +145,14 @@ public class IMDBDef1 : Object
   public static int PQSL_IMPOSTAZIONI_FLG_DEL_REMOVED_TK = 10;
   public static int PQSL_IMPOSTAZIONI_MAX_MESSAGGI_C2DM = 11;
   public static int PQSL_IMPOSTAZIONI_FLG_DEBUG = 12;
+  public static int PQSL_IMPOSTAZIONI_DES_MITTENTE = 13;
+  public static int PQSL_IMPOSTAZIONI_DES_INDIRIZZO = 14;
+  public static int PQSL_IMPOSTAZIONI_DES_SERVER_OUT = 15;
+  public static int PQSL_IMPOSTAZIONI_DES_LOGIN = 16;
+  public static int PQSL_IMPOSTAZIONI_DES_PASSWORD = 17;
+  public static int PQSL_IMPOSTAZIONI_CDN_PORTA_OUT = 18;
+  public static int PQSL_IMPOSTAZIONI_DES_INDIRIZZO_SUPP = 19;
+  public static int PQSL_IMPOSTAZIONI_FLG_SSL = 20;
 
   // Table to contain panel selected row: Prodotti
   //
@@ -218,9 +226,22 @@ public class IMDBDef1 : Object
   public static int PQSL_APPLICAZION1_DAT_SCAD_CERT = 7;
   public static int PQSL_APPLICAZION1_DES_ERR = 8;
 
+  // Table to contain panel selected row: Applicazioni
+  //
+  public static int PQRY_APPLICAZION5 = 20;
+  public static int PQSL_APPLICAZION5_ID = 0;
+  public static int PQSL_APPLICAZION5_CERT_DEV = 1;
+  public static int PQSL_APPLICAZION5_DES_NOTA = 2;
+  public static int PQSL_APPLICAZION5_FLG_ATTIVA = 3;
+  public static int PQSL_APPLICAZION5_FLG_AMBIENTE = 4;
+  public static int PQSL_APPLICAZION5_TYPE_OS = 5;
+  public static int PQSL_APPLICAZION5_ID_APP = 6;
+  public static int PQSL_APPLICAZION5_DAT_SCAD_CERT = 7;
+  public static int PQSL_APPLICAZION5_DES_ERR = 8;
+
   // Table to contain panel selected row: Device Token
   //
-  public static int PQRY_DEVICETOKEN1 = 20;
+  public static int PQRY_DEVICETOKEN1 = 21;
   public static int PQSL_DEVICETOKEN1_ID = 0;
   public static int PQSL_DEVICETOKEN1_DEV_TOKEN = 1;
   public static int PQSL_DEVICETOKEN1_DATA_ULT_ACCESSO = 2;
@@ -240,8 +261,8 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Notifiche
   //
-  public static int PQRY_NOTIFICHE4 = 21;
-  public static int PQRY_NOTIFICHE4_RS = 22;
+  public static int PQRY_NOTIFICHE4 = 22;
+  public static int PQRY_NOTIFICHE4_RS = 23;
   public static int PQSL_NOTIFICHE4_AMBIENNOTIFI = 0;
   public static int PQSL_NOTIFICHE4_MESSAGNOTIFI = 1;
   public static int PQSL_NOTIFICHE4_DES_UTENTE = 2;
@@ -253,8 +274,8 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Notifiche
   //
-  public static int PQRY_NOTIFICHE2 = 23;
-  public static int PQRY_NOTIFICHE2_RS = 24;
+  public static int PQRY_NOTIFICHE2 = 24;
+  public static int PQRY_NOTIFICHE2_RS = 25;
   public static int PQSL_NOTIFICHE2_AMBIENNOTIFI = 0;
   public static int PQSL_NOTIFICHE2_MESSAGNOTIFI = 1;
   public static int PQSL_NOTIFICHE2_DES_UTENTE = 2;
@@ -266,7 +287,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Spedizioni
   //
-  public static int PQRY_SPEDIZIONI1 = 25;
+  public static int PQRY_SPEDIZIONI1 = 26;
   public static int PQSL_SPEDIZIONI1_ID = 0;
   public static int PQSL_SPEDIZIONI1_DES_MESSAGGIO = 1;
   public static int PQSL_SPEDIZIONI1_DEV_TOKEN = 2;
@@ -283,7 +304,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Applicazioni
   //
-  public static int PQRY_APPLICAZION3 = 26;
+  public static int PQRY_APPLICAZION3 = 27;
   public static int PQSL_APPLICAZION3_ID = 0;
   public static int PQSL_APPLICAZION3_DES_NOTA = 1;
   public static int PQSL_APPLICAZION3_FLG_ATTIVA = 2;
@@ -296,7 +317,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Device Token
   //
-  public static int PQRY_DEVICETOKEN3 = 27;
+  public static int PQRY_DEVICETOKEN3 = 28;
   public static int PQSL_DEVICETOKEN3_ID = 0;
   public static int PQSL_DEVICETOKEN3_DEV_TOKEN = 1;
   public static int PQSL_DEVICETOKEN3_DATA_ULT_ACCESSO = 2;
@@ -315,8 +336,8 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Notifiche
   //
-  public static int PQRY_NOTIFICHE1 = 28;
-  public static int PQRY_NOTIFICHE1_RS = 29;
+  public static int PQRY_NOTIFICHE1 = 29;
+  public static int PQRY_NOTIFICHE1_RS = 30;
   public static int PQSL_NOTIFICHE1_AMBIENNOTIFI = 0;
   public static int PQSL_NOTIFICHE1_MESSAGNOTIFI = 1;
   public static int PQSL_NOTIFICHE1_DES_UTENTE = 2;
@@ -328,7 +349,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Spedizioni
   //
-  public static int PQRY_SPEDIZIONI3 = 30;
+  public static int PQRY_SPEDIZIONI3 = 31;
   public static int PQSL_SPEDIZIONI3_ID = 0;
   public static int PQSL_SPEDIZIONI3_DES_MESSAGGIO = 1;
   public static int PQSL_SPEDIZIONI3_DEV_TOKEN = 2;
@@ -350,8 +371,8 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Nuova Tabella
   //
-  public static int PQRY_NUOVATABELL2 = 31;
-  public static int PQRY_NUOVATABELL2_RS = 32;
+  public static int PQRY_NUOVATABELL2 = 32;
+  public static int PQRY_NUOVATABELL2_RS = 33;
   public static int PQSL_NUOVATABELL2_GOOGLE_API_ID = 0;
   public static int PQSL_NUOVATABELL2_DES_MESSAGGIO = 1;
   public static int PQSL_NUOVATABELL2_REG_ID = 2;
@@ -361,7 +382,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Spedizioni
   //
-  public static int PQRY_SPEDIZIONI = 33;
+  public static int PQRY_SPEDIZIONI = 34;
   public static int PQSL_SPEDIZIONI_ID = 0;
   public static int PQSL_SPEDIZIONI_ID_APPLICAZIONE = 1;
   public static int PQSL_SPEDIZIONI_DES_MESSAGGIO = 2;
@@ -380,13 +401,13 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Dati Temp
   //
-  public static int PQRY_DATITEMP1 = 34;
-  public static int PQRY_DATITEMP1_RS = 35;
+  public static int PQRY_DATITEMP1 = 35;
+  public static int PQRY_DATITEMP1_RS = 36;
   public static int PQSL_DATITEMP1_JSORITNOMOGG = 0;
 
   // Table to contain panel selected row: Device Token
   //
-  public static int PQRY_DEVICETOKEN5 = 36;
+  public static int PQRY_DEVICETOKEN5 = 37;
   public static int PQSL_DEVICETOKEN5_ID = 0;
   public static int PQSL_DEVICETOKEN5_ID_APPLICAZIONE = 1;
   public static int PQSL_DEVICETOKEN5_DEV_TOKEN = 2;
@@ -399,7 +420,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Applicazioni
   //
-  public static int PQRY_APPLICAZIONI = 37;
+  public static int PQRY_APPLICAZIONI = 38;
   public static int PQSL_APPLICAZIONI_ID = 0;
   public static int PQSL_APPLICAZIONI_DES_NOTA = 1;
   public static int PQSL_APPLICAZIONI_FLG_ATTIVA = 2;
@@ -410,7 +431,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Device Token
   //
-  public static int PQRY_DEVICETOKEN2 = 38;
+  public static int PQRY_DEVICETOKEN2 = 39;
   public static int PQSL_DEVICETOKEN2_ID = 0;
   public static int PQSL_DEVICETOKEN2_DEV_TOKEN = 1;
   public static int PQSL_DEVICETOKEN2_DATA_ULT_ACCESSO = 2;
@@ -428,7 +449,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Spedizioni
   //
-  public static int PQRY_SPEDIZIONI2 = 39;
+  public static int PQRY_SPEDIZIONI2 = 40;
   public static int PQSL_SPEDIZIONI2_ID = 0;
   public static int PQSL_SPEDIZIONI2_DES_MESSAGGIO = 1;
   public static int PQSL_SPEDIZIONI2_DEV_TOKEN = 2;
@@ -447,15 +468,15 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Nuova Tabella
   //
-  public static int PQRY_NUOVATABELL1 = 40;
-  public static int PQRY_NUOVATABELL1_RS = 41;
+  public static int PQRY_NUOVATABELL1 = 41;
+  public static int PQRY_NUOVATABELL1_RS = 42;
   public static int PQSL_NUOVATABELL1_DES_MESSAGGIO = 0;
   public static int PQSL_NUOVATABELL1_REG_ID = 1;
   public static int PQSL_NUOVATABELL1_RISUNOMEOGGE = 2;
 
   // Table to contain panel selected row: Applicazioni
   //
-  public static int PQRY_APPLICAZION4 = 42;
+  public static int PQRY_APPLICAZION4 = 43;
   public static int PQSL_APPLICAZION4_ID = 0;
   public static int PQSL_APPLICAZION4_DES_NOTA = 1;
   public static int PQSL_APPLICAZION4_FLG_ATTIVA = 2;
@@ -468,7 +489,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Device Token
   //
-  public static int PQRY_DEVICETOKEN4 = 43;
+  public static int PQRY_DEVICETOKEN4 = 44;
   public static int PQSL_DEVICETOKEN4_ID = 0;
   public static int PQSL_DEVICETOKEN4_DEV_TOKEN = 1;
   public static int PQSL_DEVICETOKEN4_DATA_ULT_ACCESSO = 2;
@@ -486,7 +507,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Spedizioni
   //
-  public static int PQRY_SPEDIZIONI4 = 44;
+  public static int PQRY_SPEDIZIONI4 = 45;
   public static int PQSL_SPEDIZIONI4_ID = 0;
   public static int PQSL_SPEDIZIONI4_DES_MESSAGGIO = 1;
   public static int PQSL_SPEDIZIONI4_DEV_TOKEN = 2;
@@ -505,8 +526,8 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Nuova Tabella
   //
-  public static int PQRY_NUOVATABELLA = 45;
-  public static int PQRY_NUOVATABELLA_RS = 46;
+  public static int PQRY_NUOVATABELLA = 46;
+  public static int PQRY_NUOVATABELLA_RS = 47;
   public static int PQSL_NUOVATABELLA_DES_MESSAGGIO = 0;
   public static int PQSL_NUOVATABELLA_REG_ID = 1;
   public static int PQSL_NUOVATABELLA_RISUNOMEOGGE = 2;
@@ -517,7 +538,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Dispositivi Noti IOS
   //
-  public static int PQRY_DISPONOTIIOS = 47;
+  public static int PQRY_DISPONOTIIOS = 48;
   public static int PQSL_DISPONOTIIOS_ID = 0;
   public static int PQSL_DISPONOTIIOS_DES_MESSAGGIO = 1;
   public static int PQSL_DISPONOTIIOS_DEV_TOKEN = 2;
@@ -525,14 +546,14 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Lingue
   //
-  public static int PQRY_LINGUE = 48;
+  public static int PQRY_LINGUE = 49;
   public static int PQSL_LINGUE_PRG_LINGUA = 0;
   public static int PQSL_LINGUE_DES_LINGUA = 1;
   public static int PQSL_LINGUE_CDA_LINGUA = 2;
 
   // Table to contain panel selected row: Device Token
   //
-  public static int PQRY_DEVICETOKEN = 49;
+  public static int PQRY_DEVICETOKEN = 50;
   public static int PQSL_DEVICETOKEN_ID = 0;
   public static int PQSL_DEVICETOKEN_ID_APPLICAZIONE = 1;
   public static int PQSL_DEVICETOKEN_DEV_TOKEN = 2;
@@ -552,7 +573,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Sales Data
   //
-  public static int PQRY_SALESDATA1 = 50;
+  public static int PQRY_SALESDATA1 = 51;
   public static int PQSL_SALESDATA1_PROVIDER = 0;
   public static int PQSL_SALESDATA1_PROVIDER_COUNTRY = 1;
   public static int PQSL_SALESDATA1_SKU_NUMBER = 2;
@@ -577,25 +598,25 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Currencies
   //
-  public static int PQRY_CURRENCIES = 51;
+  public static int PQRY_CURRENCIES = 52;
   public static int PQSL_CURRENCIES_CODE = 0;
   public static int PQSL_CURRENCIES_DESCRIPTION = 1;
 
   // Table to contain panel selected row: Promo Codes
   //
-  public static int PQRY_PROMOCODES = 52;
+  public static int PQRY_PROMOCODES = 53;
   public static int PQSL_PROMOCODES_CODE = 0;
   public static int PQSL_PROMOCODES_DESCRIPTION = 1;
 
   // Table to contain panel selected row: Country Codes
   //
-  public static int PQRY_COUNTRYCODES = 53;
+  public static int PQRY_COUNTRYCODES = 54;
   public static int PQSL_COUNTRYCODES_CODE = 0;
   public static int PQSL_COUNTRYCODES_DESCRIPTION = 1;
 
   // Table to contain panel selected row: Product Type Identifiers
   //
-  public static int PQRY_PRODTYPEIDEN = 54;
+  public static int PQRY_PRODTYPEIDEN = 55;
   public static int PQSL_PRODTYPEIDEN_IDENTIFIER = 0;
   public static int PQSL_PRODTYPEIDEN_DESCRIPTION = 1;
   public static int PQSL_PRODTYPEIDEN_FREE_APPS = 2;
@@ -605,7 +626,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Fiscal Calendar
   //
-  public static int PQRY_FISCALCALEND = 55;
+  public static int PQRY_FISCALCALEND = 56;
   public static int PQSL_FISCALCALEND_CDN_YEAR = 0;
   public static int PQSL_FISCALCALEND_PERIOD = 1;
   public static int PQSL_FISCALCALEND_DESCRIPTION = 2;
@@ -615,8 +636,8 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Dati Di Login
   //
-  public static int PQRY_DATIDILOGIN1 = 56;
-  public static int PQRY_DATIDILOGIN1_RS = 57;
+  public static int PQRY_DATIDILOGIN1 = 57;
+  public static int PQRY_DATIDILOGIN1_RS = 58;
   public static int PQSL_DATIDILOGIN1_EMAINUOVPANN = 0;
   public static int PQSL_DATIDILOGIN1_PINNUOVOPANN = 1;
   public static int PQSL_DATIDILOGIN1_PASUTENUOPAN = 2;
@@ -624,15 +645,15 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Dati Di Login
   //
-  public static int PQRY_DATIDILOGIN2 = 58;
-  public static int PQRY_DATIDILOGIN2_RS = 59;
+  public static int PQRY_DATIDILOGIN2 = 59;
+  public static int PQRY_DATIDILOGIN2_RS = 60;
   public static int PQSL_DATIDILOGIN2_EMAINUOVPANN = 0;
   public static int PQSL_DATIDILOGIN2_PINNUOVOPANN = 1;
 
   // Table to contain panel selected row: Selettori Grafico
   //
-  public static int PQRY_SELETTGRAFI1 = 60;
-  public static int PQRY_SELETTGRAFI1_RS = 61;
+  public static int PQRY_SELETTGRAFI1 = 61;
+  public static int PQRY_SELETTGRAFI1_RS = 62;
   public static int PQSL_SELETTGRAFI1_ID_UTENTE = 0;
   public static int PQSL_SELETTGRAFI1_ID_APP = 1;
   public static int PQSL_SELETTGRAFI1_TIPOSELEGRAF = 2;
@@ -641,13 +662,13 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Stat Apple
   //
-  public static int PQRY_STATAPPLE1 = 62;
+  public static int PQRY_STATAPPLE1 = 63;
   public static int PQSL_STATAPPLE1_DATARECORD = 0;
   public static int PQSL_STATAPPLE1_UNITSRECORD = 1;
 
   // Table to contain panel selected row: Stat Apple
   //
-  public static int PQRY_STATAPPLE = 63;
+  public static int PQRY_STATAPPLE = 64;
   public static int PQSL_STATAPPLE_ANNSTAAPPREC = 0;
   public static int PQSL_STATAPPLE_MESSTAAPPREC = 1;
   public static int PQSL_STATAPPLE_GIOSTAAPPREC = 2;
@@ -656,7 +677,7 @@ public class IMDBDef1 : Object
 
   // Table to contain panel selected row: Sales Data
   //
-  public static int PQRY_SALESDATA = 64;
+  public static int PQRY_SALESDATA = 65;
   public static int PQSL_SALESDATA_DATEMANCRECO = 0;
 
 }

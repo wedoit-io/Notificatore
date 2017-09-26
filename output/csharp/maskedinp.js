@@ -502,6 +502,8 @@ function insertChar(objInput, ch, mask, masktype)
             ris = ris.substr(0,attpos) + String.fromCharCode(ch) + ris.substr(attpos+1);
           else if (ris.length<mask.length || (ris.length==mask.length && ris.charAt(0)=='-'))
             ris = ris.substr(0,attpos) + String.fromCharCode(ch) + ris.substr(attpos);
+          else if (ris.length==mask.length && dec !== attpos)
+            ris = ris.substr(0,attpos) + String.fromCharCode(ch) + ris.substr(attpos+1);
           //
           l1=ris.length;
           ris = formatNumber(unmask(ris),mask);
@@ -710,8 +712,8 @@ function hk(evento,forcekey)
   if (ch>=107 && ch<=110)
     ch+=80;
   //
-  if (ch==17 || ch==18 || altKey)
-    return true; // Tasto CTRL/ALT, lascio premere
+  if (ch==17 || ch==18 || (altKey && !ctrlKey))
+    return true; // Tasto CTRL/ALT, lascio premere - MA NON ALTGR
   //
   if (ctrlKey && ch>=64 && ch<=95)
   {
@@ -738,6 +740,11 @@ function hk(evento,forcekey)
       //
       // Verifichiamo se il valore e' un numero, se non lo e' svuotiamo il campo
       var v = glbObjInput.value;
+      if (glbDecSep === ",") {
+        // Il parseFloat non gestisce correttamente la numerazione "all'italiana", vuole il formato x,xxx.xx o xxxx.xx
+        v = v.replace(/\./g, "");
+        v = v.replace(",", ".");
+      }
       try {
        if (!((v - parseFloat(v) + 1) >= 0))
          glbObjInput.value = "";

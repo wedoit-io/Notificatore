@@ -1,6 +1,6 @@
 // **********************************************
 // Country Codes
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -439,7 +439,7 @@ public partial class CountryCodes : MyWebForm
     SQL.Append("select ");
     SQL.Append("  A.CODE as CODE, ");
     SQL.Append("  A.DESCRIPTION as DESCRIPTION ");
-    PAN_COUNTRYCODES.SetQuery(PPQRY_COUNTRYCODES, 0, SQL, -1, "");
+    PAN_COUNTRYCODES.SetQuery(PPQRY_COUNTRYCODES, 0, SQL, -1, "A942DE86-3DD8-4B7A-9776-F1D7D53BB733");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPLE_COUNTRY_CODE A ");
@@ -677,6 +677,10 @@ public partial class CountryCodes : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

@@ -88,7 +88,7 @@ DDManager.prototype.Init = function()
     document.addEventListener("mouseover", mo, false);
     document.addEventListener("mouseout", mt, false);
     if (RD3_Glb.IsAndroid())
-    	document.addEventListener("click", ck, true);
+      document.addEventListener("click", ck, true);
   }
   else if (document.addEventListener)
   {
@@ -160,8 +160,9 @@ DDManager.prototype.OnMouseDown = function(ev)
   }
   //
   // Mi ricordo se e' stato premuto il tasto sinistro
+  // IE11 ha cambiato il comportamento e si e' allineato agli altri.. su quelli prima bisogna usare 1..
   var but = ((window.event)?window.event.button:ev.button);
-  this.LButtonDown = (but == (RD3_Glb.IsIE() ? 1 : 0));
+  this.LButtonDown = (but == (RD3_Glb.IsIE(11, false) ? 1 : 0));
   //
   var srcobj = (window.event)?window.event.srcElement:ev.explicitOriginalTarget;
   //
@@ -169,7 +170,7 @@ DDManager.prototype.OnMouseDown = function(ev)
   // su un immagine devo verificare se il fuoco era su una cella con CKEditor e prendere il testo
   // Non se il click avviene su un oggetto interno di CKEditor..
   var hcell = RD3_DesktopManager.WebEntryPoint.HilightedCell;
-  var insideCK = (srcobj && srcobj.className && srcobj.className.indexOf("cke")>=0 ? true : false);
+  var insideCK = (srcobj && srcobj.className && srcobj.className.indexOf && srcobj.className.indexOf("cke")>=0 ? true : false);
   if (hcell && hcell.ControlType == 101 && hcell.ParentField && !insideCK && !RD3_ServerParams.UseIDEditor)
   {
     var nm = hcell.ParentField.Identifier + (hcell.InList ? ":lcke" : ":fcke");
@@ -316,6 +317,18 @@ DDManager.prototype.OnMouseDown = function(ev)
     //
     if (doMove)
       this.OnMouseMove(ev);
+    //
+    if (this.InDetection)
+    {
+      try
+      {
+        // Se ho cliccato su qualcosa di diverso da un Input questo non prende il fuoco, quindi al server arriva la riga sbagliata.
+        // devo essere io a simulare la presa di fuoco dell'oggetto (lo farebbe il framework nel mouseUp, ma e' troppo tardi..)
+        if (srcobj.tagName != "INPUT" && srcobj.tagName != "TEXTAREA")
+          RD3_KBManager.IDRO_GetFocus(ev);
+      }
+      catch(e) {}
+    }
   }
   // Gestione doppio click su altri browser: negli altri browser il doppio click sulla caption della colonna nell'area di resize
   // non viene gestito, partono semplicemente due click sul DDManager, quindi devo gestirlo qui io...
@@ -490,6 +503,17 @@ DDManager.prototype.OnMouseUp = function(ev)
   //
   if (this.IsResizing || (this.IsDragging && !dropped && this.TrasfObj))
   {
+    // IE dopo aver nascosto l'oggetto originale perde lo stato checked degli input di tipo radio, ripristino tali proprieta'
+    if (RD3_Glb.IsIE() && this.DragElem && this.CloneElem)
+    {
+      var orgChecks = this.DragElem.getElementsByTagName("input");
+      var clnChecks = this.CloneElem.getElementsByTagName("input");
+      if (orgChecks.length == clnChecks.length)
+        for (var i=0; i < clnChecks.length; i++)
+          if (clnChecks[i].type == "radio")
+            orgChecks[i].checked = clnChecks[i].checked;
+    }
+    //
     // Calcolo le coordinate finali dell'oggetto
     var obj, ele;
     if (this.IsResizing)
@@ -665,7 +689,7 @@ DDManager.prototype.OnMouseMove = function(ev)
         this.TouchTimer=0;
       }
       //
-      this.StartDrag();
+      this.StartDrag(ev);
     }
     //
     // Chiudo eventuali menu' popup rimasti aperti
@@ -881,7 +905,7 @@ DDManager.prototype.GetObject = function(id, wantvalue)
   //
   // Caso particolare welcome-form nel mobile
   if (a==null && id=="welcome")
-  	a = RD3_DesktopManager.WebEntryPoint.WelcomeForm;
+    a = RD3_DesktopManager.WebEntryPoint.WelcomeForm;
   //
   // Se non lo trovo puo' darsi che sia un'oggetto del DOM interno, allora
   // estraggo "l'estensione"
@@ -1202,7 +1226,7 @@ DDManager.prototype.Reset = function(saveclone)
 // ******************************************
 // Inizia il drag dell'oggetto
 // ******************************************
-DDManager.prototype.StartDrag= function() 
+DDManager.prototype.StartDrag= function(ev) 
 {
   // Non ci sono oggetti da tirare?
   if (!this.DragObj && !this.TrasfObj)
@@ -1307,7 +1331,13 @@ DDManager.prototype.StartDrag= function()
         scf = 8;
     }
     //
-    sc = "RD3_Glb.SetTransform(document.getElementById('clone-element'), 'scale3d("+scf+","+scf+",1)');"
+    sc = "RD3_Glb.SetTransform(document.getElementById('clone-element'), 'scale3d("+scf+","+scf+",1)');";
+    //
+    // Segnalo che ho cliccato l'elemento trascinato, in questo modo nel mobile i pannelli cambiano riga.
+    // Su web non serve perche' lo fanno nel MouseDown mentre nel Mobile lo fanno nel TouchUp
+    var sobj = RD3_KBManager.GetObject(this.DragElem, true);
+    if (sobj && sobj.OnTouchUp)
+      sobj.OnTouchUp(ev, true, this.DragElem);
   }
   //
   // Assegno una trasparenza al clone se la vuole
@@ -1892,6 +1922,7 @@ DDManager.prototype.HandleTouchEvent= function(obj, evtype, ev)
   var inmenu= false;
   var intask= false;
   var theFrame = null;
+  var inSubFrm = false;
   var pf = obj;
   while (pf)
   {
@@ -1901,6 +1932,8 @@ DDManager.prototype.HandleTouchEvent= function(obj, evtype, ev)
       infrm=true;
       theFrame = this.GetObject(pf.id);
     }
+    if (pf.className=="frame-container" && pfid.indexOf("suf:") == 0)
+      inSubFrm = true;
     if (pf.className && pf.className.substr(0,14)=="messagetooltip")
       intip=true;
     if (pf.className && pf.className.substr(0,11)=="tab-caption")
@@ -1926,6 +1959,10 @@ DDManager.prototype.HandleTouchEvent= function(obj, evtype, ev)
   //
   // Il tocco sulla tabbed lo gestisco qui
   if (intab)
+    infrm=false;
+  //
+  // Click su un bottone di toolbar contenuto in una subform; lo dobbiamo comunque gestire qui
+  if (infrm && inSubFrm && obj && obj.tagName=="INPUT" && obj.className.indexOf("toolbar-button") != -1)
     infrm=false;
   //
   // Il click sulla button-bar lo gestisco qui
@@ -2063,13 +2100,13 @@ DDManager.prototype.ClosePopup=function(onlylast)
 // ***********************************************************
 DDManager.prototype.OnAllClicks=function(ev)
 {
-	var x = new Date()-this.ChompTimeStamp;
-	if (x<600)
-	{
-		RD3_Glb.StopEvent(ev);
-		if (document.activeElement)
-			document.activeElement.blur();
-	}
+  var x = new Date()-this.ChompTimeStamp;
+  if (x<600)
+  {
+    RD3_Glb.StopEvent(ev);
+    if (document.activeElement)
+      document.activeElement.blur();
+  }
 }
 
 // ***********************************************************
@@ -2077,7 +2114,7 @@ DDManager.prototype.OnAllClicks=function(ev)
 // ***********************************************************
 DDManager.prototype.ChompClick=function(ev)
 {
-	this.ChompTimeStamp = new Date();
+  this.ChompTimeStamp = new Date();
 }
 
 // ***********************************************************
@@ -2086,7 +2123,7 @@ DDManager.prototype.ChompClick=function(ev)
 DDManager.prototype.OnGeneralDrag = function(ev)
 {
   // Blocco il Drag dei file
-	if (ev && ev.dataTransfer)
+  if (ev && ev.dataTransfer)
     ev.dataTransfer.dropEffect = "none";
   //
   RD3_Glb.StopEvent(ev);

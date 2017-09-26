@@ -1026,6 +1026,10 @@ BookSpan.prototype.Realize = function(parent)
   this.ApplyVisualStyle();
   this.SetClassName();
   //
+  // Il check su mobile 7 usa il colore di sfondo, quindi deve essere reimpostato dopo aver impostato lo stile (potrebbe aver modificato il colore)
+  if (RD3_Glb.IsMobile7() && this.SpanObj && this.ControlType==RD3_Glb.VISCTRL_CHECK && this.Enabled && this.ValueList)
+    this.ValueList.SetCheck(this.SpanObj, this.Value);
+  //
   this.Realizing = false;
 }
 
@@ -1208,6 +1212,15 @@ BookSpan.prototype.SendChanges = function(evento, flag)
       case RD3_Glb.VISCTRL_EDIT:
         chg = (s!=this.Text);
         this.Text = s;
+        if (this.GetVS().ComputeMaskType(this.DataType) == "N")
+        {
+          // Nel caso numerico devo mandare al server il valore togliendo il decimal dot e lasciando solo 
+          // l'eventuale separatore dei decimali; poi ci pensa lui a mascherare
+          if (RD3_DesktopManager.WebEntryPoint.UseDecimalDot)
+            s = s.replace(/,/g, "");
+          else
+            s = s.replace(/\./g, "");
+        }
       break;
       
       case RD3_Glb.VISCTRL_COMBO:
@@ -1648,8 +1661,15 @@ BookSpan.prototype.OnTouchDown= function(evento)
 
 BookSpan.prototype.OnTouchUp= function(evento, click)
 { 
-	if (click && this.ParentBox.CanClick)
+	if (click && this.ParentBox.CanClick) 
+  {
+	  // Se e' di tipo button, mi ricordo che l'active button e' questo
+	  // Se viene aperta una popup, si attacchera' a questo bottone
+    if (this.ControlType==RD3_Glb.VISCTRL_BUTTON)
+      RD3_KBManager.ActiveButton = this.SpanObj;
+    //
 		this.ParentBox.OnClick(evento);
+	}
 	if (click && this.Enabled && this.ControlType==RD3_Glb.VISCTRL_CHECK)
 		this.OnToggleCheck(evento);
 	if (click && this.Enabled && this.ControlType==RD3_Glb.VISCTRL_COMBO)

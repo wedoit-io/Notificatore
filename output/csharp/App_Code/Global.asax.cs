@@ -25,7 +25,7 @@ public class Global : HttpApplication
       WebEntryPoint.SSManager.StartSession(new MyWebEntryPoint(HttpContext.Current), "Notificatore", "§");
     //
     // Imposto la password per la comunicazione
-    WebEntryPoint.set_ComPassword("3E429303-A969-4DFD-ACDD-1A7C5D535C15");
+    WebEntryPoint.set_ComPassword("");
   }
 
 	protected void Session_Start(Object sender, EventArgs e)

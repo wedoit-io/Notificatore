@@ -1,6 +1,6 @@
 // **********************************************
 // Product Type Identifiers
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -539,7 +539,7 @@ public partial class ProductTypeIdentifiers : MyWebForm
     SQL.Append("  A.PAID_APPS as PAID_APPS, ");
     SQL.Append("  A.IN_APPS as IN_APPS, ");
     SQL.Append("  A.UPDATE_APPS as UPDATE_APPS ");
-    PAN_PRODTYPEIDEN.SetQuery(PPQRY_PRODTYPEIDEN, 0, SQL, -1, "");
+    PAN_PRODTYPEIDEN.SetQuery(PPQRY_PRODTYPEIDEN, 0, SQL, -1, "15B0A47F-E558-43FB-94EC-90C003425721");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPLE_PROD_TYPES_IDENT A ");
@@ -777,6 +777,10 @@ public partial class ProductTypeIdentifiers : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

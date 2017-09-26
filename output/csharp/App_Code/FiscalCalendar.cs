@@ -1,6 +1,6 @@
 // **********************************************
 // Fiscal Calendar
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -515,7 +515,7 @@ public partial class FiscalCalendar : MyWebForm
     SQL.Append("  A.BEGIN_DATE as BEGIN_DATE, ");
     SQL.Append("  A.END_DATE as END_DATE, ");
     SQL.Append("  A.ID as ID ");
-    PAN_FISCALCALEND.SetQuery(PPQRY_FISCALCALEND, 0, SQL, -1, "");
+    PAN_FISCALCALEND.SetQuery(PPQRY_FISCALCALEND, 0, SQL, -1, "0CAD2BE9-DB4C-4FF2-AACA-B9A1403DA35D");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  APPLE_FISCAL_CALEND A ");
@@ -755,6 +755,10 @@ public partial class FiscalCalendar : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

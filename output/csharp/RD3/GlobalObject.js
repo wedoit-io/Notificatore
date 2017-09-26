@@ -76,6 +76,8 @@ function GlobalObject()
   this.JFREECHART  = 1;
   this.FUSIONCHART = 2;
   this.JQPLOT = 5;
+  this.CHARTJS = 6;
+  this.GOOGLECHART = 7;
   
   // Posizionamento delle Tab
   this.TABOR_TOP    = 1;
@@ -554,7 +556,7 @@ GlobalObject.prototype.IsIE= function(ver, operation)
     //
     // Internet Explorer 11 user agent: 
     //    Mozilla/5.0 (Windows NT 6.3; WOW64; Trident/7.0; rv:11.0) like Gecko
-    if (!this.uaIE && navigator.userAgent.indexOf("Trident/7.0") != -1)
+    if (!this.uaIE && (navigator.userAgent.indexOf("Trident/7.0") != -1 || navigator.userAgent.indexOf("Trident/8.0") != -1))
     {
       this.uaIE = true;
       this.uaIEVer = 11;
@@ -1110,7 +1112,11 @@ GlobalObject.prototype.BlobShowPreview = function(mime)
 // **********************************************************
 GlobalObject.prototype.HasClass = function(ele, cls)
 {
-  return (ele && ele.className && ele.className.indexOf(cls)>=0);
+  if (!ele || !ele.className)
+    return false;
+  //
+  var clName = " " + ele.className + " ";
+  return (clName && clName.indexOf && clName.indexOf(" " + cls + " ")>=0);
 }
 
 
@@ -1466,12 +1472,12 @@ GlobalObject.prototype.GetParentFrame = function(domobj)
     }
   }
   //
-	while (domobj)
-	{
-		if (domobj.className=="frame-container")
-  		return RD3_DDManager.GetObject(domobj.id);
-  	//
-  	domobj = domobj.parentNode;
+  while (domobj)
+  {
+    if (this.HasClass(domobj, "frame-container")) 
+      return RD3_DDManager.GetObject(domobj.id);
+    //
+    domobj = domobj.parentNode;
   }
   //
   return null;
@@ -1671,7 +1677,15 @@ GlobalObject.prototype.GetToolbarLimit = function(tb, flcustom)
 			}
 			else
 			{
-				if (obj.tagName!="SPAN")
+        // Nel caso di container del menu-button su quadro considero suo figlio (il vero menu button)
+        if (this.IsQuadro() && obj.id=="menu-button-container" && obj.firstChild)
+          obj = obj.firstChild;
+        //
+        // Mobile7 usa l'hidden sul backbutton, ma la sua dimensione e' il 100% anche se e' nascosto.
+        // Allora la mettiamo a 0 noi
+        if (this.IsMobile7() && obj.id == "menu-button-container" && obj.style.visibility == "hidden")
+          a.push({obj:obj,left:obj.offsetLeft,right:obj.offsetLeft});
+				else if (obj.tagName!="SPAN")
 					a.push({obj:obj,left:obj.offsetLeft,right:obj.offsetLeft+obj.offsetWidth});
 			}
 		}

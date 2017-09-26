@@ -126,6 +126,10 @@ Command.prototype.LoadFromXml = function(node)
         cmd.FormIndex = this.FormIndex;
         //
         this.Commands.push(cmd);
+      	//
+      	// Se il padre (io) e' gia' stato realizzato realizzo subito il nuovo figlio
+      	if (this.Realized)
+      	  cmd.Realize(this.MenuBox, this.MyToolBox);
       }
       break;
     }
@@ -138,8 +142,8 @@ Command.prototype.LoadFromXml = function(node)
 // **********************************************************************
 Command.prototype.ChangeProperties = function(node)
 {
-  // Semplicemente setto le proprieta' a partire dal nodo
-  this.LoadProperties(node);
+  // Normale cambio di proprieta'
+  this.LoadFromXml(node);
 }
 
 
@@ -192,6 +196,7 @@ Command.prototype.LoadProperties = function(node)
       
       case "exa": this.ExpandAnimDef = valore; break;
       case "poa": this.PopupAnimDef = valore; break;
+      case "cmds":this.IsCmdSet = true; break;
       
       case "id": 
         this.Identifier = valore;
@@ -455,7 +460,7 @@ Command.prototype.SetBadge= function(value)
       if (RD3_Glb.IsMobile() && RD3_DesktopManager.WebEntryPoint.SideMenuWidth>0)
       {
         var lft = RD3_DesktopManager.WebEntryPoint.SideMenuWidth - 10 - RD3_Glb.GetBadgeWidth(this.Badge, "grey");
-        if (this.Commands.length>0)
+        if (this.IsCmdSet)
           lft = lft - 24;
         if (this.Level>1)
           lft = lft - 4;
@@ -483,10 +488,10 @@ Command.prototype.ShowBadge= function(value)
     supportsBadge = true;
   //
   // Su WebApp solo i menu supportano il badge
-  if (this.IsMenu && !RD3_Glb.IsMobile() && this.Commands.length==0)
+  if (this.IsMenu && !RD3_Glb.IsMobile() && !this.IsCmdSet)
     supportsBadge = true;
   //
-  if (RD3_Glb.IsMobile() && this.Commands.length>0 && this.ShowGroupedMenu())
+  if (RD3_Glb.IsMobile() && this.IsCmdSet && this.ShowGroupedMenu())
     supportsBadge = false;
   //
   if (!this.IsMenu)
@@ -501,7 +506,7 @@ Command.prototype.SetExpanded= function(value)
   if (value!=undefined)
     this.Expanded = value;
   //
-  if (this.Realized && this.Commands.length>0 && this.IsMenu)
+  if (this.Realized && this.IsCmdSet && this.IsMenu)
   {
     var fx = null;
     //
@@ -806,7 +811,7 @@ Command.prototype.SetImage= function(value, force)
     this.Image = value;
   //
   // La politica di setting dell'immagine cambia a seconda del caso mobile o meno...
-  var ok = this.Realized && (this.Commands.length==0 || force || (this.Commands.length>0 && this.Image!="")) && !this.IsSeparator();
+  var ok = this.Realized && (!this.IsCmdSet || force || (this.IsCmdSet && this.Image!="")) && !this.IsSeparator();
   if (RD3_Glb.IsMobile())
   	ok = this.Realized && (value==undefined || this.Image != old || force) && !this.IsSeparator();
   //
@@ -828,7 +833,7 @@ Command.prototype.SetImage= function(value, force)
   			bp = (RD3_Glb.IsMobile7() ? "10px" : "7px");
   	    pl = (RD3_Glb.IsMobile7() ? "50px" : "48px");
   		}
-  		if (this.Commands.length>0)
+  		if (this.IsCmdSet)
   		{
   			if (bi!="")
   			{
@@ -874,14 +879,14 @@ Command.prototype.SetImage= function(value, force)
 	  		if (RD3_Glb.IsMobile7() || RD3_Glb.IsQuadro())
    	    {
    		    // immagine attivatore, background color evidenziazione
- 	        if (this.Commands.length>0)
+ 	        if (this.IsCmdSet)
  	        {
      	      s.backgroundSize = (this.Image=="" ? "" : "auto,");
    	        s.backgroundSize += (!this.IsActiveMenu() ? " 10px 16px" : " 10px 16px, 100%");
    	      }
    	      //
           // Se devo retinare, nascondo l'immagine (cosi non si vede grande) e quando arriva la rimostro
-          if (RD3_Glb.Adapt4Retina(this.Identifier, this.Image, 43, this.Commands.length))
+          if (RD3_Glb.Adapt4Retina(this.Identifier, this.Image, 43, this.IsCmdSet))
             this.MyBox.style.backgroundSize = "0px 0px";
           s.backgroundRepeat = "no-repeat";
        	}  		
@@ -890,13 +895,26 @@ Command.prototype.SetImage= function(value, force)
       {
       	if (RD3_Glb.IsMobile7())
       	{
-	        this.ToolImg.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/" + this.Image)+"')";
-          //
-          // Se devo retinare, nascondo l'immagine (cosi non si vede grande) e quando arriva la rimostro 		      
-          if (RD3_Glb.Adapt4Retina(this.Identifier, this.Image, 43))
+          var usemask = !(RD3_Glb.IsAndroid() || RD3_Glb.IsIE() || RD3_Glb.IsEdge()) || RD3_Glb.IsAndroid(4,4,0);
+          if (usemask) 
           {
-            this.ToolImg.style.minWidth = "0px";
-            this.ToolImg.style.webkitMaskSize = "0px 0px";
+            this.ToolImg.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/" + this.Image)+"')";
+            //
+            // Se devo retinare, nascondo l'immagine (cosi non si vede grande) e quando arriva la rimostro 		      
+            if (RD3_Glb.Adapt4Retina(this.Identifier, this.Image, 43))
+            {
+              this.ToolImg.style.minWidth = "0px";
+              this.ToolImg.style.webkitMaskSize = "0px 0px";
+            }
+          }
+          else {
+            var locImg = this.Image;
+            var extIdx = this.Image.lastIndexOf(".");
+            if (extIdx >= 0)
+              locImg = this.Image.substring(0, extIdx) + "-i" + this.Image.substring(extIdx);
+            this.ToolImg.src = RD3_Glb.GetImgSrc("images/" + locImg);
+            if (RD3_Glb.Adapt4Retina(this.Identifier, locImg, 43))
+              this.ToolImg.style.display = "none";
           }
 	      }
       	else
@@ -915,7 +933,7 @@ Command.prototype.SetImage= function(value, force)
 	    {
 	      if (this.CommandImg)
 	        this.CommandImg.style.display = "none";
-	      if (this.CommandImgDX  && !(this.Commands.length>0 && this.Image!=""))
+	      if (this.CommandImgDX  && !(this.IsCmdSet && this.Image!=""))
 	        this.CommandImgDX.style.display = "none";
 	      //
 	      if (this.Button)
@@ -934,7 +952,7 @@ Command.prototype.SetImage= function(value, force)
 	        this.CommandImg.src = RD3_Glb.GetImgSrc("images/"+this.Image);
 	        this.CommandImg.style.display = "inline";
 	      }
-	      if (this.CommandImgDX && !(this.Commands.length>0 && this.Image!=""))
+	      if (this.CommandImgDX && !(this.IsCmdSet && this.Image!=""))
 	      {
 	        this.CommandImgDX.src = RD3_Glb.GetImgSrc("images/"+this.Image);
 	        this.CommandImgDX.style.display = "inline";
@@ -978,7 +996,7 @@ Command.prototype.SetEnabled= function(value)
         if (this.CommandLink)
         {
           RD3_Glb.RemoveClass(this.CmdBox, "menu-item-disabled");
-          if (this.Commands.length > 0)
+          if (this.IsCmdSet)
           {
             if (this.MenuBox && this.Expanded)
               this.MenuBox.style.display = "";
@@ -994,7 +1012,7 @@ Command.prototype.SetEnabled= function(value)
       if (this.IsToolbar && this.MyToolBox)  
       {
         // Devo ripristinare le classi giuste
-        if (this.Commands.length == 0)
+        if (!this.IsCmdSet)
         {
           var t = (this.ParentCmdSet)?this.ParentCmdSet.ToolCont : -1;
           if (!this.IsSeparator())
@@ -1066,7 +1084,7 @@ Command.prototype.SetEnabled= function(value)
       // se sono un contenitore di bottoni (commandset) nascondo tutti i bottoni 
       if (this.Button)
         this.Button.disabled = "";
-      if (this.ButtonBox && this.Commands.length > 0)
+      if (this.ButtonBox && this.IsCmdSet)
         this.ButtonBox.style.display = "";
       //
       // gestisco il popup menu
@@ -1082,7 +1100,7 @@ Command.prototype.SetEnabled= function(value)
         if (this.CommandLink)
         {
           // Differenzio in base a comando/commandset (l'enabled non influenza un separatore)
-          if (this.Commands.length == 0)
+          if (!this.IsCmdSet)
           {
             if (!this.IsSeparator())
               RD3_Glb.AddClass(this.CmdBox, "menu-item-disabled");
@@ -1106,7 +1124,7 @@ Command.prototype.SetEnabled= function(value)
         // Devo solo nascondermi (come da documentazione dell'expanded in VCE)
         if (this.Image != "")
           this.MyToolBox.style.display = "none";
-        else if (this.Commands.length == 0) // Solo se e' un comando
+        else if (!this.IsCmdSet) // Solo se e' un comando
         {
           var t = (this.ParentCmdSet)?this.ParentCmdSet.ToolCont : -1;
           if (t==-1)
@@ -1130,7 +1148,7 @@ Command.prototype.SetEnabled= function(value)
       // Gestisco la Button Bar
       if (this.Button)
         this.Button.disabled = "disabled";
-      if (this.ButtonBox && this.Commands.length > 0)
+      if (this.ButtonBox && this.IsCmdSet)
         this.ButtonBox.style.display = "none";
       //
       // E il popup menu'
@@ -1168,7 +1186,7 @@ Command.prototype.SetVisible= function(value)
         RD3_DesktopManager.WebEntryPoint.AdaptFormListBox();
       }
       //
-      if (this.Level==1 && this.Commands.length>0 && this.MenuSep && !RD3_Glb.IsMobile())
+      if (this.Level==1 && this.IsCmdSet && this.MenuSep && !RD3_Glb.IsMobile())
       {
         this.MenuSep.style.display = dis;
         //
@@ -1222,7 +1240,7 @@ Command.prototype.SetVisible= function(value)
     //
     // E' cambiata la visibilita' di uno dei commandset di primo livello, se sono Mobile ed il menu e' in modalita' verticale 
     // potrebbe essere cambiata o meno la visibita' del MenuButton, quindi devo forzare una verifica
-    if (RD3_Glb.IsMobile() && this.Level==1 && this.Commands.length>0)
+    if (RD3_Glb.IsMobile() && this.Level==1 && this.IsCmdSet)
       RD3_DesktopManager.WebEntryPoint.RecalcLayout = true;
   }
 }
@@ -1393,7 +1411,7 @@ Command.prototype.RealizeSideMenu = function(parent)
   this.MyBox.setAttribute("id", this.Identifier);
   this.MyBox.className = "menu-container-level-"+this.Level;
   //
-  if (this.Level==1 && this.Commands.length>0)
+  if (this.Level==1 && this.IsCmdSet)
    {
      // I command set di primo livello sono separati da un'immagine
      // Carico allora un div "menusep" con l'immagine per separarli
@@ -1418,7 +1436,7 @@ Command.prototype.RealizeSideMenu = function(parent)
   //
   // Creo l'immagine per rappresentare i rami dell'albero dei comandi
   this.BranchImg = document.createElement("img");
-  this.BranchImg.className = "menu-" + ((this.Commands.length>0)?"commandset":"command") + "-branchimage-level-" + this.Level;
+  this.BranchImg.className = "menu-" + (this.IsCmdSet?"commandset":"command") + "-branchimage-level-" + this.Level;
   if (this.Level>1)
     this.BranchImg.src = RD3_Glb.GetImgSrc("images/cmdmlev" + this.Level + ".gif");
   else
@@ -1434,7 +1452,7 @@ Command.prototype.RealizeSideMenu = function(parent)
   else
   {
     var tb = RD3_DesktopManager.WebEntryPoint.MenuType==RD3_Glb.MENUTYPE_TASKBAR;
-    if (this.Commands.length>0)
+    if (this.IsCmdSet)
       this.CmdBox.className = "menu-commandset-level-"+this.Level+((tb)?" taskbar-commandset-level-"+this.Level:"");
     else
       this.CmdBox.className = "menu-command-level-"+this.Level+((tb)?" taskbar-command-level-"+this.Level:"");
@@ -1442,7 +1460,7 @@ Command.prototype.RealizeSideMenu = function(parent)
     // Creo il link, che poi conterra' anche l'immagine e il testo
     this.CommandLink = document.createElement("a");
     this.CommandLink.setAttribute("id", this.Identifier+":link");
-    if (this.Commands.length>0)
+    if (this.IsCmdSet)
       this.CommandLink.className = "menu-commandset-link-level-"+this.Level;
     else
       this.CommandLink.className = "menu-command-link-level-"+this.Level;  
@@ -1456,7 +1474,7 @@ Command.prototype.RealizeSideMenu = function(parent)
     // Creo l'immagine di espansione o del comando
     this.CommandImg = document.createElement("img");
     this.CommandImg.setAttribute("id", this.Identifier+":image");
-    if (this.Commands.length>0 && this.Image=="")
+    if (this.IsCmdSet && this.Image=="")
       this.CommandImg.className = "menu-commandset-image-level-"+this.Level;
     else
       this.CommandImg.className = "menu-command-image-level-"+this.Level;
@@ -1464,7 +1482,7 @@ Command.prototype.RealizeSideMenu = function(parent)
     // Creo l'immagine di espansione o del comando
     this.CommandImgDX = document.createElement("img");
     this.CommandImgDX.setAttribute("id", this.Identifier+":image");
-    if (this.Commands.length>0)
+    if (this.IsCmdSet)
       this.CommandImgDX.className = "menu-commandset-imagedx-level-"+this.Level;
     else
       this.CommandImgDX.className = "menu-command-imagedx-level-"+this.Level;
@@ -1486,7 +1504,7 @@ Command.prototype.RealizeSideMenu = function(parent)
   }
   //
    this.MyBox.appendChild(this.CmdBox);
-   if (this.Commands.length>0)
+   if (this.IsCmdSet)
     this.MyBox.appendChild(this.MenuBox);
    parent.appendChild(this.MyBox);
 }
@@ -1503,7 +1521,7 @@ Command.prototype.RealizeToolbar = function(parent)
     return;
   //
   // Sono un command set
-  if (this.Commands.length > 0)
+  if (this.IsCmdSet)
   {
     // Sono un CommandSet: devo verificare se sono un CommandSet di primo livello
     // Se non sono un CmdSet di primo livello non devo creare nessun elemento nel DOM
@@ -1581,7 +1599,7 @@ Command.prototype.RealizeToolbar = function(parent)
 // ***************************************************************
 Command.prototype.RealizeButtonBar = function(parent)
 {
-  if (this.Commands.length != 0)
+  if (this.IsCmdSet)
   {
     // Creo gli elementi del DOM
     parent.ButtonBarContainer = document.createElement("div");
@@ -1612,7 +1630,7 @@ Command.prototype.RealizeButtonBar = function(parent)
       this.ButtonBox.className = "button-bar-" + (parent.VerticalLayout?"vertical":"horizontal") + "-separator";
       parent.ButtonBarContainer.appendChild(this.ButtonBox);
     }
-    else
+    else if (parent.ButtonBarContainer)
     {
       // Sono un Comando: mi devo realizzare come Bottone
       this.ButtonBox = document.createElement(parent.VerticalLayout?"div":"span");
@@ -1699,7 +1717,7 @@ Command.prototype.AdaptLayout = function()
     this.CommandImgDX.style.marginLeft = (this.CmdBox.offsetWidth - this.CommandImg.offsetWidth - this.CommandImgDX.offsetWidth - this.CommandLink.offsetWidth - 4) + "px";
   }
   //
-  if (RD3_Glb.IsSmartPhone() && this.Commands.length>0 && this.Realized)
+  if (RD3_Glb.IsSmartPhone() && this.IsCmdSet && this.Realized)
   {
   	this.SetImage();
 	}
@@ -1941,17 +1959,17 @@ Command.prototype.OnClick= function(evento, confirmed)
   // Chiudo eventuali popup aperti, filtrando me ed i miei padri se dovro' aprire un altro popup
   // Nel mobile passa un onclick quando clicco in un menu popover, quindi il codice
   // seguente evita che si chiudano tutti i popover
-  if (this.Commands.length>0 && RD3_Glb.IsMobile() && this.GetPopover)
+  if (this.IsCmdSet && RD3_Glb.IsMobile() && this.GetPopover)
   	RD3_DesktopManager.WebEntryPoint.DisableOnClick++;
 	// 
-  wep.CmdObj.ClosePopup(this.Commands.length>0?this:null);
+  wep.CmdObj.ClosePopup(this.IsCmdSet?this:null);
   //
   // Chiudo anche il popover se ero un comando
-  if (this.Commands.length==0 && this.FormIndex==0)
+  if (!this.IsCmdSet && this.FormIndex==0)
   	RD3_DDManager.ClosePopup(true);
   //
   // Se ho dato un comando, non devo piu' mostrare la menu bar
-  if (RD3_Glb.IsSmartPhone() && this.Commands.length==0 && this.FormIndex==0)
+  if (RD3_Glb.IsSmartPhone() && !this.IsCmdSet && this.FormIndex==0)
   {
   	if (wep.CmdObj.ForceMenuBar)
   	{
@@ -1977,9 +1995,9 @@ Command.prototype.OnClick= function(evento, confirmed)
     }
     //    
     // Notifico l'evento...
-    var evt = this.Commands.length>0 ? this.ExpandEventDef : this.ClickEventDef;
+    var evt = this.IsCmdSet ? this.ExpandEventDef : this.ClickEventDef;
     var ev = new IDEvent("clk", this.Identifier, evento, evt);
-    if (this.Commands.length==0)
+    if (!this.IsCmdSet)
       wep.SoundAction("command","play");
     //
     // Se sono mobile sistemo l'elemento attivo
@@ -1998,7 +2016,7 @@ Command.prototype.OnClick= function(evento, confirmed)
     //
     if (ev.ClientSide)
     {
-      if (this.Commands.length>0)
+      if (this.IsCmdSet || (this.FormList && RD3_DesktopManager.WebEntryPoint.StackForm.length > 0))
       {
         if (wep.MenuType!=RD3_Glb.MENUTYPE_MENUBAR && !this.PopupTextCell && !RD3_Glb.IsMobile())
         {
@@ -2182,7 +2200,7 @@ Command.prototype.OnMouseOverObj= function(evento, obj)
   if (obj==this.PopupTextCell || obj==this.PopupText)
   {
     RD3_Glb.AddClass(this.PopupTextCell, "popup-menu-hover");
-    if (this.Commands.length>0 && !this.PopupContainerBox && this.PopupTimer==0)
+    if (this.IsCmdSet && !this.PopupContainerBox && this.PopupTimer==0)
     {
       // Attivo timer apertura cmdset secondo livello
       this.PopupTimer = window.setTimeout(new Function("ev","return RD3_DesktopManager.CallEventHandler('"+this.Identifier+"', 'OnClick', ev, true)"), 500);
@@ -2195,7 +2213,7 @@ Command.prototype.OnMouseOverObj= function(evento, obj)
   // IE6 non supporta HOVER
   if ((RD3_Glb.IsIE(6) || RD3_Glb.IsTouch()) && this.IsMenu && (RD3_DesktopManager.WebEntryPoint.MenuType==RD3_Glb.MENUTYPE_LEFTSB || RD3_DesktopManager.WebEntryPoint.MenuType==RD3_Glb.MENUTYPE_RIGHTSB))
   {
-    if (this.Commands.length>0)
+    if (this.IsCmdSet)
       RD3_Glb.AddClass(this.MyBox, "menu-commandset-level-"+this.Level+"-hover");
     else
       RD3_Glb.AddClass(this.MyBox, "menu-command-level-"+this.Level+"-hover");
@@ -2246,7 +2264,7 @@ Command.prototype.OnMouseOutObj= function(evento, obj)
   // IE6 non supporta HOVER
   if ((RD3_Glb.IsIE(6) || RD3_Glb.IsTouch()) && this.IsMenu && (RD3_DesktopManager.WebEntryPoint.MenuType==RD3_Glb.MENUTYPE_LEFTSB || RD3_DesktopManager.WebEntryPoint.MenuType==RD3_Glb.MENUTYPE_RIGHTSB))
   {
-    if (this.Commands.length>0)
+    if (this.IsCmdSet)
       RD3_Glb.RemoveClass(this.MyBox, "menu-commandset-level-"+this.Level+"-hover");
     else
       RD3_Glb.RemoveClass(this.MyBox, "menu-command-level-"+this.Level+"-hover");
@@ -2530,7 +2548,7 @@ Command.prototype.RealizePopupItem = function(parent)
   this.PopupTextCell = document.createElement("td");
   this.PopupTextCell.setAttribute("id", this.Identifier+":txt");
   this.PopupTextCell.className = "popup-cell-text"+(this.IsSeparator()?"-sep":"");
-  if (this.Commands.length>0)
+  if (this.IsCmdSet)
     RD3_Glb.AddClass(this.PopupTextCell, "popup-menu-popup");
   //
   // Creo la linea di testo
@@ -2748,7 +2766,7 @@ Command.prototype.RecalcSeparator = function()
     return false;
   //
   // se non sono un CmdSet non faccio nulla
-  if (this.Commands.length == 0)
+  if (!this.IsCmdSet)
     return;
   //
   if (this.RecalcSeparatorLayout)
@@ -2816,7 +2834,7 @@ Command.prototype.HandleAccell = function(eve, code, force)
   var ok = false;
   //
   // Solo CMS primo livello
-  if ((this.Level>1 || !this.IsMenu || this.Commands.length==0) && !force)
+  if ((this.Level>1 || !this.IsMenu || !this.IsCmdSet) && !force)
     return false;
   //
   // Se ho il menu' aperto, provo con loro...
@@ -3035,6 +3053,28 @@ Command.prototype.RealizePopup = function(node)
   var obj = RD3_DesktopManager.ObjectMap[id];
   var dobj = (obj && obj.GetDOMObj)? obj.GetDOMObj((obj.IsToolbar)?"toolbar":""):null;
   //
+  // Il server manda i val: riferendosi alle righe visibili del pannello, quindi se la riga base e' 50 comunque ci arriva un val:2 per la seconda riga, invece di un val:52.
+  // Questo da' problemi solo se si fa il refresh: facendolo si cancellano i valori vecchi e se il pannello e' scrollato poi non si trova niente.. 
+  // In questo caso dobbiamo provare a risalire al pannello, vedere in che posizione si trova e poi provare a cercare il valore giusto..
+  if (!obj && id && id.substring(0, 4)=== "val:") 
+  {
+    var components = id.split(":");
+    if (components.length == 5) 
+    {
+      var pan = RD3_DesktopManager.ObjectMap[("pan:" + components[3] + ":" + components [4])];
+      var fld = RD3_DesktopManager.ObjectMap[("fld:" + components[2] + ":" + components[3] + ":" + components [4])];
+      if (pan && fld)
+      {
+        obj = RD3_DesktopManager.ObjectMap[("val:" + (pan.ActualPosition + parseInt(components[1]) - 1) + ":" + components[2] + ":" + components[3] + ":" + components [4])];
+        //
+        // Non posso usare GetDOMObj perche' e' fatta per essere chiamata solo per i PValue da 0 a VisibleRows, quindi devo essere io 
+        // a cercare nel campo la cella giusta (solo se sono in LISTA + LISTLIST
+        if (pan.PanelMode != RD3_Glb.PANEL_FORM && fld.ListList)
+          dobj = fld.PListCells[parseInt(components[1]) - 1].GetDOMObj();
+      }
+    }
+  }
+  //
   // Se non ho trovato l'oggetto nella mappa provo a cercarlo nel DOM
   if (!obj)
   {
@@ -3194,7 +3234,7 @@ Command.prototype.IsDraggable = function (ident)
   // il comando e' draggabile se:
   // - candrag del commandset padre e' attivo
   // - non e' un commandset
-  var ok = this.Commands.length==0 && this.ParentCmdSet && this.ParentCmdSet.CommandCanDrag;
+  var ok = !this.IsCmdSet && this.ParentCmdSet && this.ParentCmdSet.CommandCanDrag;
   //
   // Mi devo memorizzare se vengo da Toolbar o Comando..
   if (ok)
@@ -3227,7 +3267,7 @@ Command.prototype.DropElement = function ()
 Command.prototype.ComputeDropList = function(list, dragobj) 
 {
   // Un CommandSet deve solo passare il messaggio ai suoi figli
-  if (this.Commands.length>0)
+  if (this.IsCmdSet)
   {
     var n = this.Commands.length;
     for(var i=0; i<n; i++)
@@ -3397,7 +3437,7 @@ Command.prototype.CheckSubForm= function()
 Command.prototype.HandleBackButton = function() 
 {
   // Se non sono espanso o sono un comando non faccio nulla
-  if (!this.Expanded || this.Commands.length==0 || !this.IsMenu)
+  if (!this.Expanded || !this.IsCmdSet || !this.IsMenu)
     return false;
   //
   // Sono espanso: per prima cosa verifico i miei figli.. in questo modo
@@ -3444,18 +3484,19 @@ Command.prototype.AccentColorChanged = function(reg, newc)
 Command.prototype.OnAdaptRetina = function(w, h, par)
 {
   if (this.MyBox)
-    this.MyBox.style.backgroundSize = w + "px " + h +"px" + (par>0?", 10px 16px":"") + (this.IsActiveMenu()?", 100%":"");
+    this.MyBox.style.backgroundSize = w + "px " + h +"px" + (par?", 10px 16px":"") + (this.IsActiveMenu()?", 100%":"");
   //
   if (this.ToolImg)
   {
-    if (RD3_Glb.IsMobile7())
+    var usemask = !(RD3_Glb.IsAndroid() || RD3_Glb.IsIE() || RD3_Glb.IsEdge()) || RD3_Glb.IsAndroid(4,4,0);
+    if (RD3_Glb.IsMobile7() && usemask)
     {
       this.ToolImg.width = w;
       this.ToolImg.height = h;
       this.ToolImg.style.webkitMaskSize = w + "px " + h +"px";
       this.ToolImg.style.webkitMaskRepeat = "no-repeat";
     }
-    else if (RD3_Glb.IsQuadro())
+    else if (RD3_Glb.IsQuadro() || (RD3_Glb.IsMobile7() && !usemask))
     {
       this.ToolImg.width = w;
       this.ToolImg.height = h;
@@ -3463,7 +3504,7 @@ Command.prototype.OnAdaptRetina = function(w, h, par)
     }
     //
     // Sono arrivate le immagini di una Toolbar, devo far aggiornare la Form o il Frame
-    if ((RD3_Glb.IsQuadro() || RD3_Glb.IsMobile7()) && this.IsToolbar && this.Commands.length==0 && this.ParentCmdSet!=null)
+    if ((RD3_Glb.IsQuadro() || RD3_Glb.IsMobile7()) && this.IsToolbar && !this.IsCmdSet && this.ParentCmdSet!=null)
       this.ParentCmdSet.ToolbarLoadedUpdate();
   }
 }

@@ -394,3 +394,18 @@ MessagePumpRD4.prototype.EventsToSend = function()
   return false;
 }
 
+
+// *********************************************************************************************
+// Ritorna True se c'e' in coda un evento relativo all'oggetto
+// *********************************************************************************************
+MessagePumpRD4.prototype.GetEvent = function(obj,evt)
+{
+	var id = obj.Identifier?obj.Identifier:obj;
+	var n = this.EventQueue.length;
+	for (var i=0; i<n; i++)
+	{
+		var ev = this.EventQueue[i];
+		if ((ev.ObjId==id || id=="") && (!evt || evt==ev.Tipo))
+			return ev;
+	}	
+}

@@ -1,6 +1,6 @@
 // **********************************************
 // Test Spedizione
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -494,18 +494,31 @@ public partial class TestSpedizione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("BE3A6E47-C183-478A-A00D-579D0D8BDD3D", "Etichetta Invia", "", 3, "Test Spedizione")) return 0;
       // 
       // Etichetta Invia Body
       // Corpo Procedura
       // 
       IDVariant v_SJSONRITORNO = null;
+      MainFrm.DTTObj.AddAssign ("918A61F2-671A-4D56-86BA-195E531CC3D9", "s Json Ritorno := Call GMC Helper Send Notification (Google Api Spedizioni [Test Spedizione - Spedizioni].Text, Regid Spedizione [Test Spedizione - Spedizioni], Messaggio Spedizione [Test Spedizione - Spedizioni], \"\", \"\")", "", v_SJSONRITORNO);
+      MainFrm.DTTObj.AddToken ("918A61F2-671A-4D56-86BA-195E531CC3D9", "EC03F4A2-C542-4DF9-B2D9-823E8ABBC048", 2686976, "Google Api Spedizioni [Test Spedizione - Spedizioni].Text", (new IDVariant(PAN_SPEDIZIONI.FieldText(PFL_SPEDIZIONI_GOOGLEAPI))));
+      MainFrm.DTTObj.AddToken ("918A61F2-671A-4D56-86BA-195E531CC3D9", "7A21EDB6-20C4-4BBA-8208-BEFDBD012926", 917504, "Regid Spedizione", IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI, IMDBDef1.PQSL_SPEDIZIONI_REG_ID, 0));
+      MainFrm.DTTObj.AddToken ("918A61F2-671A-4D56-86BA-195E531CC3D9", "70D789DD-64BA-48E6-8F29-E019F8D4CB90", 917504, "Messaggio Spedizione", IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI, IMDBDef1.PQSL_SPEDIZIONI_DES_MESSAGGIO, 0));
       v_SJSONRITORNO = MainFrm.CallGMCHelperSendNotification((new IDVariant(PAN_SPEDIZIONI.FieldText(PFL_SPEDIZIONI_GOOGLEAPI))), IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI, IMDBDef1.PQSL_SPEDIZIONI_REG_ID, 0), IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI, IMDBDef1.PQSL_SPEDIZIONI_DES_MESSAGGIO, 0), (new IDVariant("")), (new IDVariant("")));
+      MainFrm.DTTObj.AddAssignNewValue ("918A61F2-671A-4D56-86BA-195E531CC3D9", "58BBBD24-53F9-44CD-8783-BE1E4AA318A9", v_SJSONRITORNO);
+      MainFrm.DTTObj.AddAssign ("435587B4-F300-4D90-8286-F98352EBEC9A", "Json Ritorno Nome Oggetto [Test Spedizione - Dati Temp] := s Json Ritorno", "", IMDB.Value(IMDBDef1.PQRY_DATITEMP1, IMDBDef1.PQSL_DATITEMP1_JSORITNOMOGG, 0));
+      MainFrm.DTTObj.AddToken ("435587B4-F300-4D90-8286-F98352EBEC9A", "58BBBD24-53F9-44CD-8783-BE1E4AA318A9", 1376256, "s Json Ritorno", new IDVariant(v_SJSONRITORNO));
       IMDB.set_Value(IMDBDef1.PQRY_DATITEMP1, IMDBDef1.PQSL_DATITEMP1_JSORITNOMOGG, 0, new IDVariant(v_SJSONRITORNO));
+      MainFrm.DTTObj.AddAssignNewValue ("435587B4-F300-4D90-8286-F98352EBEC9A", "C96D3CEB-9B5E-46B1-9C5F-CE2AFF064DEB", IMDB.Value(IMDBDef1.PQRY_DATITEMP1, IMDBDef1.PQSL_DATITEMP1_JSORITNOMOGG, 0));
+      MainFrm.DTTObj.ExitProc("BE3A6E47-C183-478A-A00D-579D0D8BDD3D", "Etichetta Invia", "", 3, "Test Spedizione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("BE3A6E47-C183-478A-A00D-579D0D8BDD3D", "Etichetta Invia", "", _e);
       MainFrm.ErrObj.ProcError ("TestSpedizione", "EtichettaInvia", _e);
+      MainFrm.DTTObj.ExitProc("BE3A6E47-C183-478A-A00D-579D0D8BDD3D", "Etichetta Invia", "", 3, "Test Spedizione");
       return -1;
     }
   }
@@ -525,18 +538,26 @@ public partial class TestSpedizione : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("FB5D3ADD-0DB9-42C5-A93D-1E8AEB18F581", "Etichetta Elabora Risultato", "", 3, "Test Spedizione")) return 0;
       // 
       // Etichetta Elabora Risultato Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("D3AA8082-C9BB-4AD1-AEE7-52D6F1181D6D", "Notificatore.Elabora Risultato GCM Notification", "");
       MainFrm.ElaboraRisultatoGCMNotification(IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI, IMDBDef1.PQSL_SPEDIZIONI_REG_ID, 0), IMDB.Value(IMDBDef1.TBL_DATITEMP, IMDBDef1.FLD_DATITEMP_JSORITNOMOGG, 0), IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI, IMDBDef1.PQSL_SPEDIZIONI_ID, 0));
+      MainFrm.DTTObj.AddSubProc ("D00CE946-8967-49F9-A8C3-A5AFA3F4DFFF", "Spedizioni.Refresh Query", "");
       PAN_SPEDIZIONI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.AddSubProc ("11D70207-2152-48F4-BC14-4FBF97ECF155", "Device Token.Refresh Query", "");
       PAN_DEVICETOKEN.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("FB5D3ADD-0DB9-42C5-A93D-1E8AEB18F581", "Etichetta Elabora Risultato", "", 3, "Test Spedizione");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("FB5D3ADD-0DB9-42C5-A93D-1E8AEB18F581", "Etichetta Elabora Risultato", "", _e);
       MainFrm.ErrObj.ProcError ("TestSpedizione", "EtichettaElaboraRisultato", _e);
+      MainFrm.DTTObj.ExitProc("FB5D3ADD-0DB9-42C5-A93D-1E8AEB18F581", "Etichetta Elabora Risultato", "", 3, "Test Spedizione");
       return -1;
     }
   }
@@ -1028,7 +1049,7 @@ public partial class TestSpedizione : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPS_PUSH_SETTING A ");
     SQL.Append("where (A.ID = ~~ID_APPLICAZIONE~~) ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_LOOAPPPUSSE1, 0, SQL, -1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_LOOAPPPUSSE1, 0, SQL, -1, "0DFC514C-C23C-433E-9855-DDAAA36334B3");
     PAN_SPEDIZIONI.SetQueryDB(PPQRY_LOOAPPPUSSE1, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_SPEDIZIONI.SetMasterTable(PPQRY_LOOAPPPUSSE1, "APPS_PUSH_SETTING");
     PAN_SPEDIZIONI.SetQueryLKE(PPQRY_LOOAPPPUSSE1, PFL_SPEDIZIONI_IDAPPSPUSSE1, "IDAPPUSENOOG");
@@ -1048,7 +1069,7 @@ public partial class TestSpedizione : MyWebForm
     SQL.Append("  APPS_PUSH_SETTING A, ");
     SQL.Append("  APPS B ");
     SQL.Append("where B.ID = A.ID_APP ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_APPSPUSHSETT, 0, SQL, PFL_SPEDIZIONI_IDAPPSPUSSE1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_APPSPUSHSETT, 0, SQL, PFL_SPEDIZIONI_IDAPPSPUSSE1, "25683834-B879-4848-8135-002DAFB5E2FC");
     PAN_SPEDIZIONI.SetQueryDB(PPQRY_APPSPUSHSETT, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_SPEDIZIONI.SetIMDB(IMDB, "PQRY_SPEDIZIONI", true);
     PAN_SPEDIZIONI.set_SetString(MyGlb.MASTER_ROWNAME, "Spedizione");
@@ -1069,7 +1090,7 @@ public partial class TestSpedizione : MyWebForm
     SQL.Append("  A.INFO as INFO, ");
     SQL.Append("  A.GUID_GRUPPO as GUID_GRUPPO, ");
     SQL.Append("  A.TENTATIVI as TENTATIVI ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI, 0, SQL, -1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI, 0, SQL, -1, "0572276F-FFA0-4D49-A0F7-04F848710B6F");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  SPEDIZIONI A ");
@@ -1307,7 +1328,7 @@ public partial class TestSpedizione : MyWebForm
     SQL.Append("from ");
     SQL.Append("  APPS_PUSH_SETTING A ");
     SQL.Append("where (A.ID = ~~ID_APPLICAZIONE~~) ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_LOOAPPPUSSET, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_LOOAPPPUSSET, 0, SQL, -1, "C5FA8D63-3BEA-4E13-BB8F-D66CC4A1618B");
     PAN_DEVICETOKEN.SetQueryDB(PPQRY_LOOAPPPUSSET, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_DEVICETOKEN.SetMasterTable(PPQRY_LOOAPPPUSSET, "APPS_PUSH_SETTING");
     PAN_DEVICETOKEN.SetIMDB(IMDB, "PQRY_DEVICETOKEN5", true);
@@ -1323,7 +1344,7 @@ public partial class TestSpedizione : MyWebForm
     SQL.Append("  A.DES_NOTA as DES_NOTA, ");
     SQL.Append("  A.DATA_RIMOZ as DATA_RIMOZ, ");
     SQL.Append("  A.REG_ID as REG_ID ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN5, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN5, 0, SQL, -1, "F2C51CCC-9560-445B-9306-3B9CAF007D49");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  DEV_TOKENS A ");
@@ -1571,6 +1592,10 @@ public partial class TestSpedizione : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

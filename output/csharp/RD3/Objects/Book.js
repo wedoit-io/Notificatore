@@ -682,8 +682,14 @@ Book.prototype.SetCaption= function(value)
        this.ScrollToolbar(-1);
     //
     // Caso mobile, sposto la caption in modo da non sovrapporsi con i bottoni se si puo'
-    if (RD3_Glb.IsMobile())
-    	RD3_Glb.AdjustCaptionPosition(this.ToolbarBox, this.CaptionTxt);       
+    if (RD3_Glb.IsMobile()) 
+    {
+    	RD3_Glb.AdjustCaptionPosition(this.ToolbarBox, this.CaptionTxt);
+      //
+      // La AdjustCaptionPosition allarga la caption occupando tutto lo spazio disponibili, ma se c'e' la status bar visibile non va fatto.
+      if (this.ShowStatusBar)
+        this.CaptionTxt.style.width = "";
+    }
   }
 }
 

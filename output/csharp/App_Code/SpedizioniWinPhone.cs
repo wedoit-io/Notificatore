@@ -1,6 +1,6 @@
 // **********************************************
 // Spedizioni Win Phone
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -352,6 +352,8 @@ public partial class SpedizioniWinPhone : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("2DE58EF4-0593-4C7B-8CF3-B5C0B4F055C0", "Invia subito", "", 3, "Spedizioni Win Phone")) return 0;
       // 
       // Invia subito Body
       // Corpo Procedura
@@ -382,11 +384,14 @@ public partial class SpedizioniWinPhone : MyWebForm
         // }
       // }
       // PAN_SPEDIZIONI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("2DE58EF4-0593-4C7B-8CF3-B5C0B4F055C0", "Invia subito", "", 3, "Spedizioni Win Phone");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("2DE58EF4-0593-4C7B-8CF3-B5C0B4F055C0", "Invia subito", "", _e);
       MainFrm.ErrObj.ProcError ("SpedizioniWinPhone", "Inviasubito", _e);
+      MainFrm.DTTObj.ExitProc("2DE58EF4-0593-4C7B-8CF3-B5C0B4F055C0", "Invia subito", "", 3, "Spedizioni Win Phone");
       return -1;
     }
   }
@@ -769,7 +774,7 @@ public partial class SpedizioniWinPhone : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~ID_APPLICAZIONE~~) ");
     SQL.Append("and   (A.TYPE_OS = '3') ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "F3D67678-4926-4BF2-AC46-705FED1E90E8");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as ID, ");
@@ -806,7 +811,7 @@ public partial class SpedizioniWinPhone : MyWebForm
     SQL.Append("  A.INFO as INFO, ");
     SQL.Append("  A.TENTATIVI as TENTATIVI, ");
     SQL.Append("  A.GUID_GRUPPO as GUID_GRUPPO ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI2, 0, SQL, -1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI2, 0, SQL, -1, "84625DD8-41A7-4B26-8F2F-94AAD31620D3");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  SPEDIZIONI A ");
@@ -1047,6 +1052,10 @@ public partial class SpedizioniWinPhone : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

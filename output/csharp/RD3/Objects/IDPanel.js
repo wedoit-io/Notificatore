@@ -242,6 +242,10 @@ IDPanel.prototype.LoadFromXml = function(node)
         // 
         // Aggiorno la posizione attuale
         this.CompactActualPosition = this.ListGroupRoot.GetRowPos(this.ActualPosition);
+        //
+        // Se il pannello e' interamente vuoto allora e' come se non fosse gruppato
+        if (this.GetTotalRows() === 0)
+          this.CompactActualPosition = 1;
       }
       break;
     }
@@ -440,7 +444,7 @@ IDPanel.prototype.SetPanelMode= function(value, immediate)
           while(!objEl.id && objEl.parentNode)
             objEl = objEl.parentNode;
           //
-          var isList = objEl.id.indexOf(":lv")!=0;
+          var isList = objEl.id.indexOf(":lv") >= 0;
           if ((this.PanelMode==RD3_Glb.PANEL_LIST && !isList) || (this.PanelMode!=RD3_Glb.PANEL_LIST && isList))
             RD3_KBManager.ActiveElement = null;
         }
@@ -1114,8 +1118,11 @@ IDPanel.prototype.SetEnableMultipleSel= function(value)
       if (this.VisStyle)
         this.VisStyle.ApplyValueStyle(this.ToggleMultiSelBox, true, true, false, false, false, false, false, "left", false, false); // Header in lista
       //
-      if (RD3_ServerParams.Theme == "zen")    // No right border for ZEN
+      if (RD3_ServerParams.Theme == "zen") {    // No right border for ZEN
         this.ToggleMultiSelBox.style.setProperty("border-right","none","important");
+        if (RD3_Glb.IsIE())
+          this.ToggleMultiSelBox.style.borderBottomWidth = "0px";
+      }
     }
     //
     // Creo/distruggo toolbar di selezione multipla
@@ -1523,10 +1530,10 @@ IDPanel.prototype.SetListHeight= function(value)
   // questo perche' con le righe dinamiche quando vado in form il sistema
   // sente di dover modificare l'altezza anche della lista e questo
   // poi rompe l'animazione di ritorno
-  if (this.PanelMode==RD3_Glb.PANEL_FORM && RD3_Glb.IsMobile())
-  {
+  // Su IE no, perche' farlo significa essere legati all'ordine degli attributi, su IE l'attributo 
+  // 'vai in lista' viene dopo a 'nuova altezza lista'
+  if (this.PanelMode == RD3_Glb.PANEL_FORM && RD3_Glb.IsMobile() && !RD3_Glb.IsIE())
     return;
-  }
   //
   var old = this.ListHeight;
   //
@@ -1614,6 +1621,7 @@ IDPanel.prototype.SetHResMode= function(value)
 
 IDPanel.prototype.SetVisualStyle= function(value) 
 {
+  var old = this.VisStyle;
   if (value!=undefined)
   {
     if (value.Identifier)
@@ -1702,6 +1710,12 @@ IDPanel.prototype.SetVisualStyle= function(value)
       for (var i=0; i < this.NumRows; i++)
         this.VisStyle.ApplyBorderStyle(this.RowSel[i], 1);
     }
+    //
+    // Classe CSS da Visual Style, la applico solo se il VS e' cambiato
+    if (old && old.GetClassName && old.GetClassName())
+        RD3_Glb.RemoveClass(this.FrameBox, old.GetClassName());
+    if (this.VisStyle.GetClassName && this.VisStyle.GetClassName())
+      RD3_Glb.AddClass(this.FrameBox, this.VisStyle.GetClassName());
   }
 }
 
@@ -2376,6 +2390,9 @@ IDPanel.prototype.AdaptLayout = function()
     this.DeltaW = 0;
     this.DeltaH = 0;
     this.SetActualPosition();
+    //
+    if (RD3_Glb.IsMobile())
+      this.RefreshToolbar = true;
   }
   this.ResVisFld = false;
   //
@@ -2577,7 +2594,7 @@ IDPanel.prototype.AdaptPagesLayout = function()
   //
   // IE, a volte sbaglia... nonostante sia tutto preciso al pixel puo' mandare a capo il filler per 1px
   if (RD3_Glb.IsIE() && this.PagesFiller.offsetLeft==0)
-    this.PagesFiller.style.width = (parseInt(this.PagesFiller.style.width)-1) + "px";	
+    this.PagesFiller.style.width = (pfw > 0 ? pfw - 1 : 0) + "px";
   //
   if (ismob)
     this.PagesBox.style.top = (this.Height - this.PagesBox.offsetHeight)+"px";
@@ -2602,8 +2619,8 @@ IDPanel.prototype.AdaptFormListLayout = function()
     nheight = this.ListTop + this.ListHeightRounded + 2;      // 2px Bordi
     //
     // Se ci sono delle fixed col devo comunque tenere un po' di margine.
-    if (this.FixedColumns>0)
-      nheight += 18; 
+    if (this.FixedColumns > 0 && this.ScrollAreaBox.style.display != "none")
+      nheight = this.ListTop + parseInt(this.ScrollAreaBox.style.height);
   }
   //
   // Per tutti i campi di pannello visibili
@@ -2796,7 +2813,19 @@ IDPanel.prototype.CalcListLayout = function(flDontCheckSB)
           // Ho esaurito le colonne fisse, posiziono lo scroll container
           this.ScrollAreaBox.style.left = (ll + d) + "px";
           this.ScrollAreaBox.style.top = this.ListListBox.style.top;
-          this.ScrollAreaBox.style.height = (this.ListHeightRounded+18) + "px";
+          //
+          // Verifico se la scroll area contiene anche campi totali; nel caso la alzo q.b.
+          var offsetH = 0;
+          for (var j = 0; j < n; j++)
+          {
+            var f1 = this.Fields[j];
+            if (f1.AggregateOfField == -1 || !f1.IsVisible())
+              continue;
+            //
+            offsetH = Math.max(offsetH, f1.ListTop + f1.ListHeight - this.ListTop - this.ListHeightRounded - 2);
+          }
+          //
+          this.ScrollAreaBox.style.height = (this.ListHeightRounded + offsetH + 18) + "px";
           //
           var nw = (this.ContentBox.clientWidth - (this.ScrollBox?this.ScrollBox.offsetWidth:0) - (ll+d) - 3);
           this.ScrollAreaBox.style.width = (nw>=0 ? nw : 0) + "px";
@@ -2873,7 +2902,8 @@ IDPanel.prototype.CalcListLayout = function(flDontCheckSB)
       if (RD3_ServerParams.Theme == "zen")
       {
         rc.w += 3;
-        rc.h += 1;
+        if (!RD3_Glb.IsIE())
+          rc.h += 1;
       }
       //
       // Se il pannello ha il bordo orizzontale e l'intestazione no, la sposto
@@ -3141,6 +3171,13 @@ IDPanel.prototype.CalcGroupsLayout= function()
   // Se qualche gruppo e' cambiato e sono su mobile, devo adattare il mio container
   if (resize && RD3_Glb.IsMobile())
     this.AdaptFormListLayout();
+  //
+  // Adesso per il tema Mobile dobbiamo gestire i bordi interni dei campi
+  if (RD3_Glb.IsMobile() && !RD3_Glb.IsMobile7() && !RD3_Glb.IsQuadro())
+  {
+    for (var i=0; i<this.Groups.length; i++)
+      this.UpdateFieldClass(this.Groups[i]);
+  }
 }
 
 
@@ -3910,7 +3947,7 @@ IDPanel.prototype.SetSmallIcon= function(value)
         this.CustomButtons[i].src = RD3_Glb.GetImgSrc("images/" + a[i].Image + ext);
       //
       // Se devo retinare, nascondo l'immagine (cosi non si vede grande) e quando arriva la rimostro
-	    if (RD3_Glb.Adapt4Retina(this.Identifier, a[i].Image + ext, 43, i))
+      if (RD3_Glb.Adapt4Retina(this.Identifier, a[i].Image + ext, 43, i))
       {
         if (mob7 && usemask)
           this.CustomButtons[i].style.webkitMaskSize = "0px 0px";
@@ -4238,6 +4275,13 @@ IDPanel.prototype.OnToolbarClick= function(evento, button)
       break;
     }
   }
+  //
+  // Per un BUG di IE dopo il salvataggio se si rida' il fuoco all'editor questo anche se e' editabile non lo riesce a prendere. L'unico modo per risolverlo e' dare il fuoco al BODY
+  // dopo 250 milli se il salvataggio arriva da un editor, in questo caso quando l'utente ridara' il fuoco al campo funzionera' bene
+  if (ok && button == "save" && RD3_Glb.IsIE() && RD3_KBManager.ActiveObject && RD3_KBManager.ActiveObject instanceof PField && RD3_KBManager.ActiveObject.EditorType == 1) {
+    document.body.tabIndex = 0;
+    window.setTimeout("RD3_KBManager.ActiveObject = null; RD3_KBManager.LastActiveObject = null; RD3_KBManager.ActiveElement = null; document.body.focus();", 250);
+  }
 }
 
 
@@ -4412,7 +4456,7 @@ IDPanel.prototype.SetStatusBarText = function()
   //
   // Se non lavoro SingleDoc aggiorno la statusbar
   // altrimenti la svuoto (cosi' compare solo il nome del documento e non "Riga 1 di 1")
-  if (!this.DOSingleDoc)
+  if (!this.DOSingleDoc || (this.DOMaster && this.DOModified))
   {
     this.StatusBar.className = cn;
     this.StatusBar.innerHTML = "&nbsp;"+st;
@@ -4790,6 +4834,10 @@ IDPanel.prototype.UpdateToolbar = function()
     if (ctb)
       RD3_Glb.AdjustCustomToolbar(ctb, this.ToolbarBox);
     RD3_Glb.AdjustCaptionPosition(this.ToolbarBox, this.CaptionTxt);
+    //
+    // La AdjustCaptionPosition allarga la caption occupando tutto lo spazio disponibili, ma se c'e' la status bar visibile non va fatto.
+    if (this.ShowStatusBar)
+      this.CaptionTxt.style.width = "";
   }
   //
   // Passo il messaggio ai campi
@@ -4902,7 +4950,7 @@ IDPanel.prototype.UpdatePageEnability = function(page)
 // ********************************************************************************
 IDPanel.prototype.RowSelWidth = function()
 {
-	var rsw = RD3_ClientParams.RowSelWidth + (RD3_ServerParams.Theme == "zen" ? 14 : 0);
+  var rsw = RD3_ClientParams.RowSelWidth + (RD3_ServerParams.Theme == "zen" ? 14 : 0);
   return (this.ShowRowSelector? rsw : 0);
 }
 
@@ -5012,7 +5060,7 @@ IDPanel.prototype.AfterProcessResponse= function()
   WebFrame.prototype.AfterProcessResponse.call(this);
   //
   // Gestisco ulteriori aggiustamenti
-  if (this.ResetPosition)
+  if (this.ResetPosition || this.UpdateListGroups)
   {
     this.SetActualPosition(undefined, undefined, this.ScrollToPos && !this.DenyScroll);
     this.ResetPosition = false;
@@ -5095,14 +5143,25 @@ IDPanel.prototype.Focus= function(gotop)
     return false;
   //
   // Do il fuoco al primo campo che lo vuole
+  var rw = gotop ? 0 : this.ActualRow;
   var n = this.Fields.length;
   for (var i=0; i<n; i++)
   {
-    if (this.Fields[i].Focus(null, (gotop ? 0 : this.ActualRow)))
+    if (this.Fields[i].CanHaveFocus(rw) && this.Fields[i].Focus(null, rw))
       return true;
   }
   //
   return false;
+}
+
+IDPanel.prototype.HandlesTabFocus = function()
+{
+  // Non permetto la navigazione con il tab su un sottopannello che non puo' ne' 
+  // aggiornare ne' inserire
+  if (this.ParentFrameIdentifier && (!this.CanUpdate && !this.CanUpdate))
+    return false;
+  //  
+  return true;
 }
 
 
@@ -5641,7 +5700,7 @@ IDPanel.prototype.GetNextField = function(fld)
     if (this.AdvTabOrder && this.PanelMode==RD3_Glb.PANEL_FORM)
       f = this.FormTabOrder[i];
     //
-    if (f && !f.IsStatic() && f.IsVisible())
+    if (f && (!f.IsStatic() || f.IsButton()) && f.IsVisible() && f.HandlesTabOrder())
       return f;
   }
   //
@@ -5679,7 +5738,7 @@ IDPanel.prototype.GetPrevField = function(fld)
     if (this.AdvTabOrder && this.PanelMode==RD3_Glb.PANEL_FORM)
       f = this.FormTabOrder[i];
     //
-    if (!f.IsStatic() && f.IsVisible())
+    if ((!f.IsStatic() || f.IsButton()) && f.IsVisible() && f.HandlesTabOrder())
       return f;
   }
   //
@@ -6325,6 +6384,19 @@ IDPanel.prototype.ResizeList = function()
         }
       }
     }    
+  }
+  //
+  // Allineo i campi con valori aggregati sotto la lista
+  var n = this.Fields.length;
+  for (var i = 0; i<n; i++)
+  {
+    var f = this.Fields[i];
+    if (f.InList && f.AggregateOfField >= 0)
+    {
+      if (f.OffsetFromList == undefined)
+        f.OffsetFromList = f.ListTop - this.ListHeight - this.ListTop;
+      f.SetListTop(this.ListTop + this.ListHeightRounded + f.OffsetFromList);
+    }
   }
   //
   this.LastListResizeW = this.Width;
@@ -7900,14 +7972,15 @@ IDPanel.prototype.OnFormListAni = function()
   this.FormListButtonCnt.style.opacity=flopini;
   //
   // Eseguo l'animazione
-  var sc = "RD3_Glb.SetTransitionDuration(document.getElementById('"+ this.ListBox.id+"'), '250ms');";
-  sc += "RD3_Glb.SetTransitionDuration(document.getElementById('"+ this.FormBox.id+"'), '250ms');";  
+  var duration = RD3_Glb.IsIE() ? 400 : 250;
+  var sc = "RD3_Glb.SetTransitionDuration(document.getElementById('" + this.ListBox.id + "'), '" + duration + "ms');";
+  sc += "RD3_Glb.SetTransitionDuration(document.getElementById('" + this.FormBox.id + "'), '" + duration + "ms');";
   sc += "RD3_Glb.SetTransform(document.getElementById('"+ this.ListBox.id+"'), 'translate3d("+listfin+"px,"+ylist+"px,0px)');";
   sc += "RD3_Glb.SetTransform(document.getElementById('"+ this.FormBox.id+"'), 'translate3d("+formfin+"px,"+yform+"px,0px)');";
   if (this.PagesBox)
   {
     sc += "RD3_Glb.SetTransform(document.getElementById('"+ this.PagesBox.id+"'), 'translate3d("+formfin+"px,0px,0px)');";
-    sc += "RD3_Glb.SetTransitionDuration(document.getElementById('"+ this.PagesBox.id+"'), '250ms');";  
+    sc += "RD3_Glb.SetTransitionDuration(document.getElementById('" + this.PagesBox.id + "'), '" + duration + "ms');";
   }
   //
   // Questa animazione multipla viene gestita male da IEMobile, in questo caso la saltiamo e li facciamo mostrare/nascondere direttamente alla fine
@@ -7921,8 +7994,14 @@ IDPanel.prototype.OnFormListAni = function()
     sc += "document.getElementById('"+ this.FormListButtonCnt.id+"').style.opacity="+flopfin+";";
   }
   //
-  RD3_Glb.AddEndTransaction(this.ListBox, this.ea, false);
-  window.setTimeout(sc, RD3_Glb.IsIE() ? 300 : 30);
+  // IE BUG: gli eventi di endTransition scattano un po' quando pare loro... in questo caso lo facciamo scattare con un timer
+  var _this = this;
+  if (!RD3_Glb.IsIE())
+    RD3_Glb.AddEndTransaction(this.ListBox, this.ea, false);
+  else
+    window.setTimeout(function () { _this.ea(); }, 830);
+  //
+  window.setTimeout(sc, RD3_Glb.IsIE() ? 400 : 30);
 }
 
 
@@ -8025,7 +8104,7 @@ IDPanel.prototype.UpdateFieldClass = function(group)
       else
         considerField = f.PFormCell && f.InForm;
       //
-      if (considerField && f.Group == group)
+      if (considerField && f.Group == group && f.Visible)
       {
         if (first.length == 0)
           first.push(f);
@@ -8052,6 +8131,25 @@ IDPanel.prototype.UpdateFieldClass = function(group)
         }
         if (fieldTop == lastTop && first[0] != f)
           last.push(f);
+        //
+        // Se un gruppo ha la classe la devo togliere, perche' non e' detto che la debba avere.. lo sapro' solo alla fine..
+        if ((layout==0 && RD3_Glb.HasClass(f.ListCaptionBox, "first-group-field")) || (layout==1 && RD3_Glb.HasClass(f.FormCaptionBox, "first-group-field")))
+        {
+          RD3_Glb.RemoveClass((layout==0 ? f.ListCaptionBox : f.FormCaptionBox), "first-group-field");
+          var obj = (layout==0 ? f.PListCells[0].IntCtrl : f.PFormCell.IntCtrl);
+          if (obj instanceof IDCombo)
+            obj = obj.ComboInput;
+          RD3_Glb.RemoveClass(obj, "first-group-field");
+        }
+        //
+        if ((layout==0 && RD3_Glb.HasClass(f.ListCaptionBox, "last-group-field")) || (layout==1 && RD3_Glb.HasClass(f.FormCaptionBox, "last-group-field")))
+        {
+          RD3_Glb.RemoveClass((layout==0 ? f.ListCaptionBox : f.FormCaptionBox), "last-group-field");
+          var obj = (layout==0 ? f.PListCells[0].IntCtrl : f.PFormCell.IntCtrl);
+          if (obj instanceof IDCombo)
+            obj = obj.ComboInput;
+          RD3_Glb.RemoveClass(obj, "last-group-field");
+        }
       }
     }
     //
@@ -8114,6 +8212,32 @@ IDPanel.prototype.OnTouchUp= function(evento, click)
   //
   if (this.HilitedCombo)
     this.HilitedCombo.HiliteCombo(null, false);
+  if (this.hilitedButton) {
+    // Bottone abilitato, smetto di evidenziare
+    var obj = this.PanelMode==RD3_Glb.PANEL_LIST ? this.hilitedButton.ListCaptionBox : this.hilitedButton.FormCaptionBox;
+    RD3_Glb.RemoveClass(obj,"button-hover");
+    //
+    // Ci sono alcuni casi in cui arrivo qui senza l'old (ad esempio quando clicchi e fai lo swipe: idscroll chiama onTouchUp due volte, 
+    // la prima con l'old - che viene messo a posto - la seconda senza) in quel caso se non ho un'immagine di sfondo da rimettere a posto non faccio nulla..
+    if (obj.hasAttribute("OldBkgImage") || this.hilitedButton.Image != "")
+    { 
+      if (this.hilitedButton.VisShowActivator() && this.hilitedButton.IsButton())
+      {
+        obj.style.backgroundImage = "";
+        obj.style.backgroundPosition = "";
+      }
+      //
+      // Riprisitno la vecchia immagine se presente
+      var st = obj.getAttribute("OldBkgImage");
+      obj.removeAttribute("OldBkgImage");
+      //
+      // Se ho un'immagine allora vince quella (altrimenti si accodano..)
+      st = this.hilitedButton.Image != "" ? "" : st; 
+      this.hilitedButton.ApplyBackgroundImage(obj.style, st);
+    }
+    delete this.hilitedButton;
+  }
+  //
   return true;
 }
 
@@ -8258,7 +8382,7 @@ IDPanel.prototype.OnScrollMobile= function(ev)
       if (x==0)
         this.SearchBox.value = "<A";
       else
-        this.SearchBox.value = String.fromCharCode(x+64);
+        this.SearchBox.value = String.fromCharCode(x+64) + "*";
       if (this.SearchBox.value!=oldv)
       {
         if (RD3_ClientParams.MobileScrollbarOnTouchUp)

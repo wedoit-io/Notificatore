@@ -150,20 +150,20 @@ ValueList.prototype.SetCheck = function(obj, value, inqbe)
   var fl = (value == this.ItemList[0].Value);
   if (RD3_Glb.IsMobile())
   {
-  	if (RD3_Glb.IsQuadro())
-  	{
-  		var io = obj.firstChild;
-  		RD3_Glb.SetTransform(io, "translate3d("+(fl?0:-53)+"px, 0px, 0px)");
-  	}
-  	else if (RD3_Glb.IsMobile7())
-  	{
-  		var io = obj.firstChild;
-  		RD3_Glb.SetTransform(io, "translate3d("+(fl?22:0)+"px, 0px, 0px)");
-  		obj.style.backgroundColor = fl?"":"transparent";
-  		obj.style.borderColor = fl?"#4cd864":"";
-  	}
-  	else
-  		obj.style.backgroundPosition = (fl?"0%":"100%")+" -27px";
+    if (RD3_Glb.IsQuadro())
+    {
+      var io = obj.firstChild;
+      RD3_Glb.SetTransform(io, "translate3d("+(fl?0:-53)+"px, 0px, 0px)");
+    }
+    else if (RD3_Glb.IsMobile7())
+    {
+      var io = obj.firstChild;
+      RD3_Glb.SetTransform(io, "translate3d("+(fl?22:0)+"px, 0px, 0px)");
+      obj.style.backgroundColor = fl?"":"transparent";
+      obj.style.borderColor = fl?"#4cd864":"";
+    }
+    else
+      obj.style.backgroundPosition = (fl?"0%":"100%")+" -27px";
   }
   if (inqbe && value === "---") 
   {
@@ -196,7 +196,7 @@ ValueList.prototype.RealizeOption= function(pspan, pobj, value, vertical, list, 
 // ****************************************************************
 ValueList.prototype.SetOption = function(srcobj, value)
 {
-	var mob = RD3_Glb.IsMobile();
+  var mob = RD3_Glb.IsMobile();
   var c = srcobj.getElementsByTagName("input");
   if (c.length>0)
   {
@@ -206,7 +206,7 @@ ValueList.prototype.SetOption = function(srcobj, value)
       var it = this.ItemList[i];
       c[i].checked = (it.Value == value);
       if (mob)
-      	RD3_Glb.SetClass(c[i].nextSibling,"radio-checked",it.Value == value);
+        RD3_Glb.SetClass(c[i].nextSibling,"radio-checked",it.Value == value);
     }
   }
 }
@@ -245,7 +245,7 @@ ValueList.prototype.GetOption = function(srcobj)
     {
       var it = this.ItemList[i];
       if (c[i].checked)
-	      return it.Value;
+        return it.Value;
     }
   }
   return "";
@@ -398,7 +398,7 @@ ValueList.prototype.SetComboItemsVisible = function()
     var it = this.ItemList[i];
     //
     it.Visible = true;
-    it.HtmlNames = it.OrgNames;
+    it.HtmlNames = RD3_Glb.HTMLEncode(it.OrgNames);
   }
 }
 
@@ -585,21 +585,21 @@ ValueList.prototype.EnsureItemVisible = function(popupobj, idx)
   //
   var it = this.GetTR(popupobj, idx);
   if (!it)
-  	return;
- 	//
+    return;
+   //
   var ittop = it.offsetTop;
   //
   if (RD3_Glb.IsMobile())
   {
-  	; // Nulla da fare per il mobile...
+    ; // Nulla da fare per il mobile...
   }
   else
   {
-	  if (ittop < popupobj.scrollTop)
-	    popupobj.scrollTop = ittop - (popupobj.clientHeight/2);
-	  else if (ittop + it.offsetHeight > popupobj.scrollTop + popupobj.clientHeight)
-	    popupobj.scrollTop = ittop + (popupobj.clientHeight/2) - popupobj.clientHeight;
-	}
+    if (ittop < popupobj.scrollTop)
+      popupobj.scrollTop = ittop - (popupobj.clientHeight/2);
+    else if (ittop + it.offsetHeight > popupobj.scrollTop + popupobj.clientHeight)
+      popupobj.scrollTop = ittop + (popupobj.clientHeight/2) - popupobj.clientHeight;
+  }
 }
 
 // ***************************************************************

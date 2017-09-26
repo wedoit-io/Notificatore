@@ -28,6 +28,7 @@ function PGroup(ppanel)
   this.HeaderWidth = 0;                 // Larghezza dell'Header
   this.InList = false;                  // Gruppo formato da soli campi in lista?
   this.Identifier = "";                 // Identificatore del gruppo (univoco)
+  this.ClassName = "";                  // Classe del gruppo
   //
   // Altre variabili di modello...
   this.ParentPanel = ppanel;            // L'oggetto pannello cui il gruppo appartiene
@@ -123,6 +124,7 @@ PGroup.prototype.LoadProperties = function(node)
       case "col": this.SetCollapsed(valore == "1"); break;
       case "mfl": this.SetListMovedFields(valore == "1"); break;
       case "mff": this.SetFormMovedFields(valore == "1"); break;
+      case "cln": this.SetClassName(valore); break;
       //
       case "cla": this.CollapseAnimDef = valore; break;
       //
@@ -654,6 +656,37 @@ PGroup.prototype.SetVisualStyle = function(value)
   }
 }
 
+PGroup.prototype.SetClassName = function(value) 
+{
+  var oldC = this.ClassName;
+  if (value!=undefined)
+    this.ClassName = value;
+  //
+  // Se e' cambiata la classe o ancora non l'ho applicata allora la applico
+  if (((oldC != this.ClassName) || value == undefined) && this.Realized) 
+  {
+    if (this.ListGroupBox) 
+    {
+      // Rimuovo la classe precedente
+      if (oldC && oldC != "")
+        RD3_Glb.RemoveClass2(this.ListGroupBox, oldC);
+      //
+      // Applico la nuova classe
+      if (this.ClassName && this.ClassName != "")
+        RD3_Glb.AddClass(this.ListGroupBox, this.ClassName);
+    }
+    if (this.FormGroupBox)
+    {
+      // Rimuovo la classe precedente
+      if (oldC && oldC != "")
+        RD3_Glb.RemoveClass2(this.FormGroupBox, oldC);
+      //
+      // Applico la nuova classe
+      if (this.ClassName && this.ClassName != "")
+        RD3_Glb.AddClass(this.FormGroupBox, this.ClassName);
+    }
+  }
+}
 
 // ***************************************************************
 // Crea gli oggetti DOM utili a questo oggetto
@@ -755,6 +788,7 @@ PGroup.prototype.Realize = function(parent)
   this.SetInlist();
   this.SetVisualStyle();
   this.SetCollapsible();
+  this.SetClassName();
 }
 
 
@@ -1156,7 +1190,12 @@ PGroup.prototype.SetCollapsed = function(value, evento)
 // Gestore evento di click sul pulsante Collapse
 // ********************************************************************************
 PGroup.prototype.OnCollapseClick= function(evento)
-{ 
+{
+  // Annullo l'elemento fuocato in modo che non venga rifuocato
+  RD3_KBManager.ActiveElement = null;
+  RD3_KBManager.LastActiveObject = null;
+  RD3_KBManager.ActiveObject = null;
+  //
   if (this.ParentPanel.PanelMode == RD3_Glb.PANEL_LIST)
     this.ListCollapseButton.focus();
   else

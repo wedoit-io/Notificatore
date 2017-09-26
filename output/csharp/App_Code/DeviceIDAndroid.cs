@@ -1,6 +1,6 @@
 // **********************************************
 // Device ID Android
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -351,18 +351,30 @@ public partial class DeviceIDAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("B621C853-680C-4A98-8D95-554BE7CCFFDA", "Device Token On Dynamic Properties", "", 1, "Device ID Android")) return;
       // 
       // Device Token On Dynamic Properties Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("96FEC4FA-51A7-47B8-8194-DF0F10C2577C", "IF Data Device Token [Device ID Android - Device Token].Text = Data Ultimo Accesso Device Token [Device ID Android - Device Token].Text", "");
+      MainFrm.DTTObj.AddToken ("96FEC4FA-51A7-47B8-8194-DF0F10C2577C", "82B732EC-FD4B-40E5-83BF-AF697089B1B2", 2686976, "Data Device Token [Device ID Android - Device Token].Text", (new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATA))));
+      MainFrm.DTTObj.AddToken ("96FEC4FA-51A7-47B8-8194-DF0F10C2577C", "02865471-E1A4-4330-9811-7F58F717FC71", 2686976, "Data Ultimo Accesso Device Token [Device ID Android - Device Token].Text", (new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATAULTIACCE))));
       if ((new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATA))).equals((new IDVariant(PAN_DEVICETOKEN.FieldText(PFL_DEVICETOKEN_DATAULTIACCE))), true))
       {
+        MainFrm.DTTObj.EnterIf ("96FEC4FA-51A7-47B8-8194-DF0F10C2577C", "IF Data Device Token [Device ID Android - Device Token].Text = Data Ultimo Accesso Device Token [Device ID Android - Device Token].Text", "");
+        MainFrm.DTTObj.AddSubProc ("226899BE-BE8F-4FB6-9E34-46818ECD846A", "Data Ultimo Accesso.Set Visual Style", "");
+        MainFrm.DTTObj.AddParameter ("226899BE-BE8F-4FB6-9E34-46818ECD846A", "ADB2F285-E84F-4186-AF2D-116A70B468E8", "Stile", new IDVariant(MyGlb.VIS_SFONDOGIALLO));
         PAN_DEVICETOKEN.set_VisualStyle(Glb.OBJ_FIELD,PFL_DEVICETOKEN_DATAULTIACCE,new IDVariant(MyGlb.VIS_SFONDOGIALLO).intValue()); 
       }
+      MainFrm.DTTObj.EndIfBlk ("96FEC4FA-51A7-47B8-8194-DF0F10C2577C");
+      MainFrm.DTTObj.ExitProc("B621C853-680C-4A98-8D95-554BE7CCFFDA", "Device Token On Dynamic Properties", "", 1, "Device ID Android");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("B621C853-680C-4A98-8D95-554BE7CCFFDA", "Device Token On Dynamic Properties", "", _e);
       MainFrm.ErrObj.ProcError ("DeviceIDAndroid", "DeviceTokenOnDynamicProperties", _e);
+      MainFrm.DTTObj.ExitProc("B621C853-680C-4A98-8D95-554BE7CCFFDA", "Device Token On Dynamic Properties", "", 1, "Device ID Android");
     }
   }
 
@@ -381,6 +393,8 @@ public partial class DeviceIDAndroid : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("82018808-8152-42C8-BAA1-1575B67D0B21", "Invio Manuale", "", 3, "Device ID Android")) return 0;
       // 
       // Invio Manuale Body
       // Corpo Procedura
@@ -395,23 +409,43 @@ public partial class DeviceIDAndroid : MyWebForm
       SQL.Append("where B.ID = A.ID_APP ");
       SQL.Append("and   (A.TYPE_OS = '2') ");
       SQL.Append("and   (A.ID = " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN3, IMDBDef1.PQSL_DEVICETOKEN3_ID_APPLICAZIONE, 0), IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
+      MainFrm.DTTObj.AddQuery ("04F1612A-3F4D-4B89-880A-B05DB340E4B9", "Notificatore DB (Notificatore DB): Select into variables", "", 1280, SQL.ToString());
       QV = MainFrm.NotificatoreDBObject.DBO().OpenRS(SQL);
       if (!QV.EOF()) QV.MoveNext();
+      MainFrm.DTTObj.EndQuery ("04F1612A-3F4D-4B89-880A-B05DB340E4B9");
+      MainFrm.DTTObj.AddDBDataSource (QV, SQL);
       if (!QV.EOF())
       {
         v_VGOAPBRIDAPS = QV.Get("GOAPBRIDAPPS", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("04F1612A-3F4D-4B89-880A-B05DB340E4B9", "37AE927D-977C-4B31-8396-C6DDD4C45453", 1376256, "v Google Api Browser ID Apps Push Settings", v_VGOAPBRIDAPS);
       }
       QV.Close();
+      MainFrm.DTTObj.AddAssign ("F4E366A8-1F78-49A6-83E1-F23B2A986622", "Google Api Browser ID Apps Push Settings Nome Oggetto := v Google Api Browser ID Apps Push Settings", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_GOOGLE_API_ID, 0));
+      MainFrm.DTTObj.AddToken ("F4E366A8-1F78-49A6-83E1-F23B2A986622", "37AE927D-977C-4B31-8396-C6DDD4C45453", 1376256, "v Google Api Browser ID Apps Push Settings", new IDVariant(v_VGOAPBRIDAPS));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_GOOGLE_API_ID, 0, new IDVariant(v_VGOAPBRIDAPS));
+      MainFrm.DTTObj.AddAssignNewValue ("F4E366A8-1F78-49A6-83E1-F23B2A986622", "4C16645D-EF84-4810-937F-5D3470ECD230", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_GOOGLE_API_ID, 0));
+      MainFrm.DTTObj.AddAssign ("7586FE26-4557-4BC6-ABA3-38ABB41454C2", "Regid Spedizione Nome Oggetto := Regid Device Token [Device ID Android - Device Token]", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_REG_ID, 0));
+      MainFrm.DTTObj.AddToken ("7586FE26-4557-4BC6-ABA3-38ABB41454C2", "B0CDCA18-7174-4925-B150-DDDC91F03F98", 917504, "Regid Device Token", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN3, IMDBDef1.PQSL_DEVICETOKEN3_REG_ID, 0));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_REG_ID, 0, IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN3, IMDBDef1.PQSL_DEVICETOKEN3_REG_ID, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("7586FE26-4557-4BC6-ABA3-38ABB41454C2", "28BCC759-A34B-40C4-8A95-FD3EA75DBCE3", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_REG_ID, 0));
+      MainFrm.DTTObj.AddAssign ("28B56322-F3BD-4EF7-927F-51F7F2FED476", "Device Token Spedizione Nome Oggetto := Dev Token Device Token [Device ID Android - Device Token]", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_DEV_TOKEN, 0));
+      MainFrm.DTTObj.AddToken ("28B56322-F3BD-4EF7-927F-51F7F2FED476", "25AEFE97-3B52-49CC-8EF9-3D0C06DADB9E", 917504, "Dev Token Device Token", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN3, IMDBDef1.PQSL_DEVICETOKEN3_DEV_TOKEN, 0));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_DEV_TOKEN, 0, IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN3, IMDBDef1.PQSL_DEVICETOKEN3_DEV_TOKEN, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("28B56322-F3BD-4EF7-927F-51F7F2FED476", "966A6CF6-4BDE-4D05-AADA-09DE55426BB2", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_DEV_TOKEN, 0));
+      MainFrm.DTTObj.AddAssign ("91AE67A4-A720-4962-AA97-8690E193B148", "ID Apps Push Settings Spedizione Nome Oggetto := Applicazione Device Token [Device ID Android - Device Token]", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_ID_APPLICAZIONE, 0));
+      MainFrm.DTTObj.AddToken ("91AE67A4-A720-4962-AA97-8690E193B148", "B9DCE3A5-F434-46D2-8933-A473DECFCC88", 917504, "Applicazione", IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN3, IMDBDef1.PQSL_DEVICETOKEN3_ID_APPLICAZIONE, 0));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_ID_APPLICAZIONE, 0, IMDB.Value(IMDBDef1.PQRY_DEVICETOKEN3, IMDBDef1.PQSL_DEVICETOKEN3_ID_APPLICAZIONE, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("91AE67A4-A720-4962-AA97-8690E193B148", "51431304-4E0A-4F3D-9D44-A98D180382A7", IMDB.Value(IMDBDef1.TBL_PARAMETRI1, IMDBDef1.FLD_PARAMETRI1_ID_APPLICAZIONE, 0));
+      MainFrm.DTTObj.AddSubProc ("BCEDA4BA-F826-486E-8F92-2BEDE10AE119", "Invio GMC Manuale.Show", "");
       MainFrm.Show(MyGlb.FRM_INVIOGMCMANU, (new IDVariant(0)).intValue(), this); 
+      MainFrm.DTTObj.ExitProc("82018808-8152-42C8-BAA1-1575B67D0B21", "Invio Manuale", "", 3, "Device ID Android");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("82018808-8152-42C8-BAA1-1575B67D0B21", "Invio Manuale", "", _e);
       MainFrm.ErrObj.ProcError ("DeviceIDAndroid", "InvioManuale", _e);
+      MainFrm.DTTObj.ExitProc("82018808-8152-42C8-BAA1-1575B67D0B21", "Invio Manuale", "", 3, "Device ID Android");
       return -1;
     }
   }
@@ -794,7 +828,7 @@ public partial class DeviceIDAndroid : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~ID_APPLICAZIONE~~) ");
     SQL.Append("and   (A.TYPE_OS = '2') ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_DEVICETOKEN_APPLICAZIONE, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_DEVICETOKEN_APPLICAZIONE, "E4E0F72C-8BA4-4D83-B25B-C0ED10E8D2AB");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPPLICAZIO, ");
@@ -813,7 +847,7 @@ public partial class DeviceIDAndroid : MyWebForm
     SQL.Append("from ");
     SQL.Append("  LINGUE A ");
     SQL.Append("where (A.PRG_LINGUA = ~~PRG_LINGUA~~) ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_LINGUA, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_LINGUE, 0, SQL, PFL_DEVICETOKEN_LINGUA, "5868BAF0-2B8A-422F-BF2F-023AD39E7A40");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.PRG_LINGUA as IDLINGUA, ");
@@ -847,7 +881,7 @@ public partial class DeviceIDAndroid : MyWebForm
     SQL.Append("where (B.DEV_TOKEN = A.DEV_TOKEN) ");
     SQL.Append(") as DISNOTDEVTOK, ");
     SQL.Append("  A.PRG_LINGUA as PRG_LINGUA ");
-    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN3, 0, SQL, -1, "");
+    PAN_DEVICETOKEN.SetQuery(PPQRY_DEVICETOKEN3, 0, SQL, -1, "D5F197E0-9D77-4501-AA7F-DCDF6502D173");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  DEV_TOKENS A ");
@@ -1092,6 +1126,10 @@ public partial class DeviceIDAndroid : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

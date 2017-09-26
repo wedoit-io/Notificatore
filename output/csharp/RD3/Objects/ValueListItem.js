@@ -50,7 +50,7 @@ ValueListItem.prototype.LoadProperties = function(node)
     //
     switch(nome)
     {
-      case "txt": this.Name = valore; this.OrgNames = RD3_Glb.HTMLEncode(this.Name); break;
+      case "txt": this.Name = valore; this.OrgNames = this.Name; break;
       case "val": this.Value = valore; break;
       case "img": this.Image = valore; break;
       case "tip": this.Tooltip = valore; break;
@@ -95,31 +95,31 @@ ValueListItem.prototype.RealizeOption= function(pspan, pobj, value, vertical, li
   var cn2 = "";
   if (RD3_Glb.IsMobile())
   {
-  	if (vertical)
-  	{
-			cn+="-vertical";
-			if (first)
-				label.style.marginTop = "-12px";
-		}
-		else
-		{
-			label.style.width = Math.floor(100/vl.ItemList.length)+"%";
-			var br = (RD3_Glb.IsQuadro()?2:8)+"px";
-			if (first)
-			{
-				RD3_Glb.SetBorderRadius(label, br+" 0px 0px "+br);
-				label.style.marginLeft="0px";
-			}
-			if (last)
-			{
-				RD3_Glb.SetBorderRadius(label, "0px "+br+" "+br+" 0px");
-			}
-		}
-	}
+    if (vertical)
+    {
+      cn+="-vertical";
+      if (first)
+        label.style.marginTop = "-12px";
+    }
+    else
+    {
+      label.style.width = Math.floor(100/vl.ItemList.length)+"%";
+      var br = (RD3_Glb.IsQuadro()?2:8)+"px";
+      if (first)
+      {
+        RD3_Glb.SetBorderRadius(label, br+" 0px 0px "+br);
+        label.style.marginLeft="0px";
+      }
+      if (last)
+      {
+        RD3_Glb.SetBorderRadius(label, "0px "+br+" "+br+" 0px");
+      }
+    }
+  }
   label.className = cn;
   label.innerHTML = RD3_Glb.HTMLEncode(this.Name);
   if (RD3_Glb.IsMobile() && this.Value == value)
-		RD3_Glb.AddClass(label,"radio-checked");
+    RD3_Glb.AddClass(label,"radio-checked");
   //
   // Tooltip
   RD3_TooltipManager.SetObjTitle(obj, this.Tooltip);
@@ -169,10 +169,10 @@ ValueListItem.prototype.RealizeCombo= function(tbody, comboid, idx, vs, sel, mul
   obj.className = "combo-option";
   if (!RD3_Glb.IsMobile())
   {
-	  obj.onmouseover = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+comboid+"', 'OnOptionMouseOver', ev,"+idx+")");
-	  obj.onmouseout = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+comboid+"', 'OnOptionMouseOut', ev,"+idx+")");
-	  obj.onclick = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+comboid+"', 'OnOptionClick', ev,"+idx+")");
-	}
+    obj.onmouseover = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+comboid+"', 'OnOptionMouseOver', ev,"+idx+")");
+    obj.onmouseout = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+comboid+"', 'OnOptionMouseOut', ev,"+idx+")");
+    obj.onclick = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+comboid+"', 'OnOptionClick', ev,"+idx+")");
+  }
   obj.id = comboid + ":"+idx;
   tbody.appendChild(obj);
   //
@@ -263,7 +263,7 @@ ValueListItem.prototype.RealizeCombo= function(tbody, comboid, idx, vs, sel, mul
     s.textDecoration=(fnt[1].indexOf("S")>-1)?"line-through":"none";
     s.fontSize = fnt[2]+"pt";
     if (this.Enabled)
-    	s.color = vs.GetColor(1); // VISCLR_FOREVALUE=1
+      s.color = vs.GetColor(1); // VISCLR_FOREVALUE=1
     //
     if (!sel && this.Enabled)
       optcnt.style.cursor = "pointer";
@@ -283,11 +283,11 @@ ValueListItem.prototype.RealizeCombo= function(tbody, comboid, idx, vs, sel, mul
   if (sel)
   {
     // Non metto lo sfondo "azzurro" se l'item e' vuoto
-  	if (!multisel || this.Value!="")
-  	{
-	    obj.style.backgroundColor = vs.GetColor(9); // VISCLR_HILIGHT
-	    RD3_Glb.AddClass(obj, "combo-option-selected");
-	  }
+    if (!multisel || this.Value!="")
+    {
+      obj.style.backgroundColor = vs.GetColor(9); // VISCLR_HILIGHT
+      RD3_Glb.AddClass(obj, "combo-option-selected");
+    }
   }
   else
   {
@@ -317,7 +317,7 @@ ValueListItem.prototype.RealizeCombo= function(tbody, comboid, idx, vs, sel, mul
 // ****************************************************************
 ValueListItem.prototype.Matches= function(txt, searchMode, hilight)
 {
-  this.HtmlNames = this.OrgNames;
+  this.HtmlNames = RD3_Glb.HTMLEncode(this.OrgNames);
   //
   // Se il testo e' vuoto... tutto matcha!
   if (txt=="")
@@ -330,7 +330,7 @@ ValueListItem.prototype.Matches= function(txt, searchMode, hilight)
     {
       match = (this.OrgNames.toLowerCase().indexOf(txt.toLowerCase())==0);
       if (match && hilight)
-        this.HtmlNames = "<span class=combo-option-name-hl>" + this.OrgNames.substring(0, txt.length) + "</span>" + this.OrgNames.substring(txt.length);
+        this.HtmlNames = "<span class=combo-option-name-hl>" + RD3_Glb.HTMLEncode(this.OrgNames.substring(0, txt.length)) + "</span>" + RD3_Glb.HTMLEncode(this.OrgNames.substring(txt.length));
     }
     break;
       
@@ -341,7 +341,7 @@ ValueListItem.prototype.Matches= function(txt, searchMode, hilight)
       if (match && hilight)
       {
         pos++;  // Mangio lo spazio
-        this.HtmlNames = this.OrgNames.substring(0, pos) + "<span class=combo-option-name-hl>" + this.OrgNames.substring(pos, pos+txt.length) + "</span>" + this.OrgNames.substring(pos+txt.length);
+        this.HtmlNames = RD3_Glb.HTMLEncode(this.OrgNames.substring(0, pos)) + "<span class=combo-option-name-hl>" + RD3_Glb.HTMLEncode(this.OrgNames.substring(pos, pos+txt.length)) + "</span>" + RD3_Glb.HTMLEncode(this.OrgNames.substring(pos+txt.length));
       }
     }
     break;
@@ -351,7 +351,7 @@ ValueListItem.prototype.Matches= function(txt, searchMode, hilight)
       var pos = this.OrgNames.toLowerCase().indexOf(txt.toLowerCase());
       match = (pos!=-1);
       if (match && hilight)
-        this.HtmlNames = this.OrgNames.substring(0, pos) + "<span class=combo-option-name-hl>" + this.OrgNames.substring(pos, pos+txt.length) + "</span>" + this.OrgNames.substring(pos+txt.length);
+        this.HtmlNames = RD3_Glb.HTMLEncode(this.OrgNames.substring(0, pos)) + "<span class=combo-option-name-hl>" + RD3_Glb.HTMLEncode(this.OrgNames.substring(pos, pos+txt.length)) + "</span>" + RD3_Glb.HTMLEncode(this.OrgNames.substring(pos+txt.length));
     }
     break;
   }

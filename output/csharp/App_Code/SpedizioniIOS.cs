@@ -1,6 +1,6 @@
 // **********************************************
 // Spedizioni IOS
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -349,18 +349,30 @@ public partial class SpedizioniIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("5B6A4D28-BCAE-41B5-94E3-5DCAA71DE3B1", "Spedizioni On Dynamic Properties", "", 1, "Spedizioni IOS")) return;
       // 
       // Spedizioni On Dynamic Properties Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("28E3EE47-0606-498F-90F6-0991C93B2EAA", "IF Stato Spedizione [Spedizioni IOS - Spedizioni] = Attesa", "");
+      MainFrm.DTTObj.AddToken ("28E3EE47-0606-498F-90F6-0991C93B2EAA", "D7DCF5CC-6836-4433-8BCB-FB1261F60DDC", 917504, "Stato Spedizione", IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI1, IMDBDef1.PQSL_SPEDIZIONI1_FLG_STATO, 0));
+      MainFrm.DTTObj.AddToken ("28E3EE47-0606-498F-90F6-0991C93B2EAA", "D6046CA9-2D9C-4A5B-97B7-993C2399E958", 589824, "Attesa", (new IDVariant("W")));
       if (IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI1, IMDBDef1.PQSL_SPEDIZIONI1_FLG_STATO, 0).equals((new IDVariant("W")), true))
       {
+        MainFrm.DTTObj.EnterIf ("28E3EE47-0606-498F-90F6-0991C93B2EAA", "IF Stato Spedizione [Spedizioni IOS - Spedizioni] = Attesa", "");
+        MainFrm.DTTObj.AddSubProc ("C93BD58A-849C-4ED3-9C97-40E142B5EA1A", "Stato.Set Visual Style", "");
+        MainFrm.DTTObj.AddParameter ("C93BD58A-849C-4ED3-9C97-40E142B5EA1A", "282AEF4C-909D-44A7-A28C-AC8A376ED0A0", "Stile", new IDVariant(MyGlb.VIS_SFONDOGIALLO));
         PAN_SPEDIZIONI.set_VisualStyle(Glb.OBJ_FIELD,PFL_SPEDIZIONI_STATO,new IDVariant(MyGlb.VIS_SFONDOGIALLO).intValue()); 
       }
+      MainFrm.DTTObj.EndIfBlk ("28E3EE47-0606-498F-90F6-0991C93B2EAA");
+      MainFrm.DTTObj.ExitProc("5B6A4D28-BCAE-41B5-94E3-5DCAA71DE3B1", "Spedizioni On Dynamic Properties", "", 1, "Spedizioni IOS");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("5B6A4D28-BCAE-41B5-94E3-5DCAA71DE3B1", "Spedizioni On Dynamic Properties", "", _e);
       MainFrm.ErrObj.ProcError ("SpedizioniIOS", "SpedizioniOnDynamicProperties", _e);
+      MainFrm.DTTObj.ExitProc("5B6A4D28-BCAE-41B5-94E3-5DCAA71DE3B1", "Spedizioni On Dynamic Properties", "", 1, "Spedizioni IOS");
     }
   }
 
@@ -379,6 +391,8 @@ public partial class SpedizioniIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("290F8151-CBEA-448B-AD3F-220FDF5CCE30", "Elimina inviati", "", 3, "Spedizioni IOS")) return 0;
       // 
       // Elimina inviati Body
       // Corpo Procedura
@@ -386,13 +400,20 @@ public partial class SpedizioniIOS : MyWebForm
       SQL = new StringBuilder();
       SQL.Append("delete from SPEDIZIONI ");
       SQL.Append("where (TYPE_OS = '1') ");
+      MainFrm.DTTObj.AddQuery ("55CAE879-1104-4DEC-8292-A05273AA2DDD", "Spedizioni (Notificatore DB): Delete", "", 256, SQL.ToString());
       MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+      MainFrm.DTTObj.EndQuery ("55CAE879-1104-4DEC-8292-A05273AA2DDD");
+      MainFrm.DTTObj.AddParameter ("55CAE879-1104-4DEC-8292-A05273AA2DDD", "", "Records affected", MainFrm.NotificatoreDBObject.DBO().RecordsAffected());
+      MainFrm.DTTObj.AddSubProc ("63D6475B-2D29-4BF4-84B1-CF2CAFD0D908", "Spedizioni.Refresh Query", "");
       PAN_SPEDIZIONI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("290F8151-CBEA-448B-AD3F-220FDF5CCE30", "Elimina inviati", "", 3, "Spedizioni IOS");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("290F8151-CBEA-448B-AD3F-220FDF5CCE30", "Elimina inviati", "", _e);
       MainFrm.ErrObj.ProcError ("SpedizioniIOS", "Eliminainviati", _e);
+      MainFrm.DTTObj.ExitProc("290F8151-CBEA-448B-AD3F-220FDF5CCE30", "Elimina inviati", "", 3, "Spedizioni IOS");
       return -1;
     }
   }
@@ -414,51 +435,88 @@ public partial class SpedizioniIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("5D41FDDC-28A5-45E8-8A6C-8470262B5928", "Rimetti In Attesa", "", 3, "Spedizioni IOS")) return 0;
       // 
       // Rimetti In Attesa Body
       // Corpo Procedura
       // 
       IDVariant v_IRIGAATTIVA = null;
+      MainFrm.DTTObj.AddAssign ("1C7DB3D7-251F-490F-AEC9-61AFC408C72A", "i Riga Attiva := C1", "", v_IRIGAATTIVA);
       v_IRIGAATTIVA = (new IDVariant(1));
+      MainFrm.DTTObj.AddAssignNewValue ("1C7DB3D7-251F-490F-AEC9-61AFC408C72A", "15C634EE-1EA0-4D7F-BCA7-11F28D567287", v_IRIGAATTIVA);
+      MainFrm.DTTObj.AddIf ("9A1D81EB-1D17-4376-9E58-56CA327F0D68", "IF Spedizioni [Spedizioni IOS].Show Multiple Selection", "");
+      MainFrm.DTTObj.AddToken ("9A1D81EB-1D17-4376-9E58-56CA327F0D68", "A2DC019C-A472-4C88-94C3-0E1436E2C130", 2621440, "Spedizioni [Spedizioni IOS].Show Multiple Selection", PAN_SPEDIZIONI.ShowMultipleSel());
       if (PAN_SPEDIZIONI.ShowMultipleSel())
       {
+        MainFrm.DTTObj.EnterIf ("9A1D81EB-1D17-4376-9E58-56CA327F0D68", "IF Spedizioni [Spedizioni IOS].Show Multiple Selection", "");
+        int DTT_C3 = 0;
+        MainFrm.DTTObj.AddForEach ("5A15CF7E-8AD4-4614-A2A5-B3B0AA6AAC40", "FOR EACH Spedizioni ROW", "");
+        MainFrm.DTTObj.AddDBDataSource (PAN_SPEDIZIONI.MasterRS(), new StringBuilder(""));
         C3 = PAN_SPEDIZIONI.MasterRS();
         if (C3.size()>0) CurPos = C3.getRow(); else CurPos = 0;
         if (!C3.Bof()) PAN_SPEDIZIONI.GotoFirst();
         while (!PAN_SPEDIZIONI.RSEOF())
         {
+          DTT_C3 = DTT_C3 + 1;
+          if (!MainFrm.DTTObj.CheckLoop("5A15CF7E-8AD4-4614-A2A5-B3B0AA6AAC40", DTT_C3)) break;
+          MainFrm.DTTObj.AddIf ("71207D1A-36E2-4E6E-B495-F41F27FCF895", "IF Spedizioni [Spedizioni IOS].Is Row Selected (i Riga Attiva)", "");
+          MainFrm.DTTObj.AddToken ("71207D1A-36E2-4E6E-B495-F41F27FCF895", "A2DC019C-A472-4C88-94C3-0E1436E2C130", 2621440, "Spedizioni [Spedizioni IOS].Is Row Selected (i Riga Attiva)", PAN_SPEDIZIONI.IsRowSelected(v_IRIGAATTIVA.intValue()));
+          MainFrm.DTTObj.AddToken ("71207D1A-36E2-4E6E-B495-F41F27FCF895", "15C634EE-1EA0-4D7F-BCA7-11F28D567287", 1376256, "i Riga Attiva", v_IRIGAATTIVA);
           if (PAN_SPEDIZIONI.IsRowSelected(v_IRIGAATTIVA.intValue()))
           {
+            MainFrm.DTTObj.EnterIf ("71207D1A-36E2-4E6E-B495-F41F27FCF895", "IF Spedizioni [Spedizioni IOS].Is Row Selected (i Riga Attiva)", "");
             SQL = new StringBuilder();
             SQL.Append("update SPEDIZIONI set ");
             SQL.Append("  FLG_STATO = 'W' ");
             SQL.Append("where (ID = " + IDL.CSql(C3.Get("ID"), IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
             SQL.Append("and   (FLG_STATO = 'S') ");
+            MainFrm.DTTObj.AddQuery ("BF45CEB1-730D-4768-A36F-53BE5F190531", "Spedizioni (Notificatore DB): Update", "", 512, SQL.ToString());
             MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+            MainFrm.DTTObj.EndQuery ("BF45CEB1-730D-4768-A36F-53BE5F190531");
+            MainFrm.DTTObj.AddParameter ("BF45CEB1-730D-4768-A36F-53BE5F190531", "", "Records affected", MainFrm.NotificatoreDBObject.DBO().RecordsAffected());
           }
+          MainFrm.DTTObj.EndIfBlk ("71207D1A-36E2-4E6E-B495-F41F27FCF895");
+          MainFrm.DTTObj.AddAssign ("746EAFCD-10A7-4C03-BD71-99921174235D", "i Riga Attiva := i Riga Attiva + 1", "", v_IRIGAATTIVA);
+          MainFrm.DTTObj.AddToken ("746EAFCD-10A7-4C03-BD71-99921174235D", "15C634EE-1EA0-4D7F-BCA7-11F28D567287", 1376256, "i Riga Attiva", v_IRIGAATTIVA);
           v_IRIGAATTIVA = IDL.Add(v_IRIGAATTIVA, (new IDVariant(1)));
+          MainFrm.DTTObj.AddAssignNewValue ("746EAFCD-10A7-4C03-BD71-99921174235D", "15C634EE-1EA0-4D7F-BCA7-11F28D567287", v_IRIGAATTIVA);
           PAN_SPEDIZIONI.GotoNext();
         }
         if (CurPos>0) C3.absolute(CurPos);
+        MainFrm.DTTObj.EndForEach ("5A15CF7E-8AD4-4614-A2A5-B3B0AA6AAC40", "FOR EACH Spedizioni ROW", "", DTT_C3);
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("99C9AAB0-07E0-4CDD-97EF-7AD08067B7F7", "ELSE", "", "9A1D81EB-1D17-4376-9E58-56CA327F0D68");
+        MainFrm.DTTObj.AddIf ("AC281FCF-F00F-45E9-A223-D78106892CE7", "IF not (Is Null (ID Spedizione [Spedizioni IOS - Spedizioni]))", "");
+        MainFrm.DTTObj.AddToken ("AC281FCF-F00F-45E9-A223-D78106892CE7", "E7439425-24A8-4927-A9C8-8925E2FBC0E4", 917504, "ID Spedizione", IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI1, IMDBDef1.PQSL_SPEDIZIONI1_ID, 0));
         if (!(IDL.IsNull(IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI1, IMDBDef1.PQSL_SPEDIZIONI1_ID, 0))))
         {
+          MainFrm.DTTObj.EnterIf ("AC281FCF-F00F-45E9-A223-D78106892CE7", "IF not (Is Null (ID Spedizione [Spedizioni IOS - Spedizioni]))", "");
           SQL = new StringBuilder();
           SQL.Append("update SPEDIZIONI set ");
           SQL.Append("  FLG_STATO = 'W' ");
           SQL.Append("where (ID = " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_SPEDIZIONI1, IMDBDef1.PQSL_SPEDIZIONI1_ID, 0), IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
           SQL.Append("and   (FLG_STATO = 'S') ");
+          MainFrm.DTTObj.AddQuery ("F36D72AE-E142-42D1-B481-9DE07A6ABA64", "Spedizioni (Notificatore DB): Update", "", 512, SQL.ToString());
           MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+          MainFrm.DTTObj.EndQuery ("F36D72AE-E142-42D1-B481-9DE07A6ABA64");
+          MainFrm.DTTObj.AddParameter ("F36D72AE-E142-42D1-B481-9DE07A6ABA64", "", "Records affected", MainFrm.NotificatoreDBObject.DBO().RecordsAffected());
         }
+        MainFrm.DTTObj.EndIfBlk ("AC281FCF-F00F-45E9-A223-D78106892CE7");
       }
+      MainFrm.DTTObj.EndIfBlk ("9A1D81EB-1D17-4376-9E58-56CA327F0D68");
+      MainFrm.DTTObj.AddSubProc ("3685C8DD-7D4E-42CB-A3C1-E7815A8668A4", "Spedizioni.Refresh Query", "");
       PAN_SPEDIZIONI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("5D41FDDC-28A5-45E8-8A6C-8470262B5928", "Rimetti In Attesa", "", 3, "Spedizioni IOS");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("5D41FDDC-28A5-45E8-8A6C-8470262B5928", "Rimetti In Attesa", "", _e);
       MainFrm.ErrObj.ProcError ("SpedizioniIOS", "RimettiInAttesa", _e);
+      MainFrm.DTTObj.ExitProc("5D41FDDC-28A5-45E8-8A6C-8470262B5928", "Rimetti In Attesa", "", 3, "Spedizioni IOS");
       return -1;
     }
   }
@@ -802,7 +860,7 @@ public partial class SpedizioniIOS : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~ID_APPLICAZIONE~~) ");
     SQL.Append("and   (A.TYPE_OS = '1') ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_SPEDIZIONI_APPLICAZIONE, "93E60BCC-24C0-4C9D-9AE7-60AE3932D70F");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPPLICAZIO, ");
@@ -837,7 +895,7 @@ public partial class SpedizioniIOS : MyWebForm
     SQL.Append(") as DISPNOTISPED, ");
     SQL.Append("  A.CUSTOM_FIELD1 as CUSTOM_FIELD1, ");
     SQL.Append("  A.CUSTOM_FIELD2 as CUSTOM_FIELD2 ");
-    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI1, 0, SQL, -1, "");
+    PAN_SPEDIZIONI.SetQuery(PPQRY_SPEDIZIONI1, 0, SQL, -1, "68B03566-BB93-4A3B-A413-8F979880139A");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  SPEDIZIONI A ");
@@ -1079,6 +1137,10 @@ public partial class SpedizioniIOS : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

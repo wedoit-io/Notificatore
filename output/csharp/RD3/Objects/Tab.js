@@ -260,7 +260,7 @@ Tab.prototype.SetBadge= function(value)
           this.BadgeObj.style.top = "2px";
           this.BadgeObj.style.marginLeft = (66 - RD3_Glb.GetBadgeWidth(this.Badge, "red badge-min")) + "px";
           //
-          if (RD3_Glb.IsChrome() || RD3_Glb.IsIpad(7) || RD3_Glb.IsIphone(7))
+          if (!RD3_Glb.IsIE())
             this.BadgeObj.style.marginLeft = "12px";
           //
           this.CaptionBox.appendChild(this.BadgeObj);
@@ -498,8 +498,9 @@ Tab.prototype.AdaptLayout = function()
     RD3_Glb.AdaptToParent(this.ContentBox);
     //
     // Adatto solo quella visibile, in questo modo risparmio tempo
+    // FORCED = true per le tab di ScreenZone su IE
     if (this.Selected)
-      this.Content.AdaptLayout();
+      this.Content.AdaptLayout((RD3_Glb.IsMobile() && this.TabView && this.TabView.ZoneTabView && RD3_Glb.IsIE()));
     //
     // Se devo inviare il messaggio di cambio esposizione al contenitore, lo faccio ora
 		if (this.RefreshExposed)

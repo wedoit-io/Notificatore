@@ -1,7 +1,7 @@
 // **********************************************
 // Global functions and constants
 // Instant WEB Application: www.progamma.com
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Reflection;
@@ -111,8 +111,8 @@ public class MyGlb : Glb
   public static int CMD_SVUOLOGSFILE = 35;
   public static int CMD_INVIADISPNOT = 36;
   public static int CMD_INVIAAUTENTI = 37;
-  public static int CMD_CHECKFEEDBA1 = 38;
-  public static int CMD_CHECKCERTS = 39;
+  public static int CMD_CHECKCERTS = 38;
+  public static int CMD_CHECKFEEDBA1 = 39;
   public static int CMD_INVIANOTIFIC = 40;
   public static int CMD_ELIMININVIAT = 41;
   public static int CMD_RIMETINATTES = 42;
@@ -186,21 +186,22 @@ public class MyGlb : Glb
   public const int VIS_CASUAL = 45;
   public const int VIS_SEATTLE = 46;
   public const int VIS_ZEN = 47;
-  public const int VIS_DEFAMOBISTYL = 48;
-  public const int VIS_PRIKEYFIEMOB = 49;
-  public const int VIS_FORKEYFIEMOB = 50;
-  public const int VIS_BLOCKFIELMOB = 51;
-  public const int VIS_LOOKUFIELMOB = 52;
-  public const int VIS_LABELFIELMOB = 53;
-  public const int VIS_HYPERFIELMOB = 54;
-  public const int VIS_IMAGEFIELMOB = 55;
-  public const int VIS_COMMABUTTMOB = 56;
-  public const int VIS_CHECKSTYLMOB = 57;
-  public const int VIS_PASSWSTYLMOB = 58;
-  public const int VIS_RADIOSTYLMOB = 59;
-  public const int VIS_NORMAFIELMOB = 60;
-  public const int VIS_HTMEDISTYMOB = 61;
-  public const int MAX_VISATTR = 61;
+  public const int VIS_BOOTSTRAP = 48;
+  public const int VIS_DEFAMOBISTYL = 49;
+  public const int VIS_PRIKEYFIEMOB = 50;
+  public const int VIS_FORKEYFIEMOB = 51;
+  public const int VIS_BLOCKFIELMOB = 52;
+  public const int VIS_LOOKUFIELMOB = 53;
+  public const int VIS_LABELFIELMOB = 54;
+  public const int VIS_HYPERFIELMOB = 55;
+  public const int VIS_IMAGEFIELMOB = 56;
+  public const int VIS_COMMABUTTMOB = 57;
+  public const int VIS_CHECKSTYLMOB = 58;
+  public const int VIS_PASSWSTYLMOB = 59;
+  public const int VIS_RADIOSTYLMOB = 60;
+  public const int VIS_NORMAFIELMOB = 61;
+  public const int VIS_HTMEDISTYMOB = 62;
+  public const int MAX_VISATTR = 62;
 
 
   public static void ShiftFrmConst(int frmOfs, WebEntryPoint w)

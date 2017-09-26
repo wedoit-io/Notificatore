@@ -1,6 +1,6 @@
 // **********************************************
 // Prodotti
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -439,7 +439,7 @@ public partial class Prodotti : MyWebForm
     SQL.Append("select ");
     SQL.Append("  A.ID as ID, ");
     SQL.Append("  A.NOME_APP as NOME_APP ");
-    PAN_PRODOTTI.SetQuery(PPQRY_PRODOTTI, 0, SQL, -1, "");
+    PAN_PRODOTTI.SetQuery(PPQRY_PRODOTTI, 0, SQL, -1, "0D822193-24E8-4ACB-B53C-AA1653FB3879");
     SQL = new StringBuilder();
     SQL.Append("from ");
     SQL.Append("  PRODOTTI A ");
@@ -679,6 +679,10 @@ public partial class Prodotti : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

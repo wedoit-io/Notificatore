@@ -1,8 +1,8 @@
 // **********************************************
 // Global functions and constants
 // Instant WEB Application: www.progamma.com
-// Build on: 26/07/2016 11.08.06
-// Project : Mobile Manager
+// Build on: 20/04/2017 12.29.34
+// Project : Mobile Manager NET4
 // **********************************************
 namespace NotificatoreWS
 {

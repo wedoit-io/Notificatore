@@ -1,8 +1,8 @@
 // **********************************************
 // Connect to a database
 // Instant WEB Application: www.progamma.com
-// Build on: 26/07/2016 11.08.06
-// Project : Mobile Manager
+// Build on: 20/04/2017 12.29.34
+// Project : Mobile Manager NET4
 // **********************************************
 namespace NotificatoreWS
 {
@@ -54,7 +54,9 @@ public sealed class NotificatoreDB : IDBObject
   public void set_ErrorNumber(int t)              { vErrorNumber = t; }
 
   public IDConnection GetDB()                 { return DB; }
+  public Object GetMainFrm()                  { return MainFrm; }
   public void DBAdjustSchema(bool flForceNew) {}
+  public void AdjustObjects(ArrayList Tabelle, ArrayList Indici, ArrayList Viste) {}
 
   // **********************************************
   // Costruttore
@@ -63,9 +65,9 @@ public sealed class NotificatoreDB : IDBObject
   {
     MainFrm=p;
     DB.Parent = this;
-    vDefaultUserId = "sa";
-    vDefaultPassword = "apice";
-    vDefaultConnStr = "Data Source=CORK;Initial Catalog=NOTIFICATORE;Persist Security Info=False";
+    vDefaultUserId = "NOTIFICATORE";
+    vDefaultPassword = "NOTIFICATORE";
+    vDefaultConnStr = "Data Source=94.177.170.127;Initial Catalog=NOTIFICATORE;Persist Security Info=False";
     DBType = 256;
     DB.Unicode = true;
     DBName = "NotificatoreDB";

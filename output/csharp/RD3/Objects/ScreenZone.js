@@ -735,7 +735,7 @@ ScreenZone.prototype.OnMouseDown = function(ev, outside)
       var srcobj = (window.event)?window.event.srcElement:ev.explicitOriginalTarget;
       var obj = RD3_KBManager.GetObject(srcobj);
       //
-      if (obj && obj instanceof Command && obj.Commands.length==0)
+      if (obj && obj instanceof Command && !obj.IsCmdSet)
         closePinnedZone = true;
     }
     //
@@ -890,6 +890,21 @@ ScreenZone.prototype.SlideZone = function(startDim, destDim, ispopover)
           zinx = 0;
         }
       }
+      else if (this.ZoneState == RD3_Glb.SCRZONE_PINNEDZONE)
+      {
+        if (destDim<startDim)
+        {
+          // La zona si sta restringendo
+          zfinx = destDim-startDim;
+          zinx = 0;
+        }
+        else
+        {
+          // La zona si sta allargando
+          zinx = startDim-destDim;
+          zfinx = 0;
+        }
+      }
     break;
     
     case RD3_Glb.FORMDOCK_RIGHT :
@@ -1038,6 +1053,11 @@ ScreenZone.prototype.SlideZone = function(startDim, destDim, ispopover)
         this.TabView.ToolbarBox.style.left = "0px";
       if (this.Position==RD3_Glb.FORMDOCK_BOTTOM && !unpinnedExpanding)
         this.TabView.ToolbarBox.style.top = "0px";
+    }
+    else if (this.ZoneState == RD3_Glb.SCRZONE_PINNEDZONE)
+    {
+      this.ParentContainer.style.background = "transparent";
+      RD3_Glb.SetTransform(this.TabView.ContentBox, "translate3d("+zinx+"px,"+ziny+"px,0px)");
     }
     //
     // Eseguo l'animazione

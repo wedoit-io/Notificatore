@@ -1,6 +1,6 @@
 // **********************************************
 // Invio Notifiche A Utenti IOS
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -380,10 +380,13 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("F49DAEDF-3097-4C5C-975C-E858A23D921A", "Lancia Invio Notifica", "", 3, "Invio Notifiche A Utenti IOS")) return 0;
       // 
       // Lancia Invio Notifica Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddSubProc ("788181B9-4D31-4ED4-8F61-FEFE5F433946", "Nuovo Pannello.Update Data", "");
       PAN_NUOVOPANNELL.PanelCommand(Glb.PCM_UPDATE);
       // 
       // Ho inserito un testo?
@@ -399,40 +402,77 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
       SQL.Append("  APPS B ");
       SQL.Append("where B.ID = A.ID_APP ");
       SQL.Append("and   (A.ID = " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_IDAPPLINOTIF, 0), IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
+      MainFrm.DTTObj.AddQuery ("5C1FB5E1-DF78-4DB1-B444-64588A6F2381", "Notificatore DB (Notificatore DB): Select into variables", "", 1280, SQL.ToString());
       QV = MainFrm.NotificatoreDBObject.DBO().OpenRS(SQL);
       if (!QV.EOF()) QV.MoveNext();
+      MainFrm.DTTObj.EndQuery ("5C1FB5E1-DF78-4DB1-B444-64588A6F2381");
+      MainFrm.DTTObj.AddDBDataSource (QV, SQL);
       if (!QV.EOF())
       {
         v_VAUTHKEYAPPL = QV.Get("AUTHKEYAPPS", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("5C1FB5E1-DF78-4DB1-B444-64588A6F2381", "7C8D1B7C-9201-4939-AB0E-04DCE930226F", 1376256, "V Auth Key Applicazione", v_VAUTHKEYAPPL);
         v_VCHIAVEAPPLI = QV.Get("CHIAVEAPPS", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("5C1FB5E1-DF78-4DB1-B444-64588A6F2381", "653A7985-1EBC-4FD5-AF34-B1DEEBE45538", 1376256, "v Chiave Applicazione", v_VCHIAVEAPPLI);
       }
       QV.Close();
       IDVariant v_SUTENTE = new IDVariant(0,IDVariant.STRING);
+      MainFrm.DTTObj.AddIf ("3FCDAB71-AF3E-48F5-BAF7-B8013A2033B4", "IF Utente Record [Invio Notifiche A Utenti IOS - Nuovo Pannello] != \"[Tutti gli utenti]\"", "");
+      MainFrm.DTTObj.AddToken ("3FCDAB71-AF3E-48F5-BAF7-B8013A2033B4", "38E75D8C-206E-4FE3-ABB9-D251F87D8B9C", 917504, "Utente", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_DES_UTENTE, 0));
       if (IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_DES_UTENTE, 0).compareTo((new IDVariant("[Tutti gli utenti]")), true)!=0)
       {
+        MainFrm.DTTObj.EnterIf ("3FCDAB71-AF3E-48F5-BAF7-B8013A2033B4", "IF Utente Record [Invio Notifiche A Utenti IOS - Nuovo Pannello] != \"[Tutti gli utenti]\"", "");
+        MainFrm.DTTObj.AddAssign ("F560A93A-D98F-4D44-9AE7-F03C3D004B51", "s Utente := Utente Record [Invio Notifiche A Utenti IOS - Nuovo Pannello]", "", v_SUTENTE);
+        MainFrm.DTTObj.AddToken ("F560A93A-D98F-4D44-9AE7-F03C3D004B51", "38E75D8C-206E-4FE3-ABB9-D251F87D8B9C", 917504, "Utente", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_DES_UTENTE, 0));
         v_SUTENTE = IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_DES_UTENTE, 0);
+        MainFrm.DTTObj.AddAssignNewValue ("F560A93A-D98F-4D44-9AE7-F03C3D004B51", "19C3047A-C476-4157-AAAF-CE9243865087", v_SUTENTE);
       }
+      MainFrm.DTTObj.EndIfBlk ("3FCDAB71-AF3E-48F5-BAF7-B8013A2033B4");
       // 
       // Invio della notifica push
       // 
       NotificatoreWS.Notificatore N = null;
+      MainFrm.DTTObj.AddAssign ("F916C25C-6FEA-4931-BEFB-5B293D5CE9CE", "n := new ()", "Invio della notifica push", N);
       N = (NotificatoreWS.Notificatore)new NotificatoreWS.Notificatore(); N.Url = (String)MainFrm.WebServicesUrl["NotificatoreWS"]; N.NameSpace = "http://www.progamma.com";
+      MainFrm.DTTObj.AddAssignNewValue ("F916C25C-6FEA-4931-BEFB-5B293D5CE9CE", "CC3CAD79-DC30-4774-8CD8-DD517DF5B64E", N);
+      MainFrm.DTTObj.AddAssign ("8AC9E30E-C5CF-4128-8BFC-EFD623CEA0F0", "n.Url := Glb WS Url Notificatore", "", N.Url);
+      MainFrm.DTTObj.AddToken ("8AC9E30E-C5CF-4128-8BFC-EFD623CEA0F0", "10ADFF3C-9D96-4180-92DE-D5CA73B4ADA5", 1376256, "Glb WS Url", new IDVariant(MainFrm.GLBWSURL));
       N.Url = new IDVariant(MainFrm.GLBWSURL).stringValue();
+      MainFrm.DTTObj.AddAssignNewValue ("8AC9E30E-C5CF-4128-8BFC-EFD623CEA0F0", "CC3CAD79-DC30-4774-8CD8-DD517DF5B64E", N.Url);
       IDVariant S = null;
+      MainFrm.DTTObj.AddAssign ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "s := n.Send Notification (V Auth Key Applicazione, v Chiave Applicazione, Messaggio Notifica Record [Invio Notifiche A Utenti IOS - Nuovo Pannello], s Utente, Sound Record [Invio Notifiche A Utenti IOS - Nuovo Pannello], Badge Record [Invio", "", S);
+      MainFrm.DTTObj.AddToken ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "7C8D1B7C-9201-4939-AB0E-04DCE930226F", 1376256, "V Auth Key Applicazione", v_VAUTHKEYAPPL);
+      MainFrm.DTTObj.AddToken ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "653A7985-1EBC-4FD5-AF34-B1DEEBE45538", 1376256, "v Chiave Applicazione", v_VCHIAVEAPPLI);
+      MainFrm.DTTObj.AddToken ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "98C1F891-8CF1-41EF-9999-5A4F6227CE92", 917504, "Messaggio Notifica", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_MESSAGNOTIFI, 0));
+      MainFrm.DTTObj.AddToken ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "19C3047A-C476-4157-AAAF-CE9243865087", 1376256, "s Utente", v_SUTENTE);
+      MainFrm.DTTObj.AddToken ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "988A4879-5B25-4281-9419-C21FE8D8F4B5", 917504, "Sound", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_SOUND, 0));
+      MainFrm.DTTObj.AddToken ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "4FEF4633-0FAB-47B2-842A-25FA9038B7DC", 917504, "Badge", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_BADGE, 0));
       S = N.SendNotification_ws(v_VAUTHKEYAPPL, v_VCHIAVEAPPLI, IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_MESSAGNOTIFI, 0), v_SUTENTE, IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_SOUND, 0), IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_BADGE, 0));
+      MainFrm.DTTObj.AddAssignNewValue ("F0A42FB9-B905-4E0D-881E-F45C7B604CBA", "BC347EB8-AE96-4A52-BFB9-397EC5326DDD", S);
+      MainFrm.DTTObj.AddIf ("5954ECD3-A0AF-40E6-B334-91DEE8D03C0F", "IF s != \"\"", "");
+      MainFrm.DTTObj.AddToken ("5954ECD3-A0AF-40E6-B334-91DEE8D03C0F", "BC347EB8-AE96-4A52-BFB9-397EC5326DDD", 1376256, "s", S);
       if (S.compareTo((new IDVariant("")), true)!=0)
       {
+        MainFrm.DTTObj.EnterIf ("5954ECD3-A0AF-40E6-B334-91DEE8D03C0F", "IF s != \"\"", "");
+        MainFrm.DTTObj.AddSubProc ("FF359E44-34A7-4ACB-987B-DFA1842AC43A", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("FF359E44-34A7-4ACB-987B-DFA1842AC43A", "4C154B9E-8ADB-40E8-A659-2BC0AB2A5116", "Messaggio", S);
         MainFrm.set_AlertMessage(S); 
       }
-      else
+      else if (0==0)
       {
+        MainFrm.DTTObj.EnterElse ("FA31E2DF-9132-4B61-91DC-0BA51D86C5ED", "ELSE", "", "5954ECD3-A0AF-40E6-B334-91DEE8D03C0F");
+        MainFrm.DTTObj.AddSubProc ("70CA015F-5269-4BB4-B498-2A3EEE49850A", "Notificatore.Message Box", "");
+        MainFrm.DTTObj.AddParameter ("70CA015F-5269-4BB4-B498-2A3EEE49850A", "D646BECB-28FC-470F-BE56-A0EC924E6092", "Messaggio", (new IDVariant("Invio messaggio in coda")));
         MainFrm.set_AlertMessage((new IDVariant("Invio messaggio in coda"))); 
       }
+      MainFrm.DTTObj.EndIfBlk ("5954ECD3-A0AF-40E6-B334-91DEE8D03C0F");
+      MainFrm.DTTObj.ExitProc("F49DAEDF-3097-4C5C-975C-E858A23D921A", "Lancia Invio Notifica", "", 3, "Invio Notifiche A Utenti IOS");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("F49DAEDF-3097-4C5C-975C-E858A23D921A", "Lancia Invio Notifica", "", _e);
       MainFrm.ErrObj.ProcError ("InvioNotificheAUtentiIOS", "LanciaInvioNotifica", _e);
+      MainFrm.DTTObj.ExitProc("F49DAEDF-3097-4C5C-975C-E858A23D921A", "Lancia Invio Notifica", "", 3, "Invio Notifiche A Utenti IOS");
       return -1;
     }
   }
@@ -454,14 +494,25 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("5992DB65-3CBC-47BB-9B81-357AE06AC7BA", "Start Form", "", 3, "Invio Notifiche A Utenti IOS")) return 0;
+      MainFrm.DTTObj.AddParameter ("5992DB65-3CBC-47BB-9B81-357AE06AC7BA", "7715621F-73E3-4D2B-856B-CB11C392F98D", "ID Apps Push Settings", IDAppsPushSettings);
+      MainFrm.DTTObj.AddParameter ("5992DB65-3CBC-47BB-9B81-357AE06AC7BA", "BBFE3947-DCEF-4B8F-A3B8-ECC7F53E2327", "Utente", Utente);
       // 
       // Start Form Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("B105EFA9-6AA9-43FC-AC87-4E45A2FD6D19", "IF Null Value (Utente, \"\") != \"\"", "");
+      MainFrm.DTTObj.AddToken ("B105EFA9-6AA9-43FC-AC87-4E45A2FD6D19", "BBFE3947-DCEF-4B8F-A3B8-ECC7F53E2327", 1376256, "Utente", Utente);
       if (IDL.NullValue(Utente,(new IDVariant(""))).compareTo((new IDVariant("")), true)!=0)
       {
+        MainFrm.DTTObj.EnterIf ("B105EFA9-6AA9-43FC-AC87-4E45A2FD6D19", "IF Null Value (Utente, \"\") != \"\"", "");
+        MainFrm.DTTObj.AddAssign ("E5BEB079-CDC8-4F87-9630-B1EE23C6FC30", "Utente Device Token Notifica := Utente", "", IMDB.Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_DES_UTENTE, 0));
+        MainFrm.DTTObj.AddToken ("E5BEB079-CDC8-4F87-9630-B1EE23C6FC30", "BBFE3947-DCEF-4B8F-A3B8-ECC7F53E2327", 1376256, "Utente", new IDVariant(Utente));
         IMDB.set_Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_DES_UTENTE, 0, new IDVariant(Utente));
+        MainFrm.DTTObj.AddAssignNewValue ("E5BEB079-CDC8-4F87-9630-B1EE23C6FC30", "6478C56A-0556-4E9B-91E3-89A80CFEC444", IMDB.Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_DES_UTENTE, 0));
       }
+      MainFrm.DTTObj.EndIfBlk ("B105EFA9-6AA9-43FC-AC87-4E45A2FD6D19");
       IDVariant v_VAMBAPPPUSSE = new IDVariant(0,IDVariant.STRING);
       IDVariant v_VIDAPPPUSSET = new IDVariant(0,IDVariant.INTEGER);
       SQL = new StringBuilder();
@@ -471,21 +522,35 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
       SQL.Append("from ");
       SQL.Append("  APPS_PUSH_SETTING A ");
       SQL.Append("where (A.ID = " + IDL.CSql(IDAppsPushSettings, IDL.FMT_NUM, MainFrm.NotificatoreDBObject.DBO()) + ") ");
+      MainFrm.DTTObj.AddQuery ("B76E3D06-084A-4F24-8DDB-678D51B98EED", "Notificatore DB (Notificatore DB): Select into variables", "", 1280, SQL.ToString());
       QV = MainFrm.NotificatoreDBObject.DBO().OpenRS(SQL);
       if (!QV.EOF()) QV.MoveNext();
+      MainFrm.DTTObj.EndQuery ("B76E3D06-084A-4F24-8DDB-678D51B98EED");
+      MainFrm.DTTObj.AddDBDataSource (QV, SQL);
       if (!QV.EOF())
       {
         v_VAMBAPPPUSSE = QV.Get("AMBIENTE", IDVariant.STRING) ;
+        MainFrm.DTTObj.AddToken ("B76E3D06-084A-4F24-8DDB-678D51B98EED", "B19F1BA7-1FD5-416D-B4E2-6DA3D272BF49", 1376256, "v Ambiente Apps Push Settings", v_VAMBAPPPUSSE);
         v_VIDAPPPUSSET = QV.Get("ID", IDVariant.INTEGER) ;
+        MainFrm.DTTObj.AddToken ("B76E3D06-084A-4F24-8DDB-678D51B98EED", "477D0B02-6973-455D-8056-BC166529385A", 1376256, "v ID Apps Push Settings", v_VIDAPPPUSSET);
       }
       QV.Close();
+      MainFrm.DTTObj.AddAssign ("6AFDEA37-C436-403C-8C6E-D3B0BFFD942F", "Applicazione Record [Invio Notifiche A Utenti IOS - Nuovo Pannello] := v ID Apps Push Settings", "", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_IDAPPLINOTIF, 0));
+      MainFrm.DTTObj.AddToken ("6AFDEA37-C436-403C-8C6E-D3B0BFFD942F", "477D0B02-6973-455D-8056-BC166529385A", 1376256, "v ID Apps Push Settings", new IDVariant(v_VIDAPPPUSSET));
       IMDB.set_Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_IDAPPLINOTIF, 0, new IDVariant(v_VIDAPPPUSSET));
+      MainFrm.DTTObj.AddAssignNewValue ("6AFDEA37-C436-403C-8C6E-D3B0BFFD942F", "3A264A7E-340D-4AED-B0A7-D0750AA0EFE8", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_IDAPPLINOTIF, 0));
+      MainFrm.DTTObj.AddAssign ("35E6061A-2ED7-44D8-9CDD-8DF822DB4745", "Ambiente Notifica Record [Invio Notifiche A Utenti IOS - Nuovo Pannello] := v Ambiente Apps Push Settings", "", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_AMBIENNOTIFI, 0));
+      MainFrm.DTTObj.AddToken ("35E6061A-2ED7-44D8-9CDD-8DF822DB4745", "B19F1BA7-1FD5-416D-B4E2-6DA3D272BF49", 1376256, "v Ambiente Apps Push Settings", new IDVariant(v_VAMBAPPPUSSE));
       IMDB.set_Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_AMBIENNOTIFI, 0, new IDVariant(v_VAMBAPPPUSSE));
+      MainFrm.DTTObj.AddAssignNewValue ("35E6061A-2ED7-44D8-9CDD-8DF822DB4745", "00564FB9-0343-433B-8564-264602123D4B", IMDB.Value(IMDBDef1.PQRY_NOTIFICHE4, IMDBDef1.PQSL_NOTIFICHE4_AMBIENNOTIFI, 0));
+      MainFrm.DTTObj.ExitProc("5992DB65-3CBC-47BB-9B81-357AE06AC7BA", "Start Form", "", 3, "Invio Notifiche A Utenti IOS");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("5992DB65-3CBC-47BB-9B81-357AE06AC7BA", "Start Form", "", _e);
       MainFrm.ErrObj.ProcError ("InvioNotificheAUtentiIOS", "StartForm", _e);
+      MainFrm.DTTObj.ExitProc("5992DB65-3CBC-47BB-9B81-357AE06AC7BA", "Start Form", "", 3, "Invio Notifiche A Utenti IOS");
       return -1;
     }
   }
@@ -507,17 +572,30 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("C4327AEF-28D4-46BE-A8D4-18597109551F", "Unload", "", 0, "Invio Notifiche A Utenti IOS")) return;
+      MainFrm.DTTObj.AddParameter ("C4327AEF-28D4-46BE-A8D4-18597109551F", "F2AE655B-E92B-4499-B66D-27D95A52D9EF", "Cancel", Cancel);
+      MainFrm.DTTObj.AddParameter ("C4327AEF-28D4-46BE-A8D4-18597109551F", "67D67A4F-CF6B-462B-9994-C8EC08F0CD88", "Confirm", Confirm);
       // 
       // Unload Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddQuery ("A978B5D8-CECA-495C-9D80-5E64AC738515", "Notifiche: Delete", "", 256, "");
       UNLOAD_NOTIFIDELETE();
+      MainFrm.DTTObj.EndQuery ("A978B5D8-CECA-495C-9D80-5E64AC738515");
+      MainFrm.DTTObj.AddAssign ("34631A4D-E0EF-423D-A9EE-65FFB73B7356", "Sound Nuovo Pannello [Invio Notifiche A Utenti IOS - Nuovo Pannello].Text := C\"default\"", "", PAN_NUOVOPANNELL.FieldText(PFL_NUOVOPANNELL_SOUND));
       PAN_NUOVOPANNELL.set_FieldText(PFL_NUOVOPANNELL_SOUND, (new IDVariant("default")).stringValue());
+      MainFrm.DTTObj.AddAssignNewValue ("34631A4D-E0EF-423D-A9EE-65FFB73B7356", "7F848997-9DC9-4CA8-A569-B86CC7C811B1", PAN_NUOVOPANNELL.FieldText(PFL_NUOVOPANNELL_SOUND));
+      MainFrm.DTTObj.AddAssign ("13098BA5-E342-45A2-883B-D457E9A84ED1", "Badge Nuovo Pannello [Invio Notifiche A Utenti IOS - Nuovo Pannello].Text := C\"0\"", "", PAN_NUOVOPANNELL.FieldText(PFL_NUOVOPANNELL_BADGE));
       PAN_NUOVOPANNELL.set_FieldText(PFL_NUOVOPANNELL_BADGE, (new IDVariant("0")).stringValue());
+      MainFrm.DTTObj.AddAssignNewValue ("13098BA5-E342-45A2-883B-D457E9A84ED1", "0B0E80BD-D592-4832-AADB-C103EB640EF9", PAN_NUOVOPANNELL.FieldText(PFL_NUOVOPANNELL_BADGE));
+      MainFrm.DTTObj.ExitProc("C4327AEF-28D4-46BE-A8D4-18597109551F", "Unload", "", 0, "Invio Notifiche A Utenti IOS");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("C4327AEF-28D4-46BE-A8D4-18597109551F", "Unload", "", _e);
       MainFrm.ErrObj.ProcError ("InvioNotificheAUtentiIOS", "Unload", _e);
+      MainFrm.DTTObj.ExitProc("C4327AEF-28D4-46BE-A8D4-18597109551F", "Unload", "", 0, "Invio Notifiche A Utenti IOS");
     }
   }
 
@@ -553,16 +631,25 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("E4E6F344-7538-4891-8782-3818069096B2", "Load", "", 0, "Invio Notifiche A Utenti IOS")) return;
       // 
       // Load Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddAssign ("4AB624C6-FF7A-48A2-BB5B-413767AB4E78", "Badge Spedizione Notifica := C0", "", IMDB.Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_BADGE, 0));
       IMDB.set_Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_BADGE, 0, (new IDVariant(0)));
+      MainFrm.DTTObj.AddAssignNewValue ("4AB624C6-FF7A-48A2-BB5B-413767AB4E78", "73CB552B-4F7E-46F8-9684-8F7E74FC0F43", IMDB.Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_BADGE, 0));
+      MainFrm.DTTObj.AddAssign ("D097D45A-23EC-4684-BFAF-375306565256", "Sound Spedizione Notifica := C\"default\"", "", IMDB.Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_SOUND, 0));
       IMDB.set_Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_SOUND, 0, (new IDVariant("default")));
+      MainFrm.DTTObj.AddAssignNewValue ("D097D45A-23EC-4684-BFAF-375306565256", "4301E5B5-3D6C-47B5-A3C3-2677820BC601", IMDB.Value(IMDBDef1.TBL_NOTIFICHE3, IMDBDef1.FLD_NOTIFICHE3_SOUND, 0));
+      MainFrm.DTTObj.ExitProc("E4E6F344-7538-4891-8782-3818069096B2", "Load", "", 0, "Invio Notifiche A Utenti IOS");
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("E4E6F344-7538-4891-8782-3818069096B2", "Load", "", _e);
       MainFrm.ErrObj.ProcError ("InvioNotificheAUtentiIOS", "Load", _e);
+      MainFrm.DTTObj.ExitProc("E4E6F344-7538-4891-8782-3818069096B2", "Load", "", 0, "Invio Notifiche A Utenti IOS");
     }
   }
 
@@ -854,7 +941,7 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
     SQL.Append("where B.ID = A.ID_APP ");
     SQL.Append("and   (A.ID = ~~IDAPPLINOTIF~~) ");
     SQL.Append("and   (A.TYPE_OS = '1') ");
-    PAN_NUOVOPANNELL.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_NUOVOPANNELL_APPLICAZIONE, "");
+    PAN_NUOVOPANNELL.SetQuery(PPQRY_APPLICAZIONI, 0, SQL, PFL_NUOVOPANNELL_APPLICAZIONE, "EF7307C1-04E5-4D9E-8C2E-D3E63DE5535B");
     SQL = new StringBuilder();
     SQL.Append("select ");
     SQL.Append("  A.ID as IDAPPLICAZIO, ");
@@ -877,7 +964,7 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
     SQL.Append("where (A.ID_APPLICAZIONE = ~~IDAPPLINOTIF~~) ");
     SQL.Append("and   (A.TYPE_OS = '1') ");
     SQL.Append("and   (NOT ((A.DES_UTENTE IS NULL))) ");
-    PAN_NUOVOPANNELL.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, PFL_NUOVOPANNELL_UTENTE, "");
+    PAN_NUOVOPANNELL.SetQuery(PPQRY_DEVICETOKEN, 0, SQL, PFL_NUOVOPANNELL_UTENTE, "CC28FC41-88E5-4E1D-BFA1-224887286144");
     PAN_NUOVOPANNELL.SetQueryDB(PPQRY_DEVICETOKEN, MainFrm.NotificatoreDBObject.DB, 256);
     PAN_NUOVOPANNELL.SetIMDB(IMDB, "PQRY_NOTIFICHE4", true);
     PAN_NUOVOPANNELL.set_SetString(MyGlb.MASTER_ROWNAME, "Record");
@@ -1115,6 +1202,10 @@ public partial class InvioNotificheAUtentiIOS : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   

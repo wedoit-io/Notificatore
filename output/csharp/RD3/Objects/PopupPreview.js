@@ -7,10 +7,11 @@
 // Estende PopupFrame
 // ************************************************
 
-function PopupPreview(address, capt)
+function PopupPreview(address, capt, mime)
 {
   this.PreviewUrl = address;       // L'URL da mostrare nel frame
   this.PreviewCaption = capt;   // Il testo della caption
+  this.PreviewMime = mime;
   //
   this.Identifier = "POPPRE" + Math.floor(Math.random() * 100);  // Identificatore per gestire il click sul pulsante di chiusura 
                                                                  // (ci puo' essere un solo Msgbox attivo per volta, basterebbe anche una stringa fissa per identificatore)
@@ -70,6 +71,15 @@ PopupPreview.prototype.Realize = function(cls)
 	this.IE = RD3_Glb.IsIE(10, false);
 	if (this.IE)
 	  this.PreviewFrame.onreadystatechange = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+this.Identifier+"', 'OnReadyStateChange', ev)");
+  else if (RD3_Glb.IsIE(10, true) && this.PreviewMime && this.PreviewMime == "application/pdf") 
+  {
+    // SU IE 10 il load per i PDF non scatta.. faccio subito l'adapt
+    this.Loaded = true;
+    var pthis = this;
+    var f = function () { pthis.AdaptLayout(); };
+    window.setTimeout(f, 0);
+	  this.PopupBox.style.visibility = "";
+  }
 	else
 	  this.PreviewFrame.onload = new Function("ev","return RD3_DesktopManager.CallEventHandler('"+this.Identifier+"', 'OnReadyStateChange', ev)");
 	//
@@ -125,7 +135,8 @@ PopupPreview.prototype.AdaptLayout = function()
     //
     try
     {
-      if (!this.DebugPreview)
+      // Il Plugin dei PDf non dice le dimensioni, andiamo al 90%
+      if (!this.DebugPreview && !(this.PreviewMime && this.PreviewMime == "application/pdf"))
       {
       	w = this.PreviewFrame.contentWindow.document.body.scrollWidth+10;
       	h = this.PreviewFrame.contentWindow.document.body.scrollHeight+10;

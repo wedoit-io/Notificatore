@@ -10,7 +10,7 @@
 /* ************************************************************* */
 .radio-ie
 {
-	height: 14px;
+  height: 14px;
   width: 14px;
   margin: 2px;
 }
@@ -22,7 +22,7 @@
 
 .panel-toolbar-qbetip, .panel-toolbarsmall-qbetip
 {
-	vertical-align: 1px;
+  vertical-align: 1px;
 }
 
 .frame-toolbarsmall-caption, .panel-statussmall-qbe, .panel-statussmall-data, .panel-statussmall-updated, .book-toolbarsmall-status
@@ -34,7 +34,6 @@
 {
   padding-left: 13px;
   padding-right: 13px;
-  vertical-align: bottom;
 }
 
 .book-span-combo
@@ -47,4 +46,14 @@
 {
   vertical-align: top;
   margin-top: 4px;
+}
+
+.form-caption-container {
+  overflow: visible;
+}
+
+.toolbar-button
+{
+  padding-left: 13px;
+  padding-right: 13px;
 }

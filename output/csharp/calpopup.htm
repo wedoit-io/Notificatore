@@ -15,7 +15,7 @@
 	top: 0;
 	height: 30px;
 	line-height: 30px;
-	text-align: center;
+	padding-left: 70px;
 	text-transform: uppercase;
 }
 
@@ -28,7 +28,7 @@
 	height: 20px;
 	top: 5px;
 	z-index: 1;
-      border-radius: 3px;
+  border-radius: 3px;
   -ms-border-radius: 3px;
 }
 .CalHeaderArrowSX {
@@ -36,6 +36,9 @@
 }
 .CalHeaderArrowDX {
 	right: 5px;
+}
+.CalHeaderArrowDX-TimePicker {
+	right: calc(40% + 5px);
 }
 .CalHeaderArrowSX:hover,
 .CalHeaderArrowDX:hover {
@@ -129,18 +132,94 @@
 	position: absolute;
 }
 
+/** timepicker **/
+.timepicker {
+  width:132px; 
+  display: inline-block; 
+  float:right; 
+  height: calc(100% - 35px);
+  margin-top: 36px;
+  padding-right: 5px;
+  font-family: Tahoma, sans-serif;
+}
+.timepicker .timepicker-hour,
+.timepicker .timepicker-minute {
+  width: 45px;
+  margin: 0;
+}
+.timepicker table {
+  width: 100%;
+  margin: 0;
+}
+.timepicker table td{
+  text-align: center;
+  border-radius: 4px;
+}
+.timepicker table td {
+  height: 54px;
+  line-height: 54px;
+  width: 54px;
+}
+.timepicker table td span {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  line-height: 54px;
+  margin: 2px 1.5px;
+  border-radius: 4px;
+}
+.TimeOnly {
+  margin-top: 11px;
+  padding-right: 0px;
+  width: 100%;
+}
+.TimeHeader {
+  background-color: #8A9399;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	height: 30px;
+}
+.btn:hover {
+  background: #eeeeee;
+  cursor: pointer;
+  border-radius: 3px;
+}
 </style>
 </head>
 
 <body onload="LoadCalendar()">
-	<div class="CalHeaderArrowSX" id="PrevDiv"><img id="Prev" onclick="PrevMonth();" height="20px" src="images/prev.gif" width="20px" alt=""/></div>
-	<div class="CalHeader"><span id="MonthTitle"></span>&nbsp;<span id="YearTitle"></span></div>
-	<div class="CalHeaderArrowDX" id="NextDiv"><img id="Next" onclick="NextMonth();" height="20px" src="images/next.gif" width="20px" alt=""/></div>
-	<div class="CalHeaderWeek" id="WeekHdr"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-	<div id="CalDateContainerFront" style="Z-INDEX: 25; VISIBILITY: visible; POSITION: absolute;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
-	<img id="MonthImg" style="Z-INDEX: 20; LEFT: 5px; VISIBILITY: visible; POSITION: relative; TOP: 60px" height="96px" alt="" src="images/empty.gif" width="220px"/><br/>
-	<img class="seldata" id="SelDate" onclick="javascript:CloseCalendar()" style="DISPLAY:none;Z-INDEX:40;cursor:pointer" height="30px" alt="" src="calimages/seldt.gif" width="30px"/>
-	<div id="CloseButton" class="CloseLink" onclick="javascript:CloseCalendar()">Chiudi</div>
+  <div id="datepicker" style="width:220px; display: inline-block">
+  	<div class="CalHeaderArrowSX" id="PrevDiv"><img id="Prev" onclick="PrevMonth();" height="20px" src="calimages/prev.gif" width="20px" alt=""/></div>
+  	<div class="CalHeader"><span id="MonthTitle"></span>&nbsp;<span id="YearTitle"></span></div>
+  	<div class="CalHeaderArrowDX" id="NextDiv"><img id="Next" onclick="NextMonth();" height="20px" src="calimages/next.gif" width="20px" alt=""/></div>
+  	<div class="CalHeaderWeek" id="WeekHdr"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  	<div id="CalDateContainerFront" style="Z-INDEX: 25; VISIBILITY: visible; POSITION: absolute;"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+  	<img id="MonthImg" style="Z-INDEX: 20; LEFT: 5px; VISIBILITY: visible; POSITION: relative; TOP: 60px" height="96px" alt="" src="images/empty.gif" width="220px"/><br/>
+  	<img class="seldata" id="SelDate" onclick="javascript:CloseCalendar()" style="DISPLAY:none;Z-INDEX:40;cursor:pointer" height="30px" alt="" src="calimages/seldt.gif" width="30px"/>
+  	<div id="CloseButton" class="CloseLink" onclick="javascript:CloseCalendar()">Chiudi</div>
+  </div>
+	<div id="timepicker" class="timepicker" style="">
+	  <div class="TimeHeader"></div>
+    <table><tbody>
+      <tr>
+        <td><img src="calimages/up.gif" onclick="NextHour()" class="btn"></img></td>
+        <td class="separator"></td>
+        <td><img src="calimages/up.gif" onclick="NextMinute()"  class="btn"></img></td>
+      </tr>
+      <tr>
+        <td><span class="timepicker-hour" id="timepicker-hour">00</span></td>
+        <td class="separator">:</td>
+        <td><span class="timepicker-minute" id="timepicker-minute">00</span></td>
+      </tr>
+      <tr>
+        <td><img src="calimages/down.gif" onclick="PrevHour()" class="btn"></img></td>
+        <td class="separator"></td>
+        <td><img src="calimages/down.gif" onclick="PrevMinute()" class="btn"></img></td>
+      </tr>
+    </tbody></table>
+  </div>
 
 <script type="text/javascript" language="javascript">
 var glbLoaded  = false;
@@ -154,10 +233,14 @@ var ImgHeight  = 30;
 var glbAttDay = -1;
 var glbAttMonth = -1;
 var glbAttYear = -1;
+var glbAttHour = -1;
+var glbAttMinute = -1;
 
 var glbInputDay = -1;
 var glbInputMonth = -1;
 var glbInputYear = -1;
+var glbInputHour = -1;
+var glbInputMinute = -1;
 
 function LoadCalendar()
 {
@@ -189,8 +272,15 @@ function ClickData(evento)
 	{
 		var WhichDay = trg.getAttribute("day");
 		WhichDay -= GetDayOfWeek(1, glbAttMonth, glbAttYear);
-		MainWindow.SetDate(WhichDay, glbAttMonth, glbAttYear);
-		CalFrame.style.display = "none";
+		MainWindow.SetDate(WhichDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+		//
+		glbInputDay = WhichDay;
+		glbInputMonth = glbAttMonth;
+		glbInputYear = glbAttYear;
+		SetDate(WhichDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+		//
+		if (document.getElementById("timepicker").style.display == "none")
+		  CalFrame.style.display = "none";
 	}
 	evento.cancelBubble = true;
 }
@@ -198,17 +288,17 @@ function ClickData(evento)
 function NextMonth()
 {
 	if(glbAttMonth == 12)
-		SetDate(glbAttDay, 1, glbAttYear+1);
+		SetDate(glbAttDay, 1, glbAttYear+1, glbAttHour, glbAttMinute);
 	else
-		SetDate(glbAttDay, glbAttMonth+1, glbAttYear);
+		SetDate(glbAttDay, glbAttMonth+1, glbAttYear, glbAttHour, glbAttMinute);
 }
 
 function PrevMonth()
 {
 	if(glbAttMonth == 1)
-		SetDate(glbAttDay, 12, glbAttYear-1);
+		SetDate(glbAttDay, 12, glbAttYear-1, glbAttHour, glbAttMinute);
 	else
-		SetDate(glbAttDay, glbAttMonth-1, glbAttYear);
+		SetDate(glbAttDay, glbAttMonth-1, glbAttYear, glbAttHour, glbAttMinute);
 }
 
 function CloseCalendar()
@@ -218,15 +308,17 @@ function CloseCalendar()
 }
 
 
-function SetInputDate(intDate,intMonth,intYear)
+function SetInputDate(intDate,intMonth,intYear,intHour,intMinute)
 {
 	glbInputDay = intDate;
 	glbInputMonth = intMonth;
 	glbInputYear = intYear;
+	glbInputHour = intHour;
+	glbInputMinute = intMinute;
 }
 
 
-function SetDate(vDay, vMonth, vYear)
+function SetDate(vDay, vMonth, vYear, vHour, vMinute)
 {
 	var TipoVis = "none";
 	var idx;
@@ -283,9 +375,17 @@ function SetDate(vDay, vMonth, vYear)
   	WeekHdrDObj.style.left = (i*30 + 1) + "px";
   }
 	//
+	if (vHour > - 1 && vMinute > -1) 
+	{
+	  document.getElementById("timepicker-hour").innerHTML = vHour < 10 ? "0" + vHour : vHour;
+	  document.getElementById("timepicker-minute").innerHTML = vMinute < 10 ? "0" + vMinute : vMinute;
+	}
+	//
 	glbAttDay = vDay;
 	glbAttMonth = vMonth;
 	glbAttYear = vYear;
+	glbAttHour = vHour;
+	glbAttMinute = vMinute;
 }
 
 function GetDayOfWeek(vDay, vMonth, vYear)
@@ -297,6 +397,38 @@ function GetDayOfWeek(vDay, vMonth, vYear)
 	else
 		g--;
 	return(g);
+}
+
+function NextHour()
+{
+  glbAttHour = (glbAttHour + 1) % 24;
+  SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+  //
+  MainWindow.SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+}
+
+function PrevHour()
+{
+  glbAttHour = (((glbAttHour - 1) % 24) + 24) % 24;
+  SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+  //
+  MainWindow.SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+}
+
+function NextMinute()
+{
+  glbAttMinute = (glbAttMinute + 1) % 60;
+  SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+  //
+  MainWindow.SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+}
+
+function PrevMinute()
+{
+  glbAttMinute = (((glbAttMinute - 1) % 60) + 60) % 60;
+  SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
+  //
+  MainWindow.SetDate(glbAttDay, glbAttMonth, glbAttYear, glbAttHour, glbAttMinute);
 }
 </script>
 

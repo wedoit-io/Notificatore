@@ -40,6 +40,7 @@ function WebFrame(pform)
   this.CanDrop = false;         // Questo frame puo' effettuare drop?
   this.HandledKeys = 0;         // Tasti da intercettare a livello di frame
   this.FrameBorder = false;     // Mostrare il bordo tra i due frame?
+  //this.ClassName = null;      // Classe specifica da applicare al frame
   //
   // Oggetti secondari gestiti da questo oggetto di modello
   this.ChildFrame1 = null; // Primo frame che suddivide questo
@@ -179,6 +180,7 @@ WebFrame.prototype.LoadProperties = function(node)
       case "hks": this.SetHandledKeys(parseInt(valore)); break;
       case "dcl": this.DeleteFrame(valore); break;
       case "frb": this.SetFrameBorder(valore=="1"); break;
+      case "cln": this.SetClassName(valore); break;
       
       case "clc": this.CollapseEventDef = parseInt(valore); break;
       case "mck": this.MouseClickEventDef = parseInt(valore); break;
@@ -268,18 +270,18 @@ WebFrame.prototype.SetLocked= function(value)
     var usemask = !(RD3_Glb.IsAndroid() || RD3_Glb.IsIE() || RD3_Glb.IsEdge()) || RD3_Glb.IsAndroid(4,4,0);
     //
     if (!usemask && RD3_Glb.IsMobile7())
-    	ext = "-i" + ext;
+      ext = "-i" + ext;
     //
     // Imposto l'immagine/tooltip corretta per il pulsante locked
     if (this.Locked)
     {
       if (RD3_Glb.IsMobile7() && usemask)
       {
-      	this.LockButton.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/lock" + ext)+"')";
+        this.LockButton.style.webkitMaskImage = "url('"+RD3_Glb.GetImgSrc("images/lock" + ext)+"')";
         this.LockButton.style.webkitMaskRepeat = "no-repeat";
         this.LockButton.style.webkitMaskSize = "25px 25px";
       }
-    	else
+      else
         this.LockButton.src = RD3_Glb.GetImgSrc("images/lock" + ext);
       RD3_TooltipManager.SetObjTitle(this.LockButton, RD3_ServerParams.TooltipUnlock + RD3_KBManager.GetFKTip(RD3_ClientParams.FKLocked));
     }
@@ -389,8 +391,14 @@ WebFrame.prototype.SetCaption= function(value)
         this.CaptionTxt.style.display = (this.Caption == "" ? "none" : "");
       //
       // Caso mobile, sposto la caption in modo da non sovrapporsi con i bottoni se si puo'
-      if (RD3_Glb.IsMobile())
-      	RD3_Glb.AdjustCaptionPosition(this.ToolbarBox, this.CaptionTxt);
+      if (RD3_Glb.IsMobile()) 
+      {
+        RD3_Glb.AdjustCaptionPosition(this.ToolbarBox, this.CaptionTxt);
+        //
+        // La AdjustCaptionPosition allarga la caption occupando tutto lo spazio disponibili, ma se c'e' la status bar visibile non va fatto.
+        if (this.ShowStatusBar)
+          this.CaptionTxt.style.width = "";
+      }
     }
   }
 }
@@ -584,14 +592,14 @@ WebFrame.prototype.SetScrollbar= function(value)
     //
     if (this.IDScroll)
     {
-    	this.IDScroll.AllowXScroll = this instanceof Book && (this.Scrollbar==RD3_Glb.FORMSCROLL_HORIZ || this.Scrollbar==RD3_Glb.FORMSCROLL_BOTH);
-    	this.IDScroll.AllowYScroll = (this.Scrollbar==RD3_Glb.FORMSCROLL_VERT || this.Scrollbar==RD3_Glb.FORMSCROLL_BOTH);
-    	//
-    	if (this.IDScroll.AllowXScroll)
-    		this.IDScroll.CreateScrollObj(0);
-    	if (this.IDScroll.AllowYScroll)
-    		this.IDScroll.CreateScrollObj(1);
-  	}
+      this.IDScroll.AllowXScroll = this instanceof Book && (this.Scrollbar==RD3_Glb.FORMSCROLL_HORIZ || this.Scrollbar==RD3_Glb.FORMSCROLL_BOTH);
+      this.IDScroll.AllowYScroll = (this.Scrollbar==RD3_Glb.FORMSCROLL_VERT || this.Scrollbar==RD3_Glb.FORMSCROLL_BOTH);
+      //
+      if (this.IDScroll.AllowXScroll)
+        this.IDScroll.CreateScrollObj(0);
+      if (this.IDScroll.AllowYScroll)
+        this.IDScroll.CreateScrollObj(1);
+    }
   }
 }
 
@@ -692,6 +700,37 @@ WebFrame.prototype.SetFrameBorder = function(value)
     this.FrameBorder = value;
   //
   // Questa proprieta' non puo' variare dopo essere stata inviata
+  // Se questo frame mostra i bordi ed e' contenuto in una subform
+  // allora anche la subform deve mostrare i bordi
+  if (this.FrameBorder && this.WebForm && this.WebForm.SubFormObj)
+    this.WebForm.SubFormObj.FrameBorder = true;
+}
+
+
+WebFrame.prototype.GetFrameBorder = function() 
+{
+  if (this.ChildFrame1 && this.ChildFrame2)
+    return this.ChildFrame1.GetFrameBorder() || this.ChildFrame2.GetFrameBorder();
+  else 
+    return this.FrameBorder;
+}
+
+
+WebFrame.prototype.SetClassName = function(value)
+{
+  var old = this.ClassName;
+  if (value!=undefined)
+    this.ClassName = value;
+  //
+  if (this.Realized && this.FrameBox)
+  {
+    // Se c'e' un vecchio valore lo rimuovo, poi se ce n'e' uno nuovo lo aggiungo.
+    // in questo modo posso gestire correttamente il cambio da classe "a" -> ""
+    if (old)
+      RD3_Glb.RemoveClass(this.FrameBox, old);
+    if (this.ClassName)
+      RD3_Glb.AddClass(this.FrameBox, this.ClassName);
+  }
 }
 
 
@@ -713,7 +752,7 @@ WebFrame.prototype.Realize = function(parent)
     this.ChildBox2.setAttribute("id", this.Identifier+":f2");
     this.ChildBox2.className = "frame-container-"+(this.Vertical? "bottom":"rigth");
     //
-    if (this.ChildFrame1.FrameBorder || this.ChildFrame2.FrameBorder)
+    if (this.ChildFrame1.GetFrameBorder() || this.ChildFrame2.GetFrameBorder())
       RD3_Glb.AddClass(this.ChildBox2, "frame-border-"+(this.Vertical?"top":"left"));
     //
     // Aggiungo i box al dom
@@ -787,6 +826,7 @@ WebFrame.prototype.Realize = function(parent)
     this.SetShowStatusBar();
     this.SetScrollbar();
     this.SetOnlyContent();
+    this.SetClassName();
     //
     if (this.SetSearchValue && this.SearchBox)
     {
@@ -1242,25 +1282,34 @@ WebFrame.prototype.Focus= function()
 }
 
 // ********************************************************************************
+// Tutti i webframe generici possono ricevere il fuoco tramite navigazione da 
+// tastiera (pero' poi lo accettano o rifiutano in base alla loro logica specifica)
+// ********************************************************************************
+WebFrame.prototype.HandlesTabFocus = function()
+{
+  return true;
+}
+
+// ********************************************************************************
 // Metodi di utilita' per gestire il resize forzato
 // ********************************************************************************
 WebFrame.prototype.RequestResize = function()
 {
-	if (this.ChildFrame1 && this.ChildFrame2)
-	  return (this.ChildFrame1.RequestResize() || this.ChildFrame2.RequestResize());
-	else
-	  return this.RecalcResize;
+  if (this.ChildFrame1 && this.ChildFrame2)
+    return (this.ChildFrame1.RequestResize() || this.ChildFrame2.RequestResize());
+  else
+    return this.RecalcResize;
 }
 
 WebFrame.prototype.ClearRequestResize = function()
 {
-	if (this.ChildFrame1 && this.ChildFrame2)
-	{
-	    this.ChildFrame1.ClearRequestResize();
-	    this.ChildFrame2.ClearRequestResize();
-	}
-	else
-	 this.RecalcResize = false;
+  if (this.ChildFrame1 && this.ChildFrame2)
+  {
+      this.ChildFrame1.ClearRequestResize();
+      this.ChildFrame2.ClearRequestResize();
+  }
+  else
+   this.RecalcResize = false;
 }
 
 // ********************************************************************************
@@ -1359,9 +1408,9 @@ WebFrame.prototype.Resize = function(w, h)
           h2 = newh - this.ChildFrame1.CalcHeight() - ((this.ChildFrame1.FrameBorder || this.ChildFrame2.FrameBorder) ? RD3_ClientParams.FrameBorderTop : 0);
         this.ChildFrame2.Resize(neww, h2);
         //
-				// Se il secondo frame non accetta l'altezza, e' corretto tentare di modificare quella del primo
-				if (this.ChildFrame2.CalcHeight() != h2 && !gainHeight)
-					this.ChildFrame1.Resize(neww, newh - this.ChildFrame2.CalcHeight());
+        // Se il secondo frame non accetta l'altezza, e' corretto tentare di modificare quella del primo
+        if (this.ChildFrame2.CalcHeight() != h2 && !gainHeight)
+          this.ChildFrame1.Resize(neww, newh - this.ChildFrame2.CalcHeight());
       }
       else
       {        
@@ -1386,9 +1435,9 @@ WebFrame.prototype.Resize = function(w, h)
           w2 = neww - this.ChildFrame1.CalcWidth() - ((this.ChildFrame1.FrameBorder || this.ChildFrame2.FrameBorder) ? RD3_ClientParams.FrameBorderLeft : 1);
         this.ChildFrame2.Resize(w2, newh);
         //
-				// Se il secondo frame non accetta la larghezza, e' corretto tentare di modificare quella del primo
-				if (this.ChildFrame2.CalcWidth() != w2)
-					this.ChildFrame1.Resize(neww- this.ChildFrame2.CalcWidth(), newh);
+        // Se il secondo frame non accetta la larghezza, e' corretto tentare di modificare quella del primo
+        if (this.ChildFrame2.CalcWidth() != w2)
+          this.ChildFrame1.Resize(neww- this.ChildFrame2.CalcWidth(), newh);
       }
       //
       // Ridimensiono i childbox
@@ -1926,7 +1975,7 @@ WebFrame.prototype.OnTouchStartTb = function(e)
   // Inizio lo scrolling solo se uno un solo dito
   if (e.targetTouches.length != 1)
     return false;
-	//
+  //
   // Per gli input non gestisco gli eventi touch perche' voglio che appaia la tastiera
   var ele = RD3_Glb.ElementFromPoint(e.targetTouches[0].clientX, e.targetTouches[0].clientY);
   if (ele && ((ele.tagName=="INPUT" && ele.type != "button") || ele.tagName=="TEXTAREA" || RD3_Glb.isInsideEditor(ele)))
@@ -1987,7 +2036,7 @@ WebFrame.prototype.OnTouchMoveTb = function(e)
   this.TbTouchStartX = e.targetTouches[0].clientX;
   this.TbTouchStartY = e.targetTouches[0].clientY;
   if (Math.abs(this.TbTouchStartX-this.TbTouchOrgX)>RD3_ClientParams.TouchMoveLimit || Math.abs(this.TbTouchStartY-this.TbTouchOrgY)>RD3_ClientParams.TouchMoveLimit)
-  	this.TbMoved = true;
+    this.TbMoved = true;
   //
   return false;
 }
@@ -2382,7 +2431,10 @@ WebFrame.prototype.OnSearchChange= function(evento, noblur)
   else
     RD3_Glb.RemoveClass(this.SearchBox, "frame-search-box-deletable");
   //
-  var ev = new IDEvent("srcbox", this.Identifier, evento, RD3_Glb.EVENT_ACTIVE, this.SearchBox.value);
+  if (this.lastSearchSent != this.SearchBox.value) {
+    var ev = new IDEvent("srcbox", this.Identifier, evento, RD3_Glb.EVENT_ACTIVE, this.SearchBox.value);
+    this.lastSearchSent = this.SearchBox.value;
+  }
   //
   if (noblur)
     return;
@@ -2424,7 +2476,10 @@ WebFrame.prototype.OnSearchKeyUp = function(evento)
     var _this = this;
     this.searchTimer = window.setTimeout(function() 
     {
-      var ev = new IDEvent("srcbox", _this.Identifier, evento, RD3_Glb.EVENT_ACTIVE, _this.SearchBox.value);
+      if (_this.lastSearchSent != _this.SearchBox.value) {
+        var ev = new IDEvent("srcbox", _this.Identifier, evento, RD3_Glb.EVENT_ACTIVE, _this.SearchBox.value);
+        _this.lastSearchSent = _this.SearchBox.value;
+      }
     }, 300);
   }
 }
@@ -2459,6 +2514,7 @@ WebFrame.prototype.OnSearchMouseDown = function(ev)
     this.OnSearchChange(ev, RD3_Glb.IsAndroid());
     if (!RD3_Glb.IsAndroid())
       this.OnSearchBlur();
+    delete this.lastSearchSent;
     //
     ev.preventDefault();
     RD3_Glb.StopEvent(ev);
@@ -2487,6 +2543,7 @@ WebFrame.prototype.SetSearchBoxValue = function(val)
   }
   //
   this.SearchBox.value = val;
+  delete this.lastSearchSent;
   //
   if (val != "")
     RD3_Glb.AddClass(this.SearchBox, "frame-search-box-deletable");
@@ -2499,11 +2556,11 @@ WebFrame.prototype.SetSearchBoxValue = function(val)
 // ********************************************************************************
 WebFrame.prototype.OnCaptionClick= function(evento)
 { 
-	// mostra i messaggi oppure
+  // mostra i messaggi oppure
   // fa tornare in cima il contenuto
   if (this.WebForm.Messages.length>0)
-  	this.WebForm.OpenMessageBar(100);
-	else if (this.IDScroll)
+    this.WebForm.OpenMessageBar(100);
+  else if (this.IDScroll)
     this.IDScroll.GoTop();
 }
 
@@ -2513,16 +2570,16 @@ WebFrame.prototype.OnCaptionClick= function(evento)
 // ********************************************************************************
 WebFrame.prototype.GetCustomToolbar= function()
 { 
-	if (!this.ToolbarBox)
-		return;
-	//
-	var obj = this.ToolbarBox.firstChild;
-	while (obj)
-	{
-		if (RD3_Glb.HasClass(obj,"toolbar-frame-container"))
-			return obj;
-		obj = obj.nextSibling;
-	}
+  if (!this.ToolbarBox)
+    return;
+  //
+  var obj = this.ToolbarBox.firstChild;
+  while (obj)
+  {
+    if (RD3_Glb.HasClass(obj,"toolbar-frame-container"))
+      return obj;
+    obj = obj.nextSibling;
+  }
 }
 
 // ********************************************************************************
@@ -2546,15 +2603,15 @@ WebFrame.prototype.OnReflectMouseDown = function(ev, fromScroll, direction)
     // Per sicurezza faccio un'ulteriore controllo..
     if (!par)
       return -1;
-	  //
-	  // Passo al mio Parent la palla: decide lui se gestire lo scroll o no.. (magari anche lui non e' interessato..)
-	  var ret = -1;
-	  if (par instanceof BookBox)
-	    ret = par.ParentPage.ParentBook.OnReflectMouseDown(ev, false, direction);
-	  else if (par instanceof PField)
-	    ret = par.ParentPanel.OnReflectMouseDown(ev, false, direction);
-	  //
-	  return ret;
+    //
+    // Passo al mio Parent la palla: decide lui se gestire lo scroll o no.. (magari anche lui non e' interessato..)
+    var ret = -1;
+    if (par instanceof BookBox)
+      ret = par.ParentPage.ParentBook.OnReflectMouseDown(ev, false, direction);
+    else if (par instanceof PField)
+      ret = par.ParentPanel.OnReflectMouseDown(ev, false, direction);
+    //
+    return ret;
   }
   else if (!fromScroll && this.IDScroll)
   {
@@ -2582,12 +2639,12 @@ WebFrame.prototype.OnReflectMouseMove = function(ev, fromScroll)
       par = RD3_DesktopManager.ObjectMap[par.ParentFrameIdentifier];
     else if (par == null)
       par = RD3_DesktopManager.ObjectMap[this.ParentFrameIdentifier];
-	  //
-	  // Passo al mio Parent la palla
-	  if (par instanceof BookBox)
-	    par.ParentPage.ParentBook.OnReflectMouseMove(ev, false);
-	  else if (par instanceof PField)
-	    par.ParentPanel.OnReflectMouseMove(ev, false);
+    //
+    // Passo al mio Parent la palla
+    if (par instanceof BookBox)
+      par.ParentPage.ParentBook.OnReflectMouseMove(ev, false);
+    else if (par instanceof PField)
+      par.ParentPanel.OnReflectMouseMove(ev, false);
   }
   else if (!fromScroll && this.IDScroll)
   {
@@ -2610,12 +2667,12 @@ WebFrame.prototype.OnReflectMouseUp = function(ev, fromScroll)
       par = RD3_DesktopManager.ObjectMap[par.ParentFrameIdentifier];
     else if (par == null)
       par = RD3_DesktopManager.ObjectMap[this.ParentFrameIdentifier];
-	  //
-	  // Passo al mio Parent la palla
-	  if (par instanceof BookBox)
-	    par.ParentPage.ParentBook.OnReflectMouseUp(ev, false);
-	  else if (par instanceof PField)
-	    par.ParentPanel.OnReflectMouseUp(ev, false);
+    //
+    // Passo al mio Parent la palla
+    if (par instanceof BookBox)
+      par.ParentPage.ParentBook.OnReflectMouseUp(ev, false);
+    else if (par instanceof PField)
+      par.ParentPanel.OnReflectMouseUp(ev, false);
   }
   else if (!fromScroll && this.IDScroll)
   {
@@ -2650,10 +2707,10 @@ WebFrame.prototype.MustReflectScrollToParent  = function(direction)
 // ********************************************************************************
 WebFrame.prototype.ChangeExpose  = function(exposed)
 {
-	if (exposed)
+  if (exposed)
   {
     this.SetCaption();
-		this.WebForm.AdaptToolbar = true;
+    this.WebForm.AdaptToolbar = true;
   }
 }
 

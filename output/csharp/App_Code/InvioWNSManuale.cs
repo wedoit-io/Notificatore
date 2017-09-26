@@ -1,6 +1,6 @@
 // **********************************************
 // Invio WNS Manuale
-// Project : Mobile Manager
+// Project : Mobile Manager NET4
 // **********************************************
 using System;
 using System.Text;
@@ -376,20 +376,35 @@ public partial class InvioWNSManuale : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("07F7F732-705D-4BD1-A4CA-F8CC73DC9025", "Etichetta Invia", "", 3, "Invio WNS Manuale")) return 0;
       // 
       // Etichetta Invia Body
       // Corpo Procedura
       // 
       IDVariant v_CODICERITORN = new IDVariant(0,IDVariant.INTEGER);
       IDVariant v_TESTORITORNO = new IDVariant(0,IDVariant.STRING);
+      MainFrm.DTTObj.AddAssign ("71BFBA06-CE55-4ABA-8F14-124E4FD95E49", "codice Ritorno := Wnshelperinde.SendWinStorePushNotification (Access Tocken Nome Oggetto [Invio WNS Manuale - Parametri], Regid Spedizione Nome Oggetto [Invio WNS Manuale - Parametri], Messaggio Spedizione Nome Oggetto [Invio WNS Manuale - ", "", v_CODICERITORN);
+      MainFrm.DTTObj.AddToken ("71BFBA06-CE55-4ABA-8F14-124E4FD95E49", "0217E6BD-C28B-4E51-9E7F-3ED45A54B86B", 917504, "Access Tocken Nome Oggetto", IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_ACCTOCNOMOGG, 0));
+      MainFrm.DTTObj.AddToken ("71BFBA06-CE55-4ABA-8F14-124E4FD95E49", "94501F87-1B9A-48FB-BC87-BF488BA36B59", 917504, "Regid Spedizione Nome Oggetto", IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_REG_ID, 0));
+      MainFrm.DTTObj.AddToken ("71BFBA06-CE55-4ABA-8F14-124E4FD95E49", "B5E2CC75-EDC8-4F43-BD44-A149A4DFF8C0", 917504, "Messaggio Spedizione Nome Oggetto", IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_DES_MESSAGGIO, 0));
+      MainFrm.DTTObj.AddToken ("71BFBA06-CE55-4ABA-8F14-124E4FD95E49", "7DCF106F-7180-4079-893B-CE5E8FB354D0", 1376256, "testo Ritorno", v_TESTORITORNO);
       v_CODICERITORN = new IDVariant(WNSHelperInde.SendWinStorePushNotification(IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_ACCTOCNOMOGG, 0).stringValue(), IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_REG_ID, 0).stringValue(), IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_DES_MESSAGGIO, 0).stringValue(), out v_TESTORITORNO));
+      MainFrm.DTTObj.AddAssignNewValue ("71BFBA06-CE55-4ABA-8F14-124E4FD95E49", "32CBF3FA-6791-457B-8BC8-98615CBC338C", v_CODICERITORN);
+      MainFrm.DTTObj.AddAssign ("16926361-4068-4183-A0A1-FAE41C883D0D", "Risultato Nome Oggetto := testo Ritorno", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_RISUNOMEOGGE, 0));
+      MainFrm.DTTObj.AddToken ("16926361-4068-4183-A0A1-FAE41C883D0D", "7DCF106F-7180-4079-893B-CE5E8FB354D0", 1376256, "testo Ritorno", new IDVariant(v_TESTORITORNO));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_RISUNOMEOGGE, 0, new IDVariant(v_TESTORITORNO));
+      MainFrm.DTTObj.AddAssignNewValue ("16926361-4068-4183-A0A1-FAE41C883D0D", "6C71C36E-9409-4AB0-AF45-19AE6F66274E", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_RISUNOMEOGGE, 0));
+      MainFrm.DTTObj.AddSubProc ("9BB25AF5-78D2-4A41-B5F9-95A468192983", "Parametri.Refresh Query", "");
       PAN_PARAMETRI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("07F7F732-705D-4BD1-A4CA-F8CC73DC9025", "Etichetta Invia", "", 3, "Invio WNS Manuale");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("07F7F732-705D-4BD1-A4CA-F8CC73DC9025", "Etichetta Invia", "", _e);
       MainFrm.ErrObj.ProcError ("InvioWNSManuale", "EtichettaInvia", _e);
+      MainFrm.DTTObj.ExitProc("07F7F732-705D-4BD1-A4CA-F8CC73DC9025", "Etichetta Invia", "", 3, "Invio WNS Manuale");
       return -1;
     }
   }
@@ -409,12 +424,17 @@ public partial class InvioWNSManuale : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("3FC6A72A-F98B-4542-A9E2-F0F58EACB3B5", "Etichetta Crea spedizione", "", 3, "Invio WNS Manuale")) return 0;
       // 
       // Etichetta Crea spedizione Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddIf ("33FD9C4B-924E-42B7-9E1C-6029E03C5938", "IF not (Is Null (ID Apps Push Settings Spedizione Nome Oggetto))", "");
+      MainFrm.DTTObj.AddToken ("33FD9C4B-924E-42B7-9E1C-6029E03C5938", "81C2F942-E36B-4881-AE4F-9B5F35E1520C", 327680, "ID Apps Push Settings Spedizione", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ID_APPLICAZIONE, 0));
       if (!(IDL.IsNull(IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ID_APPLICAZIONE, 0))))
       {
+        MainFrm.DTTObj.EnterIf ("33FD9C4B-924E-42B7-9E1C-6029E03C5938", "IF not (Is Null (ID Apps Push Settings Spedizione Nome Oggetto))", "");
         SQL = new StringBuilder();
         SQL.Append("insert into SPEDIZIONI ");
         SQL.Append("( ");
@@ -436,13 +456,19 @@ public partial class InvioWNSManuale : MyWebForm
         SQL.Append("  " + IDL.CSql(IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_REG_ID, 0), IDL.FMT_CHAR, MainFrm.NotificatoreDBObject.DBO()) + ", ");
         SQL.Append("  '5' ");
         SQL.Append(") ");
+        MainFrm.DTTObj.AddQuery ("FDFAF64F-D872-46D9-B2F4-0A7714D6AAF2", "Spedizioni (Notificatore DB): Insert into", "", 768, SQL.ToString());
         MainFrm.NotificatoreDBObject.DBO().Execute(SQL);
+        MainFrm.DTTObj.EndQuery ("FDFAF64F-D872-46D9-B2F4-0A7714D6AAF2");
       }
+      MainFrm.DTTObj.EndIfBlk ("33FD9C4B-924E-42B7-9E1C-6029E03C5938");
+      MainFrm.DTTObj.ExitProc("3FC6A72A-F98B-4542-A9E2-F0F58EACB3B5", "Etichetta Crea spedizione", "", 3, "Invio WNS Manuale");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("3FC6A72A-F98B-4542-A9E2-F0F58EACB3B5", "Etichetta Crea spedizione", "", _e);
       MainFrm.ErrObj.ProcError ("InvioWNSManuale", "EtichettaCreaspedizione", _e);
+      MainFrm.DTTObj.ExitProc("3FC6A72A-F98B-4542-A9E2-F0F58EACB3B5", "Etichetta Crea spedizione", "", 3, "Invio WNS Manuale");
       return -1;
     }
   }
@@ -462,17 +488,27 @@ public partial class InvioWNSManuale : MyWebForm
     try
     {
       TransCount = 0;
+
+      if (!MainFrm.DTTObj.EnterProc("12CAC440-0C17-4771-AE66-C4087CFB91B6", "Access Tocken", "", 3, "Invio WNS Manuale")) return 0;
       // 
       // Access Tocken Body
       // Corpo Procedura
       // 
+      MainFrm.DTTObj.AddAssign ("4A505E6C-E38D-44D5-83FA-BDF40AF7FAA5", "Access Tocken Nome Oggetto := Wnshelperinde.GetWinStoreAccessToken (Wns Secret Nome Oggetto [Invio WNS Manuale - Parametri], Wns Sid Nome Oggetto [Invio WNS Manuale - Parametri])", "", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ACCTOCNOMOGG, 0));
+      MainFrm.DTTObj.AddToken ("4A505E6C-E38D-44D5-83FA-BDF40AF7FAA5", "2AB86264-784E-40A9-B4DA-7214C9C1062A", 917504, "Wns Secret", IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_WNS_SECRET, 0));
+      MainFrm.DTTObj.AddToken ("4A505E6C-E38D-44D5-83FA-BDF40AF7FAA5", "CB0869F7-077B-4215-86CD-8A9474DF9CC0", 917504, "Wns Sid", IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_WNS_SID, 0));
       IMDB.set_Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ACCTOCNOMOGG, 0, new IDVariant(WNSHelperInde.GetWinStoreAccessToken(IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_WNS_SECRET, 0).stringValue(), IMDB.Value(IMDBDef1.PQRY_NUOVATABELLA, IMDBDef1.PQSL_NUOVATABELLA_WNS_SID, 0).stringValue())));
+      MainFrm.DTTObj.AddAssignNewValue ("4A505E6C-E38D-44D5-83FA-BDF40AF7FAA5", "F229E6A2-2549-4E6D-B423-894829E8DB7C", IMDB.Value(IMDBDef1.TBL_PARAMETRI, IMDBDef1.FLD_PARAMETRI_ACCTOCNOMOGG, 0));
+      MainFrm.DTTObj.AddSubProc ("59457ABD-5028-4FBC-8331-364374FDEA43", "Parametri.Refresh Query", "");
       PAN_PARAMETRI.PanelCommand(Glb.PCM_REQUERY);
+      MainFrm.DTTObj.ExitProc("12CAC440-0C17-4771-AE66-C4087CFB91B6", "Access Tocken", "", 3, "Invio WNS Manuale");
       return 0;
     }
     catch (Exception _e)
     {
+      MainFrm.DTTObj.AddException("12CAC440-0C17-4771-AE66-C4087CFB91B6", "Access Tocken", "", _e);
       MainFrm.ErrObj.ProcError ("InvioWNSManuale", "AccessTocken", _e);
+      MainFrm.DTTObj.ExitProc("12CAC440-0C17-4771-AE66-C4087CFB91B6", "Access Tocken", "", 3, "Invio WNS Manuale");
       return -1;
     }
   }
@@ -1026,6 +1062,10 @@ public partial class InvioWNSManuale : MyWebForm
   }
 
   public override void OnGraphClick(WebFrame SrcObj, IDVariant NumSerie, IDVariant NumPoint)
+  {
+  }
+
+  public override void OnGraphOptions(WebFrame SrcObj, IDVariant Options)
   {
   }
   
