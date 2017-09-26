@@ -1,8 +1,10 @@
+App_code\ApexIDMailer.cs
 App_code\WebFetch.cs
 App_code\GCMHelper.cs
 App_code\WNSHelper.cs
 App_code\PushSharpHelper.cs
 bin\Newtonsoft.Json.dll
+bin\Newtonsoft.Json.xml
 bin\PushSharp.Amazon.dll
 bin\PushSharp.Apple.dll
 bin\PushSharp.Blackberry.dll
