@@ -4,3 +4,4 @@ NotificatoreDB.ddl
 Notificatore*.zip
 output/*.*
 Notificatore_*_GLV.idp
+/output
