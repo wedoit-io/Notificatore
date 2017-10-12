@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7">
+<link rel=stylesheet type="text/css" href="dtt.css">
+<title>Login Page</title>
+<script language="javascript" type="text/javascript">
+function PlayTest() { try { window.parent.frames('Control').NextRequest(); } catch(e) {}; }
+</script>
+<style type="text/css">
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  background-color: #F0F0F0;
+  margin: 0;
+}
+
+.loginbox {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 340px;
+  margin-top: -200px;
+  margin-left: -170px;
+  background-color: #FFF;
+      border-radius: 3px;
+  -ms-border-radius: 3px;
+  -webkit-box-shadow: 0 2px 4px 0 #CCC;
+     -moz-box-shadow: 0 2px 4px 0 #CCC;
+          box-shadow: 0 2px 4px 0 #CCC;
+}
+
+h1 {
+  font-weight: normal;
+  margin: 20px 20px;
+}
+
+.bugBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px;
+  margin: 5px;
+}
+.bugBtn:hover {
+  opacity: 0.7;
+  filter: alpha( opacity = 70 );
+}
+
+form {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.button {
+  height: 30px;
+  line-height: 30px;
+  padding: 0;
+  overflow: visible;
+  vertical-align: middle;
+      border-radius: 3px;
+  -ms-border-radius: 3px;
+  font-size: 10pt;
+  font-weight: normal;
+  text-transform: uppercase;
+  border: none;
+  background-color: #8A9399;
+  color: #FFF;
+  cursor: pointer;
+  -webkit-box-shadow: 0 1px 0 0 #666;
+     -moz-box-shadow: 0 1px 0 0 #666;
+          box-shadow: 0 1px 0 0 #666;
+}
+
+.button:hover {
+  background-color: #242D33;
+}
+
+form .button {
+  margin-top: 10px;
+}
+
+form input {
+  width: 300px !important;
+  height: 30px;
+  margin: 0 20px;
+  margin-bottom: 10px;
+  font-size: 10pt;
+}
+
+p {
+  font-size: 10pt;
+  margin: 0 20px;
+}
+
+label {
+  font-size: 10pt;
+  line-height: 24px;
+  margin: 0 20px;
+  display: block;
+}
+
+</style>
+<style id="style-1-cropbar-clipper">
+
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+
+</style>
+</head>
+
+<body onload="PlayTest()">
+
+  <div class="loginbox">
+
+\   <div class=\"bugBtn\">" + DebugButton() + "</div>
+
+    <form method="post" autocomplete="off" name="frm" action="#_ICD_WEB_LOGINURL">
+	    <input type="hidden" name="WCI" value="IWLogin">
+	    <input type="hidden" name="WCE" value="Form1">
+	    <input type="hidden" name="WCU">
+\      <h1>" + Glb.HTMLEncode(Caption(), true, true) + "</h1>
+      <label for="USERNAME">Username</label>
+\      <input id=\"USERNAME\" name=\"UserName\" tabindex=\"1\" size=\"20\" value=\"" + Glb.HTMLEncode(RolObj.glbUser) + "\">
+	    <label for="PASSWORD">Password</label>
+	    <input id="PASSWORD" type="password" name="PassWord" tabindex="2" size="20">
+	    <input id="LOGIN" class="button" border="0" name="I1" width="83" height="28" type="submit" value="LOGIN">
+\     <p>" + MainFrm.RTCObj.GetConst("4D691B94-E528-4AEC-B319-0F18A9049DB3", "Introduci il tuo Username e&nbsp;Password per accedere al sistema</a>", false) + "</p>
+    <!--  <p>Salva le mie credenziali</p><input type="checkbox" name="checkbox" value="ON" /> -->
+       
+	    <script>
+	
+	
+	      if (document.frm.UserName.value.length==0)
+	        document.frm.UserName.focus();
+	      else
+	        document.frm.PassWord.focus();
+	    </script>
+    </form>
+
+    <p align="center"><img border="0" src="images/pow2.gif" width="300" height="60"></p>
+
+    <div id="reqdiv" class=HelpReqDiv style="display:none"></div>
+    <div id="reqVdiv" class=HelpReqDiv style="display:none"></div>
+    <div id="itemdiv" class=HelpItemDiv style="display:none"></div>
+		<img id="helpcurs" class=HelpCurs src="dttimg/helpcurs.gif" style="display:none">
+  </div>
+</body>
+</html>
