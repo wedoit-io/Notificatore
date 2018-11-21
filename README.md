@@ -55,3 +55,47 @@ ret :=  notificatore.SendNotification('Messaggio di test da DB Oracle', 'admin',
 end;
 
 ```
+
+How to
+======
+
+Le impostazioni delle ACL si possono vedere dalle seguenti viste di sistema di Oracle:
+
+* DBA_NETWORK_ACLS
+* DBA_NETWORK_ACL_PRIVILEGES
+* USER_NETWORK_ACL_PRIVILEGES
+
+
+DROP ACL
+----------
+
+```plsql
+BEGIN
+  DBMS_NETWORK_ACL_ADMIN.drop_acl ( 
+    acl         => 'notificatore.xml');
+
+  COMMIT;
+END;
+/
+```
+
+Delete Privilege
+----------------
+
+```plsql
+BEGIN
+  DBMS_NETWORK_ACL_ADMIN.delete_privilege ( 
+    acl         => 'test_acl_file.xml', 
+    principal   => 'TEST2',
+    is_grant    => FALSE, 
+    privilege   => 'connect');
+
+  COMMIT;
+END;
+/
+```
+
+Riferimenti
+-----------
+* https://oracle-base.com/articles/11g/fine-grained-access-to-network-services-11gr1
+
