@@ -1,13 +1,13 @@
 Notificatore - Gestione delle notifiche push di WEDO
 ============
 
-Il Notificatore WEDO è il sistema ccentralizzato di messaggistica push per IOS e Android.
-L'interfaccia (e i servizi) del notificatore sono installati sul nostro server in cloud (aruba1) e sono raggiungibili a questi indirizzi:
+Il Notificatore WEDO è il sistema centralizzato di messaggistica push per IOS e Android per l'invio di notifiche push verso dispositivi Androis e iOS.
+L'interfaccia e i servizi del notificatore sono installati sul nostro aruba1 e sono raggiungibili a questi indirizzi:
 
 
 * http://notificatore.apexnet.it - Frontend
-* http://notificatore.apexnet.it/ws/NotificatoreWS.asmx - Web Service per l'invio delle notifiche
-
+* http://notificatore.apexnet.it/ws/NotificatoreWS.asmx - Web Service per l'invio delle notifiche (chiamata da chi invia)
+*  http://notificatore.apexnet.it(to be comple) - Endpoind per la registrazione dei dispositivo (chiamata dalle App)
 
 Le app mobile, quando vengono lanciate, inviano al notificatore una informazione di registrazione che comprende:
 
