@@ -1,4 +1,4 @@
-Notificatore - Sistema di gestione delle notifiche push di WEDO
+Notificatore - Gestione delle notifiche push di WEDO
 ============
 
 Il Notificatore WEDO è il sistema ccentralizzato di messaggistica push per IOS e Android.
