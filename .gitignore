@@ -6,3 +6,5 @@ output/*.*
 Notificatore_*_GLV.idp
 /output
 /Notificatore.idp
+Backup
+*.idp
