@@ -31,13 +31,15 @@ public static class PushSharpHelper
         
     }
 
-    //this is raised when a notification is failed due to some reason
+    // //this is raised when a notification is failed due to some reason
     public static void NotificationFailed(PushSharp.Apple.ApnsNotification Notification, Exception exception)
     {
        
         MyWebEntryPoint mw = new MyWebEntryPoint(null);
         //mw.HandleRequest(null, null);
-        PushAppEvents.ONNotificationFailed(Notification, mw, mw.getIMDB());
+		com.progamma.IDVariant ErrorMessage = new com.progamma.IDVariant();
+        ErrorMessage.set(new com.progamma.IDVariant(exception.InnerException.Message.ToString()));
+        PushAppEvents.ONNotificationFailed(Notification, ErrorMessage, mw, mw.getIMDB());
         mw.CloseAllDBConnections();
       
     }
