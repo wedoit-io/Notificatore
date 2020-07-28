@@ -12,6 +12,7 @@ bin\PushSharp.Core.dll
 bin\PushSharp.Firefox.dll
 bin\PushSharp.Google.dll
 bin\PushSharp.Windows.dll
+docs\*=docs
 images\logopush.svg
 images\bg.png
 Web.config
