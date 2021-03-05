@@ -15,4 +15,5 @@ bin\PushSharp.Windows.dll
 docs\*=docs
 images\logopush.svg
 images\bg.png
+images\logo.png
 Web.config
