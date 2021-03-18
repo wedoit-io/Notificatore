@@ -3,6 +3,7 @@ App_code\WebFetch.cs
 App_code\GCMHelper.cs
 App_code\WNSHelper.cs
 App_code\PushSharpHelper.cs
+App_code\PushNotificationWrapperHelper.cs
 bin\Newtonsoft.Json.dll
 bin\Newtonsoft.Json.xml
 bin\PushSharp.Amazon.dll
@@ -12,6 +13,7 @@ bin\PushSharp.Core.dll
 bin\PushSharp.Firefox.dll
 bin\PushSharp.Google.dll
 bin\PushSharp.Windows.dll
+bin\PushNotificationWrapper.dll
 docs\*=docs
 images\logopush.svg
 images\bg.png
