@@ -1,6 +1,53 @@
--- elenco spedizioni
-select * from SPEDIZIONI
-order by id desc;
+
+-- *** LOGS ***
+select *
+from LOGS
+where 1=1
+and data_log >= '20210322 12:29:00'
+order by ID DESC
+
+
+-- *** SPEDIZIONI ***
+-- flg_stato = 'W' (attesa) 'E' (errore) 'S' (inviato) 'P' (in corso)
+select count(*)
+from SPEDIZIONI
+where 1=1
+and  dat_creaz >= '20210322 12:29:00' --'20210319'
+--and flg_stato <> 'S'
+--and id in (30851863)
+order by id desc
+;
+
+ -- *** DEVICE TOKEN ***
+-- TYPE_OS -> 1=iOS 2=Android
+select *
+from
+  DEV_TOKENS A
+where 1=1
+and   (A.FLG_ATTIVO = 'N') OR (A.FLG_RIMOSSO = 'S')
+--and DEV_TOKEN = '0c6b975ba7d84fda7ed74d779d86377af7ac2614ae2994a67fa9d95db835d5f3'
+--and TYPE_OS = 1
+--and   (A.DES_UTENTE = '3121872')
+--and (A.ID_APPLICAZIONE in (86,88,89,90))
+--and DATA_ULT_ACCESSO < '20210101 00:00:00' 
+order by DATA_ULT_ACCESSO desc
+;
+
+
+/* DEVICE TOKEN PER UTENTE */
+select des_utente, count(*) as num
+from
+  DEV_TOKENS A
+where 1=1
+--and (A.ID_APPLICAZIONE in (86,88,89,90))
+and   (A.FLG_ATTIVO = 'S')
+and   (A.FLG_RIMOSSO = 'N')
+and   (A.DES_UTENTE = '3121872')
+group by des_utente
+having count(*) > 10
+order by num desc
+;
+
 
 -- WEB API -> SEND PUSH
 -- 1. verifico l'esistenza dell'app
@@ -95,3 +142,29 @@ and   ((A.DAT_ELAB IS NULL) OR CONVERT (float, GETDATE() - A.DAT_ELAB) > 0.100)
 and   ((A.FLG_STATO = 'W' AND (A.ID = 20806457 OR (20806457 IS NULL))) OR (A.ID = 20806457 AND ISNULL(A.TYPE_MESSAGE, 1) = '2'  AND A.FLG_STATO = 'P'))
 order by id desc
 
+
+
+-- ************************** PULIZIA DATI **************************
+
+-- CANCELLO I DEVICE TOKEN VALIDI CON ULTIMO ACCESSO PRECEDENTE AD UNA CERTA DATA
+-- tot 253425
+-- da canc -> 180593
+-- rimanent -> 72832
+select * --delete
+from  DEV_TOKENS
+where 1=1
+and DATA_ULT_ACCESSO < '20201001 00:00:00' 
+--and   (FLG_ATTIVO = 'S')
+--and   (FLG_RIMOSSO = 'N')
+--and TYPE_OS = 1
+order by DATA_ULT_ACCESSO desc
+;
+
+
+
+/*
+delete from SPEDIZIONI
+where 1=1
+and  dat_creaz >= '20210318'
+and flg_stato = 'W'
+*/
