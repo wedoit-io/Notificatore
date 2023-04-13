@@ -1,21 +1,141 @@
 
+-- *** IMPOSTAZIONI ***
+select imp.FLG_DEBUG, imp.*
+from IMPOSTAZIONI imp
+
 -- *** LOGS ***
+-- FLG_LEV_DEBUG = 0 (SPENTO)
+-- FLG_LEV_DEBUG = 1 (ERRORI)
+-- FLG_LEV_DEBUG = 0 (TRACE)
+-- FLG_LEV_DEBUG = 0 (SERVER SESSION)
 select *
 from LOGS
 where 1=1
-and data_log >= '20210322 12:29:00'
+and data_log >= '20220513 12:20:00'
+--and data_log >= getdate() -1 
+--and FLG_LEV_DEBUG = 1
+--and testo not like '%Certificate%'
 order by ID DESC
 
+SELECT *
+From SPEDIZIONI spe
+WHERE FLG_STATO = 'S'
+ORDER BY DAT_CREAZ
+
+-- per ogni giorno, restituisce il numero di device scaricati nel giorno e numero utenti che hanno fatto l'accesso in quel giorno
+-- ma che non hanno fatto l'accesso in giorni successivi
+select data,
+       sum(numero_utenti_scar) as numero_utenti_scar,
+       sum(numero_utenti_ult_accesso) as numero_utenti_ult_accesso
+from v_neth_data_stat
+group by data, anno, mese, giorno
+order by anno desc, mese desc, giorno desc
+
+select [des_utente], [ios], [android], 
+       FORMAT([data_creazione], N'dd/MM/yyyy HH:mm'),
+       FORMAT([data_accesso], N'dd/MM/yyyy HH:mm')
+from v_neth_utenti
+order by [data_accesso] desc
+
+
+select year(DAT_ELAB) as anno,
+       month(DAT_ELAB) as mese,
+       day(DAT_ELAB) as giorno,
+       count(*)
+from spedizioni
+where DAT_ELAB is not null
+group by year(DAT_ELAB),
+         month(DAT_ELAB),
+         day(DAT_ELAB)
+order by year(DAT_ELAB),
+         month(DAT_ELAB),
+         day(DAT_ELAB)
+
+select SUBSTRING(des_utente, CHARINDEX('@', DES_UTENTE ) + 1, 100), 
+       count(*) as num_utenti, 
+       FORMAT(min(data_accesso), N'dd/MM/yyyy HH:mm') as primo_accesso,
+       FORMAT(max(data_accesso), N'dd/MM/yyyy HH:mm') as ultimo_accesso
+from v_neth_utenti
+group by SUBSTRING(des_utente, CHARINDEX('@', DES_UTENTE ) + 1, 100)
+order by count(*) desc
+
+select *
+from logs
+order by id desc
+
+
+-- **********************************
+select distinct   A.ID_APPLICAZIONE as MIDAPPLICAZI 
+from   SPEDIZIONI A,   APPS_PUSH_SETTING B 
+where B.ID = A.ID_APPLICAZIONE and   (A.TYPE_OS = '2') and   (B.FLG_ATTIVA = 'S') 
+and   (((A.FLG_STATO = 'W') AND (ISNULL(A.TYPE_MESSAGE, 1) = 1) 
+AND (A.ID = NULL OR (NULL IS NULL))) OR ((A.FLG_STATO = 'P') 
+AND (ISNULL(A.TYPE_MESSAGE, 1) = 2) AND (A.ID = NULL)))
+
+select distinct   A.ID_APPLICAZIONE as MIDAPPLICAZI 
+from   SPEDIZIONI A,   APPS_PUSH_SETTING B 
+where B.ID = A.ID_APPLICAZIONE and   (A.TYPE_OS = '1') and   (B.FLG_ATTIVA = 'S') 
+and   (((A.FLG_STATO = 'W') AND (ISNULL(A.TYPE_MESSAGE, 1) = 1) 
+AND (A.ID = NULL OR (NULL IS NULL))) OR ((A.FLG_STATO = 'P') 
+AND (ISNULL(A.TYPE_MESSAGE, 1) = 2) AND (A.ID = NULL)))
+
+select distinct   A.ID_APPLICAZIONE as MIDAPPLICAZI,   A.TENTATIVI as NUMETENTSPED 
+from   SPEDIZIONI A,   APPS_PUSH_SETTING B 
+where B.ID = A.ID_APPLICAZIONE and   (A.TYPE_OS = '3') and   (B.FLG_ATTIVA = 'S') 
+and   ((A.FLG_STATO = 'W' AND (A.ID = NULL OR (NULL IS NULL))) 
+OR (A.ID = NULL AND ISNULL(A.TYPE_MESSAGE, 1) = 2 AND A.FLG_STATO = 'P'))
+
+select *
+from APPS_PUSH_SETTING 
+where 1=1
+
+and TYPE_OS = '3'
+
+
+*****************
+
+
+
+
+
+
+-- *** NUMERO SPEDIZIONI PER TIPO DISPOSITIVO ***
+select 
+  CASE 
+	WHEN (spe.TYPE_OS = 1) THEN 'iOS'
+	WHEN (spe.TYPE_OS = 2) THEN 'ANDROID'
+	ELSE 'APP SCONOSCIUTA!'
+  END  as TYPOS_DES,
+   CASE 
+	WHEN (spe.flg_stato = 'W') THEN 'IN ATTESA'
+	WHEN (spe.flg_stato = 'E') THEN 'ERRORE'
+	WHEN (spe.flg_stato = 'S') THEN 'INVIATO'
+	WHEN (spe.flg_stato = 'P') THEN 'IN CORSO'
+	ELSE 'APP SCONOSCIUTA!'
+  END  as TYPOS_DES,
+  count(*) as NumSpedizioni
+from SPEDIZIONI spe
+where 1=1
+and  spe.dat_creaz >= '20220901 00:00:00'
+and  spe.dat_creaz <= '20220901 23:59:59'
+--and  spe.dat_creaz >= getdate() -1 --'20220221 00:00:00'
+group by spe.TYPE_OS,spe.flg_stato
+;
 
 -- *** SPEDIZIONI ***
 -- flg_stato = 'W' (attesa) 'E' (errore) 'S' (inviato) 'P' (in corso)
-select count(*)
-from SPEDIZIONI
+-- TYPE_OS = 1 (iOS) 2 (Android)
+select spe.TYPE_OS, spe.flg_stato, spe.INFO, spe.*
+--count(*)
+from SPEDIZIONI spe
 where 1=1
-and  dat_creaz >= '20210322 12:29:00' --'20210319'
---and flg_stato <> 'S'
+--and  spe.dat_creaz <= /*getdate()*/ '20210929 17:12:00'
+--and  spe.dat_creaz <= getdate() - 1
+and spe.flg_stato = 'W'
+--and spe.TYPE_OS = 2
 --and id in (30851863)
-order by id desc
+--and lower(spe.INFO) like 'api - onnotificationfailed%'
+order by spe.id desc
 ;
 
  -- *** DEVICE TOKEN ***
@@ -160,7 +280,39 @@ and DATA_ULT_ACCESSO < '20201001 00:00:00'
 order by DATA_ULT_ACCESSO desc
 ;
 
+-- 44590
+select count(*)
+from SPEDIZIONI spe
+where 1=1
+--and spe.dat_creaz <= '20211001 00:00:00'
+--and spe.dat_creaz <= '20211001 11:40:00'
+and spe.flg_stato = 'W'
+--and spe.TYPE_OS = 2
+--order by spe.dat_creaz desc
 
+-- 44523
+/*
+-- metto lo stato inesistente X a quelle in attesa (W) per non farle considerare al notificatore e inviarle un po alla volta in caso di problemi
+update SPEDIZIONI
+set flg_stato = 'X'
+where 1=1
+--and dat_creaz <= getdate()  -- '20210926 00:00:00'
+--and dat_creaz <= getdate() - 1
+and dat_creaz >= '20210929 00:00:00'
+and flg_stato = 'W'
+--and TYPE_OS = 1
+*/
+
+/*
+-- metto in attesa (W) quelle in stato inesistente (X) per inviarle un po alla volta in caso di problemi
+update SPEDIZIONI 
+set flg_stato = 'W'
+where 1=1
+--and spe.dat_creaz <= '20211001 00:00:00'
+--and dat_creaz <= '20211001 11:40:00'
+and flg_stato = 'X'
+--and TYPE_OS = 2
+*/
 
 /*
 delete from SPEDIZIONI
